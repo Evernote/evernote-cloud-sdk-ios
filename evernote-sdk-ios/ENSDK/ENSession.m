@@ -788,6 +788,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     }
     
     [context.noteStore updateNote:context.note success:^(EDAMNote * resultNote) {
+        context.noteRef = context.refToReplace; // The result by definition has the same ref.
         [self uploadNote_completeWithContext:context error:nil];
     } failure:^(NSError *error) {
         if ([error.userInfo[@"parameter"] isEqualToString:@"Note.guid"]) {
@@ -882,10 +883,8 @@ static NSString * DeveloperToken, * NoteStoreUrl;
 
 - (void)uploadNote_createWithContext:(ENSessionUploadNoteContext *)context
 {
-    // Fixup the create and update dates
-    NSNumber * now = @([[NSDate date] enedamTimestamp]);
-    context.note.created = now;
-    context.note.updated = now;
+    // Clear create and update dates. The service will set these to sensible defaults for a new note.
+    context.note.created = context.note.updated = nil;
     
     // Write in the notebook guid if we're providing one.
     context.note.notebookGuid = context.notebook.guid;

@@ -281,7 +281,7 @@
       [outProtocol writeI32: [fieldValue intValue]];
       break;
     case TType_I64:
-      [outProtocol writeI64: [fieldValue longValue]];
+      [outProtocol writeI64: [fieldValue longLongValue]];
       break;
     case TType_BINARY:
       [outProtocol writeBinary: fieldValue];
