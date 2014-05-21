@@ -84,7 +84,7 @@
             ENNoteStoreClientProgressHandler uploadHandler = self.uploadProgressHandler;
             [_client setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
                 if (totalBytesExpectedToWrite > 0) {
-                    CGFloat t = totalBytesWritten / totalBytesExpectedToWrite;
+                    CGFloat t = (CGFloat)totalBytesWritten / (CGFloat)totalBytesExpectedToWrite;
                     uploadHandler(t);
                 }
             }];
@@ -96,7 +96,7 @@
             ENNoteStoreClientProgressHandler downloadHandler = self.downloadProgressHandler;
             [_client setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
                 if (totalBytesExpectedToRead > 0) {
-                    CGFloat t = totalBytesRead / totalBytesExpectedToRead;
+                    CGFloat t = (CGFloat)totalBytesRead / (CGFloat)totalBytesExpectedToRead;
                     downloadHandler(t);
                 }
             }];

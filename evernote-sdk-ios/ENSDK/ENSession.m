@@ -84,7 +84,7 @@ static NSUInteger ENSessionNotebooksCacheValidity = (5 * 60);   // 5 minutes
 @property (nonatomic, strong) ENNotebook * notebook;
 @property (nonatomic, assign) ENSessionUploadPolicy policy;
 @property (nonatomic, copy) ENSessionUploadNoteCompletionHandler completion;
-@property (nonatomic, copy) ENSessionUploadNoteProgressHandler progress;
+@property (nonatomic, copy) ENSessionProgressHandler progress;
 @property (nonatomic, strong) ENNoteStoreClient * noteStore;
 @property (nonatomic, strong) ENNoteRef * noteRef;
 @end
@@ -709,7 +709,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
             policy:(ENSessionUploadPolicy)policy
         toNotebook:(ENNotebook *)notebook
      orReplaceNote:(ENNoteRef *)noteToReplace
-          progress:(ENSessionUploadNoteProgressHandler)progress
+          progress:(ENSessionProgressHandler)progress
         completion:(ENSessionUploadNoteCompletionHandler)completion
 {
     if (!completion) {
@@ -1280,6 +1280,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
 #pragma mark - downloadNote
 
 - (void)downloadNote:(ENNoteRef *)noteRef
+            progress:(ENSessionProgressHandler)progress
           completion:(ENSessionDownloadNoteCompletionHandler)completion
 {
     if (!completion) {
@@ -1301,14 +1302,20 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     // Find the note store client that works with this note.
     ENNoteStoreClient * noteStore = [self noteStoreForNoteRef:noteRef];
     
+    if (progress) {
+        noteStore.downloadProgressHandler = progress;
+    }
+    
     // Fetch by guid. Always get the content and resources.
     [noteStore getNoteWithGuid:noteRef.guid withContent:YES withResourcesData:YES withResourcesRecognition:NO withResourcesAlternateData:NO success:^(EDAMNote * note) {
-
+        
         // Create an ENNote from the EDAMNote.
         ENNote * resultNote = [[ENNote alloc] initWithServiceNote:note];
         
+        noteStore.downloadProgressHandler = nil;
         completion(resultNote, nil);
     } failure:^(NSError * error) {
+        noteStore.downloadProgressHandler = nil;
         completion(nil, error);
     }];
 }

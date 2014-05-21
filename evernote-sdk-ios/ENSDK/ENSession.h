@@ -38,7 +38,7 @@ FOUNDATION_EXPORT NSString * const ENSessionDidUnauthenticateNotification;
 
 typedef void (^ENSessionAuthenticateCompletionHandler)(NSError * authenticateError);
 typedef void (^ENSessionListNotebooksCompletionHandler)(NSArray * notebooks, NSError * listNotebooksError);
-typedef void (^ENSessionUploadNoteProgressHandler)(CGFloat progress);
+typedef void (^ENSessionProgressHandler)(CGFloat progress);
 typedef void (^ENSessionUploadNoteCompletionHandler)(ENNoteRef * noteRef, NSError * uploadNoteError);
 typedef void (^ENSessionShareNoteCompletionHandler)(NSString * url, NSError * shareNoteError);
 typedef void (^ENSessionDeleteNoteCompletionHandler)(NSError * deleteNoteError);
@@ -133,7 +133,7 @@ extern NSUInteger ENSessionSortOrderDefault; // => ENSessionSortOrderTitle
             policy:(ENSessionUploadPolicy)policy
         toNotebook:(ENNotebook *)notebook
      orReplaceNote:(ENNoteRef *)noteToReplace
-          progress:(ENSessionUploadNoteProgressHandler)progress
+          progress:(ENSessionProgressHandler)progress
         completion:(ENSessionUploadNoteCompletionHandler)completion;
 
 - (void)shareNote:(ENNoteRef *)noteRef
@@ -149,6 +149,7 @@ extern NSUInteger ENSessionSortOrderDefault; // => ENSessionSortOrderTitle
                  completion:(ENSessionFindNotesCompletionHandler)completion;
 
 - (void)downloadNote:(ENNoteRef *)noteRef
+            progress:(ENSessionProgressHandler)progress
           completion:(ENSessionDownloadNoteCompletionHandler)completion;
 
 - (void)downloadThumbnailForNote:(ENNoteRef *)noteRef

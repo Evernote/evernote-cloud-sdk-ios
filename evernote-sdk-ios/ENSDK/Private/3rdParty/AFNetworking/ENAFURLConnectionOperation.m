@@ -551,8 +551,13 @@ didReceiveResponse:(NSURLResponse *)response
     }
     
     if (self.downloadProgress) {
+        // Capture the current values to provide smoother ramp.
+        NSUInteger dataLength = [data length];
+        long long totalBytesRead = self.totalBytesRead;
+        long long expectedContentLength = self.response.expectedContentLength;
+
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.downloadProgress([data length], self.totalBytesRead, self.response.expectedContentLength);
+            self.downloadProgress(dataLength, totalBytesRead, expectedContentLength);
         });
     }
 }
