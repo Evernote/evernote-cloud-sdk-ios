@@ -170,8 +170,6 @@ You aren't restricted to images; you can use any kind of file. Just use the appr
 
 ### Sending To Evernote with UIActivityViewController
 
-[This object works when a session is authenticated already. Note that it's a big work in progress with crummy UI for right now!]
-
 iOS provides a handy system `UIActivityViewController` that you can create and use when a user taps an "action" or "share" button in your app. The Evernote SDK provides a drop-in `UIActivity` subclass (`ENSendToEvernoteActivity`) that you can use. This will do the work of creating resources and note contents (based on the activity items), and presents a view controller that lets the user choose a notebook, add tags, edit the title, etc. Just do this:
 
 	ENSendToEvernoteActivity * evernoteActivity = [[ENSendToEvernoteActivity alloc] init];
@@ -211,9 +209,9 @@ Want a simple way of sending content to Evernote without building any UI yoursel
 
 ### What else is in here?
 
-The high level functions include those on `ENSession`, and you can look at `ENNote`, `ENResource`, `ENNotebook` for simple models of these objects as well. Other things ENSession can do for you is enumerate all notebooks a user has access to 
+The high level functions include those on `ENSession`, and you can look at `ENNote`, `ENResource`, `ENNotebook` for simple models of these objects as well. Other things ENSession can do for you is enumerate all notebooks a user has access to, replace/update existing notes, search and download notes, and fetch thumbnails. Documentation/guides for these functions is still in the works, but you should be able to get started with what's in the headers, starting with `ENSession.h`.
 
-See below for some initial notes on supporting more advanced functionality via including the "Advanced" header and using the full EDAM layer.
+See below for some initial notes on supporting even more advanced functionality via including the "Advanced" header and using the full EDAM layer.
 
 FAQ
 ---
@@ -228,17 +226,17 @@ Yes. (To use the SDK in a non-ARC project, please use the -fobjc-arc compiler fl
 
 ### Evernote can do lots of things that aren't available in ENSession. How can I do more?
 
-ENSession is an intentionally general, workflow-oriented abstraction layer. It's currently optimized for the creation and upload of new notes. You can get closer to the metal, but it will require a fair bit of understanding of Evernote's object model and API.
+ENSession is an intentionally general, workflow-oriented abstraction layer. It's currently optimized for the creation and upload of new notes, and simple search/download of existing notes. Evernote can do a lot more, though, and you can get closer to the metal, but it will require a fair bit of understanding of Evernote's object model and API.
 
 First off, import `<ENSDK/Advanced/ENSDKAdvanced.h>` instead of `ENSDK.h`. Then ask an authenticated session for its `-primaryNoteStore`. You can look at the header for `ENNoteStoreClient` to see all the methods offered on it, with block-based completion parameters. You won't generally be able to use any of the "EN"-prefixed objects in this world; you're at the "EDAM" layer, which are the actual objects that the Evernote service works with. These are powerful but somewhat complex; [please see the full API documentation for information on what you are able to do](http://dev.evernote.com/doc/reference/).
 
 This "primary" note store client can only interact with a user's personal account, and won't work with a user's business data or shared notebook data directly; you can get note store clients for those destinations by asking for `-businessNoteStore` and `-noteStoreForLinkedNotebook:`  
 
-### My app uses an App Notebook. What do I need to do special?
+### My app uses an App Notebook. Do I need to do anything special?
 
-In general, nothing. ENSession will simply return only a single notebook if you `listNotebooks` (unless the user has deleted your app notebook, in which case it will have no results). New notes created in a default (`nil`) notebook will go into your App Notebook.
+In general, no. ENSession will simply return only a single notebook if you `listNotebooks` (unless the user has deleted your app notebook, in which case it will have no results). New notes created in a default (`nil`) notebook will go into your App Notebook.
 
-*Please Note*: ENSession knows how to handle a user selecting any available notebook (including a linked or business notebook) for its App Notebook. However, if you are using the "advanced" functions in the SDK and dropping down to the EDAM layer, you'll need to be aware of the intricacies of managing the potential of talking to a linked notebook. But you can opt-out of allowing users to pick a linked notebook, by simply setting 
+*Please Note*: ENSession knows how to handle a user selecting any available notebook (including a linked or business notebook) for its App Notebook. However, if you are using the "advanced" functions in the SDK and dropping down to the EDAM layer, you'll need to be aware of the intricacies of managing talking to a linked notebook. But you can opt-out of allowing users to pick a linked notebook, by simply setting 
 
     [[ENSession sharedSession].supportsLinkedAppNotebook = NO
 
