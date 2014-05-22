@@ -122,6 +122,7 @@ static NSUInteger ENSessionNotebooksCacheValidity = (5 * 60);   // 5 minutes
 @property (nonatomic, strong) ENAuthCache * authCache;
 @property (nonatomic, strong) NSArray * notebooksCache;
 @property (nonatomic, strong) NSDate * notebooksCacheDate;
+@property (nonatomic, strong) dispatch_queue_t thumbnailQueue;
 
 @property (nonatomic, strong) ENUserStoreClient * userStorePendingRevocation;
 @end
@@ -215,6 +216,8 @@ static NSString * DeveloperToken, * NoteStoreUrl;
                                              selector:@selector(storeClientFailedAuthentication:)
                                                  name:ENStoreClientDidFailWithAuthenticationErrorNotification
                                                object:nil];
+    
+    self.thumbnailQueue = dispatch_queue_create("evernote-sdk-ios-thumbnail", DISPATCH_QUEUE_CONCURRENT);
     
     // Determine the host to use for this session.
     if (SessionHostOverride.length > 0) {
@@ -1347,11 +1350,16 @@ static NSString * DeveloperToken, * NoteStoreUrl;
         maxDimension = 0;
     }
     
-    // Go to a background queue.
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+    // Get over to a concurrent background queue.
+    dispatch_async(self.thumbnailQueue, ^{
         // Get the info we need for this note ref, then construct a standard request for the thumbnail.
         NSString * authToken = [self authenticationTokenForNoteRef:noteRef];
         NSString * shardId = [self shardIdForNoteRef:noteRef];
+        
+        if (!authToken || !shardId) {
+            completion(nil, [NSError errorWithDomain:ENErrorDomain code:ENErrorCodeUnknown userInfo:nil]);
+            return;
+        }
         
         // Only append the size param if we are explicitly providing one.
         NSString * sizeParam = nil;
@@ -1359,7 +1367,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
             sizeParam = [NSString stringWithFormat:@"?size=%lu", (unsigned long)maxDimension];
         }
         
-        NSString * urlString = [NSString stringWithFormat:@"https://%@/shard/%@/thm/note/%@%@", self.sessionHost, shardId, noteRef.guid, sizeParam];
+        NSString * urlString = [NSString stringWithFormat:@"https://%@/shard/%@/thm/note/%@%@", self.sessionHost, shardId, noteRef.guid, sizeParam ?: @""];
         NSString * postBody = [NSString stringWithFormat:@"auth=%@", [authToken en_stringByUrlEncoding]];
         
         NSMutableURLRequest * request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
@@ -1553,14 +1561,24 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     // noncached token.
     NSAssert(![NSThread isMainThread], @"Cannot get auth token on main thread");
     
-    if (noteRef.type == ENNoteRefTypePersonal) {
-        return self.primaryAuthenticationToken;
-    } else if (noteRef.type == ENNoteRefTypeBusiness) {
-        return [self validBusinessAuthenticationResult].authenticationToken;
-    } else if (noteRef.type == ENNoteRefTypeShared) {
-        return [self authenticationTokenForLinkedNotebookRef:noteRef.linkedNotebook];
+    NSString * token = nil;
+    
+    // Because this method is called from outside the normal exception handlers in the user/note
+    // store objects, it requires protection from EDAM and Thrift exceptions.
+    @try {
+        if (noteRef.type == ENNoteRefTypePersonal) {
+            token = self.primaryAuthenticationToken;
+        } else if (noteRef.type == ENNoteRefTypeBusiness) {
+            token = [self validBusinessAuthenticationResult].authenticationToken;
+        } else if (noteRef.type == ENNoteRefTypeShared) {
+            token = [self authenticationTokenForLinkedNotebookRef:noteRef.linkedNotebook];
+        }
+    } @catch (NSException * e) {
+        ENSDKLogError(@"Caught exception getting auth token for note ref %@: %@", noteRef, e);
+        token = nil;
     }
-    return nil;
+    
+    return token;
 }
 
 #pragma mark - Preferences helpers
