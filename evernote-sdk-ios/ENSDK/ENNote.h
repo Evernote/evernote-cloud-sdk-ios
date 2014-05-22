@@ -47,5 +47,5 @@ typedef void (^ENNoteGenerateWebArchiveDataCompletionHandler)(NSData * data);
 - (void)removeAllResources;
 
 - (void)generateWebArchiveData:(ENNoteGenerateWebArchiveDataCompletionHandler)completion;
-+ (void)populateNoteFromWebView:(UIWebView *)url completion:(ENNotePopulateFromWebViewCompletionHandler)completion;
++ (void)populateNoteFromWebView:(UIWebView *)webView completion:(ENNotePopulateFromWebViewCompletionHandler)completion;
 @end

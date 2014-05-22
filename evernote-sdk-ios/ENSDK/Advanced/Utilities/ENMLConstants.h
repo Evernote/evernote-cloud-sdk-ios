@@ -28,11 +28,11 @@
 
 #import <Foundation/Foundation.h>
 
-FOUNDATION_EXPORT NSString * const ENMLTagCrypt;
-FOUNDATION_EXPORT NSString * const ENMLTagTodo;
-FOUNDATION_EXPORT NSString * const ENMLTagNote;
-FOUNDATION_EXPORT NSString * const ENHTMLClassIgnore;
-FOUNDATION_EXPORT NSString * const ENHTMLClassAttachment;
-FOUNDATION_EXPORT NSString * const ENHTMLAttributeMime;
-FOUNDATION_EXPORT NSString * const ENMIMETypeOctetStream;
-FOUNDATION_EXPORT NSString * const ENMLTagMedia;
+extern NSString * const ENMLTagCrypt;
+extern NSString * const ENMLTagTodo;
+extern NSString * const ENMLTagNote;
+extern NSString * const ENHTMLClassIgnore;
+extern NSString * const ENHTMLClassAttachment;
+extern NSString * const ENHTMLAttributeMime;
+extern NSString * const ENMIMETypeOctetStream;
+extern NSString * const ENMLTagMedia;

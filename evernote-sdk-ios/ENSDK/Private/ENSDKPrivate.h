@@ -33,8 +33,8 @@
 #import "ENNoteStoreClient.h"
 #import "ENUserStoreClient.h"
 
-FOUNDATION_EXPORT NSString * const ENBootstrapProfileNameInternational;
-FOUNDATION_EXPORT NSString * const ENBootstrapProfileNameChina;
+extern NSString * const ENBootstrapProfileNameInternational;
+extern NSString * const ENBootstrapProfileNameChina;
 
 @interface ENSession (Private)
 @property (nonatomic, readonly) EDAMUserID userID;

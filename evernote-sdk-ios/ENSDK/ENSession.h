@@ -31,10 +31,10 @@
 #import "ENSDK.h"
 #import "ENSDKLogging.h"
 
-FOUNDATION_EXPORT NSString * const ENSessionHostSandbox;
+extern NSString * const ENSessionHostSandbox;
 
-FOUNDATION_EXPORT NSString * const ENSessionDidAuthenticateNotification;
-FOUNDATION_EXPORT NSString * const ENSessionDidUnauthenticateNotification;
+extern NSString * const ENSessionDidAuthenticateNotification;
+extern NSString * const ENSessionDidUnauthenticateNotification;
 
 typedef void (^ENSessionAuthenticateCompletionHandler)(NSError * authenticateError);
 typedef void (^ENSessionListNotebooksCompletionHandler)(NSArray * notebooks, NSError * listNotebooksError);
