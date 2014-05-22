@@ -197,9 +197,14 @@ If your app doesn't already have your content into visible web views, you can al
 
 ### Using the UIActivity subclass (share sheet)
 
-Want a simple way of sending content to Evernote without building any UI yourself? We've got it for you. You can use the `ENSaveToEvernoteActivity` class when opening the standard iOS activity panel. The SaveToEvernoteActivity knows how to handle items of type NSString and UIImage (and also can handle pre-created ENResource and ENNote objects). This will place an Evernote logo icon in the activity sheet that the user can choose. They'll get a convenient UI for selecting notebook, title, tags, etc.
+Want a simple way of sending content to Evernote without building any UI yourself? We've got it for you. You can use the `ENSaveToEvernoteActivity` class when opening the standard iOS activity panel. The SaveToEvernoteActivity knows how to handle items of type NSString and UIImage (and also can handle pre-created ENResource and ENNote objects). This will place an Evernote logo icon in the activity sheet that the user can choose. They'll get a convenient UI for selecting notebook, title, tags, etc. Use the ENSaveToEvernoteActivityDelegate protocol to be notified whether Save to Evernote activity succeeded, just implement the following function:
+
+	- (void)activity:(ENSaveToEvernoteActivity *)activity didFinishWithSuccess:(BOOL)success error:(NSError *)error;
+	
+Sample code to use ENSaveToEvernoteActivity:
 
     ENSaveToEvernoteActivity * saveActivity = [[ENSaveToEvernoteActivity alloc] init];
+	saveActivity.delegate = self;
     saveActivity.noteTitle = @"Default title";
     NSArray * items = [NSArray arrayWithObject:(self.textView.text)];
     UIActivityViewController * activityController = [[UIActivityViewController alloc] initWithActivityItems:items                                                                              		      
