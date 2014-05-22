@@ -978,13 +978,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
         [NSException raise:NSInvalidArgumentException format:@"handler required"];
         return;
     }
-    
-    if (!noteSearch) {
-        ENSDKLogError(@"noteSearch parameter is required to get search results");
-        completion(@[], nil);
-        return;
-    }
-    
+        
     if (!self.isAuthenticated) {
         completion(nil, [NSError errorWithDomain:ENErrorDomain code:ENErrorCodeAuthExpired userInfo:nil]);
         return;
@@ -1702,6 +1696,11 @@ static NSString * DeveloperToken, * NoteStoreUrl;
 #pragma mark - Local class definitions
 
 @implementation ENSessionFindNotesResult
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; title = \"%@\"; notebook name = \"%@\"; created = %@; updated = %@; noteRef = %p>",
+            [self class], self, self.title, self.notebook.name, self.created, self.updated, self.noteRef];
+}
 @end
 
 #pragma mark - Private context definitions

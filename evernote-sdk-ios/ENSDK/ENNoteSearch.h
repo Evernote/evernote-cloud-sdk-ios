@@ -30,7 +30,7 @@
 
 @interface ENNoteSearch : NSObject
 @property (nonatomic, readonly) NSString * searchString;
-+ (ENNoteSearch *)noteSearchWithSearchString:(NSString *)searchString;
-+ (ENNoteSearch *)noteSearchCreatedByThisApplication;
++ (instancetype)noteSearchWithSearchString:(NSString *)searchString;
++ (instancetype)noteSearchCreatedByThisApplication;
 - (id)initWithSearchString:(NSString *)searchString;
 @end

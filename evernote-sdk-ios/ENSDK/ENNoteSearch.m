@@ -34,12 +34,12 @@
 @end
 
 @implementation ENNoteSearch
-+ (ENNoteSearch *)noteSearchWithSearchString:(NSString *)searchString
++ (instancetype)noteSearchWithSearchString:(NSString *)searchString
 {
     return [[ENNoteSearch alloc] initWithSearchString:searchString];
 }
 
-+ (ENNoteSearch *)noteSearchCreatedByThisApplication
++ (instancetype)noteSearchCreatedByThisApplication
 {
     NSString * search = [NSString stringWithFormat:@"sourceApplication:%@", [[ENSession sharedSession] sourceApplication]];
     return [[ENNoteSearch alloc] initWithSearchString:search];
@@ -47,6 +47,9 @@
 
 - (id)initWithSearchString:(NSString *)searchString
 {
+    if (!searchString) {
+        return nil;
+    }
     self = [super init];
     if (self) {
         self.searchString = [searchString copy];
