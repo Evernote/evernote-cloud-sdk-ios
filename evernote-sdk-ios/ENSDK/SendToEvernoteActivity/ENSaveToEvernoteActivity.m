@@ -141,8 +141,11 @@
     return self.noteTitle;
 }
 
-- (void)viewController:(ENSaveToEvernoteViewController *)viewController didFinishWithSuccess:(BOOL)success
+- (void)viewController:(ENSaveToEvernoteViewController *)viewController didFinishWithSuccess:(BOOL)success uploadError:(NSError *)error
 {
     [self activityDidFinish:success];
+    if ([_delegate respondsToSelector:@selector(activity:didFinishWithSuccess:error:)]) {
+        [_delegate activity:self didFinishWithSuccess:success error:error];
+    }
 }
 @end

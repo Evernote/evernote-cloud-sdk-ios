@@ -9,7 +9,7 @@
 #import "SaveActivityViewController.h"
 #import <ENSDK/ENSDK.h>
 
-@interface SaveActivityViewController ()
+@interface SaveActivityViewController () <ENSaveToEvernoteActivityDelegate>
 
 @end
 
@@ -33,10 +33,20 @@
 - (void)action:(id)sender
 {
     ENSaveToEvernoteActivity * sendActivity = [[ENSaveToEvernoteActivity alloc] init];
+    sendActivity.delegate = self;
     NSArray * items = [NSArray arrayWithObject:(self.textView.text)];
     UIActivityViewController * activityController = [[UIActivityViewController alloc] initWithActivityItems:items
                                                                                       applicationActivities:@[sendActivity]];
     [self presentViewController:activityController animated:YES completion:nil];
+}
+
+#pragma ENSaveToEvernoteActivityDelegate
+- (void)activity:(ENSaveToEvernoteActivity *)activity didFinishWithSuccess:(BOOL)success error:(NSError *)error {
+    if (success) {
+        [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Saved to Evernote!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+    } else {
+        [[[UIAlertView alloc] initWithTitle:@"Fail" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+    }
 }
 
 @end

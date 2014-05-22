@@ -27,7 +27,22 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "ENSDK.h"
+@class ENSaveToEvernoteActivity;
+
+@protocol ENSaveToEvernoteActivityDelegate <NSObject>
+/**
+ *  Delegate function to notify the user whether sharing to Evernote succeeded, called from the main thread
+ *
+ *  @param activity the Save to Evernote UIActivity
+ *  @param success  whether the activity succeeded
+ *  @param error    error if any
+ */
+- (void)activity:(ENSaveToEvernoteActivity *)activity didFinishWithSuccess:(BOOL)success error:(NSError *)error;
+
+@end
 
 @interface ENSaveToEvernoteActivity : UIActivity
 @property (nonatomic, copy) NSString * noteTitle;
+@property (nonatomic, weak) id<ENSaveToEvernoteActivityDelegate> delegate;
 @end

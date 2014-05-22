@@ -33,7 +33,7 @@
 @protocol ENSendToEvernoteViewControllerDelegate <NSObject>
 - (ENNote *)noteForViewController:(ENSaveToEvernoteViewController *)viewController;
 - (NSString *)defaultNoteTitleForViewController:(ENSaveToEvernoteViewController *)viewController;
-- (void)viewController:(ENSaveToEvernoteViewController *)viewController didFinishWithSuccess:(BOOL)success;
+- (void)viewController:(ENSaveToEvernoteViewController *)viewController didFinishWithSuccess:(BOOL)success uploadError:(NSError *)error;
 @end
 
 @interface ENSaveToEvernoteViewController : UIViewController

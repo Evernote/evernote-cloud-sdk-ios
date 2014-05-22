@@ -191,13 +191,13 @@ CGFloat kTextLeftPadding = 20;
     
     // Upload the note.
     [[ENSession sharedSession] uploadNote:note notebook:self.currentNotebook completion:^(ENNoteRef *noteRef, NSError *uploadNoteError) {
-        [self.delegate viewController:self didFinishWithSuccess:(noteRef != nil)];
+        [self.delegate viewController:self didFinishWithSuccess:(noteRef != nil) uploadError:uploadNoteError];
     }];
 }
 
 - (void)cancel:(id)sender
 {
-    [self.delegate viewController:self didFinishWithSuccess:NO];
+    [self.delegate viewController:self didFinishWithSuccess:NO uploadError:[NSError errorWithDomain:ENErrorDomain code:ENErrorCodeCancelled userInfo:nil]];
 }
 
 #pragma mark - ENNotebookChooserViewControllerDelegate
