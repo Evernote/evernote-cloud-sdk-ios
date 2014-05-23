@@ -43,7 +43,12 @@
                                         completion:^(NSArray *findNotesResults, NSError *findNotesError) {
                                             [SVProgressHUD dismiss];
                                             if (!findNotesResults) {
-                                                [self showSimpleAlertWithMessage:@"Error searching for notes"];
+                                                if ([findNotesError.domain isEqualToString:ENErrorDomain] &&
+                                                    findNotesError.code == ENErrorCodePermissionDenied) {
+                                                    [self showSimpleAlertWithMessage:@"Permission denied for note find. Maybe your app only has read access?"];
+                                                } else {
+                                                    [self showSimpleAlertWithMessage:@"Error searching for notes"];
+                                                }
                                                 NSLog(@"findNotesError: %@", findNotesError);
                                             } else if (findNotesResults.count == 0) {
                                                 [self showSimpleAlertWithMessage:@"No notes from this app! Go back to menu to create some."];
