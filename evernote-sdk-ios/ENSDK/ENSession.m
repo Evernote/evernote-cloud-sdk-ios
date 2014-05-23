@@ -756,7 +756,11 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     }
     
     ENSessionUploadNoteContext * context = [[ENSessionUploadNoteContext alloc] init];
-    context.note = [note EDAMNote];
+    if (noteToReplace) {
+        context.note = [note EDAMNoteToReplaceServiceNoteGUID:noteToReplace.guid];
+    } else {
+        context.note = [note EDAMNote];
+    }
     context.refToReplace = noteToReplace;
     context.notebook = notebook;
     context.policy = policy;

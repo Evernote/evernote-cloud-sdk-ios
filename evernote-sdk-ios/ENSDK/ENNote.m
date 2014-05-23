@@ -221,12 +221,21 @@
 
 - (EDAMNote *)EDAMNote
 {
-    // Turn the ENNote into an EDAMNote. Use the cached EDAMNote as a starting point if we have one.
+    return [self EDAMNoteToReplaceServiceNoteGUID:nil];
+}
+
+- (EDAMNote *)EDAMNoteToReplaceServiceNoteGUID:(NSString *)guid
+{
+    // Turn the ENNote into an EDAMNote. Use the cached EDAMNote as a starting point if we have one
+    // and if it matches the note GUID we're given. This way we can preserve the characteristics
+    // of the "original" note we might be replacing, but not propagate those properties to a
+    // a completely fresh note.
     EDAMNote * note = nil;
-    if (self.serviceNote) {
+    if (self.serviceNote && [self.serviceNote.guid isEqualToString:guid]) {
         note = [self.serviceNote copy];
-        // Don't preserve these.
+        // Don't preserve these. Our caller will either rewrite them or leave them blank.
         note.guid = nil;
+        note.notebookGuid = nil;
         note.updateSequenceNum = nil;
     } else {
         note = [[EDAMNote alloc] init];

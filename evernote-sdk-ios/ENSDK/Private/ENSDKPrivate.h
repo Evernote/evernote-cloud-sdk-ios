@@ -65,6 +65,7 @@ extern NSString * const ENBootstrapProfileNameChina;
 - (void)setGuid:(NSString *)guid;
 - (void)setEnmlContent:(NSString *)enmlContent;
 - (void)setResources:(NSArray *)resources;
+- (EDAMNote *)EDAMNoteToReplaceServiceNoteGUID:(NSString *)guid;
 - (EDAMNote *)EDAMNote;
 - (BOOL)validateForLimits;
 @end
