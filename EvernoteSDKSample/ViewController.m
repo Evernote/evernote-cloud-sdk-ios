@@ -10,6 +10,7 @@
 #import <ENSDK/ENSDK.h>
 #import "UserInfoViewController.h"
 #import "SaveActivityViewController.h"
+#import "ViewAppNotesViewController.h"
 #import "SVProgressHUD.h"
 
 NS_ENUM(NSInteger, SampleFunctions) {
@@ -18,11 +19,13 @@ NS_ENUM(NSInteger, SampleFunctions) {
     kSampleFunctionsSaveActivity,
     kSampleFunctionsCreatePhotoNote,
     kSampleFunctionsClipWebPage,
+    kSampleFunctionsViewAppNotesList,
     
     kSampleFunctionsMaxValue
 };
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIWebViewDelegate>
+@property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) UIWebView * webView;
 @end
 
@@ -112,6 +115,10 @@ NS_ENUM(NSInteger, SampleFunctions) {
             cell.textLabel.text = @"Clip web page";
             break;
             
+        case kSampleFunctionsViewAppNotesList:
+            cell.textLabel.text = @"View this app's notes";
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            
         default:
             ;
     }
@@ -164,6 +171,12 @@ NS_ENUM(NSInteger, SampleFunctions) {
             self.webView.delegate = self;
             [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
             [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.theatlantic.com/technology/print/2014/04/exploding-whales/361444/"]]];
+            break;
+        }
+        case kSampleFunctionsViewAppNotesList:
+        {
+            ViewAppNotesViewController * vanvc = [[ViewAppNotesViewController alloc] init];
+            [self.navigationController pushViewController:vanvc animated:YES];
             break;
         }
         default:

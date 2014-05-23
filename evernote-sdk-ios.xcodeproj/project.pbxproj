@@ -211,6 +211,8 @@
 		BE2E25D918F4D6C300BD7E6E /* ENMLConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E25D718F4D6C200BD7E6E /* ENMLConstants.h */; };
 		BE2E25DA18F4D6C300BD7E6E /* ENMLConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E25D818F4D6C200BD7E6E /* ENMLConstants.m */; };
 		BE2E25DD18F4DCE600BD7E6E /* ENSDKPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E25DC18F4DCE600BD7E6E /* ENSDKPrivate.m */; };
+		BE4695CC192ECE4D00ADE15F /* ViewAppNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4695CB192ECE4D00ADE15F /* ViewAppNotesViewController.m */; };
+		BE4695CF192ED90E00ADE15F /* ViewNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4695CE192ED90E00ADE15F /* ViewNoteViewController.m */; };
 		BE48C6F719102CC600025618 /* ENWebContentTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = BE48C6F519102CC600025618 /* ENWebContentTransformer.h */; };
 		BE48C6F919102CC600025618 /* ENWebContentTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE48C6F619102CC600025618 /* ENWebContentTransformer.m */; };
 		BE48C6FA19102CC600025618 /* ENWebContentTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE48C6F619102CC600025618 /* ENWebContentTransformer.m */; };
@@ -469,6 +471,10 @@
 		BE2E25D718F4D6C200BD7E6E /* ENMLConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENMLConstants.h; sourceTree = "<group>"; };
 		BE2E25D818F4D6C200BD7E6E /* ENMLConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENMLConstants.m; sourceTree = "<group>"; };
 		BE2E25DC18F4DCE600BD7E6E /* ENSDKPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENSDKPrivate.m; sourceTree = "<group>"; };
+		BE4695CA192ECE4D00ADE15F /* ViewAppNotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewAppNotesViewController.h; sourceTree = "<group>"; };
+		BE4695CB192ECE4D00ADE15F /* ViewAppNotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewAppNotesViewController.m; sourceTree = "<group>"; };
+		BE4695CD192ED90E00ADE15F /* ViewNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewNoteViewController.h; sourceTree = "<group>"; };
+		BE4695CE192ED90E00ADE15F /* ViewNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewNoteViewController.m; sourceTree = "<group>"; };
 		BE48C6F519102CC600025618 /* ENWebContentTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENWebContentTransformer.h; sourceTree = "<group>"; };
 		BE48C6F619102CC600025618 /* ENWebContentTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENWebContentTransformer.m; sourceTree = "<group>"; };
 		BE48C6FB19102DD900025618 /* ENWebClipNoteBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENWebClipNoteBuilder.h; sourceTree = "<group>"; };
@@ -960,6 +966,10 @@
 				BECDD3A8190908A9003736EE /* UserInfoViewController.m */,
 				BECDD3AA19090FBA003736EE /* SaveActivityViewController.h */,
 				BECDD3AB19090FBA003736EE /* SaveActivityViewController.m */,
+				BE4695CA192ECE4D00ADE15F /* ViewAppNotesViewController.h */,
+				BE4695CB192ECE4D00ADE15F /* ViewAppNotesViewController.m */,
+				BE4695CD192ED90E00ADE15F /* ViewNoteViewController.h */,
+				BE4695CE192ED90E00ADE15F /* ViewNoteViewController.m */,
 				BECDD3891908FFC2003736EE /* Images.xcassets */,
 				BECDD3751908FFC1003736EE /* Supporting Files */,
 			);
@@ -1426,7 +1436,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BECDD3881908FFC2003736EE /* ViewController.m in Sources */,
+				BE4695CC192ECE4D00ADE15F /* ViewAppNotesViewController.m in Sources */,
 				BECDD3AC19090FBA003736EE /* SaveActivityViewController.m in Sources */,
+				BE4695CF192ED90E00ADE15F /* ViewNoteViewController.m in Sources */,
 				BECDD3A9190908A9003736EE /* UserInfoViewController.m in Sources */,
 				BECDD37F1908FFC1003736EE /* AppDelegate.m in Sources */,
 				BECDD37B1908FFC1003736EE /* main.m in Sources */,

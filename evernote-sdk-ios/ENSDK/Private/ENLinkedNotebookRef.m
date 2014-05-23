@@ -58,4 +58,33 @@
     [encoder encodeObject:self.shardId forKey:@"shardId"];
     [encoder encodeObject:self.sharedNotebookGlobalId forKey:@"sharedNotebookGlobalId"];
 }
+
+- (BOOL)isEqual:(id)object
+{
+    if (self == object) {
+        return YES;
+    }
+    if (!object || ![object isKindOfClass:[self class]]) {
+        return NO;
+    }
+    ENLinkedNotebookRef * other = object;
+    if ((other.guid == self.guid || [other.guid isEqualToString:self.guid]) &&
+        (other.noteStoreUrl == self.noteStoreUrl || [other.noteStoreUrl isEqualToString:self.noteStoreUrl]) &&
+        (other.shardId == self.shardId || [other.shardId isEqualToString:self.shardId]) &&
+        (other.sharedNotebookGlobalId == self.sharedNotebookGlobalId || [other.sharedNotebookGlobalId isEqualToString:self.sharedNotebookGlobalId])) {
+        return YES;
+    }
+    return NO;
+}
+
+- (NSUInteger)hash
+{
+    NSUInteger prime = 31;
+    NSUInteger result = 1;
+    result = prime * result + [self.guid hash];
+    result = prime * result + [self.noteStoreUrl hash];
+    result = prime * result + [self.shardId hash];
+    result = prime * result + [self.sharedNotebookGlobalId hash];
+    return result;
+}
 @end

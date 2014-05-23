@@ -66,9 +66,45 @@
     [encoder encodeObject:self.linkedNotebook forKey:@"linkedNotebook"];
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    ENNoteRef * copy = [[ENNoteRef alloc] init];
+    copy.type = self.type;
+    copy.guid = self.guid;
+    copy.linkedNotebook = self.linkedNotebook;
+    return copy;
+}
+
 - (NSData *)asData
 {
     return [NSKeyedArchiver archivedDataWithRootObject:self];
+}
+
+- (BOOL)isEqual:(id)object
+{
+    if (self == object) {
+        return YES;
+    }
+    if (!object || ![object isKindOfClass:[self class]]) {
+        return NO;
+    }
+    ENNoteRef * other = object;
+    if (other.type == self.type &&
+        (self.guid == other.guid || [other.guid isEqualToString:self.guid]) &&
+        (self.linkedNotebook == other.linkedNotebook || [other.linkedNotebook isEqual:self.linkedNotebook])) {
+        return YES;
+    }
+    return NO;
+}
+
+- (NSUInteger)hash
+{
+    NSUInteger prime = 31;
+    NSUInteger result = 1;
+    result = prime * result + (int)self.type;
+    result = prime * result + [self.guid hash];
+    result = prime * result + [self.linkedNotebook hash];
+    return result;
 }
 
 - (NSString *)description
