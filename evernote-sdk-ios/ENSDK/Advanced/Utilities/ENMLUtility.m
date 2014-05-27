@@ -190,14 +190,18 @@ typedef void (^ENMLHTMLCompletionBlock)(NSString* html, NSError *error);
     NSNumber *width = [attributes objectForKey:@"width"];
     NSNumber *height = [attributes objectForKey:@"height"];
     if (width == nil || height == nil) {
-        width = [NSNumber numberWithInt:[resource.width intValue]];
-        height = [NSNumber numberWithInt:[resource.height intValue]];
+        width = resource.width;
+        height = resource.height;
     }
     
-    [imageAttributes setObject:width
-                        forKey:@"width"];
-    [imageAttributes setObject:height
-                        forKey:@"height"];
+    if (width != nil) {
+        [imageAttributes setObject:width
+                            forKey:@"width"];
+    }
+    if (height != nil) {
+        [imageAttributes setObject:height
+                            forKey:@"height"];
+    }
     
     [self.htmlWriter startElement:@"img" attributes:imageAttributes];
     [self.htmlWriter endElement];
