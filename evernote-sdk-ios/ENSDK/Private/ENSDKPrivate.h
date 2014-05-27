@@ -89,6 +89,7 @@ extern NSString * const ENBootstrapProfileNameChina;
 
 // Private pesudo-recursive method that gets all matching notes batch by batch until exhausted.
 - (void)findNotesMetadataWithFilter:(EDAMNoteFilter *)filter
+                         maxResults:(NSUInteger)maxResults
                          resultSpec:(EDAMNotesMetadataResultSpec *)resultSpec
                             success:(void(^)(NSArray *notesMetadataList))success
                             failure:(void(^)(NSError *error))failure;

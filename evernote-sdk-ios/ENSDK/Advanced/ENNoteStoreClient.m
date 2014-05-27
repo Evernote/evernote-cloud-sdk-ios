@@ -33,6 +33,9 @@
 #import "THTTPClient.h"
 #import "TBinaryProtocol.h"
 
+// This is the Evernote standard reasonable recommendation for a single findNotes call and won't break in future.
+#define FIND_NOTES_DEFAULT_MAX_NOTES 100
+
 @interface ENNoteStoreClient ()
 @property (nonatomic, strong) EDAMNoteStoreClient * client;
 @property (nonatomic, copy) NSString * cachedNoteStoreUrl;
@@ -851,6 +854,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
 #pragma mark - Protected routines
 
 - (void)findNotesMetadataWithFilter:(EDAMNoteFilter *)filter
+                         maxResults:(NSUInteger)maxResults
                          resultSpec:(EDAMNotesMetadataResultSpec *)resultSpec
                             success:(void(^)(NSArray *notesMetadataList))success
                             failure:(void(^)(NSError *error))failure
@@ -858,6 +862,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
     [self findNotesMetadataInternalWithFilter:filter
                                        offset:0
                                    resultSpec:resultSpec
+                                   maxResults:maxResults
                                       results:[[NSMutableArray alloc] init]
                                       success:success
                                       failure:failure];
@@ -866,13 +871,26 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
 - (void)findNotesMetadataInternalWithFilter:(EDAMNoteFilter *)filter
                                      offset:(int32_t)offset
                                  resultSpec:(EDAMNotesMetadataResultSpec *)resultSpec
+                                 maxResults:(NSUInteger)maxResults
                                     results:(NSMutableArray *)results
                                     success:(void(^)(NSArray *notesMetadataList))success
                                     failure:(void(^)(NSError *error))failure
 {
+    // If we've already fulfilled a bounded find order, then we are done.
+    if (maxResults > 0 && results.count >= maxResults) {
+        success(results);
+        return;
+    }
+    
+    // For this call, ask for the remaining number to fulfill the order, but don't exceed standard max.
+    int32_t maxNotesThisCall = FIND_NOTES_DEFAULT_MAX_NOTES;
+    if (maxResults > 0) {
+        maxNotesThisCall = MIN(maxResults - results.count, (NSUInteger)maxNotesThisCall);
+    }
+    
     [self findNotesMetadataWithFilter:filter
                                offset:offset
-                             maxNotes:100           // This is a reasonable recommendation for a single call and won't break in future.
+                             maxNotes:maxNotesThisCall
                            resultSpec:resultSpec
                               success:^(EDAMNotesMetadataList *metadata) {
                                   // Add these results.
@@ -881,10 +899,12 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                   // because in theory the note count total could change between calls.
                                   int32_t nextIndex = [metadata.startIndex intValue] + (int32_t)metadata.notes.count;
                                   int32_t remainingCount = [metadata.totalNotes intValue] - nextIndex;
+                                  // Go for another round if there are more to get.
                                   if (remainingCount > 0) {
                                       [self findNotesMetadataInternalWithFilter:filter
                                                                          offset:nextIndex
                                                                      resultSpec:resultSpec
+                                                                     maxResults:maxResults
                                                                         results:results
                                                                         success:success
                                                                         failure:failure];

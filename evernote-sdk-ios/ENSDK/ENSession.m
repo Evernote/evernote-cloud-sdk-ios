@@ -95,6 +95,7 @@ static NSUInteger ENSessionNotebooksCacheValidity = (5 * 60);   // 5 minutes
 @property (nonatomic, assign) ENSessionSortOrder sortOrder;
 @property (nonatomic, strong) EDAMNoteFilter * noteFilter;
 @property (nonatomic, strong) EDAMNotesMetadataResultSpec * resultSpec;
+@property (nonatomic, assign) NSUInteger maxResults;
 @property (nonatomic, assign) BOOL requiresLocalMerge;
 @property (nonatomic, assign) BOOL sortAscending;
 @property (nonatomic, strong) NSArray * allNotebooks;
@@ -976,7 +977,8 @@ static NSString * DeveloperToken, * NoteStoreUrl;
                  inNotebook:(ENNotebook *)notebook
                     orScope:(ENSessionSearchScope)scope
                   sortOrder:(ENSessionSortOrder)sortOrder
-                 completion:(ENSessionFindNotesCompletionHandler)completion;
+                 maxResults:(NSUInteger)maxResults
+                 completion:(ENSessionFindNotesCompletionHandler)completion
 {
     if (!completion) {
         [NSException raise:NSInvalidArgumentException format:@"handler required"];
@@ -1053,6 +1055,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     context.sortOrder = sortOrder;
     context.noteFilter = noteFilter;
     context.resultSpec = resultSpec;
+    context.maxResults = maxResults;
     context.findMetadataResults = [[NSMutableArray alloc] init];
     context.requiresLocalMerge = requiresLocalMerge;
     context.sortAscending = sortAscending;
@@ -1104,6 +1107,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     }
 
     [self.primaryNoteStore findNotesMetadataWithFilter:context.noteFilter
+                                            maxResults:context.maxResults
                                             resultSpec:context.resultSpec
                                                success:^(NSArray *notesMetadataList) {
                                                    [context.findMetadataResults addObjectsFromArray:notesMetadataList];
@@ -1126,6 +1130,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     }
 
     [self.businessNoteStore findNotesMetadataWithFilter:context.noteFilter
+                                             maxResults:context.maxResults
                                              resultSpec:context.resultSpec
                                                 success:^(NSArray *notesMetadataList) {
                                                     [context.findMetadataResults addObjectsFromArray:notesMetadataList];
@@ -1183,6 +1188,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     
     ENNoteStoreClient * noteStore = [self noteStoreForLinkedNotebook:notebook.linkedNotebook];
     [noteStore findNotesMetadataWithFilter:context.noteFilter
+                                maxResults:context.maxResults
                                 resultSpec:context.resultSpec
                                    success:^(NSArray *notesMetadataList) {
                                        // Do it again with the next linked notebook in the list.
@@ -1262,6 +1268,12 @@ static NSString * DeveloperToken, * NoteStoreUrl;
         result.updated = [NSDate endateFromEDAMTimestamp:[metadata.updated longLongValue]];
         
         [findNotesResults addObject:result];
+        
+        // If the caller specified a max result count, and we've reached it, then stop fixing up
+        // results here.
+        if (context.maxResults > 0 && findNotesResults.count >= context.maxResults) {
+            break;
+        }
     }
     
     context.results = findNotesResults;

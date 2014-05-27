@@ -146,6 +146,7 @@ extern NSUInteger ENSessionSortOrderDefault; // => ENSessionSortOrderTitle
                  inNotebook:(ENNotebook *)notebook
                     orScope:(ENSessionSearchScope)scope
                   sortOrder:(ENSessionSortOrder)sortOrder
+                 maxResults:(NSUInteger)maxResults
                  completion:(ENSessionFindNotesCompletionHandler)completion;
 
 - (void)downloadNote:(ENNoteRef *)noteRef

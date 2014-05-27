@@ -40,6 +40,7 @@
                                         inNotebook:nil
                                            orScope:ENSessionSearchScopeDefault
                                          sortOrder:ENSessionSortOrderRecentlyCreated
+                                        maxResults:0
                                         completion:^(NSArray *findNotesResults, NSError *findNotesError) {
                                             [SVProgressHUD dismiss];
                                             if (!findNotesResults) {
