@@ -47,30 +47,35 @@ typedef void (^ENSessionDownloadNoteCompletionHandler)(ENNote * note, NSError * 
 typedef void (^ENSessionDownloadNoteThumbnailCompletionHandler)(UIImage * thumbnail, NSError * downloadNoteThumbnailError);
 
 typedef NS_ENUM(NSInteger, ENSessionUploadPolicy) {
-    ENSessionUploadPolicyCreate,
-    ENSessionUploadPolicyReplace,
-    ENSessionUploadPolicyReplaceOrCreate
+    ENSessionUploadPolicyCreate,            // always create a new note.
+    ENSessionUploadPolicyReplace,           // replace existing note if present.
+    ENSessionUploadPolicyReplaceOrCreate    // attempt to replace existing note, but if it no longer exists, create new instead.
 };
 
 typedef NS_OPTIONS(NSUInteger, ENSessionSearchScope) {
-    ENSessionSearchScopeNone                = 0,      // only useful if specifying a notebook instead.
-    ENSessionSearchScopePersonal            = 1 << 0,
-    ENSessionSearchScopePersonalLinked      = 1 << 1,
-    ENSessionSearchScopeBusiness            = 1 << 2
+    ENSessionSearchScopeNone                = 0,      // only used if specifying an explicit notebook instead.
+    ENSessionSearchScopePersonal            = 1 << 0, // search among all personal notebooks.
+    ENSessionSearchScopePersonalLinked      = 1 << 1, // search among all notebooks shared to the user by others.
+    ENSessionSearchScopeBusiness            = 1 << 2, // search among all business notebooks the user has joined.
+    
+    ENSessionSearchScopeAppNotebook         = 1 << 3  // use this if your app uses an "App Notebook". (any other set flags will be ignored.)
 };
-extern NSUInteger ENSessionSearchScopeDefault; // => ENSessionSearchScopePersonal
-extern NSUInteger ENSessionSearchScopeAll;     // ! Performance warning. !
+// Default search is among personal notebooks only; typical and most performant scope.
+#define ENSessionSearchScopeDefault     (ENSessionSearchScopePersonal)
+// Search everything this user can see. PERFORMANCE NOTE: This can be very expensive and result in many roundtrips if the
+// user is a member of a business and/or has many linked notebooks.
+#define ENSessionSearchScopeAll         (ENSessionSearchScopePersonal | ENSessionSearchScopePersonalLinked | ENSessionSearchScopeBusiness)
 
 typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
-    ENSessionSortOrderTitle                 = 1 << 0,
-    ENSessionSortOrderRecentlyCreated       = 1 << 1,
-    ENSessionSortOrderRecentlyUpdated       = 1 << 2,
-    ENSessionSortOrderRelevance             = 1 << 3,  // only valid when using a single search scope
+    ENSessionSortOrderTitle                 = 1 << 0,  // case-insensitive order by title.
+    ENSessionSortOrderRecentlyCreated       = 1 << 1,  // most recently created first.
+    ENSessionSortOrderRecentlyUpdated       = 1 << 2,  // most recently updated first.
+    ENSessionSortOrderRelevance             = 1 << 3,  // most relevant first. NB only valid when using a single search scope
     
-    ENSessionSortOrderNormal                = 0 << 16, // default
-    ENSessionSortOrderReverse               = 1 << 16
+    ENSessionSortOrderNormal                = 0 << 16, // default order (no flag)
+    ENSessionSortOrderReverse               = 1 << 16  // reverse order
 };
-extern NSUInteger ENSessionSortOrderDefault; // => ENSessionSortOrderTitle
+#define ENSessionSortOrderDefault       ENSessionSortOrderTitle
 
 // Result record for findNotes call.
 @interface ENSessionFindNotesResult : NSObject

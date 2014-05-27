@@ -44,11 +44,6 @@ NSString * const ENSessionHostSandbox = @"sandbox.evernote.com";
 NSString * const ENSessionDidAuthenticateNotification = @"ENSessionDidAuthenticateNotification";
 NSString * const ENSessionDidUnauthenticateNotification = @"ENSessionDidUnauthenticateNotification";
 
-// Values visible publicly.
-NSUInteger ENSessionSearchScopeDefault = ENSessionSearchScopePersonal;
-NSUInteger ENSessionSearchScopeAll = NSIntegerMax;
-NSUInteger ENSessionSortOrderDefault = ENSessionSortOrderTitle;
-
 // Constants valid only in this file.
 static NSString * ENSessionBootstrapServerBaseURLStringCN  = @"app.yinxiang.com";
 static NSString * ENSessionBootstrapServerBaseURLStringUS  = @"www.evernote.com";
@@ -59,6 +54,7 @@ static NSString * ENSessionPreferencesCurrentProfileName = @"CurrentProfileName"
 static NSString * ENSessionPreferencesUser = @"User";
 static NSString * ENSessionPreferencesAppNotebookIsLinked = @"AppNotebookIsLinked";
 static NSString * ENSessionPreferencesLinkedAppNotebook = @"LinkedAppNotebook";
+static NSString * ENSessionPreferencesSharedAppNotebook = @"SharedAppNotebook";
 
 static NSUInteger ENSessionNotebooksCacheValidity = (5 * 60);   // 5 minutes
 
@@ -782,13 +778,6 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     
     context.note.guid = context.refToReplace.guid;
     context.note.active = @YES;
-    if (context.note.notebookGuid != nil) {
-        // Allowing arbitrary update of notebook that the note is in would require a ton of logic that would require deleting and re-creating
-        // if it moves across shard (share/business) boundaries. We punt on that whole problem here by simply disallowing notebook change
-        // as part of an update flow.
-        ENSDKLogInfo(@"Cannot replace a note and change its notebook; location will be preserved.");
-        context.note.notebookGuid = nil;
-    }
     context.noteStore = [self noteStoreForNoteRef:context.refToReplace];
     
     if (context.progress) {
@@ -831,6 +820,11 @@ static NSString * DeveloperToken, * NoteStoreUrl;
                 context.noteStore = [self noteStoreForLinkedNotebook:linkedNotebook];
                 context.noteRef.type = ENNoteRefTypeShared;
                 context.noteRef.linkedNotebook = [ENLinkedNotebookRef linkedNotebookRefFromLinkedNotebook:linkedNotebook];
+                
+                // Because we are using a linked app notebook, and authenticating to it with the shared auth model,
+                // we must provide a notebook guid in the note or face an error.
+                EDAMSharedNotebook * sharedNotebook = [self.preferences decodedObjectForKey:ENSessionPreferencesSharedAppNotebook];
+                context.note.notebookGuid = sharedNotebook.notebookGuid;
             } else {
                 // We don't have a linked notebook record to use. We need to go find one.
                 [self uploadNote_findLinkedAppNotebookWithContext:context];
@@ -879,10 +873,35 @@ static NSString * DeveloperToken, * NoteStoreUrl;
         EDAMLinkedNotebook * linkedNotebook = linkedNotebooks[0];
         [self.preferences encodeObject:linkedNotebook forKey:ENSessionPreferencesLinkedAppNotebook];
         
-        // Go back and redetermine the destination.
-        [self uploadNote_determineDestinationWithContext:context];
+        // Go find the shared notebook that corresponds to this.
+        [self uploadNote_findSharedAppNotebookWithContext:context];
     } failure:^(NSError * error) {
         ENSDKLogInfo(@"Failed to listLinkedNotebooks for uploadNote; turning into NotFound: %@", error);
+        // Uh-oh; there's no destination to use. We have to fail the request.
+        error = [NSError errorWithDomain:ENErrorDomain code:ENErrorCodeNotFound userInfo:nil];
+        [self uploadNote_completeWithContext:context error:error];
+    }];
+}
+
+- (void)uploadNote_findSharedAppNotebookWithContext:(ENSessionUploadNoteContext *)context
+{
+    EDAMLinkedNotebook * linkedNotebook = [self.preferences decodedObjectForKey:ENSessionPreferencesLinkedAppNotebook];
+    ENNoteStoreClient * linkedNoteStore = [self noteStoreForLinkedNotebook:linkedNotebook];
+    [linkedNoteStore getSharedNotebookByAuthWithSuccess:^(EDAMSharedNotebook *sharedNotebook) {
+        if (sharedNotebook) {
+            // Persist the shared notebook record.
+            [self.preferences encodeObject:sharedNotebook forKey:ENSessionPreferencesSharedAppNotebook];
+            
+            // Go back and redetermine the destination.
+            [self uploadNote_determineDestinationWithContext:context];
+        } else {
+            ENSDKLogInfo(@"getSharedNotebookByAuth for uploadNote returned empty sharedNotebook; turning into NotFound.");
+            // Uh-oh; there's no destination to use. We have to fail the request.
+            NSError * error = [NSError errorWithDomain:ENErrorDomain code:ENErrorCodeNotFound userInfo:nil];
+            [self uploadNote_completeWithContext:context error:error];
+        }
+    } failure:^(NSError *error) {
+        ENSDKLogInfo(@"Failed to getSharedNotebookByAuth for uploadNote; turning into NotFound: %@", error);
         // Uh-oh; there's no destination to use. We have to fail the request.
         error = [NSError errorWithDomain:ENErrorDomain code:ENErrorCodeNotFound userInfo:nil];
         [self uploadNote_completeWithContext:context error:error];
@@ -895,7 +914,9 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     context.note.created = context.note.updated = nil;
     
     // Write in the notebook guid if we're providing one.
-    context.note.notebookGuid = context.notebook.guid;
+    if (!context.note.notebookGuid) {
+        context.note.notebookGuid = context.notebook.guid;
+    }
     
     if (context.progress) {
         context.noteStore.uploadProgressHandler = context.progress;
@@ -988,6 +1009,13 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     if (!self.isAuthenticated) {
         completion(nil, [NSError errorWithDomain:ENErrorDomain code:ENErrorCodeAuthExpired userInfo:nil]);
         return;
+    }
+    
+    // App notebook scope is internally just an "all" search, because we don't a priori know where the app
+    // notebook is. There's some room for a fast path in this flow if we have a saved linked record to a
+    // linked app notebook, but that case is likely rare enough to prevent complexifying this code for.
+    if (EN_FLAG_ISSET(scope, ENSessionSearchScopeAppNotebook)) {
+        scope = ENSessionSearchScopeAll;
     }
     
     // Validate the scope and sort arguments.
@@ -1094,18 +1122,28 @@ static NSString * DeveloperToken, * NoteStoreUrl;
 
 - (void)findNotes_findInPersonalScopeWithContext:(ENSessionFindNotesContext *)context
 {
+    BOOL skipPersonalScope = NO;
     // Skip the personal scope if the scope notebook isn't personal, or if the scope
     // flag doesn't include personal.
     if (context.scopeNotebook) {
+        // If the scope notebook isn't personal, skip personal.
         if (context.scopeNotebook.isLinked) {
-            [self findNotes_findInBusinessScopeWithContext:context];
-            return;
+            skipPersonalScope = YES;
         }
     } else if (!EN_FLAG_ISSET(context.scope, ENSessionSearchScopePersonal)) {
+        // If the caller didn't request personal scope.
+        skipPersonalScope = YES;
+    } else if ([self appNotebookIsLinked]) {
+        // If we know this is an app notebook scoped app, and we know the app notebook is not personal.
+        skipPersonalScope = YES;
+    }
+
+    // If we're skipping personal scope, proceed directly to busines scope.
+    if (skipPersonalScope) {
         [self findNotes_findInBusinessScopeWithContext:context];
         return;
     }
-
+    
     [self.primaryNoteStore findNotesMetadataWithFilter:context.noteFilter
                                             maxResults:context.maxResults
                                             resultSpec:context.resultSpec
@@ -1141,6 +1179,12 @@ static NSString * DeveloperToken, * NoteStoreUrl;
                                                     
                                                     [self findNotes_findInLinkedScopeWithContext:context];
                                                 } failure:^(NSError *error) {
+                                                    if ([self isErrorDueToRestrictedAuth:error]) {
+                                                        // This is a business user, but apparently has an app notebook restriction that's
+                                                        // not in the business. Go look in linked scope.
+                                                        [self findNotes_findInLinkedScopeWithContext:context];
+                                                        return;
+                                                    }
                                                     ENSDKLogError(@"findNotes: Failed to find notes (business). %@", error);
                                                     [self findNotes_completeWithContext:context error:error];
                                                 }];
