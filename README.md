@@ -109,6 +109,13 @@ The SDK comes with a simple sample application, called (shockingly) `EvernoteSDK
 
 *Note* You will still need to edit the AppDelegate of the sample to include your consumer key and secret. 
 
+Basic Evernote Concepts
+-----------------------
+
+The most fundamental object in Evernote is the "note" (represented by an ENNote). A note is one chunk of content visible in a user's account. Its body is stored in a form of markup, and may have attached image or file "resources." A note also has a title, timestamps, and other metadata.
+
+Every note resides in a "notebook" (represented by an ENNotebook). Users can create and organize notes among notebooks in their account. They may also have notebooks that are shared to them by others. A user who has an Evernote Business account will have access to notebooks owned by the business.
+
 Using the Evernote SDK
 ----------------------
 
