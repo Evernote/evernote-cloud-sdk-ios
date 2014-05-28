@@ -764,10 +764,59 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     context.completion = completion;
     context.progress = progress;
     
-    if (noteToReplace) {
+    [self uploadNote_determineDestinationWithContext:context];
+}
+
+- (void)uploadNote_determineDestinationWithContext:(ENSessionUploadNoteContext *)context
+{
+    // Begin prepping a resulting note ref.
+    context.noteRef = [[ENNoteRef alloc] init];
+    
+    // If this app uses an app notebook and that notebook is linked, then no matter what the caller says,
+    // we're going to need to use the explicit notebook destination to comply with shared notebook auth.
+    if ([self appNotebookIsLinked]) {
+        // Do we have a cached linked notebook record to use as a destination?
+        EDAMLinkedNotebook * linkedNotebook = [self.preferences decodedObjectForKey:ENSessionPreferencesLinkedAppNotebook];
+        if (linkedNotebook) {
+            context.noteStore = [self noteStoreForLinkedNotebook:linkedNotebook];
+            context.noteRef.type = ENNoteRefTypeShared;
+            context.noteRef.linkedNotebook = [ENLinkedNotebookRef linkedNotebookRefFromLinkedNotebook:linkedNotebook];
+            
+            // Because we are using a linked app notebook, and authenticating to it with the shared auth model,
+            // we must provide a notebook guid in the note or face an error.
+            EDAMSharedNotebook * sharedNotebook = [self.preferences decodedObjectForKey:ENSessionPreferencesSharedAppNotebook];
+            context.note.notebookGuid = sharedNotebook.notebookGuid;
+        } else {
+            // We don't have a linked notebook record to use. We need to go find one.
+            [self uploadNote_findLinkedAppNotebookWithContext:context];
+            return;
+        }
+    }
+    
+    if (!context.noteStore) {
+        if (context.refToReplace) {
+            context.noteStore = [self noteStoreForNoteRef:context.refToReplace];
+            context.noteRef.type = context.refToReplace.type;
+            context.noteRef.linkedNotebook = context.refToReplace.linkedNotebook;
+        } else if (context.notebook.isBusinessNotebook) {
+            context.noteStore = [self businessNoteStore];
+            context.noteRef.type = ENNoteRefTypeBusiness;
+        } else if (context.notebook.isLinked) {
+            context.noteStore = [self noteStoreForLinkedNotebook:context.notebook.linkedNotebook];
+            context.noteRef.type = ENNoteRefTypeShared;
+            context.noteRef.linkedNotebook = [ENLinkedNotebookRef linkedNotebookRefFromLinkedNotebook:context.notebook.linkedNotebook];
+        } else {
+            // This is the normal case. Either the app has not specified a destination notebook, or the
+            // notebook is personal.
+            context.noteStore = [self primaryNoteStore];
+            context.noteRef.type = ENNoteRefTypePersonal;
+        }
+    }
+    
+    if (context.refToReplace) {
         [self uploadNote_updateWithContext:context];
     } else {
-        [self uploadNote_determineDestinationWithContext:context];
+        [self uploadNote_createWithContext:context];
     }
 }
 
@@ -778,7 +827,6 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     
     context.note.guid = context.refToReplace.guid;
     context.note.active = @YES;
-    context.noteStore = [self noteStoreForNoteRef:context.refToReplace];
     
     if (context.progress) {
         context.noteStore.uploadProgressHandler = context.progress;
@@ -795,64 +843,21 @@ static NSString * DeveloperToken, * NoteStoreUrl;
                 context.note.guid = nil;
                 context.policy = ENSessionUploadPolicyCreate;
                 context.refToReplace = nil;
-                [self uploadNote_createWithContext:context];
+                
+                // Go back to determining the destination before creating. We'll take into account a supplied
+                // notebook at this point, which may actually be in a different place than the note we were
+                // trying to replace. We don't have enough information otherwise to reliably place a new note
+                // in the same notebook as the original one, so defaulting to a default notebook in a given
+                // note store is less predictable than defaulting to the default overall. In practice, this
+                // works out the same most of the time. (For app notebook apps, it'll end up in the app notebook
+                // anyway of course.)
+                [self uploadNote_determineDestinationWithContext:context];
                 return;
             }
         }
         ENSDKLogError(@"Failed to updateNote for uploadNote: %@", error);
         [self uploadNote_completeWithContext:context error:error];
     }];
-}
-
-- (void)uploadNote_determineDestinationWithContext:(ENSessionUploadNoteContext *)context
-{
-    // Begin prepping a resulting note ref.
-    context.noteRef = [[ENNoteRef alloc] init];
-    
-    // If the destination is not specified, and this app uses app notebook, we are responsible for
-    // choosing the right note store (personal or linked). We default to personal, but if we know the
-    // user chose a linked notebook, then we'll need to use its shard info to talk to it.
-    if (!context.notebook) {
-        if ([self appNotebookIsLinked]) {
-            // Do we have a cached linked notebook record to use as a destination?
-            EDAMLinkedNotebook * linkedNotebook = [self.preferences decodedObjectForKey:ENSessionPreferencesLinkedAppNotebook];
-            if (linkedNotebook) {
-                context.noteStore = [self noteStoreForLinkedNotebook:linkedNotebook];
-                context.noteRef.type = ENNoteRefTypeShared;
-                context.noteRef.linkedNotebook = [ENLinkedNotebookRef linkedNotebookRefFromLinkedNotebook:linkedNotebook];
-                
-                // Because we are using a linked app notebook, and authenticating to it with the shared auth model,
-                // we must provide a notebook guid in the note or face an error.
-                EDAMSharedNotebook * sharedNotebook = [self.preferences decodedObjectForKey:ENSessionPreferencesSharedAppNotebook];
-                context.note.notebookGuid = sharedNotebook.notebookGuid;
-            } else {
-                // We don't have a linked notebook record to use. We need to go find one.
-                [self uploadNote_findLinkedAppNotebookWithContext:context];
-                return;
-            }
-        } else {
-            // Either the app doesn't use app notebook, or it does and the single notebook is a personal one.
-            // (We'll fall into the catch-all else case below and end up on the personal note store.)
-        }
-    }
-    
-    if (!context.noteStore) {
-        if (context.notebook.isBusinessNotebook) {
-            context.noteStore = [self businessNoteStore];
-            context.noteRef.type = ENNoteRefTypeBusiness;
-        } else if (context.notebook.isLinked) {
-            context.noteStore = [self noteStoreForLinkedNotebook:context.notebook.linkedNotebook];
-            context.noteRef.type = ENNoteRefTypeShared;
-            context.noteRef.linkedNotebook = [ENLinkedNotebookRef linkedNotebookRefFromLinkedNotebook:context.notebook.linkedNotebook];
-        } else {
-            // This is the normal case. Either the app has not specified a destination notebook, or the
-            // notebook is personal.
-            context.noteStore = [self primaryNoteStore];
-            context.noteRef.type = ENNoteRefTypePersonal;
-        }
-    }
-    
-    [self uploadNote_createWithContext:context];
 }
 
 - (void)uploadNote_findLinkedAppNotebookWithContext:(ENSessionUploadNoteContext *)context
