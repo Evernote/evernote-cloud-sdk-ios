@@ -98,42 +98,100 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
 @property (nonatomic, readonly) NSString * userDisplayName;
 @property (nonatomic, readonly) NSString * businessDisplayName;
 
-// One of the two methods below MUST be called, BEFORE the shared session is accessed.
-// In your AppDelegate startup code is appropriate. There's no reason to change these
-// values at runtime once the Evernote functionality has been used, and in fact doing so
-// will have no effect.
+#pragma mark - Session setup
+
+/**
+ *  Set up the session object with an app consumer key and secret. This is the standard setup
+ *  method. App keys are available from dev.evernote.com. You must call this method BEFORE the
+ *  -sharedSession is accessed, for example in your app delegate.
+ *
+ *  @param key    Consumer key for your app
+ *  @param secret Consumer secret for yor app
+ *  @param host   (optional) If you're using a non-production host, like the developer sandbox, specify it here.
+ */
 + (void)setSharedSessionConsumerKey:(NSString *)key
                      consumerSecret:(NSString *)secret
                        optionalHost:(NSString *)host;
 
+/**
+ *  Set up the session object with a developer token and Note Store URL. This is an alternate
+ *  setup method used only when you are authenticating directly to your own production account. (An
+ *  app for general distribution will use a consumer key and secret.) You must call this method BEFORE
+ * the -sharedSession is accessed, for example in your app delegate.
+ *
+ *  @param token The developer token
+ *  @param url   The Note Store URL.
+ */
 + (void)setSharedSessionDeveloperToken:(NSString *)token
                           noteStoreUrl:(NSString *)url;
 
+/**
+ *  Access the shared session object; this is the only way to get a valid ENSession.
+ *
+ *  @return The shared session object.
+ */
 + (ENSession *)sharedSession;
 
-//
-// Authentication functions.
-//
+#pragma mark - Authentication
 
+/**
+ *  Authenticate a user to the Evernote service. This should be done before calling Evernote methods, if the -isAuthenticated
+ *  property returns NO.
+ *
+ *  @param viewController A current UIViewController that an authentication view can be presented from.
+ *  @param completion     A block to receive the result of the operation (an error if there was one).
+ */
 - (void)authenticateWithViewController:(UIViewController *)viewController
                             completion:(ENSessionAuthenticateCompletionHandler)completion;
+
+/**
+ *  Unauthenticate the current user.
+ */
 - (void)unauthenticate;
 
-// To be called from your AppDelegate's -application:openURL:sourceApplication:annotation:
+/**
+ *  Should be called from your AppDelegate's -application:openURL:sourceApplication:annotation: to 
+ *  handle authentication via app switching.
+ *
+ *  @param url The URL to handle.
+ *
+ *  @return Whether this method successfully handled this URL. (Non-Evernote URLs will return NO.)
+ */
 - (BOOL)handleOpenURL:(NSURL *)url;
 
-//
-// Evernote functions.
-//
+#pragma mark - Evernote functions
 
+/**
+ *  Compile a list of all notebooks a user has access to, including personal, shared, and business
+ *  notebooks as applicable.
+ *
+ *  @param completion A block to receive the results (a list of ENNotebook objects) or error.
+ */
 - (void)listNotebooksWithHandler:(ENSessionListNotebooksCompletionHandler)completion;
 
-// Easy convenience method for creating new notes.
+/**
+ *  Create a new note in Evernote by uploading a note object. 
+ *  This is a simple convenience wrapper around -uploadNote:policy:toNotebook:orReplaceNote:progress:completion:
+ *  which you can use for more options.
+ *
+ *  @param note       A prepared ENNote object, with a title, and content as resources as required.
+ *  @param notebook   (optional) The notebook to create the note in. Specify nil for a default notebook.
+ *  @param completion A block to receive the result of the operation (a note reference) or error.
+ */
 - (void)uploadNote:(ENNote *)note
           notebook:(ENNotebook *)notebook
         completion:(ENSessionUploadNoteCompletionHandler)completion;
 
-// Use the full method if you want to track progress, overwrite existing notes, etc.
+/**
+ *  Create a new note, or replace an existing note, in Evernote by uploading a note object.
+ *
+ *  @param note          A prepared ENNote object, with a title, and content as resources as required.
+ *  @param policy        Policy indication for create vs replace, etc. See ENSessionUploadPolicy.
+ *  @param notebook      (optional) The notebook to create the note in, if creating. Specify nil for a default notebook. Not valid when replace.
+ *  @param noteToReplace (optional) For replace policies, the reference to the note to replace.
+ *  @param progress      (optional) A block that will receive updates from 0.0 to 1.0 indicating upload progress.
+ *  @param completion    A block to receive the result of the operation (a note reference) or error.
+ */
 - (void)uploadNote:(ENNote *)note
             policy:(ENSessionUploadPolicy)policy
         toNotebook:(ENNotebook *)notebook
@@ -141,12 +199,39 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
           progress:(ENSessionProgressHandler)progress
         completion:(ENSessionUploadNoteCompletionHandler)completion;
 
+/**
+ *  Share an existing note, and creates a URL that allows access to it directly.
+ *  NOTE: An application may only turn on sharing for a note when the user explicitly chooses to do so - 
+ *  for example by tapping a "share" button. You may never enable sharing without the user's
+ *  explicit consent.
+ *
+ *  @param noteRef    A reference to the note to share.
+ *  @param completion (optional) A block to recieve the result of the operation (a URL) or error.
+ */
 - (void)shareNote:(ENNoteRef *)noteRef
        completion:(ENSessionShareNoteCompletionHandler)completion;
 
+/**
+ *  Put an existing note in the user's trash. This does not permanently expunge the note.
+ *
+ *  @param noteRef    A reference to the note to delete.
+ *  @param completion (optional) A block to recieve an error if the operation fails.
+ */
 - (void)deleteNote:(ENNoteRef *)noteRef
         completion:(ENSessionDeleteNoteCompletionHandler)completion;
 
+/**
+ *  Find notes, based on given criteria, within the notebooks that the user has access to. This method results
+ *  in a list of items, including note references and several useful metadata fields. (The full content of the
+ *  notes can be downloaded using -downloadNote:progress:completion:)
+ *
+ *  @param noteSearch (optional) An ENNoteSeach object that represents a query. If this is omitted, the method will return all notes; you should probably only omit this if you specify a notebook.
+ *  @param notebook   (optional) A notebook (ENNotebook) object to find within. If this is omitted, all available notebooks will be searched.
+ *  @param scope      A bitflag set indicating where the method should direct its search.
+ *  @param sortOrder  A bitflag set indicating how the results should be sorted.
+ *  @param maxResults The maximum number of results to return. Use zero (0) here to find all results.
+ *  @param completion A block to receive the result of the operation (a list of result object) or error.
+ */
 - (void)findNotesWithSearch:(ENNoteSearch *)noteSearch
                  inNotebook:(ENNotebook *)notebook
                     orScope:(ENSessionSearchScope)scope
@@ -154,12 +239,25 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
                  maxResults:(NSUInteger)maxResults
                  completion:(ENSessionFindNotesCompletionHandler)completion;
 
+/**
+ *  Download the full content and resources of a specified note.
+ *
+ *  @param noteRef    A reference to the note to download.
+ *  @param progress   (optional) A block that will receive updates from 0.0 to 1.0 indicating download progress.
+ *  @param completion A block to receive the result of the operation (an ENNote object) or error.
+ */
 - (void)downloadNote:(ENNoteRef *)noteRef
             progress:(ENSessionProgressHandler)progress
           completion:(ENSessionDownloadNoteCompletionHandler)completion;
 
+/**
+ *  Download the service-generated thumbnail image for a note.
+ *
+ *  @param noteRef      A reference to the note for which to download the thumbnail.
+ *  @param maxDimension The maximum one-side dimension of the thumbnail to download. The resulting image may be smaller than this, but will not be larger.
+ *  @param completion   A block to receive the result of the operation (a UIImage object) or error.
+ */
 - (void)downloadThumbnailForNote:(ENNoteRef *)noteRef
                     maxDimension:(NSUInteger)maxDimension
                       completion:(ENSessionDownloadNoteThumbnailCompletionHandler)completion;
-
 @end
