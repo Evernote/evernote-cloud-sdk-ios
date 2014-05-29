@@ -44,8 +44,9 @@ extern NSString * ENOAuthAuthenticatorAuthInfoAppNotebookIsLinked;
 @property (nonatomic, copy) NSString * consumerSecret;
 @property (nonatomic, copy) NSString * host;
 @property (nonatomic, assign) BOOL supportsLinkedAppNotebook;
+@property (nonatomic, assign) BOOL useWebAuthenticationOnly;
 
 - (void)authenticateWithViewController:(UIViewController *)viewController;
 
-- (BOOL)canHandleOpenURL:(NSURL *)url;
+- (BOOL)handleOpenURL:(NSURL *)url;
 @end

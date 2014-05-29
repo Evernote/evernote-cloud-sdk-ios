@@ -10,7 +10,7 @@ Installing
 
 ### Register for an Evernote API key (and secret)...
 
-You can do this on the [Evernote Developers portal page](http://dev.evernote.com/documentation/cloud/). Most applications will want to do this-- it's easy and instant.
+You can do this on the [Evernote Developers portal page](http://dev.evernote.com/documentation/cloud/). Most applications will want to do this-- it's easy and instant. During development, you will point your app at Evernote's "sandbox" development environment. When you are ready to test on production, we will upgrade your key. (You can create test accounts on sandbox by just going to [sandbox.evernote.com](http://sandbox.evernote.com)).
 
 ### ...or get a Developer Token
 
@@ -44,7 +44,7 @@ evernote-sdk-ios depends on a couple system frameworks, so you'll need to add th
 
 ### Modify your application's main plist file
 
-Users will have the fastest OAuth experience in your app if they already have the Evernote app installed. To facilitate this, create an array key called URL types with a single array sub-item called URL Schemes. Give this a single item with your consumer key prefixed with 'en-'
+Users will have the fastest OAuth experience in your app if they already have the Evernote app installed. When this is the case, the authentication process will bounce to the Evernote app and authenticate without the user needing to enter their credentials at all. To facilitate this, create an array key called URL types with a single array sub-item called URL Schemes. Give this a single item with your consumer key prefixed with 'en-'
 
 	<key>CFBundleURLTypes</key>
 	<array>
@@ -57,6 +57,10 @@ Users will have the fastest OAuth experience in your app if they already have th
 			</array>
 		</dict>
 	</array>
+	
+Don't worry: authentication can still proceed if the Evernote app is not installed, but it will fall back to web-based OAuth. This is transparent to your app.
+
+**Note** When your app is in development and uses the "sandbox" environment, authentication will always use web-based OAuth, even if you have the Evernote app installed. After upgrading to a production consumer key, be sure to test authentication again with the Evernote app.
 
 ### Add the standard header file to any file that uses the Evernote SDK
 

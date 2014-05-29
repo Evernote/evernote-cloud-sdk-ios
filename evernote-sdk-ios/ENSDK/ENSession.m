@@ -306,6 +306,12 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     self.authenticator.consumerSecret = ConsumerSecret;
     self.authenticator.host = self.sessionHost;
     self.authenticator.supportsLinkedAppNotebook = self.supportsLinkedAppNotebook;
+    
+    // If we're overriding the standard host, then we're in some sort of development environment
+    // (sandbox), and the cross-app auth won't work. In this case, force the authenticator to use
+    // web auth only.
+    self.authenticator.useWebAuthenticationOnly = (SessionHostOverride != nil);
+    
     [self.authenticator authenticateWithViewController:viewController];
 }
 
@@ -431,7 +437,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
 - (BOOL)handleOpenURL:(NSURL *)url
 {
     if (self.authenticator) {
-        return [self.authenticator canHandleOpenURL:url];
+        return [self.authenticator handleOpenURL:url];
     }
     return NO;
 }

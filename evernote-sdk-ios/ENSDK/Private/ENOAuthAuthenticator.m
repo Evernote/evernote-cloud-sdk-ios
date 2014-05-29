@@ -306,41 +306,6 @@ NSString * ENOAuthAuthenticatorAuthInfoAppNotebookIsLinked = @"ENOAuthAuthentica
     return string;
 }
 
-- (BOOL)handleOpenURL:(NSURL *)url
-{
-    [self.hostViewController dismissViewControllerAnimated:YES completion:^{
-        // only handle our specific oauth_callback URLs
-        if (![[url absoluteString] hasPrefix:[self oauthCallback]]) {
-            return;
-        }
-        // OAuth step 3: got authorization from the user, now get a real token.
-        NSDictionary * parameters = [[self class] parametersFromQueryString:url.query];
-        NSString * oauthToken = [parameters objectForKey:@"oauth_token"];
-        NSString * oauthVerifier = [parameters objectForKey:@"oauth_verifier"];
-        NSURLRequest * authTokenRequest = [ENGCOAuth URLRequestForPath:@"/oauth"
-                                                        GETParameters:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                       oauthVerifier, @"oauth_verifier", nil]
-                                                               scheme:OAUTH_PROTOCOL_SCHEME
-                                                                 host:self.host
-                                                          consumerKey:self.consumerKey
-                                                       consumerSecret:self.consumerSecret
-                                                          accessToken:oauthToken
-                                                          tokenSecret:self.tokenSecret];
-        
-        NSURLConnection * connection = [NSURLConnection connectionWithRequest:authTokenRequest delegate:self];
-        if (!connection) {
-            // can't make connection, so immediately fail.
-            [self completeAuthenticationWithError:[NSError errorWithDomain:ENErrorDomain
-                                                                      code:ENErrorCodeConnectionFailed
-                                                                  userInfo:nil]];
-        };
-    }];
-    if (![[url absoluteString] hasPrefix:[self oauthCallback]]) {
-        return NO;
-    }
-    return YES;
-}
-
 - (void)handleDidBecomeActive{
     //Unexpected to calls to app delegate's applicationDidBecomeActive are
     // handled by this method.
@@ -429,6 +394,10 @@ NSString * ENOAuthAuthenticatorAuthInfoAppNotebookIsLinked = @"ENOAuthAuthentica
         // her credentials in order to authorize the application.
         UIDevice *device = [UIDevice currentDevice];
         if([self isEvernoteInstalled] == NO) {
+            self.isMultitaskLoginDisabled = YES;
+        }
+        // This is an override intented for testing/sandbox environments. 
+        if(self.useWebAuthenticationOnly == YES) {
             self.isMultitaskLoginDisabled = YES;
         }
         [self verifyCFBundleURLSchemes];
@@ -522,12 +491,14 @@ NSString * ENOAuthAuthenticatorAuthInfoAppNotebookIsLinked = @"ENOAuthAuthentica
         return;
     }
 
-    self.hostViewController = nil;
     NSMutableDictionary * authInfo = [[NSMutableDictionary alloc] init];
     if (linkedAppNotebook) {
         [authInfo setObject:@YES forKey:ENOAuthAuthenticatorAuthInfoAppNotebookIsLinked];
     }
-    [self.delegate authenticatorDidAuthenticateWithCredentials:credentials authInfo:authInfo];
+    [self.hostViewController dismissViewControllerAnimated:YES completion:^{
+        self.hostViewController = nil;
+        [self.delegate authenticatorDidAuthenticateWithCredentials:credentials authInfo:authInfo];
+    }];
 }
 
 - (void)completeAuthenticationWithError:(NSError *)error
@@ -537,8 +508,10 @@ NSString * ENOAuthAuthenticatorAuthInfoAppNotebookIsLinked = @"ENOAuthAuthentica
     }
     
     self.state = ENOAuthAuthenticatorStateLoggedOut;
-    self.hostViewController = nil;
-    [self.delegate authenticatorDidFailWithError:error];
+    [self.hostViewController dismissViewControllerAnimated:YES completion:^{
+        self.hostViewController = nil;
+        [self.delegate authenticatorDidFailWithError:error];
+    }];
 }
 
 - (void) switchProfile {
@@ -632,10 +605,8 @@ NSString * ENOAuthAuthenticatorAuthInfoAppNotebookIsLinked = @"ENOAuthAuthentica
 
 - (void)oauthViewControllerDidCancel:(ENOAuthViewController *)sender
 {
-    [self.hostViewController dismissViewControllerAnimated:YES completion:^{
-        NSError* error = [NSError errorWithDomain:ENErrorDomain code:ENErrorCodeCancelled userInfo:nil];
-        [self completeAuthenticationWithError:error];
-    }];
+    NSError* error = [NSError errorWithDomain:ENErrorDomain code:ENErrorCodeCancelled userInfo:nil];
+    [self completeAuthenticationWithError:error];
 }
 
 - (void)oauthViewControllerDidSwitchProfile:(ENOAuthViewController *)sender {
@@ -645,13 +616,10 @@ NSString * ENOAuthAuthenticatorAuthInfoAppNotebookIsLinked = @"ENOAuthAuthentica
 
 - (void)oauthViewController:(ENOAuthViewController *)sender didFailWithError:(NSError *)error
 {
-    [self.hostViewController dismissViewControllerAnimated:YES completion:^{
-        [self completeAuthenticationWithError:error];
-    }];
-    
+    [self completeAuthenticationWithError:error];
 }
 
-- (BOOL)canHandleOpenURL:(NSURL *)url {
+- (BOOL)handleOpenURL:(NSURL *)url {
     if([[url host] isEqualToString:@"invalidURL"]) {
         NSLog(@"Invalid URL sent to Evernote!");
         return NO;
@@ -695,14 +663,16 @@ NSString * ENOAuthAuthenticatorAuthInfoAppNotebookIsLinked = @"ENOAuthAuthentica
 
 - (void)gotCallbackURL : (NSString*)callback {
     NSURL* callbackURL = [NSURL URLWithString:callback];
+    if(callbackURL == nil) {
+        [self completeAuthenticationWithError:[NSError errorWithDomain:ENErrorDomain code:ENErrorCodeCancelled userInfo:nil]];
+        return;
+    }
     [self getOAuthTokenForURL:callbackURL];
 }
 
 - (void)oauthViewController:(ENOAuthViewController *)sender receivedOAuthCallbackURL:(NSURL *)url
 {
-    [self.hostViewController dismissViewControllerAnimated:YES completion:^{
-        [self getOAuthTokenForURL:url];
-    }];
+    [self getOAuthTokenForURL:url];
 }
 
 - (void)getOAuthTokenForURL:(NSURL*)url {
