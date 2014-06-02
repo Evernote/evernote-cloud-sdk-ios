@@ -1,9 +1,15 @@
-Evernote Cloud SDK for iOS version 2.0 (beta)
-======================================
+Evernote Cloud SDK for iOS (beta)
+=================================
 
 What this is
 ------------
-A simple, workflow-oriented library built on the Evernote Cloud API. It's designed to drop into your app easily and make the most common tasks very simple to accomplish. It is also the (eventual) successor to the evernote-ios-sdk library, although while this library has beta status, that one is still available and supported.
+
+A simple, workflow-oriented library built on the Evernote Cloud API. It's designed to drop into your app easily and make most common Evernote integrations very simple to accomplish. 
+
+Note for users of the 1.x SDK for iOS
+-------------------------------------
+
+This library is the spiritual, although not syntactic, successor to to the [Evernote SDK for iOS 1.x](https://github.com/evernote/evernote-sdk-ios). Currently, both libraries are available and supported. This one is not a "drop-in" update-- it omits the "app bridge" functionality, and the objects that you use for authentication and to get to the traditional (EDAM) API are a little different. The EDAM classes also have a slightly different property format. It’s not too much work to switch, if you're already using that package and want to migrate. A migration guide will be forthcoming, but in the meanwhile, feel free to get in touch if you have questions.
 
 Installing
 ----------
