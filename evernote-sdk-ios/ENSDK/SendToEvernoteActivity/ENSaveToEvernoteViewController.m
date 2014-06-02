@@ -128,7 +128,7 @@ CGFloat kTextLeftPadding = 20;
     [super viewDidLoad];
     
     // Kick off the notebook list fetch.
-    [[ENSession sharedSession] listNotebooksWithHandler:^(NSArray *notebooks, NSError *listNotebooksError) {
+    [[ENSession sharedSession] listNotebooksWithCompletion:^(NSArray *notebooks, NSError *listNotebooksError) {
         self.notebookList = notebooks;
         // Populate the notebook picker with the default notebook.
         for (ENNotebook * notebook in notebooks) {

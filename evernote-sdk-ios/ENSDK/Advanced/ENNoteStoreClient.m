@@ -885,7 +885,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
     // For this call, ask for the remaining number to fulfill the order, but don't exceed standard max.
     int32_t maxNotesThisCall = FIND_NOTES_DEFAULT_MAX_NOTES;
     if (maxResults > 0) {
-        maxNotesThisCall = MIN(maxResults - results.count, (NSUInteger)maxNotesThisCall);
+        maxNotesThisCall = (int32_t)MIN(maxResults - results.count, (NSUInteger)maxNotesThisCall);
     }
     
     [self findNotesMetadataWithFilter:filter

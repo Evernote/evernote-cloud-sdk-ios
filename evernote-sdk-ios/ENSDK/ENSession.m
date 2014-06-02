@@ -457,7 +457,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
 // For personal users, therefore, this will make 2 + n roundtrips, where n is the number of shared notebooks.
 // For business users, this will make 2 + 2 + n roundtrips, where n is the number of nonbusiness shared notebooks.
 
-- (void)listNotebooksWithHandler:(ENSessionListNotebooksCompletionHandler)completion
+- (void)listNotebooksWithCompletion:(ENSessionListNotebooksCompletionHandler)completion
 {
     if (!completion) {
         [NSException raise:NSInvalidArgumentException format:@"handler required"];
@@ -1120,7 +1120,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     // quickly by a fetchNote(s), which is going to require the full notebook list anyway, and by then
     // it'll be cached.
     
-    [self listNotebooksWithHandler:^(NSArray *notebooks, NSError *listNotebooksError) {
+    [self listNotebooksWithCompletion:^(NSArray *notebooks, NSError *listNotebooksError) {
         if (notebooks) {
             context.allNotebooks = notebooks;
             [self findNotes_findInPersonalScopeWithContext:context];

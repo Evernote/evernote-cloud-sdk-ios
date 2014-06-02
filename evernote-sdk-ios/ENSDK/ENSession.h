@@ -167,7 +167,7 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
  *
  *  @param completion A block to receive the results (a list of ENNotebook objects) or error.
  */
-- (void)listNotebooksWithHandler:(ENSessionListNotebooksCompletionHandler)completion;
+- (void)listNotebooksWithCompletion:(ENSessionListNotebooksCompletionHandler)completion;
 
 /**
  *  Create a new note in Evernote by uploading a note object. 
