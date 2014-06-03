@@ -461,14 +461,14 @@
 - (UIImage *)tokenBackgroundImageForState:(UIControlState)state withTokenText:(NSString *)tokenText {
     UIColor *topColor; UIColor *bottomColor; UIColor *strokeColor;
 
-    if (state == UIControlStateNormal) {
-        topColor = [ENTheme defaultTintColor];
-        bottomColor = [ENTheme defaultTintColor];
-        strokeColor = [UIColor clearColor];
-    } else if (state == UIControlStateHighlighted || state == UIControlStateSelected) {
+    if (state == UIControlStateHighlighted || state == UIControlStateSelected) {
         topColor = [ENTheme defaultTintColor];
         bottomColor = [ENTheme defaultTintColor];
         strokeColor = [UIColor colorWithRed:0.110 green:0.451 blue:0.227 alpha:1.0];
+    } else {
+        topColor = [ENTheme defaultTintColor];
+        bottomColor = [ENTheme defaultTintColor];
+        strokeColor = [UIColor clearColor];
     }
     return [self buttonImageWithTopColor:topColor bottomColor:bottomColor withStrokeColor:strokeColor];
 }
