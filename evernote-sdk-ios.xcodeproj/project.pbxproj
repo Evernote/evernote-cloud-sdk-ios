@@ -91,7 +91,6 @@
 		86CB761B18FF4554002F267E /* ENTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 86CB761918FF4554002F267E /* ENTheme.h */; };
 		86CB761D18FF4554002F267E /* ENTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CB761A18FF4554002F267E /* ENTheme.m */; };
 		86CB761E18FF4554002F267E /* ENTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CB761A18FF4554002F267E /* ENTheme.m */; };
-		86D49E3F191DA4A8001C3581 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 86D49E38191DA4A8001C3581 /* LICENSE */; };
 		86D49E40191DA4A8001C3581 /* RMSTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 86D49E39191DA4A8001C3581 /* RMSTextField.h */; };
 		86D49E41191DA4A8001C3581 /* RMSTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 86D49E39191DA4A8001C3581 /* RMSTextField.h */; };
 		86D49E42191DA4A8001C3581 /* RMSTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 86D49E3A191DA4A8001C3581 /* RMSTextField.m */; };
@@ -246,7 +245,6 @@
 		BE7E5F421921808B00A4DA30 /* FATObject.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F301921808B00A4DA30 /* FATObject.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		BE7E5F431921808B00A4DA30 /* FATObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F311921808B00A4DA30 /* FATObject.m */; };
 		BE7E5F441921808B00A4DA30 /* FATObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F311921808B00A4DA30 /* FATObject.m */; };
-		BE7E5F451921808B00A4DA30 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = BE7E5F321921808B00A4DA30 /* LICENSE */; };
 		BE7E5F461921808B00A4DA30 /* TBinaryProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F331921808B00A4DA30 /* TBinaryProtocol.h */; };
 		BE7E5F471921808B00A4DA30 /* TBinaryProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F331921808B00A4DA30 /* TBinaryProtocol.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		BE7E5F481921808B00A4DA30 /* TBinaryProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F341921808B00A4DA30 /* TBinaryProtocol.m */; };
@@ -1225,8 +1223,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE7E5F451921808B00A4DA30 /* LICENSE in Resources */,
-				86D49E3F191DA4A8001C3581 /* LICENSE in Resources */,
 				865C383D18F8BA2400ECB2BA /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
