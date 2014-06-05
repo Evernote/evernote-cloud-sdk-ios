@@ -13,6 +13,8 @@
 #import "ViewAppNotesViewController.h"
 #import "SVProgressHUD.h"
 
+#define PHOTO_MAX_WIDTH 500
+
 NS_ENUM(NSInteger, SampleFunctions) {
     kSampleFunctionsUnauthenticate,
     kSampleFunctionsUserInfo,
@@ -240,6 +242,15 @@ NS_ENUM(NSInteger, SampleFunctions) {
 {
     UIImage * image = [info objectForKey:UIImagePickerControllerOriginalImage];
     
+    // Normalize image orientation if it's from the camera and scale it down.
+    CGFloat scaleFactor = image.size.width / PHOTO_MAX_WIDTH;
+    CGSize targetSize = CGSizeMake(image.size.width / scaleFactor, image.size.height / scaleFactor);
+    UIGraphicsBeginImageContext(targetSize);
+    [image drawInRect:CGRectMake(0, 0, targetSize.width, targetSize.height)];
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // Build note with resource.
     ENResource * resource = [[ENResource alloc] initWithImage:image];
     ENNote * note = [[ENNote alloc] init];
     note.title = @"Photo note";
