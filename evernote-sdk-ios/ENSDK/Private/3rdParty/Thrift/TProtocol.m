@@ -401,9 +401,20 @@
       @throw anObject;
     }
   }
-  
-  @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
-                                           reason: [message stringByAppendingString:@" failed: unknown result"]];
+    
+  BOOL nonExceptionTypesPresent = NO;
+  for (FATField *aResponseType in responseTypes) {
+    if ([aResponseType.valueClass isSubclassOfClass:[FATException class]] == NO) {
+      nonExceptionTypesPresent = YES;
+      break;
+    }
+  }
+    
+  if (nonExceptionTypesPresent) {
+    @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
+                                             reason: [message stringByAppendingString:@" failed: unknown result"]];
+  }
+    
   return nil;
 }
 
