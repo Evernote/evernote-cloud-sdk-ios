@@ -299,6 +299,20 @@
     // update an existing note, we always desire the intention of removing any existing resources.
     [note setResources:resources];
     
+    // set EDAM attributes if edamAttributes dictionary is not nil
+    for (NSString * key in self.edamAttributes.allKeys) {
+        id value = [self.edamAttributes valueForKey:key];
+        @try {
+            [note setValue:value forKey:key];
+        }
+        @catch (NSException *exception) {
+            ENSDKLogError(@"Unable to set value %@ for key %@", value, key);
+            if ([[exception name] isEqualToString: NSUndefinedKeyException]) {
+                ENSDKLogError(@"Key %@ not found on EDAMNote", key);
+            }
+        }
+    }
+    
     return note;
 }
 
