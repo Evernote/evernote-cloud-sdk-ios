@@ -53,12 +53,14 @@
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
     self.title = NSLocalizedString(@"Notebooks", @"Notebooks");
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self reloadRecentNotebooks];
     [self rebuildSections];
 }

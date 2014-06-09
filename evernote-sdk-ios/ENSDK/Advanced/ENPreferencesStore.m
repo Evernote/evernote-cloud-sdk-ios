@@ -82,7 +82,7 @@
     @synchronized(self) {
         data = [self.store objectForKey:key];
     }
-    if (!data || [data isKindOfClass:[NSData data]]) {
+    if (!data || [data isKindOfClass:[NSData class]]) {
         return nil;
     }
     id object = nil;

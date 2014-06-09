@@ -32,6 +32,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     [SVProgressHUD showProgress:0.0 status:nil maskType:SVProgressHUDMaskTypeClear];
     [[ENSession sharedSession] downloadNote:self.noteRef progress:^(CGFloat progress) {
         if (self.webView) {
@@ -48,6 +49,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     self.webView = nil;
     [SVProgressHUD dismiss];
 }
