@@ -63,7 +63,8 @@
         _isReminder = (note.attributes.reminderOrder != nil);
         _sourceUrl = note.attributes.sourceURL;
         _tagNames = note.tagNames;  // This is usually nil, unfortunately, on notes that come from the service.
-        
+        _updateSequenceNum = note.updateSequenceNum;
+
         // Resources to ENResources
         _resources = [[NSMutableArray alloc] init];
         for (EDAMResource * serviceResource in note.resources) {
