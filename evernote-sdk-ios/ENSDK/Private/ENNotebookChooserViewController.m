@@ -53,16 +53,16 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
     self.title = NSLocalizedString(@"Notebooks", @"Notebooks");
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    [super viewDidLoad];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
     [self reloadRecentNotebooks];
     [self rebuildSections];
+    [super viewWillAppear:animated];
 }
 
 #pragma mark - Table view data source
