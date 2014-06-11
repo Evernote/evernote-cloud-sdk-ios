@@ -41,6 +41,7 @@
 @property (nonatomic, copy) NSString * sourceUrl;
 @property (nonatomic, copy) NSString * cachedENMLContent;
 @property (nonatomic, strong) EDAMNote * serviceNote;
+@property (nonatomic, strong) NSDictionary * edamAttributes;
 @end
 
 @implementation ENNote

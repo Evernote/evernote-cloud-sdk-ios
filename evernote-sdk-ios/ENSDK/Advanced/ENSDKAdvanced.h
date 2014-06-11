@@ -66,6 +66,7 @@
 
 @interface ENNote (Advanced)
 @property (nonatomic, copy) NSString * sourceUrl;
+@property (nonatomic, strong) NSDictionary * edamAttributes;
 @end
 
 @interface ENNoteContent (Advanced)
