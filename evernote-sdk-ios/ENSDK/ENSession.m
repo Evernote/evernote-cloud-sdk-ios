@@ -1318,6 +1318,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
         ENSessionFindNotesResult * result = [[ENSessionFindNotesResult alloc] init];
         result.noteRef = ref;
         result.notebook = notebook;
+        result.updateSequenceNum = metadata.updateSequenceNum;
         result.title = metadata.title;
         result.created = [NSDate endateFromEDAMTimestamp:[metadata.created longLongValue]];
         result.updated = [NSDate endateFromEDAMTimestamp:[metadata.updated longLongValue]];
@@ -1769,8 +1770,8 @@ static NSString * DeveloperToken, * NoteStoreUrl;
 @implementation ENSessionFindNotesResult
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; title = \"%@\"; notebook name = \"%@\"; created = %@; updated = %@; noteRef = %p>",
-            [self class], self, self.title, self.notebook.name, self.created, self.updated, self.noteRef];
+    return [NSString stringWithFormat:@"<%@: %p; title = \"%@\"; notebook name = \"%@\"; created = %@; updated = %@; noteRef = %p, updateSequenceNum = %@>",
+            [self class], self, self.title, self.notebook.name, self.created, self.updated, self.noteRef, self.updateSequenceNum];
 }
 @end
 

@@ -81,6 +81,7 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
 @interface ENSessionFindNotesResult : NSObject
 @property (nonatomic, strong) ENNoteRef * noteRef;
 @property (nonatomic, strong) ENNotebook * notebook;
+@property (nonatomic, strong) NSNumber * updateSequenceNum;
 @property (nonatomic, strong) NSString * title;
 @property (nonatomic, strong) NSDate * created;
 @property (nonatomic, strong) NSDate * updated;

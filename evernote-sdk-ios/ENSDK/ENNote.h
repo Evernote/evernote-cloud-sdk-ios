@@ -43,6 +43,7 @@ typedef void (^ENNoteGenerateWebArchiveDataCompletionHandler)(NSData * data);
 @property (nonatomic, copy) NSArray * tagNames;
 @property (nonatomic, assign) BOOL isReminder;
 @property (nonatomic, strong) NSDictionary * edamAttributes;
+@property (nonatomic, strong) NSNumber * updateSequenceNum;
 - (NSArray *)resources;
 - (void)addResource:(ENResource *)resource;
 - (void)removeAllResources;
