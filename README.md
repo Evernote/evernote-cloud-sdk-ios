@@ -9,7 +9,7 @@ A simple, workflow-oriented library built on the Evernote Cloud API. It's design
 Note for users of the 1.x SDK for iOS
 -------------------------------------
 
-This library is the spiritual, although not syntactic, successor to to the [Evernote SDK for iOS 1.x](https://github.com/evernote/evernote-sdk-ios). Currently, both libraries are available and supported. This one is not a "drop-in" update-- it omits the "app bridge" functionality, and the objects that you use for authentication and to get to the traditional (EDAM) API are a little different. The EDAM classes also have a slightly different property format. It’s not too much work to switch, if you're already using that package and want to migrate. A migration guide will be forthcoming, but in the meanwhile, feel free to get in touch if you have questions.
+This library is the spiritual, although not syntactic, successor to to the [Evernote SDK for iOS 1.x](https://github.com/evernote/evernote-sdk-ios). Currently, both libraries are available and supported. This one is not a "drop-in" update-- it omits the "app bridge" functionality, and the objects that you use for authentication and to get to the traditional (EDAM) API are a little different. The EDAM classes also have a slightly different property format. It’s usually not too much work to switch, if you're already using that package and want to migrate. [We have provided a migration guide for users of the 1.x SDK](https://github.com/evernote/evernote-cloud-sdk-ios/blob/master/Migration_from_SDK_1_x.md). 
 
 Installing
 ----------
