@@ -102,6 +102,10 @@ static NSUInteger ENSessionNotebooksCacheValidity = (5 * 60);   // 5 minutes
 @property (nonatomic, copy) ENSessionFindNotesCompletionHandler completion;
 @end
 
+@interface ENSessionFindNotesResult ()
+@property (nonatomic, assign) int32_t updateSequenceNum;
+@end
+
 @interface ENSession () <ENLinkedNoteStoreClientDelegate, ENBusinessNoteStoreClientDelegate, ENOAuthAuthenticatorDelegate>
 @property (nonatomic, assign) BOOL supportsLinkedAppNotebook;
 @property (nonatomic, strong) ENOAuthAuthenticator * authenticator;
@@ -1067,6 +1071,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     resultSpec.includeTitle = @YES;
     resultSpec.includeCreated = @YES;
     resultSpec.includeUpdated = @YES;
+    resultSpec.includeUpdateSequenceNum = @YES;
     
     EDAMNoteFilter * noteFilter = [[EDAMNoteFilter alloc] init];
     noteFilter.words = noteSearch.searchString;
@@ -1327,6 +1332,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
         result.title = metadata.title;
         result.created = [NSDate dateWithEDAMTimestamp:[metadata.created longLongValue]];
         result.updated = [NSDate dateWithEDAMTimestamp:[metadata.updated longLongValue]];
+        result.updateSequenceNum = [metadata.updateSequenceNum intValue];
         
         [findNotesResults addObject:result];
         
@@ -1614,6 +1620,18 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     return nil;
 }
 
+- (ENNoteStoreClient *)noteStoreForNotebook:(ENNotebook *)notebook
+{
+    if ([notebook isBusinessNotebook]) {
+        return [self businessNoteStore];
+    } else if ([notebook isLinked]) {
+        return [ENLinkedNoteStoreClient noteStoreClientForLinkedNotebookRef:[ENLinkedNotebookRef linkedNotebookRefFromLinkedNotebook:notebook.linkedNotebook]];
+    } else {
+        return [self primaryNoteStore];
+    }
+    return nil;
+}
+
 - (NSString *)shardIdForNoteRef:(ENNoteRef *)noteRef
 {
     if (noteRef.type == ENNoteRefTypePersonal) {
@@ -1775,8 +1793,8 @@ static NSString * DeveloperToken, * NoteStoreUrl;
 @implementation ENSessionFindNotesResult
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; title = \"%@\"; notebook name = \"%@\"; created = %@; updated = %@; noteRef = %p>",
-            [self class], self, self.title, self.notebook.name, self.created, self.updated, self.noteRef];
+    return [NSString stringWithFormat:@"<%@: %p; title = \"%@\"; notebook name = \"%@\"; created = %@; updated = %@; usn = %d; noteRef = %p>",
+            [self class], self, self.title, self.notebook.name, self.created, self.updated, self.updateSequenceNum, self.noteRef];
 }
 @end
 

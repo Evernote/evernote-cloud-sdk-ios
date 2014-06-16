@@ -64,6 +64,16 @@
 - (ENNoteStoreClient *)primaryNoteStore;
 - (ENNoteStoreClient *)businessNoteStore;
 - (ENNoteStoreClient *)noteStoreForLinkedNotebook:(EDAMLinkedNotebook *)linkedNotebook;
+
+// Retrieve a note store client appropriate to a note ref or notebook object. These methods allow you to
+// get a note store client based on an object you have retrieved through the nonadvanced API. Internally,
+// these will call one of the above appropriate accessors for you.
+- (ENNoteStoreClient *)noteStoreForNoteRef:(ENNoteRef *)noteRef;
+- (ENNoteStoreClient *)noteStoreForNotebook:(ENNotebook *)notebook;
+@end
+
+@interface ENSessionFindNotesResult (Advanced)
+@property (nonatomic, assign) int32_t updateSequenceNum;
 @end
 
 @interface ENNote (Advanced)
@@ -79,4 +89,12 @@
 @interface ENResource (Advanced)
 @property (nonatomic, copy) NSString * sourceUrl;
 - (NSData *)dataHash;
+@end
+
+@interface ENNoteRef (Advanced)
+@property (nonatomic, readonly) NSString * guid;
+@end
+
+@interface  ENNotebook (Advanced)
+@property (nonatomic, readonly) NSString * guid;
 @end
