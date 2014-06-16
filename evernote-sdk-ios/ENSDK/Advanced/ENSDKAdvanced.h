@@ -31,6 +31,8 @@
 #import "ENNoteStoreClient.h"
 #import "ENUserStoreClient.h"
 #import "ENPreferencesStore.h"
+#import "NSDate+EDAMAdditions.h"
+#import "ENMLWriter.h"
 @class ENNoteStoreClient;
 
 @interface ENSession (Advanced)

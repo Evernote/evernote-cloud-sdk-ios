@@ -304,7 +304,7 @@
     for (NSString * key in self.edamAttributes.allKeys) {
         id value = [self.edamAttributes valueForKey:key];
         @try {
-            [note setValue:value forKey:key];
+            [note setValue:value forKeyPath:key];
         }
         @catch (NSException *exception) {
             ENSDKLogError(@"Unable to set value %@ for key %@", value, key);

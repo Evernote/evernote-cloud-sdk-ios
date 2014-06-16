@@ -835,7 +835,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
 - (void)uploadNote_updateWithContext:(ENSessionUploadNoteContext *)context
 {
     // If we're replacing a note, fixup the update date.
-    context.note.updated = @([[NSDate date] enedamTimestamp]);
+    context.note.updated = @([[NSDate date] edamTimestamp]);
     
     context.note.guid = context.refToReplace.guid;
     context.note.active = @YES;
@@ -1325,8 +1325,8 @@ static NSString * DeveloperToken, * NoteStoreUrl;
         result.noteRef = ref;
         result.notebook = notebook;
         result.title = metadata.title;
-        result.created = [NSDate endateFromEDAMTimestamp:[metadata.created longLongValue]];
-        result.updated = [NSDate endateFromEDAMTimestamp:[metadata.updated longLongValue]];
+        result.created = [NSDate dateWithEDAMTimestamp:[metadata.created longLongValue]];
+        result.updated = [NSDate dateWithEDAMTimestamp:[metadata.updated longLongValue]];
         
         [findNotesResults addObject:result];
         
