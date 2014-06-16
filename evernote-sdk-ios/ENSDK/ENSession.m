@@ -217,27 +217,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     self.thumbnailQueue = dispatch_queue_create("evernote-sdk-ios-thumbnail", DISPATCH_QUEUE_CONCURRENT);
     
     // Determine the host to use for this session.
-    if (SessionHostOverride.length > 0) {
-        // Use the override given by the developer. This is optional, and
-        // generally used for the sandbox.
-        self.sessionHost = SessionHostOverride;
-    } else if (NoteStoreUrl) {
-        // If we have a developer key, just get the host from the note store url.
-        NSURL * noteStoreUrl = [NSURL URLWithString:NoteStoreUrl];
-        self.sessionHost = noteStoreUrl.host;
-    } else if ([[self currentProfileName] isEqualToString:ENBootstrapProfileNameInternational]) {
-        self.sessionHost = ENSessionBootstrapServerBaseURLStringUS;
-    } else if ([[self currentProfileName] isEqualToString:ENBootstrapProfileNameChina]) {
-        self.sessionHost = ENSessionBootstrapServerBaseURLStringCN;
-    } else {
-        // Choose the initial host based on locale.
-        NSString * locale = [[NSLocale currentLocale] localeIdentifier];
-        if ([[locale lowercaseString] hasPrefix:@"zh"]) {
-            self.sessionHost = ENSessionBootstrapServerBaseURLStringCN;
-        } else {
-            self.sessionHost = ENSessionBootstrapServerBaseURLStringUS;
-        }
-    }
+    [self selectInitialSessionHost];
     
     // If the developer token is set, then we can short circuit the entire auth flow and just call ourselves authenticated.
     if (DeveloperToken) {
@@ -265,6 +245,31 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     self.user = [self.preferences decodedObjectForKey:ENSessionPreferencesUser];
     
     [self performPostAuthentication];
+}
+
+- (void)selectInitialSessionHost
+{
+    if (SessionHostOverride.length > 0) {
+        // Use the override given by the developer. This is optional, and
+        // generally used for the sandbox.
+        self.sessionHost = SessionHostOverride;
+    } else if (NoteStoreUrl) {
+        // If we have a developer key, just get the host from the note store url.
+        NSURL * noteStoreUrl = [NSURL URLWithString:NoteStoreUrl];
+        self.sessionHost = noteStoreUrl.host;
+    } else if ([[self currentProfileName] isEqualToString:ENBootstrapProfileNameInternational]) {
+        self.sessionHost = ENSessionBootstrapServerBaseURLStringUS;
+    } else if ([[self currentProfileName] isEqualToString:ENBootstrapProfileNameChina]) {
+        self.sessionHost = ENSessionBootstrapServerBaseURLStringCN;
+    } else {
+        // Choose the initial host based on locale. Simplified Chinese locales get the yinxiang service.
+        NSString * locale = [[[NSLocale currentLocale] localeIdentifier] lowercaseString];
+        if ([locale hasPrefix:@"zh_hans"] || [locale isEqualToString:@"zh_cn"] || [locale isEqualToString:@"zh"]) {
+            self.sessionHost = ENSessionBootstrapServerBaseURLStringCN;
+        } else {
+            self.sessionHost = ENSessionBootstrapServerBaseURLStringUS;
+        }
+    }
 }
 
 - (void)authenticateWithViewController:(UIViewController *)viewController
@@ -430,6 +435,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     [self saveCredentialStore:credentialStore];
     
     [self.preferences removeAllItems];
+    [self selectInitialSessionHost];
     
     [self notifyAuthenticationChanged];
 }
