@@ -47,7 +47,17 @@ The primary note store is always valid, and accesses a user's personal data. The
 
 ### Update EDAM primitive property access
 
-The new version of the EDAM classes (like `EDAMNote`, etc) have *all* properties defined as objects. There is no change for most properties, which are strings, embedded other objects, etc. The properties that represent primitive types (like integers and timestamps and BOOLs) are now stored as `NSNumber` objects. Look at their definition in the headers (e.g. EDAMTypes.h) to see what the underlying type is, and use `NSNumber`'s accessors for retrieving them.
+The new version of the EDAM classes (like `EDAMNote`, etc) have *all* properties defined as objects. There is no change for most properties, which are strings, embedded other objects, etc. The properties that represent primitive types (like integers and timestamps and BOOLs) are now stored as `NSNumber` objects. Look at their definition in the headers (e.g. EDAMTypes.h) to see what the underlying type is in the inline comment, and use `NSNumber`'s accessors for retrieving them:
+
+EDAM type  | NSNumber getter
+------------- | -------------
+BOOL  | `-boolValue`
+int16_t | `-shortValue`
+int32_t  | `-intValue`
+int | `-intValue`
+int64_t  | `-longLongValue`
+double | `-doubleValue`
+EDAMTimestamp | `-longLongValue`
 
 This change results in far less code in the SDK, but it's important to double-check the access points in your code. For example, if you look at a BOOL property, you must do e.g.
 
@@ -62,5 +72,3 @@ and NOT
     }
 
 or your logic won't work as expected.
-
-Most of the types should be self-explanatory, but note that for `int64_t`, be sure to use `-longLongValue`.
