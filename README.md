@@ -9,7 +9,7 @@ A simple, workflow-oriented library built on the Evernote Cloud API. It's design
 Note for users of the 1.x SDK for iOS
 -------------------------------------
 
-This library is the spiritual, although not syntactic, successor to to the [Evernote SDK for iOS 1.x](https://github.com/evernote/evernote-sdk-ios). Currently, both libraries are available and supported. This one is not a "drop-in" update-- it omits the "app bridge" functionality, and the objects that you use for authentication and to get to the traditional (EDAM) API are a little different. The EDAM classes also have a slightly different property format. It’s usually not too much work to switch, if you're already using that package and want to migrate. [We have provided a migration guide for users of the 1.x SDK](https://github.com/evernote/evernote-cloud-sdk-ios/blob/master/Migration_from_SDK_1_x.md). 
+This library is the spiritual, although not syntactic, successor to to the [Evernote SDK for iOS 1.x](https://github.com/evernote/evernote-sdk-ios). Currently, both libraries are available and supported. This one is not a "drop-in" update-- it omits the "app bridge" functionality, and the objects that you use for authentication and to get to the traditional (EDAM) API are a little different. The EDAM classes also have a slightly different property format. It’s usually not too much work to switch, if you're already using that package and want to migrate. [We have provided a migration guide for users of the 1.x SDK](Migration_from_SDK_1_x.md). 
 
 Installing
 ----------
@@ -229,7 +229,7 @@ FAQ
 
 ### What iOS versions are supported?
 
-This version of the SDK is designed for iOS 7 (and above). 
+This version of the SDK is designed for iOS 7 and above.
 
 ### Does the Evernote SDK support ARC?
 
@@ -237,21 +237,15 @@ Yes. (To use the SDK in a non-ARC project, please use the -fobjc-arc compiler fl
 
 ### Evernote can do lots of things that aren't available in ENSession. How can I do more?
 
-ENSession is an intentionally general, workflow-oriented abstraction layer. It's currently optimized for the creation and upload of new notes, and simple search/download of existing notes. Evernote can do a lot more, though, and you can get closer to the metal, but it will require a fair bit of understanding of Evernote's object model and API.
+ENSession is an intentionally general, workflow-oriented abstraction layer. It's currently optimized for the creation and upload of new notes, and simple search/download of existing notes. Evernote can do a lot more, though, and you can get closer to the metal, but it will require deeper understanding of Evernote's object model and API.
 
-First off, import `<ENSDK/Advanced/ENSDKAdvanced.h>` instead of `ENSDK.h`. Then ask an authenticated session for its `-primaryNoteStore`. You can look at the header for `ENNoteStoreClient` to see all the methods offered on it, with block-based completion parameters. You won't generally be able to use any of the "EN"-prefixed objects in this world; you're at the "EDAM" layer, which are the actual objects that the Evernote service works with. These are powerful but somewhat complex; [please see the full API documentation for information on what you are able to do](http://dev.evernote.com/doc/reference/).
-
-This "primary" note store client can only interact with a user's personal account, and won't work with a user's business data or shared notebook data directly; you can get note store clients for those destinations by asking for `-businessNoteStore` and `-noteStoreForLinkedNotebook:`  
+This SDK offers an "advanced" set of capabilities that include full access to the underlying Evernote API. Please see the [Working with the Advanced API](Working_with_the_Advanced_(EDAM)_API.md) guide for further information.
 
 ### My app uses an App Notebook. Do I need to do anything special?
 
 In general, no. ENSession will simply return only a single notebook if you `listNotebooks` (unless the user has deleted your app notebook, in which case it will have no results). New notes created in a default (`nil`) notebook will go into your App Notebook.
 
-*Please Note*: ENSession knows how to handle a user selecting any available notebook (including a linked or business notebook) for its App Notebook. However, if you are using the "advanced" functions in the SDK and dropping down to the EDAM layer, you'll need to be aware of the intricacies of managing talking to a linked notebook. But you can opt-out of allowing users to pick a linked notebook, by simply setting 
-
-    [[ENSession sharedSession].supportsLinkedAppNotebook = NO
-
-as part of your setup, prior to authenticating a user. Our advice is usually to opt out of this unless you are really conversant in the API, but feel free to get in touch for more info.
+*Please Note*: ENSession knows how to handle a user selecting any available notebook (including a linked or business notebook) for its App Notebook. However, if you are using the "advanced" (EDAM) functions in the SDK and dropping down to the EDAM layer, you'll need to be aware of the intricacies of managing talking to a linked notebook. Please see the [EDAM guide](Working_with_the_Advanced_(EDAM)_API.md) for more information and how to opt-out of this.
 
 ### Where can I find out more about the Evernote service, API, and object model for my more sophisticated integration?
 
