@@ -28,7 +28,31 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ *  This class represents the content of a note.
+ */
 @interface ENNoteContent : NSObject
+
+/**
+ *  Class method to create a note content object from a plaintext string.
+ *
+ *  @param string A plaintext string.
+ *
+ *  @return A valid note content instance.
+ */
 + (instancetype)noteContentWithString:(NSString *)string;
+
+/**
+ *  Class method to create a note content object from a string of sanitized HTML string. 
+ *  "Sanitized" HTML means that any desired CSS styles are inlined into the DOM (versus being
+ *  remote resources or a single <style> block.)
+ *
+ *  NB If you have an HTML source that's not already sanitized, you can load it into a UIWebView and
+ *  use +[ENNote populateNoteFromWebView:completion:] to capture it.
+ *
+ *  @param Sanitized HTML string.
+ *
+ *  @return A valid note content instance.
+ */
 + (instancetype)noteContentWithSanitizedHTML:(NSString *)html;
 @end

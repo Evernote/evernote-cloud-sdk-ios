@@ -46,38 +46,98 @@ typedef void (^ENSessionFindNotesCompletionHandler)(NSArray * findNotesResults, 
 typedef void (^ENSessionDownloadNoteCompletionHandler)(ENNote * note, NSError * downloadNoteError);
 typedef void (^ENSessionDownloadNoteThumbnailCompletionHandler)(UIImage * thumbnail, NSError * downloadNoteThumbnailError);
 
+/**
+ *  A value indicating how the session should approach creating vs. updating existing notes when uploading.
+ */
 typedef NS_ENUM(NSInteger, ENSessionUploadPolicy) {
-    ENSessionUploadPolicyCreate,            // always create a new note.
-    ENSessionUploadPolicyReplace,           // replace existing note if present.
-    ENSessionUploadPolicyReplaceOrCreate    // attempt to replace existing note, but if it no longer exists, create new instead.
+    /**
+     *  Always create a new note.
+     */
+    ENSessionUploadPolicyCreate,
+    /**
+     *  Replace existing note if present.
+     */
+    ENSessionUploadPolicyReplace,
+    /**
+     *  Attempt to replace existing note, but if it no longer exists, create new instead.
+     */
+    ENSessionUploadPolicyReplaceOrCreate
 };
 
+/**
+ *  Option flags for search scope when finding notes.
+ */
 typedef NS_OPTIONS(NSUInteger, ENSessionSearchScope) {
-    ENSessionSearchScopeNone                = 0,      // only used if specifying an explicit notebook instead.
-    ENSessionSearchScopePersonal            = 1 << 0, // search among all personal notebooks.
-    ENSessionSearchScopePersonalLinked      = 1 << 1, // search among all notebooks shared to the user by others.
-    ENSessionSearchScopeBusiness            = 1 << 2, // search among all business notebooks the user has joined.
-    
-    ENSessionSearchScopeAppNotebook         = 1 << 3  // use this if your app uses an "App Notebook". (any other set flags will be ignored.)
+    /**
+     *  Only used if specifying an explicit notebook instead.
+     */
+    ENSessionSearchScopeNone                = 0,
+    /**
+     *  Search among all personal notebooks.
+     */
+    ENSessionSearchScopePersonal            = 1 << 0,
+    /**
+     *  Search among all notebooks shared to the user by others.
+     */
+    ENSessionSearchScopePersonalLinked      = 1 << 1,
+    /**
+     *  Search among all business notebooks the user has joined.
+     */
+    ENSessionSearchScopeBusiness            = 1 << 2,
+
+    /**
+     *  Use this if your app uses an "App Notebook". (any other set flags will be ignored.)
+     */
+    ENSessionSearchScopeAppNotebook         = 1 << 3
 };
+
 // Default search is among personal notebooks only; typical and most performant scope.
 #define ENSessionSearchScopeDefault     (ENSessionSearchScopePersonal)
 // Search everything this user can see. PERFORMANCE NOTE: This can be very expensive and result in many roundtrips if the
 // user is a member of a business and/or has many linked notebooks.
 #define ENSessionSearchScopeAll         (ENSessionSearchScopePersonal | ENSessionSearchScopePersonalLinked | ENSessionSearchScopeBusiness)
 
+/**
+ *  Option flags for ordering of results from finding notes.
+ */
 typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
-    ENSessionSortOrderTitle                 = 1 << 0,  // case-insensitive order by title.
-    ENSessionSortOrderRecentlyCreated       = 1 << 1,  // most recently created first.
-    ENSessionSortOrderRecentlyUpdated       = 1 << 2,  // most recently updated first.
-    ENSessionSortOrderRelevance             = 1 << 3,  // most relevant first. NB only valid when using a single search scope
     
-    ENSessionSortOrderNormal                = 0 << 16, // default order (no flag)
-    ENSessionSortOrderReverse               = 1 << 16  // reverse order
+    // The following options address the kind of sort that should be used.
+    
+    /**
+     *  Case-insensitive order by title.
+     */
+    ENSessionSortOrderTitle                 = 1 << 0,
+    /**
+     *  Most recently created first.
+     */
+    ENSessionSortOrderRecentlyCreated       = 1 << 1,
+    /**
+     *  Most recently updated first.
+     */
+    ENSessionSortOrderRecentlyUpdated       = 1 << 2,
+    /**
+     *  Most relevant first. NB only valid when using a single search scope.
+     */
+    ENSessionSortOrderRelevance             = 1 << 3,
+
+    
+    // The following options address the ordering of the sort.
+    
+    /**
+     *  Default order (no flag).
+     */
+    ENSessionSortOrderNormal                = 0 << 16,
+    /**
+     *  Reverse order.
+     */
+    ENSessionSortOrderReverse               = 1 << 16
 };
 #define ENSessionSortOrderDefault       ENSessionSortOrderTitle
 
-// Result record for findNotes call.
+/**
+ *  Result record for -findNotesWithSearch...
+ */
 @interface ENSessionFindNotesResult : NSObject
 @property (nonatomic, strong) ENNoteRef * noteRef;
 @property (nonatomic, strong) ENNotebook * notebook;
@@ -86,16 +146,53 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
 @property (nonatomic, strong) NSDate * updated;
 @end
 
+/**
+ *  This is the class that represents a "session" with Evernote. It is designed as a singleton; get the
+ *  instance with -sharedSession. It is the primary interface for all interactions with Evernote.
+ */
 @interface ENSession : NSObject
+
+/**
+ *  The optional logger sets a destination for informational and error logging from within the SDK.
+ *  By default, output is directed to the console (via NSLog). You can replace this with your own
+ *  logging object, or set it to nil to suppress all logging.
+ */
 @property (nonatomic, strong) id<ENSDKLogging> logger;
+
+/**
+ *  This is a string that is used when creating notes to uniquely identify your application. 
+ *  By default, it will be equal to the bundle identifier of the app.
+ */
 @property (nonatomic, copy) NSString * sourceApplication;  
 
+/**
+ *  Indicates whether the session is currently authenticated.
+ */
 @property (nonatomic, readonly) BOOL isAuthenticated;
+
+/**
+ *  Indicates whether the session is currently in the process of an asynchronous authentication.
+ */
 @property (nonatomic, readonly) BOOL isAuthenticationInProgress;
 
+/**
+ *  Indicates whether the current user has Evernote Premium status.
+ */
 @property (nonatomic, readonly) BOOL isPremiumUser;
+
+/**
+ *  Indicates whether the current user is a member of a Business.
+ */
 @property (nonatomic, readonly) BOOL isBusinessUser;
+
+/**
+ *  A string that can be used in UI to identify the user. This is not unique.
+ */
 @property (nonatomic, readonly) NSString * userDisplayName;
+
+/**
+ *  A string that can be used in UI to identify the business the user is a member of.
+ */
 @property (nonatomic, readonly) NSString * businessDisplayName;
 
 #pragma mark - Session setup

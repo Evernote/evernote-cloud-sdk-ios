@@ -36,65 +36,151 @@
 @class ENNoteStoreClient;
 
 @interface ENSession (Advanced)
-// Indicates if your app is capable of supporting linked/business notebooks as app notebook destinations.
-// Defaults to YES, as the non-advanced interface on ENSession will handle these transparently. If you're
-// using the note store clients directly, either set this to NO, or be sure you test using a shared notebook as
-// an app notebook.
+/**
+ * Indicates if your app is capable of supporting linked/business notebooks as app notebook destinations.
+ * Defaults to YES, as the non-advanced interface on ENSession will handle these transparently. If you're
+ * using the note store clients directly, either set this to NO, or be sure you test using a shared notebook as
+ * an app notebook.
+ */
 @property (nonatomic, assign) BOOL supportsLinkedAppNotebook;
 
-// Once authenticated, this flag will indicate whether the app notebook chosen by the user is, in fact, linked.
-// (This will never be YES if you have set the flag above to NO). If so, you must take this into account:
-// the primary note store will not allow you to access the notebook; instead, you must authenticate to the
-// relevant linked notebook. You can find the linked notebook record by calling -listLinkedNotebooks on the
-// primary note store.
+/**
+ * Once authenticated, this flag will indicate whether the app notebook chosen by the user is, in fact, linked.
+ * (This will never be YES if you have set the flag above to NO). If so, you must take this into account:
+ * the primary note store will not allow you to access the notebook; instead, you must authenticate to the
+ * relevant linked notebook. You can find the linked notebook record by calling -listLinkedNotebooks on the
+ * primary note store.
+ */
 @property (nonatomic, readonly) BOOL appNotebookIsLinked;
 
-// This give access to the preferences store that the session keeps independently from NSUserDefaults, and is
-// destroyed when the session unauthenticates. This should generally not be used in your application, but
-// it is used by the sample UIActivity to track recently-used notebook destinations, which are of course
-// session-specific. If you use it, please namespace your keys appropriately to avoid collisions.
+/**
+ * This give access to the preferences store that the session keeps independently from NSUserDefaults, and is
+ * destroyed when the session unauthenticates. This should generally not be used in your application, but
+ * it is used by the sample UIActivity to track recently-used notebook destinations, which are of course
+ * session-specific. If you use it, please namespace your keys appropriately to avoid collisions.
+ */
 @property (nonatomic, readonly) ENPreferencesStore * preferences;
 
-// Retrive an appropriate note store client to perform API operations with:
-// - The primary note store client is valid for all personal notebooks, and can also be used to authenticate with
-//   shared notebooks.
-// - The business note store client will only be non-nil if the authenticated user is a member of a business. With
-//   it, you can access the business's notebooks.
-// - Every linked notebook requires its own note store client instance to access.
+// The following accessors all allow retrieval of an appropriate note store client to perform API operations with.
+
+/**
+ *  The primary note store client is valid for all personal notebooks, and can also be used to authenticate with
+ *  shared notebooks.
+ *
+ *  @return A client for the user's primary note store.
+ */
 - (ENNoteStoreClient *)primaryNoteStore;
+
+/**
+ *  The business note store client will only be non-nil if the authenticated user is a member of a business. With
+ *  it, you can access the business's notebooks.
+ *
+ *  @return A client for the user's business note store, or nil if the user is not a member of a business.
+ */
 - (ENNoteStoreClient *)businessNoteStore;
+
+/**
+ *  Every linked notebook requires its own note store client instance to access.
+ *
+ *  @param linkedNotebook A linked notebook record for which you'd like a note store client.
+ *
+ *  @return A client for the linked notebook's note store.
+ */
 - (ENNoteStoreClient *)noteStoreForLinkedNotebook:(EDAMLinkedNotebook *)linkedNotebook;
 
-// Retrieve a note store client appropriate to a note ref or notebook object. These methods allow you to
-// get a note store client based on an object you have retrieved through the nonadvanced API. Internally,
-// these will call one of the above appropriate accessors for you.
+/**
+ *  Retrieves a note store client appropriate for accessing the note pointed to by the note ref.
+ *  Useful for "bridging" between the high-level and EDAM APIs.
+ *
+ *  @param noteRef A valid note ref.
+ *
+ *  @return A client for the note store that contains the note ref's note.
+ */
 - (ENNoteStoreClient *)noteStoreForNoteRef:(ENNoteRef *)noteRef;
+
+/**
+ *  Retrieves a note store client appropriate for accessing a given notebook.
+ *  Useful for "bridging" between the high-level and EDAM APIs.
+ *
+ *  @param notebook A valid notebook.
+ *
+ *  @return A client for the note store that contains the notebook.
+ */
 - (ENNoteStoreClient *)noteStoreForNotebook:(ENNotebook *)notebook;
 @end
 
 @interface ENSessionFindNotesResult (Advanced)
+/**
+ *  The update sequence number (USN) associated with the current version of the note find result.
+ */
 @property (nonatomic, assign) int32_t updateSequenceNum;
 @end
 
 @interface ENNote (Advanced)
+/**
+ *  A property indicating the "source" URL for this note. Optional, and useful mainly in contexts where the 
+ *  note is captured from web content.
+ */
 @property (nonatomic, copy) NSString * sourceUrl;
+
+/**
+ *  An optional dictionary of attributes which are used at upload time only to apply to an EDAMNote during
+ *  its creation. The keys in the dictionary should be valid keypaths in an EDAMNote, e.g. "active", or "attributes.reminderTime";
+ *  the values are the objects to apply. 
+ *
+ *  Note that downloaded notes do not populate this dictionary; if you need to inspect properties of an EDAMNote that aren't
+ *  represented by ENNote, you should use ENNoteStoreClient's -getNoteWithGuid... method to download the EDAMNote directly.
+ */
 @property (nonatomic, strong) NSDictionary * edamAttributes;
 @end
 
 @interface ENNoteContent (Advanced)
+/**
+ *  Class method to create note content directly from a string of valid ENML.
+ *
+ *  @param enml A valid ENML string. (Invalid ENML will fail at upload time.)
+ *
+ *  @return A note content object.
+ */
 + (instancetype)noteContentWithENML:(NSString *)enml;
+
+/**
+ *  The designated initializer for this class; initializes note content with a string of valid ENML.
+ *
+ *  @param enml A valid ENML string. (Invalid ENML will fail at upload time.)
+ *
+ *  @return A note content object.
+ */
 - (id)initWithENML:(NSString *)enml;
 @end
 
 @interface ENResource (Advanced)
+/**
+ *  A property indicating the "source" URL for this resource. Optional, and useful mainly in contexts where the
+ *  resource is captured from web content.
+ */
 @property (nonatomic, copy) NSString * sourceUrl;
+
+/**
+ *  Accessor for the MD5 hash of the data of a resource. This is useful when writing ENML.
+ *
+ *  @return The hash for this resource.
+ */
 - (NSData *)dataHash;
 @end
 
 @interface ENNoteRef (Advanced)
+/**
+ *  The Evernote service guid for the note that this note ref points to. Valid only with a note store client
+ *  that also corresponds to this note ref; see ENSession to retrieve an appropriate note store client.
+ */
 @property (nonatomic, readonly) NSString * guid;
 @end
 
 @interface  ENNotebook (Advanced)
+/**
+ *  The Evernote service guid for the note that this notebook corresponds to. Valid only with a note store client
+ *  that also corresponds to this notebook; see ENSession to retrieve an appropriate note store client.
+ */
 @property (nonatomic, readonly) NSString * guid;
 @end

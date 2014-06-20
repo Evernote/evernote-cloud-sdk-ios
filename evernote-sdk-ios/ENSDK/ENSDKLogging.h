@@ -33,7 +33,24 @@
 // entirely by setting the property to nil.
 //
 
+/**
+ * The SDK sends some info and error messages to a log output. By default, these will just go to NSLog.
+ * You can plug into your app's own logging infrastructure if you wish by setting the shared ENSession's
+ * logger property to any object that implements this simple protocol. You can also suppress output
+ * entirely by setting the property to nil.
+ */
 @protocol ENSDKLogging <NSObject>
+/**
+ *  This method is called to log information messages.
+ *
+ *  @param str String to log.
+ */
 - (void)evernoteLogInfoString:(NSString *)str;
+
+/**
+ *  This method is called to log error messages.
+ *
+ *  @param str String to log.
+ */
 - (void)evernoteLogErrorString:(NSString *)str;
 @end

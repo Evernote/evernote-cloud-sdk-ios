@@ -28,9 +28,41 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ *  A note search represents a search query for the Evernote service used in finding notes.
+ */
 @interface ENNoteSearch : NSObject
+
+/**
+ *  The search in the Evernote search grammar.
+ */
 @property (nonatomic, readonly) NSString * searchString;
+
+/**
+ *  Class method to get a new search object from a raw search string. 
+ *  You can use the full search grammar as described at http://dev.evernote.com/doc/articles/search_grammar.php
+ *
+ *  @param searchString A search string.
+ *
+ *  @return A note search object.
+ */
 + (instancetype)noteSearchWithSearchString:(NSString *)searchString;
+
+/**
+ *  Class method to get a new search object that represents all notes created by this application.
+ *  "This application" is based on the sourceApplication property on ENSession.
+ *
+ *  @return A note search object.
+ */
 + (instancetype)noteSearchCreatedByThisApplication;
+
+/**
+ *  The designated initializer for a note search, from a raw search string.
+ *  You can use the full search grammar as described at http://dev.evernote.com/doc/articles/search_grammar.php
+ *
+ *  @param searchString A search string.
+ *
+ *  @return An initialized note search object.
+ */
 - (id)initWithSearchString:(NSString *)searchString;
 @end

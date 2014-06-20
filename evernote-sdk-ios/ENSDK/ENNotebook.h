@@ -28,12 +28,51 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ *  This class represents a notebook in the Evernote service.
+ */
 @interface ENNotebook : NSObject <NSCoding>
+
+/**
+ *  The name of the notebook.
+ */
 @property (nonatomic, readonly) NSString * name;
+
+/**
+ *  The best-available display name for the owner of this notebook.
+ */
 @property (nonatomic, readonly) NSString * ownerDisplayName;
+
+/**
+ *  A flag indicating if this notebook is read/write for the current user.
+ */
 @property (nonatomic, readonly) BOOL allowsWriting;
+
+/**
+ *  A flag indicating if this notebook is "shared." In this context, "shared" means
+ *  that it is visible to more users than just the current one. Either it is a notebook that the current
+ *  user created and shared, or one that was shared by someone else but joined by the current user.
+ *  See -isOwnedByUser for ownership of a shared notebook.
+ */
 @property (nonatomic, readonly) BOOL isShared;
+
+/**
+ *  A flag indicating whether this notebook exists in the user's business.
+ */
 @property (nonatomic, readonly) BOOL isBusinessNotebook;
+
+/**
+ *  A flag indicating whether this notebook is "owned" by the current user. In this context, "owned"
+ *  indicates either a notebook within the user's personal account (shared with others or not), or a business
+ *  notebook that this user is the contact for (generally due to them being the creator).
+ */
 @property (nonatomic, readonly) BOOL isOwnedByUser;
+
+/**
+ *  A flag indicating whether this notebook is the user's "default" notebook; e.g. the notebook
+ *  that will be used as an upload destination if none is specified. (Apps using "App Notebook" auth will
+ *  see this flag appear to be YES on their sole notebook even if the user has some other "default" notebook
+ *  set using full Evernote clients.)
+ */
 @property (nonatomic, readonly) BOOL isDefaultNotebook;
 @end

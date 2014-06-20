@@ -28,10 +28,28 @@
 
 #import <Foundation/Foundation.h>
 
-// An opaque reference to an existing note in the service. It can be used to
-// share or update that same note at a later time.
+/**
+ *  An opaque reference to an existing note in the service. It encapsulates enough
+ *  information to point to a note in any notebook a user has access to. It can be used to
+ *  share or update that same note at a later time.
+ */
 @interface ENNoteRef : NSObject <NSCoding, NSCopying>
+
+/**
+ *  Factory method to deserialize a note ref from a data object.
+ *
+ *  @param data Data that was previously serialized from a note ref.
+ *
+ *  @return A valid note ref instance.
+ */
 + (instancetype)noteRefFromData:(NSData *)data;
+
+/**
+ *  Create a serialized data representation of the receiver.
+ *
+ *  @return A serialized data representation of the receiver.
+ */
 - (NSData *)asData;
+
 @end
 

@@ -29,11 +29,58 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+/**
+ *  This class represents a resource attached to an Evernote note. A resource is often an image,
+ *  but can be any file with any MIME type. The resource is typically referred to from within the 
+ *  note content.
+ */
 @interface ENResource : NSObject
+
+/**
+ *  The data body of the resource.
+ */
 @property (nonatomic, strong) NSData * data;
+
+/**
+ *  The MIME type of the resource.
+ */
 @property (nonatomic, copy) NSString * mimeType;
+
+/**
+ *  A filename associated with the resource. This is not required.
+ */
 @property (nonatomic, copy) NSString * filename;
+
+/**
+ *  Designated initializer for a resource.
+ *
+ *  @param data     The data for this resource.
+ *  @param mimeType The MIME type indicating what the data represents.
+ *  @param filename (optional) A filename to be associated with the resource.
+ *
+ *  @return A resouce object instance.
+ */
 - (id)initWithData:(NSData *)data mimeType:(NSString *)mimeType filename:(NSString *)filename;
+
+/**
+ *  Initializer for data and MIME type.
+ *
+ *  @param data     The data for this resource.
+ *  @param mimeType The MIME type indicating what the data represents.
+ *
+ *  @return A resouce object instance.
+ */
 - (id)initWithData:(NSData *)data mimeType:(NSString *)mimeType;
+
+/**
+ *  Convenience initializer for creating a resource directly from an image object. This 
+ *  method will choose the smaller of PNG or JPEG encoding, and set the MIME type appropriately.
+ *  (If you'd like finer control over the encoding, you can encode the image explicitly and 
+ *  use a data initiliazer.)
+ *
+ *  @param image An image.
+ *
+ *  @return A resouce object instance.
+ */
 - (id)initWithImage:(UIImage *)image;
 @end
