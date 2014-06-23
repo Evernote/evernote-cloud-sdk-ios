@@ -31,7 +31,6 @@
 
 @interface ENResource ()
 @property (nonatomic, copy) NSString * sourceUrl;
-@property (nonatomic, strong) NSString * guid;
 @property (nonatomic, strong) NSData * dataHash;
 @end
 
@@ -111,8 +110,7 @@
     }
     
     EDAMResource * resource = [[EDAMResource alloc] init];
-    resource.guid = self.guid;
-    if (!resource.guid && self.data) {
+    if (self.data) {
         resource.data = [[EDAMData alloc] init];
         resource.data.bodyHash = self.dataHash;
         resource.data.size = @(self.data.length);

@@ -31,6 +31,8 @@
 #import "ENWebClipNoteBuilder.h"
 #import "ENMLUtility.h"
 #import "ENWebArchive.h"
+#import "ENMIMEUtils.h"
+#import "NSData+EvernoteSDK.h"
 
 #pragma mark - ENNote
 
@@ -149,15 +151,28 @@
         enml = [emptyContent enmlWithResources:self.resources];
     }
     
-    // Convert our ENResources to EDAM resources. This is just a container conversion, it's unfortunate to do here,
-    // but isn't actually expensive.
+    // Convert our ENResources to EDAM resources to send into the converter utility. We'll be asking for image resources
+    // to be referenced in the HTML (vs inlined), which means the URL in the archive web resource must match the URL in the
+    // <img src="..."> attribute. If the resource already has a source URL value, it is kept and used, but if not (ie the
+    // note was not captured from a web page), then just make one up. In this case we use a dummy hostname, and just use the
+    // resource's hash as a fake filename with an appropriate extension.
+    //
+    // This would be cleaner if we didn't require the totally fake hostname, but using any non-absolute path here confuses UIWebView.
+    //
     NSMutableArray * edamResources = [NSMutableArray arrayWithCapacity:self.resources.count];
     for (ENResource * resource in self.resources) {
-        [edamResources addObject:[resource EDAMResource]];
+        EDAMResource * edamResource = [resource EDAMResource];
+        if (!edamResource.attributes.sourceURL) {
+            NSString * dataHash = [resource.dataHash enlowercaseHexDigits];
+            NSString * extension = [ENMIMEUtils fileExtensionForMIMEType:resource.mimeType];
+            NSString * fakeUrl = [NSString stringWithFormat:@"http://example.com/%@.%@", dataHash, extension];
+            edamResource.attributes.sourceURL = fakeUrl;
+        }
+        [edamResources addObject:edamResource];
     }
     
     ENMLUtility * utility = [[ENMLUtility alloc] init];
-    [utility convertENMLToHTML:enml withInlinedResources:edamResources completionBlock:^(NSString * html, NSError * error) {
+    [utility convertENMLToHTML:enml withReferencedResources:edamResources completionBlock:^(NSString * html, NSError * error) {
         if (!html) {
             ENSDKLogInfo(@"+webArchiveData failed to convert ENML to HTML: %@", error);
             completion(nil);
@@ -173,11 +188,22 @@
                                                           textEncodingName:ENWebResourceTextEncodingNameUTF8
                                                                  frameName:nil];
         
+        // Prepare the array of any subresources present for the main archive.
+        NSMutableArray * subresources = [[NSMutableArray alloc] init];
+        for (EDAMResource * resource in edamResources) {
+            ENWebResource * webResource = [[ENWebResource alloc] initWithData:resource.data.body
+                                                                          URL:[NSURL URLWithString:resource.attributes.sourceURL]
+                                                                     MIMEType:resource.mime
+                                                             textEncodingName:nil
+                                                                    frameName:nil];
+            [subresources addObject:webResource];
+        }
+        
         // Put together the archive.
         // NB For now, we are really just wrapping the HTML with inlined resources with a web archive.
         // Eventually this should be updated to construct the web archive with the actual resources as subresources.
         ENWebArchive * archive = [[ENWebArchive alloc] initWithMainResource:mainResource
-                                                               subresources:nil
+                                                               subresources:subresources
                                                            subframeArchives:nil];
         completion([archive data]);
     }];

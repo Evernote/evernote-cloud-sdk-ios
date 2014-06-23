@@ -42,6 +42,7 @@ typedef void (^ENMLHTMLCompletionBlock)(NSString* html, NSError *error);
 @property (nonatomic,copy) ENMLHTMLCompletionBlock completionBlock;
 @property (nonatomic,strong) NSXMLParser* xmlParser;
 @property (nonatomic,assign) BOOL shouldIgnoreNextEndElement;
+@property (nonatomic,assign) BOOL shouldInlineResources;
 
 @end
 
@@ -65,14 +66,22 @@ typedef void (^ENMLHTMLCompletionBlock)(NSString* html, NSError *error);
     [self convertENMLToHTML:enmlContent withInlinedResources:nil completionBlock:block];
 }
 
-
 - (void) convertENMLToHTML:(NSString*)enmlContent withInlinedResources:(NSArray*)resources completionBlock:(void(^)(NSString* html, NSError *error))block {
+    [self convertENMLToHTML:enmlContent withResources:resources inlineResources:YES completionBlock:block];
+}
+
+- (void) convertENMLToHTML:(NSString*)enmlContent withReferencedResources:(NSArray*)resources completionBlock:(void(^)(NSString* html, NSError *error))block {
+    [self convertENMLToHTML:enmlContent withResources:resources inlineResources:NO completionBlock:block];
+}
+
+- (void) convertENMLToHTML:(NSString*)enmlContent withResources:(NSArray*)resources inlineResources:(BOOL)shouldInline completionBlock:(void(^)(NSString* html, NSError *error))block {
     self.xmlParser = [[NSXMLParser alloc] initWithData:[enmlContent dataUsingEncoding:NSUTF8StringEncoding]];
     self.outputHTML = [NSMutableString string];
     self.htmlWriter = [[KSHTMLWriter alloc] initWithOutputWriter:self.outputHTML];
     [self.xmlParser setDelegate:self];
     self.resources = resources;
     self.completionBlock = block;
+    self.shouldInlineResources = shouldInline;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [self.xmlParser parse];
     });
@@ -175,10 +184,17 @@ typedef void (^ENMLHTMLCompletionBlock)(NSString* html, NSError *error);
     
     NSMutableDictionary *imageAttributes = [NSMutableDictionary dictionaryWithDictionary:attributes];
     NSString *mime = [resource mime];
-    NSString *resourceBodyBase64 = [[[resource data] body] base64EncodedStringWithOptions:0];
-    NSString* imgStr = [NSString stringWithFormat:@"data:%@;base64,%@",mime,resourceBodyBase64];
-
-    [imageAttributes setObject:imgStr
+    NSString *sourceStr = nil;
+    if (!self.shouldInlineResources) {
+        sourceStr = [[resource attributes] sourceURL];
+    }
+    // Inline resource either if asked for, if if there WAS no source URL.
+    if (!sourceStr) {
+        NSString *resourceBodyBase64 = [[[resource data] body] base64EncodedStringWithOptions:0];
+        sourceStr = [NSString stringWithFormat:@"data:%@;base64,%@",mime,resourceBodyBase64];
+    }
+    
+    [imageAttributes setObject:sourceStr
                         forKey:@"src"];
     if (mime == nil) {
         mime = ENMIMETypeOctetStream;
