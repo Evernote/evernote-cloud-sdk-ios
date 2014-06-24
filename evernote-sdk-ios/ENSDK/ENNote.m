@@ -330,12 +330,12 @@
     for (NSString * key in self.edamAttributes.allKeys) {
         id value = [self.edamAttributes valueForKey:key];
         @try {
-            [note setValue:value forKeyPath:key];
+            [note.attributes setValue:value forKey:key];
         }
         @catch (NSException *exception) {
-            ENSDKLogError(@"Unable to set value %@ for key %@", value, key);
+            ENSDKLogError(@"Unable to set value %@ for key %@ on EDAMNote.attributes", value, key);
             if ([[exception name] isEqualToString: NSUndefinedKeyException]) {
-                ENSDKLogError(@"Key %@ not found on EDAMNote", key);
+                ENSDKLogError(@"Key %@ not found on EDAMNote.attributes", key);
             }
         }
     }
