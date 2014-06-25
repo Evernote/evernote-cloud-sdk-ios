@@ -237,6 +237,10 @@
 		BE4BF766192C4B5200564DA3 /* NSString+URLEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = BE4BF763192C4B5200564DA3 /* NSString+URLEncoding.h */; };
 		BE4BF767192C4B5200564DA3 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4BF764192C4B5200564DA3 /* NSString+URLEncoding.m */; };
 		BE4BF768192C4B5200564DA3 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4BF764192C4B5200564DA3 /* NSString+URLEncoding.m */; };
+		BE4C731B195B859A001E5EF6 /* ENShareURLHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = BE4C7319195B859A001E5EF6 /* ENShareURLHelper.h */; };
+		BE4C731C195B859A001E5EF6 /* ENShareURLHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = BE4C7319195B859A001E5EF6 /* ENShareURLHelper.h */; };
+		BE4C731D195B859A001E5EF6 /* ENShareURLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4C731A195B859A001E5EF6 /* ENShareURLHelper.m */; };
+		BE4C731E195B859A001E5EF6 /* ENShareURLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4C731A195B859A001E5EF6 /* ENShareURLHelper.m */; };
 		BE7E5F3D1921808B00A4DA30 /* FATField.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F2E1921808B00A4DA30 /* FATField.h */; };
 		BE7E5F3E1921808B00A4DA30 /* FATField.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F2E1921808B00A4DA30 /* FATField.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		BE7E5F3F1921808B00A4DA30 /* FATField.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F2F1921808B00A4DA30 /* FATField.m */; };
@@ -490,6 +494,8 @@
 		BE4BF75E1925736300564DA3 /* ENNoteSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENNoteSearch.m; sourceTree = "<group>"; };
 		BE4BF763192C4B5200564DA3 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
 		BE4BF764192C4B5200564DA3 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
+		BE4C7319195B859A001E5EF6 /* ENShareURLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENShareURLHelper.h; sourceTree = "<group>"; };
+		BE4C731A195B859A001E5EF6 /* ENShareURLHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENShareURLHelper.m; sourceTree = "<group>"; };
 		BE7E5F2E1921808B00A4DA30 /* FATField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FATField.h; sourceTree = "<group>"; };
 		BE7E5F2F1921808B00A4DA30 /* FATField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FATField.m; sourceTree = "<group>"; };
 		BE7E5F301921808B00A4DA30 /* FATObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FATObject.h; sourceTree = "<group>"; };
@@ -822,6 +828,8 @@
 				BE48C70E1912FC1300025618 /* ENLoadingViewController.m */,
 				BE4BF763192C4B5200564DA3 /* NSString+URLEncoding.h */,
 				BE4BF764192C4B5200564DA3 /* NSString+URLEncoding.m */,
+				BE4C7319195B859A001E5EF6 /* ENShareURLHelper.h */,
+				BE4C731A195B859A001E5EF6 /* ENShareURLHelper.m */,
 			);
 			path = Private;
 			sourceTree = "<group>";
@@ -997,6 +1005,7 @@
 				BE2E246218EBA5D500BD7E6E /* EDAMLimits.h in Headers */,
 				BE2E24D918EBA5D500BD7E6E /* ENXMLSaxParser.h in Headers */,
 				BE2E24A818EBA5D500BD7E6E /* ENSSKeychain.h in Headers */,
+				BE4C731B195B859A001E5EF6 /* ENShareURLHelper.h in Headers */,
 				BE7E5F461921808B00A4DA30 /* TBinaryProtocol.h in Headers */,
 				86D49E40191DA4A8001C3581 /* RMSTextField.h in Headers */,
 				86CB761B18FF4554002F267E /* ENTheme.h in Headers */,
@@ -1085,6 +1094,7 @@
 				860DF40A18FCCE51002B4793 /* ENSDK.h in Headers */,
 				860DF40B18FCCE51002B4793 /* ENSession.h in Headers */,
 				860DF40D18FCCE51002B4793 /* ENNote.h in Headers */,
+				BE4C731C195B859A001E5EF6 /* ENShareURLHelper.h in Headers */,
 				860DF40F18FCCE51002B4793 /* ENNoteContent.h in Headers */,
 				860DF41118FCCE51002B4793 /* ENNotebook.h in Headers */,
 				860DF41318FCCE51002B4793 /* ENResource.h in Headers */,
@@ -1311,6 +1321,7 @@
 				BE2E24CC18EBA5D500BD7E6E /* ENLinkedNotebookRef.m in Sources */,
 				BE2E25DA18F4D6C300BD7E6E /* ENMLConstants.m in Sources */,
 				BE2E247818EBA5D500BD7E6E /* ENMLWriter.m in Sources */,
+				BE4C731D195B859A001E5EF6 /* ENShareURLHelper.m in Sources */,
 				BECDD2FD18F78072003736EE /* ENHTMLNoteContent.m in Sources */,
 				BE48C70B1911713300025618 /* ENWebArchive.m in Sources */,
 				BE2E248018EBA5D500BD7E6E /* NSString+EDAMAdditions.m in Sources */,
@@ -1395,6 +1406,7 @@
 				860DF43318FCD022002B4793 /* ENNote.m in Sources */,
 				860DF43518FCD022002B4793 /* ENNoteContent.m in Sources */,
 				BE48C70C1911713300025618 /* ENWebArchive.m in Sources */,
+				BE4C731E195B859A001E5EF6 /* ENShareURLHelper.m in Sources */,
 				860DF43718FCD022002B4793 /* ENNotebook.m in Sources */,
 				860DF43918FCD022002B4793 /* ENResource.m in Sources */,
 				BE48C70019102DD900025618 /* ENWebClipNoteBuilder.m in Sources */,

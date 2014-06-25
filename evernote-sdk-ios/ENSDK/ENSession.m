@@ -38,6 +38,7 @@
 #import "ENPreferencesStore.h"
 #import "NSDate+EDAMAdditions.h"
 #import "NSString+URLEncoding.h"
+#import "ENShareURLHelper.h"
 
 // Strings visible publicly.
 NSString * const ENSessionHostSandbox = @"sandbox.evernote.com";
@@ -976,7 +977,11 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     ENNoteStoreClient * noteStore = [self noteStoreForNoteRef:noteRef];
     [noteStore shareNoteWithGuid:noteRef.guid success:^(NSString * noteKey) {
         NSString * shardId = [self shardIdForNoteRef:noteRef];
-        NSString * shareUrl = [NSString stringWithFormat:@"http://%@/shard/%@/sh/%@/%@", self.sessionHost, shardId, noteRef.guid, noteKey];
+        NSString * shareUrl = [ENShareURLHelper shareURLStringForNoteGUID:noteRef.guid
+                                                                  shardId:shardId
+                                                                 shareKey:noteKey
+                                                              serviceHost:self.sessionHost
+                                                  encodedAdditionalString:nil];        
         if (completion) {
             completion(shareUrl, nil);
         }
