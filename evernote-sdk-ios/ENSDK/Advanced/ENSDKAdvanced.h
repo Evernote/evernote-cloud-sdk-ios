@@ -124,8 +124,8 @@
 @property (nonatomic, copy) NSString * sourceUrl;
 
 /**
- *  An optional dictionary of attributes which are used at upload time only to apply to an EDAMNote during
- *  its creation. The keys in the dictionary should be valid keypaths in an EDAMNote, e.g. "active", or "attributes.reminderTime";
+ *  An optional dictionary of attributes which are used at upload time only to apply to an EDAMNote's attributes during
+ *  its creation. The keys in the dictionary should be valid keys in an EDAMNoteAttributes, e.g. "author", or "sourceApplication";
  *  the values are the objects to apply. 
  *
  *  Note that downloaded notes do not populate this dictionary; if you need to inspect properties of an EDAMNote that aren't
