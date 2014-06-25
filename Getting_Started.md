@@ -231,6 +231,46 @@ This method will capture content from the DOM. Images in the page will be captur
 
 If your app doesn't already have your content into visible web views, you can always create an offscreen `UIWebView` and populate a note from it once loaded. When doing this, please bear in mind that the dimensions of the web view (even when offscreen) can affect the rendered contents. Also note that `UIWebView`'s delegate methods don't indicate when the whole page has "completely" loaded if your page includes linked (remote) resources. 
 
+### Downloading and displaying an existing note
+
+If you have an `ENNoteRef` object, either because you uploaded a note and kept the resulting note ref, or because you got one from a `findNotes..` operation (below), you can download the content of that note from the service like this (`progress` optionally sets a block that gets status updates during download):
+
+    [[ENSession sharedSession] downloadNote:noteRef progress:nil completion:^(ENNote * note, NSError * error) {
+		if (note) {
+			// success.
+		}
+	}];
+	
+But what can you do with a note? Well, you could change parts of the object, and reupload it to e.g. replace the existing note on the service. (See the documentation for `uploadNote...`). But you can also display it to the user. We've made this easy-- rather than serializing it to HTML and fussing with attached image resources, we've provided a method to generate a single Safari "web archive" from the note; this is a bundled data type which `UIWebView` natively knows how to load directly. Let's say you have a `UIWebView` ready to go, called `webView`:
+
+    [note generateWebArchiveData:^(NSData *data) {
+    	[webView loadData:data MIMEType:ENWebArchiveDataMIMEType textEncodingName:nil baseURL:nil];
+	}];
+
+This generates the web archive and hands it to the web view. (The generation is asynchronous, but is immediate.) Note that the provided constant `ENWebArchiveDataMIMEType` has the MIME type for this special kind of data.
+
+### Finding notes in Evernote
+
+The SDK provides a simplified search operation that can find notes available to the user. Use an `ENNoteSearch` to encapsulate a query. (There are a few basic search objects you can use, or create your own with anything valid in the [Evernote search grammar](https://dev.evernote.com/doc/articles/search_grammar.php)). For example, to search for the 20 most recent notes containing the word "redwood", you could use search like this:
+
+	[[ENSession sharedSession] findNotesWithSearch:[ENNoteSearch noteSearchWithSearchString:@"redwood"]
+										inNotebook:nil
+										   orScope:ENSessionSearchScopeDefault
+										 sortOrder:ENSessionSortOrderRecentlyCreated
+										maxResults:20
+										completion:^(NSArray * findNotesResults, NSError * findNotesError) {
+		if (findNotesResults) {
+			for (ENSessionFindNotesResult * result in findNotesResults) {
+				// Each ENSessionFindNotesResult has a noteRef along with other important metadata.
+				NSLog(@"Found note with title: %@", result.title);
+			}
+		}
+	}];
+
+If you specify a notebook, the search will be limited to that notebook. If you omit the notebook, you can specify different combinations of search scope (personal, business, shared notebooks, etc), but please be aware of performance considerations. 
+
+**Performance Warning** Doing a broadly scoped search, and/or specifying a very high number of max results against a user's account with significant content can result in slow responses and a poor user experience. If the number of results is unbounded, the client may run out of memory and be terminated if there are too many results! Business scope in particular can produce an unpredictable amount of results. Please consider your usage very carefully here. You can do paged searches, and have other low-level controls by [using the advanced API.](Working_with_the_Advanced_\(EDAM\)_API.md)
+
 ### What else can I do?
 
 Other things ENSession can do for you is enumerate all notebooks a user has access to, replace/update existing notes, search and download notes, and fetch thumbnails. You should be able to get started with what's in the headers, starting with `ENSession.h`.
