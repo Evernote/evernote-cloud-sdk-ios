@@ -217,6 +217,9 @@ NSString * ENOAuthAuthenticatorAuthInfoAppNotebookIsLinked = @"ENOAuthAuthentica
     if (self.supportsLinkedAppNotebook) {
         [authParameters setObject:@"true" forKey:@"supportLinkedSandbox"];
     }
+    if (self.preferRegistration) {
+        [authParameters setObject:@"true" forKey:@"preferRegistration"];
+    }
     NSString *queryString = [[self class] queryStringFromParameters:authParameters];
     return [NSString stringWithFormat:@"%@://%@/OAuth.action?%@", OAUTH_PROTOCOL_SCHEME, self.host, queryString];
 }

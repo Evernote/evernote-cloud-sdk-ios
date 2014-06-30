@@ -278,6 +278,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
 }
 
 - (void)authenticateWithViewController:(UIViewController *)viewController
+                    preferRegistration:(BOOL)preferRegistration
                             completion:(ENSessionAuthenticateCompletionHandler)completion
 {
     if (!completion) {
@@ -316,6 +317,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     self.authenticator.consumerSecret = ConsumerSecret;
     self.authenticator.host = self.sessionHost;
     self.authenticator.supportsLinkedAppNotebook = self.supportsLinkedAppNotebook;
+    self.authenticator.preferRegistration = preferRegistration;
     
     // If we're overriding the standard host, then we're in some sort of development environment
     // (sandbox), and the cross-app auth won't work. In this case, force the authenticator to use

@@ -135,7 +135,9 @@ NS_ENUM(NSInteger, SampleFunctions) {
                 [[ENSession sharedSession] unauthenticate];
                 [self update];
             } else {
-                [[ENSession sharedSession] authenticateWithViewController:self completion:^(NSError *authenticateError) {
+                [[ENSession sharedSession] authenticateWithViewController:self
+                                                       preferRegistration:YES
+                                                               completion:^(NSError *authenticateError) {
                     if (!authenticateError) {
                         [self update];
                     } else if (authenticateError.code != ENErrorCodeCancelled) {
