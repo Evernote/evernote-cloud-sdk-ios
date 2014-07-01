@@ -66,4 +66,10 @@
     // into the document.
     return self.emml;
 }
+
+- (NSString *)enml
+{
+    // This accessor chooses not to append any resource/media info to the end of the content.
+    return [self enmlWithResources:nil];
+}
 @end

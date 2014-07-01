@@ -152,6 +152,15 @@
  *  @return A note content object.
  */
 - (id)initWithENML:(NSString *)enml;
+
+/**
+ *  Return the content of the receiver in ENML format. For content created with ENML to begin with, this
+ *  will simply return that ENML. For content created with other input means, the content will be transformed
+ *  to ENML.
+ *
+ *  @return A note content object.
+ */
+- (NSString *)enml;
 @end
 
 @interface ENResource (Advanced)
