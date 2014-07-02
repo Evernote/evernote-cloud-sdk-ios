@@ -482,7 +482,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     }
     
     // Do we have a cached result that is unexpired?
-    if (self.notebooksCache && ([self.notebooksCacheDate timeIntervalSinceNow] * -1.0) < ENSessionNotebooksCacheValidity) {
+    if ([self.notebooksCache count] > 0 && ([self.notebooksCacheDate timeIntervalSinceNow] * -1.0) < ENSessionNotebooksCacheValidity) {
         completion(self.notebooksCache, nil);
         return;
     }
