@@ -136,7 +136,7 @@ NS_ENUM(NSInteger, SampleFunctions) {
                 [self update];
             } else {
                 [[ENSession sharedSession] authenticateWithViewController:self
-                                                       preferRegistration:YES
+                                                       preferRegistration:NO
                                                                completion:^(NSError *authenticateError) {
                     if (!authenticateError) {
                         [self update];
@@ -174,7 +174,7 @@ NS_ENUM(NSInteger, SampleFunctions) {
             self.webView = [[UIWebView alloc] initWithFrame:self.view.window.bounds];
             self.webView.delegate = self;
             [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-            [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.theatlantic.com/technology/print/2014/04/exploding-whales/361444/"]]];
+            [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://developer.apple.com/xcode/"]]];
             break;
         }
         case kSampleFunctionsViewAppNotesList:
