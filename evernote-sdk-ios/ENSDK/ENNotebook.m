@@ -47,6 +47,11 @@
     return [self initWithNotebook:nil linkedNotebook:linkedNotebook sharedNotebook:sharedNotebook];
 }
 
+- (id)initWithPublicNotebook:(EDAMNotebook *)publicNotebook forLinkedNotebook:(EDAMLinkedNotebook *)linkedNotebook
+{
+    return [self initWithNotebook:publicNotebook linkedNotebook:linkedNotebook sharedNotebook:nil];
+}
+
 - (id)initWithSharedNotebook:(EDAMSharedNotebook *)sharedNotebook forLinkedNotebook:(EDAMLinkedNotebook *)linkedNotebook withBusinessNotebook:(EDAMNotebook *)notebook
 {
     return [self initWithNotebook:notebook linkedNotebook:linkedNotebook sharedNotebook:sharedNotebook];
@@ -116,7 +121,7 @@
 
 - (NSString *)guid
 {
-    // Personal notebooks have a native guid, and if we've stashed a business-native notebook here, then we can look at that
+    // Personal notebooks have a native guid, and if we've stashed a public/business-native notebook here, then we can look at that
     // as well.
     if (self.notebook) {
         return self.notebook.guid;
@@ -134,11 +139,17 @@
     return self.linkedNotebook != nil;
 }
 
+- (BOOL)isPublic
+{
+    return [self isLinked] && self.linkedNotebook.sharedNotebookGlobalId == nil;
+}
+
 - (BOOL)isBusinessNotebook
 {
     // Business notebooks are the only ones that have a combination of a linked notebook and normal
     // notebook being set. In this case, the normal notebook represents the notebook inside the business.
-    return self.linkedNotebook != nil && self.notebook != nil;
+    // additionally, checking linked notebook record is actually pointing to a shared notebook record so it's not a public notebook
+    return self.notebook != nil && self.linkedNotebook != nil && self.linkedNotebook.sharedNotebookGlobalId != nil;
 }
 
 - (BOOL)isOwnedByUser
@@ -162,7 +173,7 @@
 {
     if (self.isDefaultNotebookOverride) {
         return YES;
-    } else if (self.notebook) {
+    } else if (self.notebook && [self isPublic] == NO) {
         return [self.notebook.defaultNotebook boolValue];
     }
     return NO;
@@ -173,6 +184,11 @@
     if (!self.linkedNotebook) {
         // All personal notebooks are readwrite.
         return YES;
+    }
+    
+    if ([self isPublic]) {
+        // All public notebooks are readonly.
+        return NO;
     }
     
     int privilege = [self.sharedNotebook.privilege intValue];

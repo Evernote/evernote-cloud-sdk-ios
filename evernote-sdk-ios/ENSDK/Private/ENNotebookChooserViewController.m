@@ -104,6 +104,7 @@
     }
     [cell setNotebook:notebook];
     [cell setIsCurrentNotebook:[notebook isEqual:self.currentNotebook]];
+    [cell setIsReadOnlyNotebook:![notebook allowsWriting]];
     
     return cell;
 }

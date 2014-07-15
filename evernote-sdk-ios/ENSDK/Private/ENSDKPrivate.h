@@ -50,6 +50,8 @@ extern NSString * const ENBootstrapProfileNameChina;
 - (id)initWithNotebook:(EDAMNotebook *)notebook;
 // For a non-business shared notebook
 - (id)initWithSharedNotebook:(EDAMSharedNotebook *)sharedNotebook forLinkedNotebook:(EDAMLinkedNotebook *)linkedNotebook;
+// For a publicly shared notebook
+- (id)initWithPublicNotebook:(EDAMNotebook *)publicNotebook forLinkedNotebook:(EDAMLinkedNotebook *)linkedNotebook;
 // For a business shared notebook
 - (id)initWithSharedNotebook:(EDAMSharedNotebook *)sharedNotebook forLinkedNotebook:(EDAMLinkedNotebook *)linkedNotebook withBusinessNotebook:(EDAMNotebook *)notebook;
 @end

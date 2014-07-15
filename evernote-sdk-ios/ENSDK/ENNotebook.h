@@ -57,6 +57,12 @@
 @property (nonatomic, readonly) BOOL isShared;
 
 /**
+ *  A flag indicating if this notebook is a publicly shared notebook. A public notebook does not need 
+ *  authentication to see the content, and joined users only have read permission
+ */
+@property (nonatomic, readonly) BOOL isPublic;
+
+/**
  *  A flag indicating whether this notebook exists in the user's business.
  */
 @property (nonatomic, readonly) BOOL isBusinessNotebook;

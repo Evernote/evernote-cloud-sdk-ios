@@ -45,7 +45,7 @@
     if (success) {
         [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Saved to Evernote!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
     } else {
-        [[[UIAlertView alloc] initWithTitle:@"Fail" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+        NSLog(@"Activity Error: %@", error);
     }
 }
 

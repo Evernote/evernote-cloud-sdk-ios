@@ -35,6 +35,7 @@
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
 
 @property (assign, nonatomic) BOOL isCurrentNotebook;
+@property (assign, nonatomic) BOOL isReadOnlyNotebook;
 @property (strong, nonatomic) ENNotebook *notebook;
 @property (strong, nonatomic) UIButton *checkButton;
 @property (strong, nonatomic) ENNotebookTypeView *notebookTypeView;

@@ -34,16 +34,13 @@
 #define COLOR_NOTEBOOK_SHARED_LABEL [UIColor colorWithRed:45.0/255 green:190.0/255 blue:96.0/255 alpha:1]
 #define COLOR_NOTEBOOK_BUSINESS_LABEL [UIColor colorWithRed:77.0/255 green:129.0/255 blue:140.0/255 alpha:1]
 #define kIconTintColor  [UIColor colorWithRed:0.44 green:0.44 blue:0.44 alpha:1]
+#define kReadOnlyTintColor [UIColor colorWithWhite:0.6 alpha:1.0]
 #define kCellInsetLeft  38.0
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
     if (self) {
-        [self.textLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:16.0]];
-        [self.textLabel setTextColor:[UIColor colorWithRed:25.0 / 255.0 green:25.0 / 255.0 blue:25.0 / 255.0 alpha:1.0]];
-        [self.detailTextLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:11.0]];
-        [self.detailTextLabel setTextColor:COLOR_NOTEBOOK_SHARED_LABEL];
         [self setSeparatorInset:UIEdgeInsetsMake(0.0, kCellInsetLeft, 0.0, 0.0)];
         self.checkButton = [[UIButton alloc] init];
         [self.contentView addSubview:self.checkButton];
@@ -53,6 +50,9 @@
         [self.checkButton setCenter:CGPointMake(0.6 * kCellInsetLeft, CGRectGetMidY(self.bounds) + 1.0)];
         [self.checkButton setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin];
         [self.checkButton setHidden:YES];
+        [self.textLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:16.0]];
+        [self.detailTextLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:11.0]];
+        [self configureTextLabelColor];
     }
     return self;
 }
@@ -91,6 +91,22 @@
     if (_isCurrentNotebook == isCurrentNotebook) return;
     _isCurrentNotebook = isCurrentNotebook;
     [self.checkButton setHidden:!_isCurrentNotebook];
+}
+
+- (void)setIsReadOnlyNotebook:(BOOL)isReadOnlyNotebook {
+    _isReadOnlyNotebook = isReadOnlyNotebook;
+    [self setUserInteractionEnabled:!_isReadOnlyNotebook];
+    if (_isReadOnlyNotebook) {
+        self.textLabel.textColor = kReadOnlyTintColor;
+        self.detailTextLabel.textColor = kReadOnlyTintColor;
+    } else {
+        [self configureTextLabelColor];
+    }
+}
+
+- (void)configureTextLabelColor {
+    [self.textLabel setTextColor:[UIColor colorWithRed:25.0 / 255.0 green:25.0 / 255.0 blue:25.0 / 255.0 alpha:1.0]];
+    [self.detailTextLabel setTextColor:COLOR_NOTEBOOK_SHARED_LABEL];
 }
 
 @end

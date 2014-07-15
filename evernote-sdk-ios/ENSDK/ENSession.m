@@ -642,14 +642,33 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     
     for (EDAMLinkedNotebook * linkedNotebook in context.linkedPersonalNotebooks) {
         ENNoteStoreClient * noteStore = [self noteStoreForLinkedNotebook:linkedNotebook];
-        [noteStore getSharedNotebookByAuthWithSuccess:^(EDAMSharedNotebook * sharedNotebook) {
-            // Add the shared notebook to the map.
-            [sharedNotebooks setObject:sharedNotebook forKey:linkedNotebook.guid];
-            [self listNotebooks_completePendingSharedNotebookWithContext:context];
-        } failure:^(NSError * error) {
-            context.error = error;
-            [self listNotebooks_completePendingSharedNotebookWithContext:context];
-        }];
+        if (linkedNotebook.sharedNotebookGlobalId == nil) {
+            // sharedNotebookGlobalId is nil means it's a public notebook
+            [self.userStore getPublicUserInfoWithUsername:linkedNotebook.username
+                                                  success:^(EDAMPublicUserInfo *info) {
+                                                      [noteStore getPublicNotebookWithUserID:[[info userId] intValue]
+                                                                                   publicUri:linkedNotebook.uri
+                                                                                     success:^(EDAMNotebook *sharedNotebook) {
+                                                                                         [sharedNotebooks setObject:sharedNotebook forKey:linkedNotebook.guid];
+                                                                                         [self listNotebooks_completePendingSharedNotebookWithContext:context];
+                                                                                     } failure:^(NSError *error) {
+                                                                                         context.error = error;
+                                                                                         [self listNotebooks_completePendingSharedNotebookWithContext:context];
+                                                                                     }];
+                                                  } failure:^(NSError *error) {
+                                                      context.error = error;
+                                                      [self listNotebooks_completePendingSharedNotebookWithContext:context];
+                                                  }];
+        } else {
+            [noteStore getSharedNotebookByAuthWithSuccess:^(EDAMSharedNotebook * sharedNotebook) {
+                // Add the shared notebook to the map.
+                [sharedNotebooks setObject:sharedNotebook forKey:linkedNotebook.guid];
+                [self listNotebooks_completePendingSharedNotebookWithContext:context];
+            } failure:^(NSError * error) {
+                context.error = error;
+                [self listNotebooks_completePendingSharedNotebookWithContext:context];
+            }];
+        }
     }
 }
 
@@ -671,8 +690,16 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     
     // Process the results
     for (EDAMLinkedNotebook * linkedNotebook in context.linkedPersonalNotebooks) {
-        EDAMSharedNotebook * sharedNotebook = [context.sharedNotebooks objectForKey:linkedNotebook.guid];
-        ENNotebook * result = [[ENNotebook alloc] initWithSharedNotebook:sharedNotebook forLinkedNotebook:linkedNotebook];
+        id sharedNotebook = [context.sharedNotebooks objectForKey:linkedNotebook.guid];
+        ENNotebook * result = nil;
+        if ([sharedNotebook isMemberOfClass:[EDAMSharedNotebook class]]) {
+            // shared notebook with individuals
+            result = [[ENNotebook alloc] initWithSharedNotebook:sharedNotebook forLinkedNotebook:linkedNotebook];
+        } else {
+            // public notebook
+            result = [[ENNotebook alloc] initWithPublicNotebook:sharedNotebook forLinkedNotebook:linkedNotebook];
+        }
+        result.isShared = YES;
         [context.resultNotebooks addObject:result];
     }
     
@@ -895,6 +922,12 @@ static NSString * DeveloperToken, * NoteStoreUrl;
         }
         // Take this notebook, and cache it.
         EDAMLinkedNotebook * linkedNotebook = linkedNotebooks[0];
+        if (linkedNotebook.sharedNotebookGlobalId == nil) {
+            // The notebook is a public notebook so it's read only. Fail the request with error.
+            NSError * error = [NSError errorWithDomain:ENErrorDomain code:ENErrorCodePermissionDenied userInfo:nil];
+            [self uploadNote_completeWithContext:context error:error];
+            return;
+        }
         [self.preferences encodeObject:linkedNotebook forKey:ENSessionPreferencesLinkedAppNotebook];
         
         // Go find the shared notebook that corresponds to this.
