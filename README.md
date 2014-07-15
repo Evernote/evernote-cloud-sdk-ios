@@ -1,5 +1,5 @@
-Evernote Cloud SDK 2.0 for iOS (beta)
-=====================================
+Evernote Cloud SDK 2.0 for iOS
+==============================
 
 What Is This?
 -------------
