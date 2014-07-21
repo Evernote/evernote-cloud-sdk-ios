@@ -72,6 +72,9 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
 {
+    if ([request.URL.scheme isEqualToString:@"file"] && [request.URL.pathExtension isEqualToString:@"pdf"]) {
+        return YES;
+    }
     // Don't allow user to navigate from here.
     return !self.doneLoading;
 }
