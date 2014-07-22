@@ -228,7 +228,6 @@ typedef void (^ENMLHTMLCompletionBlock)(NSString* html, NSError *error);
     
 - (void)writePDFLinkForResource:(EDAMResource *)resource
 {
-    NSLog(@"resource: %@",resource.attributes);
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error = 0;
     NSString *contentsPath = [NSTemporaryDirectory() stringByAppendingString:@"contents"];
@@ -238,8 +237,10 @@ typedef void (^ENMLHTMLCompletionBlock)(NSString* html, NSError *error);
     [fileManager createDirectoryAtPath:contentsPath withIntermediateDirectories:NO attributes:nil error:&error];
     
     NSString* path = [NSString stringWithFormat:@"%@/%@",contentsPath,resource.attributes.fileName];
+    
     [resource.data.body writeToFile:path atomically:NO];
-    [self.htmlWriter writeHTMLFormat:@"<a href=\"file:/%@\">%@</a>",path,resource.attributes.fileName];
+    
+    [self.htmlWriter writeHTMLFormat:@"<br/><center><a href=\"file:/%@\" class=\"btn\">PDF</a></center>",path];
 }
 
 - (void) writeTodoWithAttributes:(NSDictionary *)attributes
