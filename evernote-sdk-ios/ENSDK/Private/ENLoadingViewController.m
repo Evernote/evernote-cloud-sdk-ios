@@ -54,7 +54,9 @@
 {
     [super viewDidLoad];
     
-    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Cancel") style:UIBarButtonItemStylePlain target:self action:@selector(cancel:)];
+    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                target:self
+                                                                                action:@selector(cancel:)];
     self.navigationItem.rightBarButtonItem = cancelItem;
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self.activityIndicator setHidesWhenStopped:YES];
