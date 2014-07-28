@@ -167,6 +167,13 @@
             NSString * extension = [ENMIMEUtils fileExtensionForMIMEType:resource.mimeType];
             NSString * fakeUrl = [NSString stringWithFormat:@"http://example.com/%@.%@", dataHash, extension];
             edamResource.attributes.sourceURL = fakeUrl;
+        } else {
+            edamResource.attributes.sourceURL = (NSString*)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+                                                                                                                     kCFAllocatorDefault,
+                                                                                                                     (CFStringRef)edamResource.attributes.sourceURL,
+                                                                                                                     NULL,
+                                                                                                                     CFSTR(":/?#[]@!$&'()*+,;="),
+                                                                                                                     kCFStringEncodingUTF8));
         }
         [edamResources addObject:edamResource];
     }
