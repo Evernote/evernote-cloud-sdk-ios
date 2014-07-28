@@ -36,6 +36,7 @@
     NSString * path = [bundle pathForResource:name ofType:extension];
     if (!path) {
         ENSDKLogError(@"Failed to load resource from ENSDKResources.bundle. Is it included in your app?");
+        assert(path);
     }
     return path;
 }
