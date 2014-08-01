@@ -134,6 +134,21 @@
     return nil;
 }
 
+- (BOOL)isShared
+{
+    return [self isOwnShared] || [self isJoinedShared];
+}
+
+- (BOOL)isOwnShared
+{
+    return ![self isLinked] && [self.notebook.sharedNotebookIds count] > 0;
+}
+
+- (BOOL)isJoinedShared
+{
+    return [self isLinked];
+}
+
 - (BOOL)isLinked
 {
     return self.linkedNotebook != nil;
@@ -141,7 +156,16 @@
 
 - (BOOL)isPublic
 {
+    return [self isOwnPublic] || [self isJoinedPublic];
+}
+
+- (BOOL)isJoinedPublic
+{
     return [self isLinked] && self.linkedNotebook.sharedNotebookGlobalId == nil;
+}
+
+- (BOOL)isOwnPublic {
+    return ![self isLinked] && [self.notebook.publishing.uri length] > 0;
 }
 
 - (BOOL)isBusinessNotebook
@@ -173,7 +197,7 @@
 {
     if (self.isDefaultNotebookOverride) {
         return YES;
-    } else if (self.notebook && [self isPublic] == NO) {
+    } else if (self.notebook && [self isJoinedPublic] == NO) {
         return [self.notebook.defaultNotebook boolValue];
     }
     return NO;
@@ -186,7 +210,7 @@
         return YES;
     }
     
-    if ([self isPublic]) {
+    if ([self isJoinedPublic]) {
         // All public notebooks are readonly.
         return NO;
     }

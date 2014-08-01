@@ -49,18 +49,39 @@
 @property (nonatomic, readonly) BOOL allowsWriting;
 
 /**
- *  A flag indicating if this notebook is "shared." In this context, "shared" means
- *  that it is visible to more users than just the current one. Either it is a notebook that the current
- *  user created and shared, or one that was shared by someone else but joined by the current user.
- *  See -isOwnedByUser for ownership of a shared notebook.
+ *  A flag indicating if this notebook is shared. Being shared means it is visible to other users.
+ *  Either it is a notebook that the current user created and shared,
+ *  or one that was shared by someone else but joined by the current user.
  */
 @property (nonatomic, readonly) BOOL isShared;
 
 /**
- *  A flag indicating if this notebook is a publicly shared notebook. A public notebook does not need 
- *  authentication to see the content, and joined users only have read permission
+ *  A flag indicating if this notebook is the user's own shared notebook with others
+ */
+@property (nonatomic, readonly) BOOL isOwnShared;
+
+/**
+ *  A flag indicating if this notebook is the user's joined shared notebook from others
+ */
+@property (nonatomic, readonly) BOOL isJoinedShared;
+
+/**
+ *  A flag indicating if this notebook is public. Being public means it is visible to everyone.
+ *  Either it is a notebook that the current user created and shared publicly,
+ *  or one that was shared publicly by someone else but joined by the current user.
  */
 @property (nonatomic, readonly) BOOL isPublic;
+
+/**
+ *  A flag indicating if this notebook is the user's own public notebook
+ */
+@property (nonatomic, readonly) BOOL isOwnPublic;
+
+/**
+ *  A flag indicating if this notebook is the user's joined public notebook. A joined public notebook does 
+ *  not need authentication to see the content, and joined users only have read permission
+ */
+@property (nonatomic, readonly) BOOL isJoinedPublic;
 
 /**
  *  A flag indicating whether this notebook exists in the user's business.
