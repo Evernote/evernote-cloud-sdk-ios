@@ -1653,7 +1653,9 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     if ([notebook isBusinessNotebook]) {
         return [self businessNoteStore];
     } else if ([notebook isLinked]) {
-        return [ENLinkedNoteStoreClient noteStoreClientForLinkedNotebookRef:[ENLinkedNotebookRef linkedNotebookRefFromLinkedNotebook:notebook.linkedNotebook]];
+        ENLinkedNoteStoreClient *store = [ENLinkedNoteStoreClient noteStoreClientForLinkedNotebookRef:[ENLinkedNotebookRef linkedNotebookRefFromLinkedNotebook:notebook.linkedNotebook]];
+        store.delegate = self;
+        return store;
     } else {
         return [self primaryNoteStore];
     }
