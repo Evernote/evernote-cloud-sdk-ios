@@ -173,6 +173,9 @@ typedef void (^ENMLHTMLCompletionBlock)(NSString* html, NSError *error);
         [self writeImageTagForResource:resource
                         withAttributes:scrubbedAttributes];
     }
+    else if ([mime hasPrefix:@"application/pdf"] == YES) {
+        [self writePDFLinkForResource:resource];
+    }
     else {
         // Ignoring all other resource types
     }
@@ -221,6 +224,23 @@ typedef void (^ENMLHTMLCompletionBlock)(NSString* html, NSError *error);
     
     [self.htmlWriter startElement:@"img" attributes:imageAttributes];
     [self.htmlWriter endElement];
+}
+    
+- (void)writePDFLinkForResource:(EDAMResource *)resource
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error = 0;
+    NSString *contentsPath = [NSTemporaryDirectory() stringByAppendingString:@"contents"];
+    if ([fileManager fileExistsAtPath:contentsPath]) {
+        [fileManager removeItemAtPath:contentsPath error:&error];
+    }
+    [fileManager createDirectoryAtPath:contentsPath withIntermediateDirectories:NO attributes:nil error:&error];
+    
+    NSString* path = [NSString stringWithFormat:@"%@/%@",contentsPath,resource.attributes.fileName];
+    
+    [resource.data.body writeToFile:path atomically:NO];
+    
+    [self.htmlWriter writeHTMLFormat:@"<br/><center><a href=\"file:/%@\" class=\"btn\">PDF</a></center>",path];
 }
 
 - (void) writeTodoWithAttributes:(NSDictionary *)attributes
