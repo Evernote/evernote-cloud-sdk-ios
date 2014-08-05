@@ -68,10 +68,23 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     self.doneLoading = YES;
+    
+    //Make CSS Button for file link
+    NSString *css = @"a.btn{-webkit-border-radius: 50;    -moz-border-radius: 50;    border-radius: 50px;    font-family: Arial;color: #007bff;    font-size: 24px;background: #ffffff;padding: 10px 60px 10px 60px;border: solid #007bff 6px;    text-decoration: none;}";
+    NSMutableString *javascript = [NSMutableString string];
+    [javascript appendString:@"var style = document.createElement('style');"];
+    [javascript appendString:@"style.type = 'text/css';"];
+    [javascript appendFormat:@"var cssContent = document.createTextNode('%@');", css];
+    [javascript appendString:@"style.appendChild(cssContent);"];
+    [javascript appendString:@"document.body.appendChild(style);"];
+    [webView stringByEvaluatingJavaScriptFromString:javascript];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
 {
+    if ([request.URL.scheme isEqualToString:@"file"] && [request.URL.pathExtension isEqualToString:@"pdf"]) {
+        return YES;
+    }
     // Don't allow user to navigate from here.
     return !self.doneLoading;
 }
