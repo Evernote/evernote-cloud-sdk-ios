@@ -75,8 +75,10 @@
 {
     [super viewDidLoad];
     
-    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringFromTable(@"Cancel", @"EvernoteSDK", nil) style:UIBarButtonItemStylePlain target:self action:@selector(cancel:)];
-    
+    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                target:self
+                                                                                action:@selector(cancel:)];
+        
     self.navigationItem.rightBarButtonItem = cancelItem;
     
     // adding an activity indicator
