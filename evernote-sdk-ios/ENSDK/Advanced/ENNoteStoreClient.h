@@ -1002,4 +1002,10 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                               recipientSettings: (EDAMSharedNotebookRecipientSettings *) recipientSettings
                                                         success:(void(^)(int32_t usn))success
                                                         failure:(void(^)(NSError *error))failure;
+
+/**
+ *  Cancel the first operation on the note store queue
+ */
+- (void) cancelFirstOperation;
+
 @end

@@ -851,6 +851,10 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
     } success:success failure:failure];
 }
 
+- (void) cancelFirstOperation {
+    [[self client] cancel];
+}
+
 #pragma mark - Protected routines
 
 - (void)findNotesMetadataWithFilter:(EDAMNoteFilter *)filter
