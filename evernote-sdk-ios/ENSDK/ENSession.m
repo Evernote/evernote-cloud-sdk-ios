@@ -1281,7 +1281,13 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     [context.linkedNotebooksToSearch removeObjectAtIndex:0];
     
     ENNoteStoreClient * noteStore = [self noteStoreForLinkedNotebook:notebook.linkedNotebook];
-    [noteStore findNotesMetadataWithFilter:context.noteFilter
+    EDAMNoteFilter * noteFilter = [context.noteFilter copy];
+    if ([notebook isJoinedPublic]) {
+        // https://dev.evernote.com/doc/reference/NoteStore.html#Fn_NoteStore_findNotesMetadata
+        // to search joined public notebook, the auth token can be nil, but notebookGuid must be set
+        noteFilter.notebookGuid = notebook.guid;
+    }
+    [noteStore findNotesMetadataWithFilter:noteFilter
                                 maxResults:context.maxResults
                                 resultSpec:context.resultSpec
                                    success:^(NSArray *notesMetadataList) {
@@ -1750,6 +1756,11 @@ static NSString * DeveloperToken, * NoteStoreUrl;
 - (NSString *)authenticationTokenForLinkedNotebookRef:(ENLinkedNotebookRef *)linkedNotebookRef
 {
     NSAssert(![NSThread isMainThread], @"Cannot authenticate to linked notebook on main thread");
+    
+    // use nil token for joined public notebook
+    if (linkedNotebookRef.sharedNotebookGlobalId == nil) {
+        return nil;
+    }
     
     // See if we have auth data already for this notebook.
     EDAMAuthenticationResult * auth = [self.authCache authenticationResultForLinkedNotebookGuid:linkedNotebookRef.guid];
