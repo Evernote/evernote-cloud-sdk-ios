@@ -51,6 +51,7 @@ CGFloat kTextLeftPadding = 20;
 @property (nonatomic, strong) ENNotebookPickerView *notebookPickerView;
 @property (nonatomic, strong) ENNotebookPickerButton * notebookPickerButton;
 @property (nonatomic, strong) RMSTokenView * tagsView;
+@property (nonatomic, strong) UIWebView * noteView;
 
 @property (nonatomic, strong) NSArray * notebookList;
 @property (nonatomic, strong) ENNotebook * currentNotebook;
@@ -97,11 +98,16 @@ CGFloat kTextLeftPadding = 20;
     [divider3 setBackgroundColor:[ENTheme defaultSeparatorColor]];
     [self.view addSubview:divider3];
     
-    NSString *format = [NSString stringWithFormat:@"V:[titleField(%f)][divider1(%f)][tagsView(>=%f)][notebookView(%f)][divider3(%f)]", kTitleViewHeight, OnePxHeight(), kTagsViewHeight, kNotebookViewHeight, OnePxHeight()];
+    UIWebView *noteView = [[UIWebView alloc] initWithFrame:CGRectZero];
+    noteView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:noteView];
+    self.noteView = noteView;
+    
+    NSString *format = [NSString stringWithFormat:@"V:|[titleField(%f)][divider1(%f)][tagsView(>=%f)][notebookView(%f)][divider3(%f)][noteView]|", kTitleViewHeight, OnePxHeight(), kTagsViewHeight, kNotebookViewHeight, OnePxHeight()];
     [self.view addConstraints: [NSLayoutConstraint constraintsWithVisualFormat:format
                                                                        options:NSLayoutFormatAlignAllLeft | NSLayoutFormatAlignAllRight
                                                                        metrics:nil
-                                                                         views:NSDictionaryOfVariableBindings(titleField, divider1, tagsView, notebookView, divider3)]];
+                                                                         views:NSDictionaryOfVariableBindings(titleField, divider1, tagsView, notebookView, divider3, noteView)]];
     [self.view addConstraints: [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[titleField]|"
                                                                        options:0
                                                                        metrics:nil
@@ -139,6 +145,14 @@ CGFloat kTextLeftPadding = 20;
             }
         }
         self.saveButtonItem.enabled = YES;
+    }];
+    
+    ENNote * note = [self.delegate noteForViewController:self];
+    [note generateWebArchiveData:^(NSData *data) {
+        [self.noteView loadData:data
+                      MIMEType:ENWebArchiveDataMIMEType
+              textEncodingName:nil
+                       baseURL:nil];
     }];
 }
 
