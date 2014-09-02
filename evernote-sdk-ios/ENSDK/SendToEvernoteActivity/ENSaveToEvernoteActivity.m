@@ -92,6 +92,8 @@
             [images addObject:item];
         } else if ([item isKindOfClass:[ENResource class]]) {
             [resources addObject:item];
+        } else if ([item isKindOfClass:[NSURL class]]) {
+            [strings addObject:[(NSURL *)item absoluteString]];
         }
     }
     
