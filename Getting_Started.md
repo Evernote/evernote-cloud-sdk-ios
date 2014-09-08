@@ -208,7 +208,7 @@ We saw at the beginning in "Hello World!" how you'd create a new, plaintext note
 	note.content = [ENNoteContent noteContentWithString:@"Check out this awesome picture!"];
 	note.title = @"My Image Note";
 	ENResource * resource = [[ENResource alloc] initWithImage:myImage]; // myImage is a UIImage object.
-	[note addResource:resource]
+	[note addResource:resource];
 	[[ENSession sharedSession] uploadNote:note notebook:nil completion:^(ENNoteRef * noteRef, NSError * uploadNoteError) {
 		// same as above...
 	}];
