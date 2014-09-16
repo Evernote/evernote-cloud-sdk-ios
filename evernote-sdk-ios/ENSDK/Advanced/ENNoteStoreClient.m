@@ -350,7 +350,7 @@
 }
 
 #pragma mark - NoteStore notes methods
-- (void)findRealtedWithQuery:(EDAMRelatedQuery *)query
+- (void)findRelatedWithQuery:(EDAMRelatedQuery *)query
                   resultSpec:(EDAMRelatedResultSpec *)resultSpec
                      success:(void(^)(EDAMRelatedResult *result))success
                      failure:(void(^)(NSError *error))failure

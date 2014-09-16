@@ -323,7 +323,7 @@ typedef void (^ENNoteStoreClientProgressHandler)(CGFloat progress);
  @param success Success completion block.
  @param failure Failure completion block.
  */
-- (void)findRealtedWithQuery:(EDAMRelatedQuery *)query
+- (void)findRelatedWithQuery:(EDAMRelatedQuery *)query
                   resultSpec:(EDAMRelatedResultSpec *)resultSpec
                      success:(void(^)(EDAMRelatedResult *result))success
                      failure:(void(^)(NSError *error))failure;
