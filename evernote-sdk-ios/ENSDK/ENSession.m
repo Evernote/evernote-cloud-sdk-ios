@@ -1180,7 +1180,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
         skipPersonalScope = YES;
     }
 
-    // If we're skipping personal scope, proceed directly to busines scope.
+    // If we're skipping personal scope, proceed directly to business scope.
     if (skipPersonalScope) {
         [self findNotes_findInBusinessScopeWithContext:context];
         return;
