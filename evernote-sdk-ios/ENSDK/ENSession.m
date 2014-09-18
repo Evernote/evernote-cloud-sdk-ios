@@ -597,14 +597,6 @@ static NSString * DeveloperToken, * NoteStoreUrl;
             // This linked notebook corresponds to a business notebook.
             EDAMNotebook * businessNotebook = [context.businessNotebooks objectForKey:sharedNotebook.notebookGuid];
             ENNotebook * result = [[ENNotebook alloc] initWithSharedNotebook:sharedNotebook forLinkedNotebook:linkedNotebook withBusinessNotebook:businessNotebook];
-
-            // Figure out if the business notebook is "shared". There are three cases here, all of which mean "shared": (1) I explicitly shared to individuals,
-            // (2) I shared with the whole business and (3) I joined someone else's shared business notebook. The first (and third) are indicated by more than
-            // one shared notebook record for this notebook GUID. The second one (if not covered by the first) is indicated by the presence of a business notebook
-            // on the notebook.
-            if ([context.sharedBusinessNotebookGuids countForObject:sharedNotebook.notebookGuid] > 1 ||
-                businessNotebook.businessNotebook != nil) {
-            }
             
             [context.resultNotebooks addObject:result];
             [context.linkedPersonalNotebooks removeObjectIdenticalTo:linkedNotebook]; // OK since we're enumerating a copy.
