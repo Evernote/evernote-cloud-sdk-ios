@@ -38,5 +38,6 @@
 +(UIColor*)defaultSeparatorColor;
 BOOL IsIPad();
 CGFloat OnePxHeight();
+BOOL IsIOS8();
 
 @end

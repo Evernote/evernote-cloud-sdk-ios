@@ -58,4 +58,12 @@ CGFloat OnePxHeight() {
     return 1.0/[UIScreen mainScreen].scale;
 }
 
+BOOL IsIOS8() {
+    if([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
+        return YES;
+    }else {
+        return NO;
+    }
+}
+
 @end

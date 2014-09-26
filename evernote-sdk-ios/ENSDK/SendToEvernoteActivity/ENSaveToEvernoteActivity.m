@@ -29,6 +29,7 @@
 #import "ENSaveToEvernoteActivity.h"
 #import "ENSaveToEvernoteViewController.h"
 #import "ENSDK.h"
+#import "ENTheme.h"
 
 @interface ENSaveToEvernoteActivity () <ENSendToEvernoteViewControllerDelegate>
 @property (nonatomic, strong) ENNote * preparedNote;
@@ -53,7 +54,11 @@
 
 - (UIImage *)activityImage
 {
-    return [UIImage imageNamed:@"ENSDKResources.bundle/ENActivityIcon"];
+    if (IsIOS8()) {
+        return [UIImage imageNamed:@"ENSDKResources.bundle/ENActivityIcon-color"];
+    } else {
+        return [UIImage imageNamed:@"ENSDKResources.bundle/ENActivityIcon"];
+    }
 }
 
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems
