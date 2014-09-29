@@ -35,8 +35,9 @@
     ENSaveToEvernoteActivity * sendActivity = [[ENSaveToEvernoteActivity alloc] init];
     sendActivity.delegate = self;
     NSArray * items = [NSArray arrayWithObject:(self.textView.text)];
+    BOOL isIOS8AndEvernoteInstalled = IsIOS8() && IsEvernoteInstalled();
     UIActivityViewController * activityController = [[UIActivityViewController alloc] initWithActivityItems:items
-                                                                                      applicationActivities:@[sendActivity]];
+                                                                                      applicationActivities:(isIOS8AndEvernoteInstalled? nil : @[sendActivity])];
     [self presentViewController:activityController animated:YES completion:nil];
 }
 

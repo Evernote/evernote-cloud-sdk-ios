@@ -91,6 +91,10 @@
 		86CB761B18FF4554002F267E /* ENTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 86CB761918FF4554002F267E /* ENTheme.h */; };
 		86CB761D18FF4554002F267E /* ENTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CB761A18FF4554002F267E /* ENTheme.m */; };
 		86CB761E18FF4554002F267E /* ENTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CB761A18FF4554002F267E /* ENTheme.m */; };
+		86CD513819D9DAD600DCC747 /* ENCommonUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 86CD513619D9DAD600DCC747 /* ENCommonUtils.h */; };
+		86CD513919D9DAD600DCC747 /* ENCommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CD513719D9DAD600DCC747 /* ENCommonUtils.m */; };
+		86CD513A19D9DBDF00DCC747 /* ENCommonUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 86CD513619D9DAD600DCC747 /* ENCommonUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		86CD513B19D9DBDF00DCC747 /* ENCommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CD513719D9DAD600DCC747 /* ENCommonUtils.m */; };
 		86D49E40191DA4A8001C3581 /* RMSTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 86D49E39191DA4A8001C3581 /* RMSTextField.h */; };
 		86D49E41191DA4A8001C3581 /* RMSTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 86D49E39191DA4A8001C3581 /* RMSTextField.h */; };
 		86D49E42191DA4A8001C3581 /* RMSTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 86D49E3A191DA4A8001C3581 /* RMSTextField.m */; };
@@ -353,6 +357,8 @@
 		86CB761318FF33D4002F267E /* ENSaveToEvernoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENSaveToEvernoteViewController.m; sourceTree = "<group>"; };
 		86CB761918FF4554002F267E /* ENTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENTheme.h; sourceTree = "<group>"; };
 		86CB761A18FF4554002F267E /* ENTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENTheme.m; sourceTree = "<group>"; };
+		86CD513619D9DAD600DCC747 /* ENCommonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENCommonUtils.h; sourceTree = "<group>"; };
+		86CD513719D9DAD600DCC747 /* ENCommonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENCommonUtils.m; sourceTree = "<group>"; };
 		86D49E38191DA4A8001C3581 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		86D49E39191DA4A8001C3581 /* RMSTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSTextField.h; sourceTree = "<group>"; };
 		86D49E3A191DA4A8001C3581 /* RMSTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSTextField.m; sourceTree = "<group>"; };
@@ -671,6 +677,8 @@
 			isa = PBXGroup;
 			children = (
 				BE2E23F418EBA5D500BD7E6E /* ENSDK.h */,
+				86CD513619D9DAD600DCC747 /* ENCommonUtils.h */,
+				86CD513719D9DAD600DCC747 /* ENCommonUtils.m */,
 				BE2E23F618EBA5D500BD7E6E /* ENSession.h */,
 				BE2E23F718EBA5D500BD7E6E /* ENSession.m */,
 				BE2E23EC18EBA5D500BD7E6E /* ENNote.h */,
@@ -1027,6 +1035,7 @@
 				BE2E246618EBA5D500BD7E6E /* EDAMTypes.h in Headers */,
 				BE2E248A18EBA5D500BD7E6E /* ENNote.h in Headers */,
 				BE48C7091911713300025618 /* ENWebArchive.h in Headers */,
+				86CD513819D9DAD600DCC747 /* ENCommonUtils.h in Headers */,
 				BE4BF765192C4B5200564DA3 /* NSString+URLEncoding.h in Headers */,
 				BE2E24A618EBA5D500BD7E6E /* NSString+XMLAdditions.h in Headers */,
 				BE2E248818EBA5D500BD7E6E /* ENError.h in Headers */,
@@ -1125,6 +1134,7 @@
 				BECDD3581908DE29003736EE /* EDAMUserStore.h in Headers */,
 				BECDD3591908DE29003736EE /* ENMLConstants.h in Headers */,
 				BECDD35A1908DE2A003736EE /* ENMLUtility.h in Headers */,
+				86CD513A19D9DBDF00DCC747 /* ENCommonUtils.h in Headers */,
 				BECDD35B1908DE2A003736EE /* ENEncryptedContentInfo.h in Headers */,
 				BE4BF766192C4B5200564DA3 /* NSString+URLEncoding.h in Headers */,
 				BECDD35C1908DE2A003736EE /* ENMIMEUtils.h in Headers */,
@@ -1335,6 +1345,7 @@
 				BE2E249518EBA5D500BD7E6E /* ENSession.m in Sources */,
 				86D49E4A191DA4A8001C3581 /* RMSTokenView.m in Sources */,
 				BE2E25DD18F4DCE600BD7E6E /* ENSDKPrivate.m in Sources */,
+				86CD513919D9DAD600DCC747 /* ENCommonUtils.m in Sources */,
 				BE2E248318EBA5D500BD7E6E /* NSData+EvernoteSDK.m in Sources */,
 				BE7E5F481921808B00A4DA30 /* TBinaryProtocol.m in Sources */,
 				BE2E24D018EBA5D500BD7E6E /* ENNotebookChooserViewController.m in Sources */,
@@ -1420,6 +1431,7 @@
 				86D49E4B191DA4A8001C3581 /* RMSTokenView.m in Sources */,
 				860DF44818FCD022002B4793 /* EDAMLimits.m in Sources */,
 				860DF44A18FCD022002B4793 /* EDAMNoteStore.m in Sources */,
+				86CD513B19D9DBDF00DCC747 /* ENCommonUtils.m in Sources */,
 				860DF44C18FCD022002B4793 /* EDAMTypes.m in Sources */,
 				860DF44E18FCD022002B4793 /* EDAMUserStore.m in Sources */,
 				BE7E5F491921808B00A4DA30 /* TBinaryProtocol.m in Sources */,

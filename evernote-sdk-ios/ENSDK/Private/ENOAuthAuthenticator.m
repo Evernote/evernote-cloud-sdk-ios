@@ -396,7 +396,7 @@ NSString * ENOAuthAuthenticatorAuthInfoAppNotebookIsLinked = @"ENOAuthAuthentica
         // This minimizes the chance that the user will have to enter his or
         // her credentials in order to authorize the application.
         UIDevice *device = [UIDevice currentDevice];
-        if([self isEvernoteInstalled] == NO) {
+        if(IsEvernoteInstalled() == NO) {
             self.isMultitaskLoginDisabled = YES;
         }
         // This is an override intented for testing/sandbox environments. 
@@ -700,11 +700,6 @@ NSString * ENOAuthAuthenticatorAuthInfoAppNotebookIsLinked = @"ENOAuthAuthentica
                                                                   code:ENErrorCodeConnectionFailed
                                                               userInfo:nil]];
     };
-}
-
-- (BOOL)isEvernoteInstalled
-{
-    return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"en://"]];
 }
 
 - (void)loadingViewControllerDidCancel:(ENLoadingViewController *)viewController
