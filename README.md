@@ -44,3 +44,7 @@ Yes. Please specify preferRegistration parameter as YES when calling
                             completion:(ENSessionAuthenticateCompletionHandler)completion;
 ```
 on [ENSession sharedSession]
+
+### How can I avoid showing the customized Evernote share sheet and Evernote iOS 8 share extension at the same time? They look duplicated to users.
+
+You can do the same thing as our sample app does. If on iOS 8 and Evernote app is installed, do not show the customized share sheet provided by the SDK. Check out the code from [here](https://github.com/evernote/evernote-cloud-sdk-ios/blob/master/EvernoteSDKSample/SaveActivityViewController.m#L38-L41).
