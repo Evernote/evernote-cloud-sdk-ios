@@ -38,6 +38,9 @@
     BOOL isIOS8AndEvernoteInstalled = IsIOS8() && IsEvernoteInstalled();
     UIActivityViewController * activityController = [[UIActivityViewController alloc] initWithActivityItems:items
                                                                                       applicationActivities:(isIOS8AndEvernoteInstalled? nil : @[sendActivity])];
+    if ([activityController respondsToSelector:@selector(popoverPresentationController)]) {
+        activityController.popoverPresentationController.barButtonItem = sender;
+    }
     [self presentViewController:activityController animated:YES completion:nil];
 }
 
