@@ -646,6 +646,11 @@ static NSString * DeveloperToken, * NoteStoreUrl;
                 [sharedNotebooks setObject:sharedNotebook forKey:linkedNotebook.guid];
                 [self listNotebooks_completePendingSharedNotebookWithContext:context];
             } failure:^(NSError * error) {
+                // failed to get the sharedNotebook from the service
+                // the shared notebook could be deleted from the owner
+                // we remove the linked notebook record from the context so it won't be listed in the result
+                ENSDKLogError(@"Failed to get shared notebook for linked notebook record %@", linkedNotebook);
+                [context.linkedPersonalNotebooks removeObject:linkedNotebook];
                 context.error = error;
                 [self listNotebooks_completePendingSharedNotebookWithContext:context];
             }];
@@ -662,13 +667,6 @@ static NSString * DeveloperToken, * NoteStoreUrl;
 
 - (void)listNotebooks_processSharedNotebooksWithContext:(ENSessionListNotebooksContext *)context
 {
-    if (context.error) {
-        // One of the calls failed. Currently we treat this as a hard error, and fail the entire call.
-        ENSDKLogError(@"Error from getSharedNotebookByAuth against a personal linked notebook: %@", context.error);
-        [self listNotebooks_completeWithContext:context error:context.error];
-        return;
-    }
-    
     // Process the results
     for (EDAMLinkedNotebook * linkedNotebook in context.linkedPersonalNotebooks) {
         id sharedNotebook = [context.sharedNotebooks objectForKey:linkedNotebook.guid];
