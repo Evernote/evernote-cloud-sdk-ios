@@ -53,6 +53,7 @@ static NSString * ENSessionPreferencesFilename = @"com.evernote.evernote-sdk-ios
 static NSString * ENSessionPreferencesCredentialStore = @"CredentialStore";
 static NSString * ENSessionPreferencesCurrentProfileName = @"CurrentProfileName";
 static NSString * ENSessionPreferencesUser = @"User";
+static NSString * ENSessionPreferencesBusinessUser = @"BusinessUser";
 static NSString * ENSessionPreferencesAppNotebookIsLinked = @"AppNotebookIsLinked";
 static NSString * ENSessionPreferencesLinkedAppNotebook = @"LinkedAppNotebook";
 static NSString * ENSessionPreferencesSharedAppNotebook = @"SharedAppNotebook";
@@ -114,12 +115,12 @@ static NSUInteger ENSessionNotebooksCacheValidity = (5 * 60);   // 5 minutes
 @property (nonatomic, copy) NSString * sessionHost;
 @property (nonatomic, assign) BOOL isAuthenticated;
 @property (nonatomic, strong) EDAMUser * user;
+@property (nonatomic, strong) EDAMUser * businessUser;
 @property (nonatomic, strong) ENPreferencesStore * preferences;
 @property (nonatomic, strong) NSString * primaryAuthenticationToken;
 @property (nonatomic, strong) ENUserStoreClient * userStore;
 @property (nonatomic, strong) ENNoteStoreClient * primaryNoteStore;
 @property (nonatomic, strong) ENNoteStoreClient * businessNoteStore;
-@property (nonatomic, strong) NSString * businessShardId;
 @property (nonatomic, strong) ENAuthCache * authCache;
 @property (nonatomic, strong) NSArray * notebooksCache;
 @property (nonatomic, strong) NSDate * notebooksCacheDate;
@@ -243,10 +244,9 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     self.isAuthenticated = YES;
     self.primaryAuthenticationToken = credentials.authenticationToken;
     
-    // We appear to have valid personal credentials, so populate the user object from cache,
-    // and pull up business credentials. Refresh the business credentials if necessary, and the user
-    // object always.
+    // We appear to have valid personal credentials, so populate the user object from cache
     self.user = [self.preferences decodedObjectForKey:ENSessionPreferencesUser];
+    self.businessUser = [self.preferences decodedObjectForKey:ENSessionPreferencesBusinessUser];
     
     [self performPostAuthentication];
 }
@@ -340,6 +340,14 @@ static NSString * DeveloperToken, * NoteStoreUrl;
         self.user = user;
         [self.preferences encodeObject:user forKey:ENSessionPreferencesUser];
         [self completeAuthenticationWithError:nil];
+        
+        // refresh the notebook cache
+        [self listNotebooksWithCompletion:^(NSArray *notebooks, NSError *listNotebooksError) {
+            if (listNotebooksError) {
+                ENSDKLogError(@"Error when listing notebooks: %@", listNotebooksError);
+            }
+            ENSDKLogInfo(@"Notebooks: %@", notebooks);
+        }];
     } failure:^(NSError * getUserError) {
         ENSDKLogError(@"Failed to get user info for user: %@", getUserError);
         [self completeAuthenticationWithError:(failuresAreFatal ? getUserError : nil)];
@@ -1566,6 +1574,8 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     if (!auth) {
         auth = [self.userStore authenticateToBusiness];
         [self.authCache setAuthenticationResultForBusiness:auth];
+        self.businessUser = auth.user;
+        [self.preferences encodeObject:self.businessUser forKey:ENSessionPreferencesBusinessUser];
     }
     return auth;
 }
@@ -1661,7 +1671,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     if (noteRef.type == ENNoteRefTypePersonal) {
         return self.user.shardId;
     } else if (noteRef.type == ENNoteRefTypeBusiness) {
-        return self.businessShardId;
+        return self.businessUser.shardId;
     } else if (noteRef.type == ENNoteRefTypeShared) {
         return noteRef.linkedNotebook.shardId;
     }
