@@ -182,7 +182,7 @@ When the session starts up, if it's not already authenticated, you'll need to au
 A typical place to do this would be a "link to Evernote" button action.
 
     ENSession *session = [ENSession sharedSession];
-    [session authenticateWithViewController:self completion:^(NSError *error) {
+    [session authenticateWithViewController:self preferRegistration:NO completion:^(NSError *error) {
         if (error) {
             // authentication failed 
             // show an alert, etc
