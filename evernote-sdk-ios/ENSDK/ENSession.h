@@ -270,6 +270,14 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
 - (void)listNotebooksWithCompletion:(ENSessionListNotebooksCompletionHandler)completion;
 
 /**
+ *  Compile a list of all notebooks a user has write access to, including personal, shared, and business
+ *  notebooks as applicable.
+ *
+ *  @param completion A block to receive the results (a list of ENNotebook objects) or error.
+ */
+- (void)listWritableNotebooksWithCompletion:(ENSessionListNotebooksCompletionHandler)completion;
+
+/**
  *  Create a new note in Evernote by uploading a note object. 
  *  This is a simple convenience wrapper around -uploadNote:policy:toNotebook:orReplaceNote:progress:completion:
  *  which you can use for more options.

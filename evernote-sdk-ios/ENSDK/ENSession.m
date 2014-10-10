@@ -503,6 +503,19 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     [self listNotebooks_listNotebooksWithContext:context];
 }
 
+- (void)listWritableNotebooksWithCompletion:(ENSessionListNotebooksCompletionHandler)completion
+{
+    [self listNotebooksWithCompletion:^(NSArray *notebooks, NSError *listNotebooksError) {
+        NSMutableArray *writableNotebooks = [NSMutableArray array];
+        for (ENNotebook *notebook in notebooks) {
+            if ([notebook allowsWriting]) {
+                [writableNotebooks addObject:notebook];
+            }
+        }
+        completion(writableNotebooks, listNotebooksError);
+    }];
+}
+
 - (void)listNotebooks_listNotebooksWithContext:(ENSessionListNotebooksContext *)context
 {
     [self.primaryNoteStore listNotebooksWithSuccess:^(NSArray * notebooks) {
