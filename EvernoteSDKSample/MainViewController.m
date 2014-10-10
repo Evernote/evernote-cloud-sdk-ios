@@ -6,9 +6,10 @@
 //  Copyright (c) 2014 n/a. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "MainViewController.h"
 #import <ENSDK/ENSDK.h>
 #import "UserInfoViewController.h"
+#import "TagsInfoViewController.h"
 #import "SaveActivityViewController.h"
 #import "ViewAppNotesViewController.h"
 #import "SVProgressHUD.h"
@@ -18,6 +19,7 @@
 NS_ENUM(NSInteger, SampleFunctions) {
     kSampleFunctionsUnauthenticate,
     kSampleFunctionsUserInfo,
+    kSampleFunctionsTagsInfo,
     kSampleFunctionsSaveActivity,
     kSampleFunctionsCreatePhotoNote,
     kSampleFunctionsClipWebPage,
@@ -26,12 +28,12 @@ NS_ENUM(NSInteger, SampleFunctions) {
     kSampleFunctionsMaxValue
 };
 
-@interface ViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIWebViewDelegate>
+@interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIWebViewDelegate>
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) UIWebView * webView;
 @end
 
-@implementation ViewController
+@implementation MainViewController
 
 - (void)loadView {
     [super loadView];
@@ -104,6 +106,11 @@ NS_ENUM(NSInteger, SampleFunctions) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
             
+        case kSampleFunctionsTagsInfo:
+            cell.textLabel.text = @"Tags";
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            break;
+            
         case kSampleFunctionsSaveActivity:
             cell.textLabel.text = @"Save Activity";
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -150,6 +157,12 @@ NS_ENUM(NSInteger, SampleFunctions) {
         case kSampleFunctionsUserInfo:
         {
             UIViewController * vc = [[UserInfoViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case kSampleFunctionsTagsInfo:
+        {
+            UIViewController * vc = [[TagsInfoViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }

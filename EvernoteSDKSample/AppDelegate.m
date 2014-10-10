@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import <ENSDK/ENSDK.h>
-#import "ViewController.h"
+#import "MainViewController.h"
 
 @implementation AppDelegate
 
@@ -26,7 +26,7 @@
     self.window = [[UIWindow alloc] initWithFrame:
                    [[UIScreen mainScreen] bounds]];
 
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[[MainViewController alloc] init]];
     self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
 

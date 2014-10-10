@@ -107,6 +107,7 @@
 		86D49E49191DA4A8001C3581 /* RMSTokenView.h in Headers */ = {isa = PBXBuildFile; fileRef = 86D49E3D191DA4A8001C3581 /* RMSTokenView.h */; };
 		86D49E4A191DA4A8001C3581 /* RMSTokenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86D49E3E191DA4A8001C3581 /* RMSTokenView.m */; };
 		86D49E4B191DA4A8001C3581 /* RMSTokenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86D49E3E191DA4A8001C3581 /* RMSTokenView.m */; };
+		86D792B419E862DF008664DF /* TagsInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86D792B319E862DF008664DF /* TagsInfoViewController.m */; };
 		86F2D7FB1909ECD300C0AA7F /* libevernote-sdk-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB3D1AD1524ED96001C4534 /* libevernote-sdk-ios.a */; };
 		86F2D7FD1909EDAA00C0AA7F /* ENSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 86F2D7FC1909EDAA00C0AA7F /* ENSDKResources.bundle */; };
 		86F2D802190A348F00C0AA7F /* ENSDKResourceLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = BECDD3C7190A2DE7003736EE /* ENSDKResourceLoader.m */; };
@@ -311,7 +312,7 @@
 		BECDD3791908FFC1003736EE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BECDD3771908FFC1003736EE /* InfoPlist.strings */; };
 		BECDD37B1908FFC1003736EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BECDD37A1908FFC1003736EE /* main.m */; };
 		BECDD37F1908FFC1003736EE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BECDD37E1908FFC1003736EE /* AppDelegate.m */; };
-		BECDD3881908FFC2003736EE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BECDD3871908FFC2003736EE /* ViewController.m */; };
+		BECDD3881908FFC2003736EE /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BECDD3871908FFC2003736EE /* MainViewController.m */; };
 		BECDD38A1908FFC2003736EE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BECDD3891908FFC2003736EE /* Images.xcassets */; };
 		BECDD3A31908FFE8003736EE /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2E25B018EDE1C100BD7E6E /* MobileCoreServices.framework */; };
 		BECDD3A61909009B003736EE /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A9BE476B1781FAFA00471BF7 /* libxml2.dylib */; };
@@ -366,6 +367,8 @@
 		86D49E3C191DA4A8001C3581 /* RMSTokenConstraintManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSTokenConstraintManager.m; sourceTree = "<group>"; };
 		86D49E3D191DA4A8001C3581 /* RMSTokenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMSTokenView.h; sourceTree = "<group>"; };
 		86D49E3E191DA4A8001C3581 /* RMSTokenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSTokenView.m; sourceTree = "<group>"; };
+		86D792B219E862DF008664DF /* TagsInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagsInfoViewController.h; sourceTree = "<group>"; };
+		86D792B319E862DF008664DF /* TagsInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagsInfoViewController.m; sourceTree = "<group>"; };
 		86F2D7FC1909EDAA00C0AA7F /* ENSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ENSDKResources.bundle; sourceTree = SOURCE_ROOT; };
 		A9BE476B1781FAFA00471BF7 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		BE2E23BF18EBA5D400BD7E6E /* EDAM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDAM.h; sourceTree = "<group>"; };
@@ -533,8 +536,8 @@
 		BECDD37C1908FFC1003736EE /* EvernoteSDKSample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EvernoteSDKSample-Prefix.pch"; sourceTree = "<group>"; };
 		BECDD37D1908FFC1003736EE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BECDD37E1908FFC1003736EE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		BECDD3861908FFC1003736EE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		BECDD3871908FFC2003736EE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		BECDD3861908FFC1003736EE /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		BECDD3871908FFC2003736EE /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		BECDD3891908FFC2003736EE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BECDD3A7190908A9003736EE /* UserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
 		BECDD3A8190908A9003736EE /* UserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
@@ -974,18 +977,20 @@
 				BE48C71319131AC200025618 /* 3rdparty */,
 				BECDD37D1908FFC1003736EE /* AppDelegate.h */,
 				BECDD37E1908FFC1003736EE /* AppDelegate.m */,
-				BECDD3861908FFC1003736EE /* ViewController.h */,
-				BECDD3871908FFC2003736EE /* ViewController.m */,
-				BECDD3A7190908A9003736EE /* UserInfoViewController.h */,
-				BECDD3A8190908A9003736EE /* UserInfoViewController.m */,
+				BECDD3891908FFC2003736EE /* Images.xcassets */,
+				BECDD3861908FFC1003736EE /* MainViewController.h */,
+				BECDD3871908FFC2003736EE /* MainViewController.m */,
 				BECDD3AA19090FBA003736EE /* SaveActivityViewController.h */,
 				BECDD3AB19090FBA003736EE /* SaveActivityViewController.m */,
+				BECDD3751908FFC1003736EE /* Supporting Files */,
+				86D792B219E862DF008664DF /* TagsInfoViewController.h */,
+				86D792B319E862DF008664DF /* TagsInfoViewController.m */,
+				BECDD3A7190908A9003736EE /* UserInfoViewController.h */,
+				BECDD3A8190908A9003736EE /* UserInfoViewController.m */,
 				BE4695CA192ECE4D00ADE15F /* ViewAppNotesViewController.h */,
 				BE4695CB192ECE4D00ADE15F /* ViewAppNotesViewController.m */,
 				BE4695CD192ED90E00ADE15F /* ViewNoteViewController.h */,
 				BE4695CE192ED90E00ADE15F /* ViewNoteViewController.m */,
-				BECDD3891908FFC2003736EE /* Images.xcassets */,
-				BECDD3751908FFC1003736EE /* Supporting Files */,
 			);
 			path = EvernoteSDKSample;
 			sourceTree = "<group>";
@@ -1455,12 +1460,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BECDD3881908FFC2003736EE /* ViewController.m in Sources */,
+				BECDD3881908FFC2003736EE /* MainViewController.m in Sources */,
 				BE4695CC192ECE4D00ADE15F /* ViewAppNotesViewController.m in Sources */,
 				BECDD3AC19090FBA003736EE /* SaveActivityViewController.m in Sources */,
 				BE4695CF192ED90E00ADE15F /* ViewNoteViewController.m in Sources */,
 				BECDD3A9190908A9003736EE /* UserInfoViewController.m in Sources */,
 				BECDD37F1908FFC1003736EE /* AppDelegate.m in Sources */,
+				86D792B419E862DF008664DF /* TagsInfoViewController.m in Sources */,
 				BECDD37B1908FFC1003736EE /* main.m in Sources */,
 				BE48C71919131AC200025618 /* SVProgressHUD.m in Sources */,
 			);
