@@ -32,6 +32,7 @@
 #import "EDAMNoteStoreClient+Utilities.h"
 #import "THTTPClient.h"
 #import "TBinaryProtocol.h"
+#import "ENSession.h"
 
 // This is the Evernote standard reasonable recommendation for a single findNotes call and won't break in future.
 #define FIND_NOTES_DEFAULT_MAX_NOTES 100
@@ -215,6 +216,7 @@
                success:(void(^)(EDAMNotebook *notebook))success
                failure:(void(^)(NSError *error))failure
 {
+    [[ENSession sharedSession] listNotebooks_cleanCache];
     [self invokeAsyncIdBlock:^id {
         return [self.client createNotebook:self.authenticationToken notebook:notebook];
     } success:success failure:failure];

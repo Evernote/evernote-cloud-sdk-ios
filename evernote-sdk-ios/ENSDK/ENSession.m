@@ -494,8 +494,7 @@ static NSString * DeveloperToken, * NoteStoreUrl;
         return;
     }
     
-    self.notebooksCache = nil;
-    self.notebooksCacheDate = nil;
+    [self listNotebooks_cleanCache];
     
     ENSessionListNotebooksContext * context = [[ENSessionListNotebooksContext alloc] init];
     context.completion = completion;
@@ -734,6 +733,12 @@ static NSString * DeveloperToken, * NoteStoreUrl;
     self.notebooksCacheDate = [NSDate date];
     
     context.completion(context.resultNotebooks, error);
+}
+
+- (void)listNotebooks_cleanCache
+{
+    self.notebooksCache = nil;
+    self.notebooksCacheDate = nil;
 }
 
 #pragma mark - uploadNote

@@ -278,6 +278,11 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
 - (void)listWritableNotebooksWithCompletion:(ENSessionListNotebooksCompletionHandler)completion;
 
 /**
+ *  Manually clean the local notebook list cache.
+ */
+- (void)listNotebooks_cleanCache;
+
+/**
  *  Create a new note in Evernote by uploading a note object. 
  *  This is a simple convenience wrapper around -uploadNote:policy:toNotebook:orReplaceNote:progress:completion:
  *  which you can use for more options.
