@@ -25,17 +25,24 @@
 {
     [super viewDidLoad];
     [self.navigationItem setTitle:@"User Info"];
+    ENSession *sesssion = [ENSession sharedSession];
     NSMutableString * str = [NSMutableString string];
     [str appendFormat:@"Display name: %@\n", [[ENSession sharedSession] userDisplayName]];
-    if ([[ENSession sharedSession] isBusinessUser]) {
-        [str appendFormat:@"Member of the business \"%@\"\n", [[ENSession sharedSession] businessDisplayName]];
-    } else {
-        [str appendString:@"User is not a Business user.\n"];
-    }
-    if ([[ENSession sharedSession] isPremiumUser]) {
+    if ([sesssion isPremiumUser]) {
         [str appendString:@"User is a Premium user\n"];
     } else {
         [str appendString:@"User is not a Premium user.\n"];
+    }
+    
+    [str appendFormat:@"\nUser's personal usage: %lld / %lld, percentage %.2f %%\n", [sesssion personalUploadUsage], [sesssion personalUploadLimit], [sesssion personalUploadUsage] * 100.0 / [sesssion personalUploadLimit]];
+
+    if ([sesssion isBusinessUser]) {
+        [str appendFormat:@"\nMember of the business \"%@\"\n", [sesssion businessDisplayName]];
+        
+        [str appendFormat:@"User's business usage: %lld / %lld, percentage %.2f %%\n", [sesssion businessUploadUsage], [sesssion businessUploadLimit], [sesssion businessUploadUsage] * 100.0 / [sesssion businessUploadLimit]];
+
+    } else {
+        [str appendString:@"User is not a Business user.\n"];
     }
     
     [self.textView setText:str];

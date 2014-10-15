@@ -54,6 +54,16 @@
 @property (nonatomic, readonly) BOOL appNotebookIsLinked;
 
 /**
+ *  EDAMUser object of the user's personal account
+ */
+@property (nonatomic, strong) EDAMUser * user;
+
+/**
+ *  EDAMUser object of the user's business account
+ */
+@property (nonatomic, strong) EDAMUser * businessUser;
+
+/**
  * This give access to the preferences store that the session keeps independently from NSUserDefaults, and is
  * destroyed when the session unauthenticates. This should generally not be used in your application, but
  * it is used by the sample UIActivity to track recently-used notebook destinations, which are of course

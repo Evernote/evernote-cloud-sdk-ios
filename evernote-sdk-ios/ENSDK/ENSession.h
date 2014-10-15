@@ -195,6 +195,28 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
  */
 @property (nonatomic, readonly) NSString * businessDisplayName;
 
+/**
+ *  Number of bytes the user's personal account have used for upload.
+ */
+@property (nonatomic, readonly) long long personalUploadUsage;
+
+/**
+ *  Number of bytes the user's personal account limit for upload.
+ */
+@property (nonatomic, readonly) long long personalUploadLimit;
+
+/**
+ *  Number of bytes the user's business account have used for upload.
+ *  Will be 0 if not a business user.
+ */
+@property (nonatomic, readonly) long long businessUploadUsage;
+
+/**
+ *  Number of bytes the user's business account limit for upload.
+ *  Will be 0 if not a business user.
+ */
+@property (nonatomic, readonly) long long businessUploadLimit;
+
 #pragma mark - Session setup
 
 /**
@@ -373,4 +395,5 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
 - (void)downloadThumbnailForNote:(ENNoteRef *)noteRef
                     maxDimension:(NSUInteger)maxDimension
                       completion:(ENSessionDownloadNoteThumbnailCompletionHandler)completion;
+
 @end

@@ -127,6 +127,12 @@ static NSUInteger ENSessionNotebooksCacheValidity = (5 * 60);   // 5 minutes
 @property (nonatomic, strong) dispatch_queue_t thumbnailQueue;
 
 @property (nonatomic, strong) ENUserStoreClient * userStorePendingRevocation;
+
+@property (nonatomic, assign) long long personalUploadUsage;
+@property (nonatomic, assign) long long personalUploadLimit;
+@property (nonatomic, assign) long long businessUploadUsage;
+@property (nonatomic, assign) long long businessUploadLimit;
+
 @end
 
 @implementation ENSession
@@ -348,10 +354,29 @@ static NSString * DeveloperToken, * NoteStoreUrl;
             }
             ENSDKLogInfo(@"Notebooks: %@", notebooks);
         }];
+        
+        [self refreshUploadUsage];
     } failure:^(NSError * getUserError) {
         ENSDKLogError(@"Failed to get user info for user: %@", getUserError);
         [self completeAuthenticationWithError:(failuresAreFatal ? getUserError : nil)];
     }];
+}
+
+- (void)refreshUploadUsage {
+    [self.primaryNoteStore getSyncStateWithSuccess:^(EDAMSyncState *syncState) {
+        self.personalUploadUsage = syncState.uploaded.longLongValue;
+        self.personalUploadLimit = self.user.accounting.uploadLimit.longLongValue;
+    } failure:^(NSError *error) {
+        ENSDKLogError(@"Failed to get personal sync state");
+    }];
+    if (self.isBusinessUser) {
+        [self.businessNoteStore getSyncStateWithSuccess:^(EDAMSyncState *syncState) {
+            self.businessUploadUsage = syncState.uploaded.longLongValue;
+            self.businessUploadLimit = self.businessUser.accounting.uploadLimit.longLongValue;
+        } failure:^(NSError *error) {
+            ENSDKLogError(@"Failed to get business sync state");
+        }];
+    }
 }
 
 - (void)completeAuthenticationWithError:(NSError *)error
