@@ -39,7 +39,7 @@
 @implementation ENSaveToEvernoteActivity
 + (UIActivityCategory)activityCategory
 {
-    return UIActivityCategoryShare;
+    return UIActivityCategoryAction;
 }
 
 - (NSString *)activityType
@@ -54,11 +54,7 @@
 
 - (UIImage *)activityImage
 {
-    if (IsIOS8()) {
-        return [UIImage imageNamed:@"ENSDKResources.bundle/ENActivityIcon-color"];
-    } else {
-        return [UIImage imageNamed:@"ENSDKResources.bundle/ENActivityIcon"];
-    }
+    return [UIImage imageNamed:@"ENSDKResources.bundle/ENActivityIcon"];
 }
 
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems

@@ -35,9 +35,8 @@
     ENSaveToEvernoteActivity * sendActivity = [[ENSaveToEvernoteActivity alloc] init];
     sendActivity.delegate = self;
     NSArray * items = [NSArray arrayWithObject:(self.textView.text)];
-    BOOL isIOS8AndEvernoteInstalled = IsIOS8() && IsEvernoteInstalled();
     UIActivityViewController * activityController = [[UIActivityViewController alloc] initWithActivityItems:items
-                                                                                      applicationActivities:(isIOS8AndEvernoteInstalled? nil : @[sendActivity])];
+                                                                                      applicationActivities:@[sendActivity]];
     if ([activityController respondsToSelector:@selector(popoverPresentationController)]) {
         activityController.popoverPresentationController.barButtonItem = sender;
     }
