@@ -95,6 +95,9 @@
             [resources addObject:item];
         } else if ([item isKindOfClass:[NSURL class]]) {
             [strings addObject:[(NSURL *)item absoluteString]];
+        } else if ([item isKindOfClass:[ENNote class]]) {
+            self.preparedNote = (ENNote *)item;
+            return;
         }
     }
     
