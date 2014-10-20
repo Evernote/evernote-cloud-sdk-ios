@@ -59,15 +59,11 @@
 
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems
 {
-    // A prepared ENNote is allowed if it's the only item given.
-    if (activityItems.count == 1 && [activityItems[0] isKindOfClass:[ENNote class]]) {
-        return YES;
-    }
-
     for (id item in activityItems) {
         if ([item isKindOfClass:[NSString class]] ||
             [item isKindOfClass:[UIImage class]] ||
-            [item isKindOfClass:[ENResource class]]) {
+            [item isKindOfClass:[ENResource class]] ||
+            [item isKindOfClass:[ENNote class]]) {
             return YES;
         }
     }
@@ -80,12 +76,7 @@
     NSMutableArray * strings = [NSMutableArray array];
     NSMutableArray * images = [NSMutableArray array];
     NSMutableArray * resources = [NSMutableArray array];
-    
-    if (activityItems.count == 1 && [activityItems[0] isKindOfClass:[ENNote class]]) {
-        self.preparedNote = activityItems[0];
-        return;
-    }
-    
+        
     for (id item in activityItems) {
         if ([item isKindOfClass:[NSString class]]) {
             [strings addObject:item];
