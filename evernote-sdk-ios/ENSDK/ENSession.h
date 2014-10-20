@@ -251,6 +251,13 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
  */
 + (ENSession *)sharedSession;
 
+/**
+ *  Set to YES if the client would like to opt out from refreshing the notebooks cache on launch
+ *
+ *  @param disable Whether to disable the SDK to refresh the notebooks cache on launch
+ */
++ (void)setDisableRefreshingNotebooksCacheOnLaunch:(BOOL)disable;
+
 #pragma mark - Authentication
 
 /**

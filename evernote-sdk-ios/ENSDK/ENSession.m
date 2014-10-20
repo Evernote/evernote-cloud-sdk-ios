@@ -140,6 +140,7 @@ static NSUInteger ENSessionNotebooksCacheValidity = (5 * 60);   // 5 minutes
 static NSString * SessionHostOverride;
 static NSString * ConsumerKey, * ConsumerSecret;
 static NSString * DeveloperToken, * NoteStoreUrl;
+static BOOL disableRefreshingNotebooksCacheOnLaunch;
 
 + (void)setSharedSessionConsumerKey:(NSString *)key
                      consumerSecret:(NSString *)secret
@@ -171,6 +172,11 @@ static NSString * DeveloperToken, * NoteStoreUrl;
         session = [[ENSession alloc] init];
     });
     return session;
+}
+
++ (void)setDisableRefreshingNotebooksCacheOnLaunch:(BOOL)disable
+{
+    disableRefreshingNotebooksCacheOnLaunch = disable;
 }
 
 + (BOOL)checkSharedSessionSettings
@@ -347,13 +353,15 @@ static NSString * DeveloperToken, * NoteStoreUrl;
         [self.preferences encodeObject:user forKey:ENSessionPreferencesUser];
         [self completeAuthenticationWithError:nil];
         
-        // refresh the notebook cache
-        [self listNotebooksWithCompletion:^(NSArray *notebooks, NSError *listNotebooksError) {
-            if (listNotebooksError) {
-                ENSDKLogError(@"Error when listing notebooks: %@", listNotebooksError);
-            }
-            ENSDKLogInfo(@"Notebooks: %@", notebooks);
-        }];
+        if (!disableRefreshingNotebooksCacheOnLaunch) {
+            // refresh the notebook cache
+            [self listNotebooksWithCompletion:^(NSArray *notebooks, NSError *listNotebooksError) {
+                if (listNotebooksError) {
+                    ENSDKLogError(@"Error when listing notebooks: %@", listNotebooksError);
+                }
+                ENSDKLogInfo(@"Notebooks: %@", notebooks);
+            }];
+        }
         
         [self refreshUploadUsage];
     } failure:^(NSError * getUserError) {
