@@ -1,7 +1,7 @@
 Getting Started with the Evernote Cloud SDK for iOS
 ---
 
-This document covers getting set up with the Cloud SDK, some quick examples, and some discussion of the primary classes. 
+This document covers getting set up with the Cloud SDK, some quick examples, and some discussion of the primary classes.
 
 ### Hello World!
 
@@ -42,7 +42,7 @@ You have a few options:
 
 		Framework built successfully! Please find in /Users/echeng/Documents/Evernote/evernote-sdk-ios-new/scripts/..//Products/ENSDK.framework
 
-	Please add the ENSDK.framework and the ENSDKResources.bundle in the Products folder into your projects. Make sure you check "Copy items into destination group's folder (if needed)" This should
+	Please add the ENSDK.framework and the ENSDKResources.bundle in the Products folder into your project's Frameworks group. Make sure you check "Copy items into destination group's folder (if needed)".
 
 - (Alternative) If you want to build the entire SDK source alongside your own project files, you can do that too. Copy ENSDKResources.bundle and the evernote-sdk-ios folder (in the same folder with ENSDKResources.bundle) into your Xcode project directly. Add the new files to your app target.
 
@@ -68,7 +68,7 @@ Users will have the fastest OAuth experience in your app if they already have th
 			</array>
 		</dict>
 	</array>
-	
+
 Don't worry: authentication can still proceed if the Evernote app is not installed, but it will fall back to web-based OAuth. This is transparent to your app.
 
 **Note** When your app is in development and uses the "sandbox" environment, authentication will always use web-based OAuth, even if you have the Evernote app installed. After upgrading to a production consumer key, be sure to test authentication again with the Evernote app.
@@ -124,21 +124,21 @@ Before we get into how to work with the simple object model to programmatically 
 
 The SDK comes with a simple sample application, called (shockingly) `EvernoteSDKSample` so you can see the workflow for basic functionality. This is set up as a target within the Xcode project. Building this project will also build the SDK and link to it as a library. This app demonstrates authentication, creating simple notes, web clips, finding and displaying notes, and using the ENSaveToEvernoteActivity subclass of UIActivity (below).
 
-*Note* You will still need to edit the AppDelegate of the sample to include your consumer key and secret. 
+*Note* You will still need to edit the AppDelegate of the sample to include your consumer key and secret.
 
 ### Using the UIActivity subclass (share sheet)
 
 You can let your users send your content into Evernote without building any UI or interacting with the object model at all. You can use the `ENSaveToEvernoteActivity` class when opening the standard iOS activity panel. The SaveToEvernoteActivity knows how to handle items of type NSString and UIImage (and also can handle pre-created ENResource and ENNote objects). This will place an Evernote logo icon in the activity sheet that the user can choose. They'll get a convenient UI for selecting notebook, title, tags, etc. Use the ENSaveToEvernoteActivityDelegate protocol to be notified whether Save to Evernote activity succeeded, just implement the following function:
 
 	- (void)activity:(ENSaveToEvernoteActivity *)activity didFinishWithSuccess:(BOOL)success error:(NSError *)error;
-	
+
 Sample code to use ENSaveToEvernoteActivity:
 
     ENSaveToEvernoteActivity * saveActivity = [[ENSaveToEvernoteActivity alloc] init];
 	saveActivity.delegate = self;
     saveActivity.noteTitle = @"Default title";
     NSArray * items = [NSArray arrayWithObject:(self.textView.text)];
-    UIActivityViewController * activityController = [[UIActivityViewController alloc] initWithActivityItems:items                                                                              		      
+    UIActivityViewController * activityController = [[UIActivityViewController alloc] initWithActivityItems:items
                                                                                       applicationActivities:@[saveActivity]];
     [self presentViewController:activityController animated:YES completion:nil];
 
@@ -148,7 +148,7 @@ Basic Concepts
 
 ### Evernote Concepts
 
-The object model in the SDK is designed to reflect a distilled version of the object model you're familiar with as an Evernote user. The most fundamental object in Evernote is the "note" (represented by an ENNote). A note is one chunk of content visible in a user's account. Its body is stored in a form of markup, and may have attached image or file "resources." A note also has a title, timestamps, tags, and other metadata. 
+The object model in the SDK is designed to reflect a distilled version of the object model you're familiar with as an Evernote user. The most fundamental object in Evernote is the "note" (represented by an ENNote). A note is one chunk of content visible in a user's account. Its body is stored in a form of markup, and may have attached image or file "resources." A note also has a title, timestamps, tags, and other metadata.
 
 Notes exist inside of notebooks, and a user has at least one of these in their account. A user can move notes between notebooks using their Evernote client. Users can also join notebooks shared by other users. A user who is also a member of a [Business](http://evernote.com/business/) account will have access to business notebooks that they've created or joined.
 
@@ -166,7 +166,7 @@ On the other hand, an `ENNoteRef` is an immutable, opaque reference to a specifi
 
 ### ENNotebook
 
-An `ENNotebook` represents a notebook on the service. It has several properties that can tell you its name, business or sharing status, etc. 
+An `ENNotebook` represents a notebook on the service. It has several properties that can tell you its name, business or sharing status, etc.
 
 ### ENSession
 
@@ -184,11 +184,11 @@ A typical place to do this would be a "link to Evernote" button action.
     ENSession *session = [ENSession sharedSession];
     [session authenticateWithViewController:self preferRegistration:NO completion:^(NSError *error) {
         if (error) {
-            // authentication failed 
+            // authentication failed
             // show an alert, etc
             // ...
         } else {
-            // authentication succeeded 
+            // authentication succeeded
             // do something now that we're authenticated
             // ...
         }
@@ -217,7 +217,7 @@ You aren't restricted to images; you can use any kind of file. Just use the appr
 
 ### Creating a note using HTML or web content.
 
-The SDK contains a facility for capturing web content as a note. This content can be remote of course (generated by your service) or could be loaded locally from resources within your app. You can use `+[ENNote populateNoteFromWebView:completion:]` to create an `ENNote` object from the contents of a loaded `UIWebView` object. 
+The SDK contains a facility for capturing web content as a note. This content can be remote of course (generated by your service) or could be loaded locally from resources within your app. You can use `+[ENNote populateNoteFromWebView:completion:]` to create an `ENNote` object from the contents of a loaded `UIWebView` object.
 
     [ENNote populateNoteFromWebView:webView completion:^(ENNote * note) {
 	    if (note) {
@@ -227,9 +227,9 @@ The SDK contains a facility for capturing web content as a note. This content ca
         }
     }];  
 
-This method will capture content from the DOM. Images in the page will be captured as ENResource objects in the note (not true of images provided as CSS styles.) Please note that this is not a comprehensive "web clipper", though, and isn't designed to work fully on arbitrary pages from the internet. It will work best on pages which have been generally designed for the purpose of being captured as note content. 
+This method will capture content from the DOM. Images in the page will be captured as ENResource objects in the note (not true of images provided as CSS styles.) Please note that this is not a comprehensive "web clipper", though, and isn't designed to work fully on arbitrary pages from the internet. It will work best on pages which have been generally designed for the purpose of being captured as note content.
 
-If your app doesn't already have your content into visible web views, you can always create an offscreen `UIWebView` and populate a note from it once loaded. When doing this, please bear in mind that the dimensions of the web view (even when offscreen) can affect the rendered contents. Also note that `UIWebView`'s delegate methods don't indicate when the whole page has "completely" loaded if your page includes linked (remote) resources. 
+If your app doesn't already have your content into visible web views, you can always create an offscreen `UIWebView` and populate a note from it once loaded. When doing this, please bear in mind that the dimensions of the web view (even when offscreen) can affect the rendered contents. Also note that `UIWebView`'s delegate methods don't indicate when the whole page has "completely" loaded if your page includes linked (remote) resources.
 
 ### Downloading and displaying an existing note
 
@@ -240,7 +240,7 @@ If you have an `ENNoteRef` object, either because you uploaded a note and kept t
 			// success.
 		}
 	}];
-	
+
 But what can you do with a note? Well, you could change parts of the object, and reupload it to e.g. replace the existing note on the service. (See the documentation for `uploadNote...`). But you can also display it to the user. We've made this easy-- rather than serializing it to HTML and fussing with attached image resources, we've provided a method to generate a single Safari "web archive" from the note; this is a bundled data type which `UIWebView` natively knows how to load directly. Let's say you have a `UIWebView` ready to go, called `webView`:
 
     [note generateWebArchiveData:^(NSData *data) {
@@ -267,7 +267,7 @@ The SDK provides a simplified search operation that can find notes available to 
 		}
 	}];
 
-If you specify a notebook, the search will be limited to that notebook. If you omit the notebook, you can specify different combinations of search scope (personal, business, shared notebooks, etc), but please be aware of performance considerations. 
+If you specify a notebook, the search will be limited to that notebook. If you omit the notebook, you can specify different combinations of search scope (personal, business, shared notebooks, etc), but please be aware of performance considerations.
 
 **Performance Warning** Doing a broadly scoped search, and/or specifying a very high number of max results against a user's account with significant content can result in slow responses and a poor user experience. If the number of results is unbounded, the client may run out of memory and be terminated if there are too many results! Business scope in particular can produce an unpredictable amount of results. Please consider your usage very carefully here. You can do paged searches, and have other low-level controls by [using the advanced API.](Working_with_the_Advanced_\(EDAM\)_API.md)
 
@@ -276,6 +276,3 @@ If you specify a notebook, the search will be limited to that notebook. If you o
 Other things ENSession can do for you is enumerate all notebooks a user has access to, replace/update existing notes, search and download notes, and fetch thumbnails. You should be able to get started with what's in the headers, starting with `ENSession.h`.
 
 If you want to do more sophisticated work with Evernote, the primary interface that this SDK provides may not offer all of the functionality that you need. There is a lower-level API available that exposes the full breadth of the service capabilities at the expense of some learning overhead. [Have a look at this guide to advanced functionality to get started with it.](Working_with_the_Advanced_\(EDAM\)_API.md)
-
- 
-
