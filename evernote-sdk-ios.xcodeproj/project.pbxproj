@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0BB3D1B11524ED96001C4534 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB3D1B01524ED96001C4534 /* Foundation.framework */; };
+		8600EC171A15D97400F8F838 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8600EC161A15D97400F8F838 /* Launch Screen.xib */; };
 		860DF40A18FCCE51002B4793 /* ENSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23F418EBA5D500BD7E6E /* ENSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		860DF40B18FCCE51002B4793 /* ENSession.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23F618EBA5D500BD7E6E /* ENSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		860DF40D18FCCE51002B4793 /* ENNote.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23EC18EBA5D500BD7E6E /* ENNote.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -339,6 +340,7 @@
 		0BB3D1B01524ED96001C4534 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0BB3D1B41524ED96001C4534 /* evernote-sdk-ios-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "evernote-sdk-ios-Prefix.pch"; sourceTree = "<group>"; };
 		0BB3D24D1524EEF3001C4534 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8600EC161A15D97400F8F838 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		862E76C5192AB962003D0A32 /* ENNotebookPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENNotebookPickerView.h; sourceTree = "<group>"; };
 		862E76C6192AB962003D0A32 /* ENNotebookPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENNotebookPickerView.m; sourceTree = "<group>"; };
 		865C383118F8BA2400ECB2BA /* ENSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ENSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -991,6 +993,7 @@
 				BE4695CB192ECE4D00ADE15F /* ViewAppNotesViewController.m */,
 				BE4695CD192ED90E00ADE15F /* ViewNoteViewController.h */,
 				BE4695CE192ED90E00ADE15F /* ViewNoteViewController.m */,
+				8600EC161A15D97400F8F838 /* Launch Screen.xib */,
 			);
 			path = EvernoteSDKSample;
 			sourceTree = "<group>";
@@ -1261,6 +1264,7 @@
 				86F2D7FD1909EDAA00C0AA7F /* ENSDKResources.bundle in Resources */,
 				BECDD38A1908FFC2003736EE /* Images.xcassets in Resources */,
 				BECDD3791908FFC1003736EE /* InfoPlist.strings in Resources */,
+				8600EC171A15D97400F8F838 /* Launch Screen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
