@@ -1294,7 +1294,7 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
     // Skip linked scope if scope notebook is not a personal linked notebook, or if the
     // linked scope is not included.
     if (context.scopeNotebook) {
-        if (!context.scopeNotebook.isLinked || !context.scopeNotebook.isBusinessNotebook) {
+        if (!context.scopeNotebook.isLinked || context.scopeNotebook.isBusinessNotebook) {
             [self findNotes_processResultsWithContext:context];
             return;
         }
