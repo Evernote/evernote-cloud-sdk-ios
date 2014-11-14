@@ -35,8 +35,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import "TProtocol.h"
-#import "TException.h"
+#import "ENTProtocol.h"
+#import "ENTException.h"
 #import "FATObject.h"
 #import "EDAMTypes.h"
 #import "EDAMErrors.h"
@@ -155,15 +155,15 @@ static int16_t EDAMEDAM_VERSION_MINOR = 27;
 
 @implementation EDAMUserStoreClient
 {
-  id <TProtocol> _inProtocol;
-  id <TProtocol> _outProtocol;
+  id <ENTProtocol> _inProtocol;
+  id <ENTProtocol> _outProtocol;
 }
-- (id) initWithProtocol: (id <TProtocol>) protocol
+- (id) initWithProtocol: (id <ENTProtocol>) protocol
 {
   return [self initWithInProtocol: protocol outProtocol: protocol];
 }
 
-- (id) initWithInProtocol: (id <TProtocol>) anInProtocol outProtocol: (id <TProtocol>) anOutProtocol
+- (id) initWithInProtocol: (id <ENTProtocol>) anInProtocol outProtocol: (id <ENTProtocol>) anOutProtocol
 {
   self = [super init];
   if (self != nil)  {
@@ -175,14 +175,14 @@ static int16_t EDAMEDAM_VERSION_MINOR = 27;
 
 - (BOOL) checkVersion: (NSString *) clientName edamVersionMajor: (int16_t) edamVersionMajor edamVersionMinor: (int16_t) edamVersionMinor
 {
-  [TProtocolUtil sendMessage:@"checkVersion"
+  [ENTProtocolUtil sendMessage:@"checkVersion"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"clientName"], clientName, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_I16 optional:NO name:@"edamVersionMajor"], @(edamVersionMajor), nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:3 type:TType_I16 optional:NO name:@"edamVersionMinor"], @(edamVersionMinor), nil],
                             ]];
-  return [[TProtocolUtil readMessage:@"checkVersion"
+  return [[ENTProtocolUtil readMessage:@"checkVersion"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_BOOL optional:NO name:@"success"],
@@ -191,12 +191,12 @@ static int16_t EDAMEDAM_VERSION_MINOR = 27;
 
 - (EDAMBootstrapInfo *) getBootstrapInfo: (NSString *) locale
 {
-  [TProtocolUtil sendMessage:@"getBootstrapInfo"
+  [ENTProtocolUtil sendMessage:@"getBootstrapInfo"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"locale"], locale, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getBootstrapInfo"
+  return [ENTProtocolUtil readMessage:@"getBootstrapInfo"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMBootstrapInfo class]],
@@ -205,7 +205,7 @@ static int16_t EDAMEDAM_VERSION_MINOR = 27;
 
 - (EDAMAuthenticationResult *) authenticate: (NSString *) username password: (NSString *) password consumerKey: (NSString *) consumerKey consumerSecret: (NSString *) consumerSecret supportsTwoFactor: (BOOL) supportsTwoFactor
 {
-  [TProtocolUtil sendMessage:@"authenticate"
+  [ENTProtocolUtil sendMessage:@"authenticate"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"username"], username, nil],
@@ -214,7 +214,7 @@ static int16_t EDAMEDAM_VERSION_MINOR = 27;
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:4 type:TType_STRING optional:NO name:@"consumerSecret"], consumerSecret, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:5 type:TType_BOOL optional:NO name:@"supportsTwoFactor"], @(supportsTwoFactor), nil],
                             ]];
-  return [TProtocolUtil readMessage:@"authenticate"
+  return [ENTProtocolUtil readMessage:@"authenticate"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMAuthenticationResult class]],
@@ -225,7 +225,7 @@ static int16_t EDAMEDAM_VERSION_MINOR = 27;
 
 - (EDAMAuthenticationResult *) authenticateLongSession: (NSString *) username password: (NSString *) password consumerKey: (NSString *) consumerKey consumerSecret: (NSString *) consumerSecret deviceIdentifier: (NSString *) deviceIdentifier deviceDescription: (NSString *) deviceDescription supportsTwoFactor: (BOOL) supportsTwoFactor
 {
-  [TProtocolUtil sendMessage:@"authenticateLongSession"
+  [ENTProtocolUtil sendMessage:@"authenticateLongSession"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"username"], username, nil],
@@ -236,7 +236,7 @@ static int16_t EDAMEDAM_VERSION_MINOR = 27;
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:6 type:TType_STRING optional:NO name:@"deviceDescription"], deviceDescription, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:7 type:TType_BOOL optional:NO name:@"supportsTwoFactor"], @(supportsTwoFactor), nil],
                             ]];
-  return [TProtocolUtil readMessage:@"authenticateLongSession"
+  return [ENTProtocolUtil readMessage:@"authenticateLongSession"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMAuthenticationResult class]],
@@ -247,7 +247,7 @@ static int16_t EDAMEDAM_VERSION_MINOR = 27;
 
 - (EDAMAuthenticationResult *) completeTwoFactorAuthentication: (NSString *) authenticationToken oneTimeCode: (NSString *) oneTimeCode deviceIdentifier: (NSString *) deviceIdentifier deviceDescription: (NSString *) deviceDescription
 {
-  [TProtocolUtil sendMessage:@"completeTwoFactorAuthentication"
+  [ENTProtocolUtil sendMessage:@"completeTwoFactorAuthentication"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
@@ -255,7 +255,7 @@ static int16_t EDAMEDAM_VERSION_MINOR = 27;
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:3 type:TType_STRING optional:NO name:@"deviceIdentifier"], deviceIdentifier, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:4 type:TType_STRING optional:NO name:@"deviceDescription"], deviceDescription, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"completeTwoFactorAuthentication"
+  return [ENTProtocolUtil readMessage:@"completeTwoFactorAuthentication"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMAuthenticationResult class]],
@@ -266,12 +266,12 @@ static int16_t EDAMEDAM_VERSION_MINOR = 27;
 
 - (void) revokeLongSession: (NSString *) authenticationToken
 {
-  [TProtocolUtil sendMessage:@"revokeLongSession"
+  [ENTProtocolUtil sendMessage:@"revokeLongSession"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                             ]];
-  [TProtocolUtil readMessage:@"revokeLongSession"
+  [ENTProtocolUtil readMessage:@"revokeLongSession"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:1 type:TType_STRUCT optional:NO name:@"userException" valueType:TType_STRUCT valueClass:[EDAMUserException class]],
@@ -281,12 +281,12 @@ static int16_t EDAMEDAM_VERSION_MINOR = 27;
 
 - (EDAMAuthenticationResult *) authenticateToBusiness: (NSString *) authenticationToken
 {
-  [TProtocolUtil sendMessage:@"authenticateToBusiness"
+  [ENTProtocolUtil sendMessage:@"authenticateToBusiness"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"authenticateToBusiness"
+  return [ENTProtocolUtil readMessage:@"authenticateToBusiness"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMAuthenticationResult class]],
@@ -297,12 +297,12 @@ static int16_t EDAMEDAM_VERSION_MINOR = 27;
 
 - (EDAMAuthenticationResult *) refreshAuthentication: (NSString *) authenticationToken
 {
-  [TProtocolUtil sendMessage:@"refreshAuthentication"
+  [ENTProtocolUtil sendMessage:@"refreshAuthentication"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"refreshAuthentication"
+  return [ENTProtocolUtil readMessage:@"refreshAuthentication"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMAuthenticationResult class]],
@@ -313,12 +313,12 @@ static int16_t EDAMEDAM_VERSION_MINOR = 27;
 
 - (EDAMUser *) getUser: (NSString *) authenticationToken
 {
-  [TProtocolUtil sendMessage:@"getUser"
+  [ENTProtocolUtil sendMessage:@"getUser"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getUser"
+  return [ENTProtocolUtil readMessage:@"getUser"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMUser class]],
@@ -329,12 +329,12 @@ static int16_t EDAMEDAM_VERSION_MINOR = 27;
 
 - (EDAMPublicUserInfo *) getPublicUserInfo: (NSString *) username
 {
-  [TProtocolUtil sendMessage:@"getPublicUserInfo"
+  [ENTProtocolUtil sendMessage:@"getPublicUserInfo"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"username"], username, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getPublicUserInfo"
+  return [ENTProtocolUtil readMessage:@"getPublicUserInfo"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMPublicUserInfo class]],
@@ -346,12 +346,12 @@ static int16_t EDAMEDAM_VERSION_MINOR = 27;
 
 - (EDAMPremiumInfo *) getPremiumInfo: (NSString *) authenticationToken
 {
-  [TProtocolUtil sendMessage:@"getPremiumInfo"
+  [ENTProtocolUtil sendMessage:@"getPremiumInfo"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getPremiumInfo"
+  return [ENTProtocolUtil readMessage:@"getPremiumInfo"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMPremiumInfo class]],
@@ -362,12 +362,12 @@ static int16_t EDAMEDAM_VERSION_MINOR = 27;
 
 - (NSString *) getNoteStoreUrl: (NSString *) authenticationToken
 {
-  [TProtocolUtil sendMessage:@"getNoteStoreUrl"
+  [ENTProtocolUtil sendMessage:@"getNoteStoreUrl"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getNoteStoreUrl"
+  return [ENTProtocolUtil readMessage:@"getNoteStoreUrl"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRING optional:NO name:@"success"],
@@ -378,13 +378,13 @@ static int16_t EDAMEDAM_VERSION_MINOR = 27;
 
 - (void) inviteToBusiness: (NSString *) authenticationToken emailAddress: (NSString *) emailAddress
 {
-  [TProtocolUtil sendMessage:@"inviteToBusiness"
+  [ENTProtocolUtil sendMessage:@"inviteToBusiness"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"emailAddress"], emailAddress, nil],
                             ]];
-  [TProtocolUtil readMessage:@"inviteToBusiness"
+  [ENTProtocolUtil readMessage:@"inviteToBusiness"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:1 type:TType_STRUCT optional:NO name:@"userException" valueType:TType_STRUCT valueClass:[EDAMUserException class]],
@@ -394,13 +394,13 @@ static int16_t EDAMEDAM_VERSION_MINOR = 27;
 
 - (void) removeFromBusiness: (NSString *) authenticationToken emailAddress: (NSString *) emailAddress
 {
-  [TProtocolUtil sendMessage:@"removeFromBusiness"
+  [ENTProtocolUtil sendMessage:@"removeFromBusiness"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"emailAddress"], emailAddress, nil],
                             ]];
-  [TProtocolUtil readMessage:@"removeFromBusiness"
+  [ENTProtocolUtil readMessage:@"removeFromBusiness"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:1 type:TType_STRUCT optional:NO name:@"userException" valueType:TType_STRUCT valueClass:[EDAMUserException class]],

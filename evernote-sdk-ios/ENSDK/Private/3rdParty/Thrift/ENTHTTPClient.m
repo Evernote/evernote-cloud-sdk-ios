@@ -17,12 +17,12 @@
  * under the License.
  */
 
-#import "THTTPClient.h"
+#import "ENTHTTPClient.h"
 #import "ENAFURLConnectionOperation.h"
 
 typedef void (^ProgressBlock)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite);
 
-@interface THTTPClient()
+@interface ENTHTTPClient()
 
 @property (nonatomic,strong) ENAFURLConnectionOperation *httpOperation;
 @property (strong, nonatomic) NSMutableData *requestData;
@@ -36,7 +36,7 @@ typedef void (^ProgressBlock)(NSUInteger bytesWritten, long long totalBytesWritt
 
 @end
 
-@implementation THTTPClient
+@implementation ENTHTTPClient
 
 - (id) initWithURL: (NSURL *) aURL {
     return [self initWithURL: aURL
@@ -83,7 +83,7 @@ typedef void (^ProgressBlock)(NSUInteger bytesWritten, long long totalBytesWritt
     
     NSString * userAgent = self.userAgent;
     if (userAgent == nil) {
-        userAgent = [THTTPClient createClientVersionString];
+        userAgent = [ENTHTTPClient createClientVersionString];
     }
     [request setValue: userAgent forHTTPHeaderField: @"User-Agent"];
     
@@ -122,19 +122,19 @@ typedef void (^ProgressBlock)(NSUInteger bytesWritten, long long totalBytesWritt
     [self.requestData setLength: 0];
     
     if (responseData == nil) {
-        @throw [TTransportException exceptionWithName: @"TTransportException"
+        @throw [ENTTransportException exceptionWithName: @"TTransportException"
                                                reason: @"Could not make HTTP request"
                                                 error: error];
     }
     if (![response isKindOfClass: [NSHTTPURLResponse class]]) {
-        @throw [TTransportException exceptionWithName: @"TTransportException"
+        @throw [ENTTransportException exceptionWithName: @"TTransportException"
                                                reason: [NSString stringWithFormat: @"Unexpected NSURLResponse type: %@",
                                                         NSStringFromClass([response class])]];
     }
     
     NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *) response;
     if ([httpResponse statusCode] != 200) {
-        @throw [TTransportException exceptionWithName: @"TTransportException"
+        @throw [ENTTransportException exceptionWithName: @"TTransportException"
                                                reason: [NSString stringWithFormat: @"Bad response from HTTP server: %ld",
                                                         (long)[httpResponse statusCode]]];
     }

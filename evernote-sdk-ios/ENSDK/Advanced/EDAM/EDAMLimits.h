@@ -35,8 +35,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import "TProtocol.h"
-#import "TException.h"
+#import "ENTProtocol.h"
+#import "ENTException.h"
 #import "FATObject.h"
 
 @interface EDAMLimitsConstants : NSObject 

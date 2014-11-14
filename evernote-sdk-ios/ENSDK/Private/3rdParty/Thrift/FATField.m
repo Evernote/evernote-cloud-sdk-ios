@@ -27,7 +27,7 @@
  */
 
 #import "FATField.h"
-#import "TProtocol.h"
+#import "ENTProtocol.h"
 
 @implementation FATField
 

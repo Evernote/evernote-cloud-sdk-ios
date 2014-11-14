@@ -17,27 +17,27 @@
  * under the License.
  */
 
-#import "TBinaryProtocol.h"
+#import "ENTBinaryProtocol.h"
 
 int32_t VERSION_1 = 0x80010000;
 int32_t VERSION_MASK = 0xffff0000;
 
-@interface TBinaryProtocol()
+@interface ENTBinaryProtocol()
 
-@property (strong, nonatomic) id <TTransport> transport;
+@property (strong, nonatomic) id <ENTTransport> transport;
 @property (assign, nonatomic) BOOL strictRead;
 @property (assign, nonatomic) BOOL strictWrite;
 @property (assign, nonatomic) int32_t messageSizeLimit;
 
 @end
 
-@implementation TBinaryProtocol
+@implementation ENTBinaryProtocol
 
-- (id) initWithTransport: (id <TTransport>) transport {
+- (id) initWithTransport: (id <ENTTransport>) transport {
   return [self initWithTransport: transport strictRead: NO strictWrite: NO];
 }
 
-- (id) initWithTransport: (id <TTransport>) transport
+- (id) initWithTransport: (id <ENTTransport>) transport
               strictRead: (BOOL) strictRead
              strictWrite: (BOOL) strictWrite
 {
@@ -53,7 +53,7 @@ int32_t VERSION_MASK = 0xffff0000;
 - (NSString *) readStringBody: (int) size {
   char * buffer = malloc(size+1);
   if (!buffer) {
-    @throw [TProtocolException exceptionWithName: @"TProtocolException"
+    @throw [ENTProtocolException exceptionWithName: @"TProtocolException"
                                           reason: [NSString stringWithFormat: @"Unable to allocate memory in %s, size: %i",
                                                    __PRETTY_FUNCTION__,
                                                    size]];;
@@ -75,7 +75,7 @@ int32_t VERSION_MASK = 0xffff0000;
   if (size < 0) {
     int version = size & VERSION_MASK;
     if (version != VERSION_1) {
-      @throw [TProtocolException exceptionWithName: @"TProtocolException"
+      @throw [ENTProtocolException exceptionWithName: @"TProtocolException"
                                             reason: @"Bad version in readMessageBegin"];
     }
     if (type != NULL) {
@@ -92,16 +92,16 @@ int32_t VERSION_MASK = 0xffff0000;
   }
   else {
     if (self.strictRead) {
-      @throw [TProtocolException exceptionWithName: @"TProtocolException"
+      @throw [ENTProtocolException exceptionWithName: @"TProtocolException"
                                             reason: @"Missing version in readMessageBegin, old client?"];
     }
     if ([self messageSizeLimit] > 0 && size > self.messageSizeLimit) {
       if (size == '<!DO' || size == '<htm') {
-        @throw [TProtocolException exceptionWithName: @"TProtocolException"
+        @throw [ENTProtocolException exceptionWithName: @"TProtocolException"
                                               reason: @"Service did not return a Thrift structure"];
       }
       else {
-        @throw [TProtocolException exceptionWithName: @"TProtocolException"
+        @throw [ENTProtocolException exceptionWithName: @"TProtocolException"
                                               reason: [NSString stringWithFormat: @"Message too big.  Size limit is: %d Message size is: %d",
                                                        self.messageSizeLimit,
                                                        size]];
@@ -211,7 +211,7 @@ int32_t VERSION_MASK = 0xffff0000;
   int32_t size = [self readI32];
   uint8_t * buff = malloc(size);
   if (buff == NULL) {
-    @throw [TProtocolException
+    @throw [ENTProtocolException
             exceptionWithName: @"TProtocolException"
             reason: [NSString stringWithFormat: @"Out of memory.  Unable to allocate %d bytes trying to read binary data.",
                      size]];

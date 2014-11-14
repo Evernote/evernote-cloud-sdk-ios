@@ -17,9 +17,9 @@
  * under the License.
  */
 
-#import "TException.h"
+#import "ENTException.h"
 
-@protocol TTransport <NSObject>
+@protocol ENTTransport <NSObject>
 
   /**
    * Guarantees that all of len bytes are read
@@ -43,7 +43,7 @@
 - (void)setDownloadProgressBlock:(void (^)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead))block;
 @end
 
-@interface TTransportException : TException
+@interface ENTTransportException : ENTException
 
 + (id) exceptionWithReason: (NSString *) reason
                      error: (NSError *) error;

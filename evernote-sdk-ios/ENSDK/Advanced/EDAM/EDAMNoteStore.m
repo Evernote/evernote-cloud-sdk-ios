@@ -35,8 +35,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import "TProtocol.h"
-#import "TException.h"
+#import "ENTProtocol.h"
+#import "ENTException.h"
 #import "FATObject.h"
 #import "EDAMUserStore.h"
 #import "EDAMTypes.h"
@@ -385,15 +385,15 @@
 
 @implementation EDAMNoteStoreClient
 {
-  id <TProtocol> _inProtocol;
-  id <TProtocol> _outProtocol;
+  id <ENTProtocol> _inProtocol;
+  id <ENTProtocol> _outProtocol;
 }
-- (id) initWithProtocol: (id <TProtocol>) protocol
+- (id) initWithProtocol: (id <ENTProtocol>) protocol
 {
   return [self initWithInProtocol: protocol outProtocol: protocol];
 }
 
-- (id) initWithInProtocol: (id <TProtocol>) anInProtocol outProtocol: (id <TProtocol>) anOutProtocol
+- (id) initWithInProtocol: (id <ENTProtocol>) anInProtocol outProtocol: (id <ENTProtocol>) anOutProtocol
 {
   self = [super init];
   if (self != nil)  {
@@ -403,24 +403,24 @@
   return self;
 }
 
-- (id<TProtocol>)inProtocol
+- (id<ENTProtocol>)inProtocol
 {
     return _inProtocol;
 }
 
-- (id<TProtocol>)outProtocol
+- (id<ENTProtocol>)outProtocol
 {
     return _outProtocol;
 }
 
 - (EDAMSyncState *) getSyncState: (NSString *) authenticationToken
 {
-  [TProtocolUtil sendMessage:@"getSyncState"
+  [ENTProtocolUtil sendMessage:@"getSyncState"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getSyncState"
+  return [ENTProtocolUtil readMessage:@"getSyncState"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMSyncState class]],
@@ -431,13 +431,13 @@
 
 - (EDAMSyncState *) getSyncStateWithMetrics: (NSString *) authenticationToken clientMetrics: (EDAMClientUsageMetrics *) clientMetrics
 {
-  [TProtocolUtil sendMessage:@"getSyncStateWithMetrics"
+  [ENTProtocolUtil sendMessage:@"getSyncStateWithMetrics"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRUCT optional:NO name:@"clientMetrics" valueType:TType_STRUCT valueClass:[EDAMClientUsageMetrics class]], clientMetrics, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getSyncStateWithMetrics"
+  return [ENTProtocolUtil readMessage:@"getSyncStateWithMetrics"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMSyncState class]],
@@ -448,7 +448,7 @@
 
 - (EDAMSyncChunk *) getSyncChunk: (NSString *) authenticationToken afterUSN: (int32_t) afterUSN maxEntries: (int32_t) maxEntries fullSyncOnly: (BOOL) fullSyncOnly
 {
-  [TProtocolUtil sendMessage:@"getSyncChunk"
+  [ENTProtocolUtil sendMessage:@"getSyncChunk"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
@@ -456,7 +456,7 @@
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:3 type:TType_I32 optional:NO name:@"maxEntries"], @(maxEntries), nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:4 type:TType_BOOL optional:NO name:@"fullSyncOnly"], @(fullSyncOnly), nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getSyncChunk"
+  return [ENTProtocolUtil readMessage:@"getSyncChunk"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMSyncChunk class]],
@@ -467,7 +467,7 @@
 
 - (EDAMSyncChunk *) getFilteredSyncChunk: (NSString *) authenticationToken afterUSN: (int32_t) afterUSN maxEntries: (int32_t) maxEntries filter: (EDAMSyncChunkFilter *) filter
 {
-  [TProtocolUtil sendMessage:@"getFilteredSyncChunk"
+  [ENTProtocolUtil sendMessage:@"getFilteredSyncChunk"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
@@ -475,7 +475,7 @@
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:3 type:TType_I32 optional:NO name:@"maxEntries"], @(maxEntries), nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:4 type:TType_STRUCT optional:NO name:@"filter" valueType:TType_STRUCT valueClass:[EDAMSyncChunkFilter class]], filter, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getFilteredSyncChunk"
+  return [ENTProtocolUtil readMessage:@"getFilteredSyncChunk"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMSyncChunk class]],
@@ -486,13 +486,13 @@
 
 - (EDAMSyncState *) getLinkedNotebookSyncState: (NSString *) authenticationToken linkedNotebook: (EDAMLinkedNotebook *) linkedNotebook
 {
-  [TProtocolUtil sendMessage:@"getLinkedNotebookSyncState"
+  [ENTProtocolUtil sendMessage:@"getLinkedNotebookSyncState"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRUCT optional:NO name:@"linkedNotebook" valueType:TType_STRUCT valueClass:[EDAMLinkedNotebook class]], linkedNotebook, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getLinkedNotebookSyncState"
+  return [ENTProtocolUtil readMessage:@"getLinkedNotebookSyncState"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMSyncState class]],
@@ -504,7 +504,7 @@
 
 - (EDAMSyncChunk *) getLinkedNotebookSyncChunk: (NSString *) authenticationToken linkedNotebook: (EDAMLinkedNotebook *) linkedNotebook afterUSN: (int32_t) afterUSN maxEntries: (int32_t) maxEntries fullSyncOnly: (BOOL) fullSyncOnly
 {
-  [TProtocolUtil sendMessage:@"getLinkedNotebookSyncChunk"
+  [ENTProtocolUtil sendMessage:@"getLinkedNotebookSyncChunk"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
@@ -513,7 +513,7 @@
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:4 type:TType_I32 optional:NO name:@"maxEntries"], @(maxEntries), nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:5 type:TType_BOOL optional:NO name:@"fullSyncOnly"], @(fullSyncOnly), nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getLinkedNotebookSyncChunk"
+  return [ENTProtocolUtil readMessage:@"getLinkedNotebookSyncChunk"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMSyncChunk class]],
@@ -525,12 +525,12 @@
 
 - (NSArray *) listNotebooks: (NSString *) authenticationToken
 {
-  [TProtocolUtil sendMessage:@"listNotebooks"
+  [ENTProtocolUtil sendMessage:@"listNotebooks"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"listNotebooks"
+  return [ENTProtocolUtil readMessage:@"listNotebooks"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_LIST optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMNotebook class]],
@@ -541,12 +541,12 @@
 
 - (NSArray *) listPublishedBusinessNotebooks: (NSString *) authenticationToken
 {
-  [TProtocolUtil sendMessage:@"listPublishedBusinessNotebooks"
+  [ENTProtocolUtil sendMessage:@"listPublishedBusinessNotebooks"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"listPublishedBusinessNotebooks"
+  return [ENTProtocolUtil readMessage:@"listPublishedBusinessNotebooks"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_LIST optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMNotebook class]],
@@ -557,13 +557,13 @@
 
 - (EDAMNotebook *) getNotebook: (NSString *) authenticationToken guid: (EDAMGuid) guid
 {
-  [TProtocolUtil sendMessage:@"getNotebook"
+  [ENTProtocolUtil sendMessage:@"getNotebook"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getNotebook"
+  return [ENTProtocolUtil readMessage:@"getNotebook"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMNotebook class]],
@@ -575,12 +575,12 @@
 
 - (EDAMNotebook *) getDefaultNotebook: (NSString *) authenticationToken
 {
-  [TProtocolUtil sendMessage:@"getDefaultNotebook"
+  [ENTProtocolUtil sendMessage:@"getDefaultNotebook"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getDefaultNotebook"
+  return [ENTProtocolUtil readMessage:@"getDefaultNotebook"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMNotebook class]],
@@ -591,13 +591,13 @@
 
 - (EDAMNotebook *) createNotebook: (NSString *) authenticationToken notebook: (EDAMNotebook *) notebook
 {
-  [TProtocolUtil sendMessage:@"createNotebook"
+  [ENTProtocolUtil sendMessage:@"createNotebook"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRUCT optional:NO name:@"notebook" valueType:TType_STRUCT valueClass:[EDAMNotebook class]], notebook, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"createNotebook"
+  return [ENTProtocolUtil readMessage:@"createNotebook"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMNotebook class]],
@@ -608,13 +608,13 @@
 
 - (int32_t) updateNotebook: (NSString *) authenticationToken notebook: (EDAMNotebook *) notebook
 {
-  [TProtocolUtil sendMessage:@"updateNotebook"
+  [ENTProtocolUtil sendMessage:@"updateNotebook"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRUCT optional:NO name:@"notebook" valueType:TType_STRUCT valueClass:[EDAMNotebook class]], notebook, nil],
                             ]];
-  return [[TProtocolUtil readMessage:@"updateNotebook"
+  return [[ENTProtocolUtil readMessage:@"updateNotebook"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_I32 optional:NO name:@"success"],
@@ -626,13 +626,13 @@
 
 - (int32_t) expungeNotebook: (NSString *) authenticationToken guid: (EDAMGuid) guid
 {
-  [TProtocolUtil sendMessage:@"expungeNotebook"
+  [ENTProtocolUtil sendMessage:@"expungeNotebook"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                             ]];
-  return [[TProtocolUtil readMessage:@"expungeNotebook"
+  return [[ENTProtocolUtil readMessage:@"expungeNotebook"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_I32 optional:NO name:@"success"],
@@ -644,12 +644,12 @@
 
 - (NSArray *) listTags: (NSString *) authenticationToken
 {
-  [TProtocolUtil sendMessage:@"listTags"
+  [ENTProtocolUtil sendMessage:@"listTags"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"listTags"
+  return [ENTProtocolUtil readMessage:@"listTags"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_LIST optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMTag class]],
@@ -660,13 +660,13 @@
 
 - (NSArray *) listTagsByNotebook: (NSString *) authenticationToken notebookGuid: (EDAMGuid) notebookGuid
 {
-  [TProtocolUtil sendMessage:@"listTagsByNotebook"
+  [ENTProtocolUtil sendMessage:@"listTagsByNotebook"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"notebookGuid"], notebookGuid, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"listTagsByNotebook"
+  return [ENTProtocolUtil readMessage:@"listTagsByNotebook"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_LIST optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMTag class]],
@@ -678,13 +678,13 @@
 
 - (EDAMTag *) getTag: (NSString *) authenticationToken guid: (EDAMGuid) guid
 {
-  [TProtocolUtil sendMessage:@"getTag"
+  [ENTProtocolUtil sendMessage:@"getTag"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getTag"
+  return [ENTProtocolUtil readMessage:@"getTag"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMTag class]],
@@ -696,13 +696,13 @@
 
 - (EDAMTag *) createTag: (NSString *) authenticationToken tag: (EDAMTag *) tag
 {
-  [TProtocolUtil sendMessage:@"createTag"
+  [ENTProtocolUtil sendMessage:@"createTag"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRUCT optional:NO name:@"tag" valueType:TType_STRUCT valueClass:[EDAMTag class]], tag, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"createTag"
+  return [ENTProtocolUtil readMessage:@"createTag"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMTag class]],
@@ -714,13 +714,13 @@
 
 - (int32_t) updateTag: (NSString *) authenticationToken tag: (EDAMTag *) tag
 {
-  [TProtocolUtil sendMessage:@"updateTag"
+  [ENTProtocolUtil sendMessage:@"updateTag"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRUCT optional:NO name:@"tag" valueType:TType_STRUCT valueClass:[EDAMTag class]], tag, nil],
                             ]];
-  return [[TProtocolUtil readMessage:@"updateTag"
+  return [[ENTProtocolUtil readMessage:@"updateTag"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_I32 optional:NO name:@"success"],
@@ -732,13 +732,13 @@
 
 - (void) untagAll: (NSString *) authenticationToken guid: (EDAMGuid) guid
 {
-  [TProtocolUtil sendMessage:@"untagAll"
+  [ENTProtocolUtil sendMessage:@"untagAll"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                             ]];
-  [TProtocolUtil readMessage:@"untagAll"
+  [ENTProtocolUtil readMessage:@"untagAll"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:1 type:TType_STRUCT optional:NO name:@"userException" valueType:TType_STRUCT valueClass:[EDAMUserException class]],
@@ -749,13 +749,13 @@
 
 - (int32_t) expungeTag: (NSString *) authenticationToken guid: (EDAMGuid) guid
 {
-  [TProtocolUtil sendMessage:@"expungeTag"
+  [ENTProtocolUtil sendMessage:@"expungeTag"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                             ]];
-  return [[TProtocolUtil readMessage:@"expungeTag"
+  return [[ENTProtocolUtil readMessage:@"expungeTag"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_I32 optional:NO name:@"success"],
@@ -767,12 +767,12 @@
 
 - (NSArray *) listSearches: (NSString *) authenticationToken
 {
-  [TProtocolUtil sendMessage:@"listSearches"
+  [ENTProtocolUtil sendMessage:@"listSearches"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"listSearches"
+  return [ENTProtocolUtil readMessage:@"listSearches"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_LIST optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMSavedSearch class]],
@@ -783,13 +783,13 @@
 
 - (EDAMSavedSearch *) getSearch: (NSString *) authenticationToken guid: (EDAMGuid) guid
 {
-  [TProtocolUtil sendMessage:@"getSearch"
+  [ENTProtocolUtil sendMessage:@"getSearch"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getSearch"
+  return [ENTProtocolUtil readMessage:@"getSearch"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMSavedSearch class]],
@@ -801,13 +801,13 @@
 
 - (EDAMSavedSearch *) createSearch: (NSString *) authenticationToken search: (EDAMSavedSearch *) search
 {
-  [TProtocolUtil sendMessage:@"createSearch"
+  [ENTProtocolUtil sendMessage:@"createSearch"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRUCT optional:NO name:@"search" valueType:TType_STRUCT valueClass:[EDAMSavedSearch class]], search, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"createSearch"
+  return [ENTProtocolUtil readMessage:@"createSearch"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMSavedSearch class]],
@@ -818,13 +818,13 @@
 
 - (int32_t) updateSearch: (NSString *) authenticationToken search: (EDAMSavedSearch *) search
 {
-  [TProtocolUtil sendMessage:@"updateSearch"
+  [ENTProtocolUtil sendMessage:@"updateSearch"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRUCT optional:NO name:@"search" valueType:TType_STRUCT valueClass:[EDAMSavedSearch class]], search, nil],
                             ]];
-  return [[TProtocolUtil readMessage:@"updateSearch"
+  return [[ENTProtocolUtil readMessage:@"updateSearch"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_I32 optional:NO name:@"success"],
@@ -836,13 +836,13 @@
 
 - (int32_t) expungeSearch: (NSString *) authenticationToken guid: (EDAMGuid) guid
 {
-  [TProtocolUtil sendMessage:@"expungeSearch"
+  [ENTProtocolUtil sendMessage:@"expungeSearch"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                             ]];
-  return [[TProtocolUtil readMessage:@"expungeSearch"
+  return [[ENTProtocolUtil readMessage:@"expungeSearch"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_I32 optional:NO name:@"success"],
@@ -854,7 +854,7 @@
 
 - (EDAMNoteList *) findNotes: (NSString *) authenticationToken filter: (EDAMNoteFilter *) filter offset: (int32_t) offset maxNotes: (int32_t) maxNotes
 {
-  [TProtocolUtil sendMessage:@"findNotes"
+  [ENTProtocolUtil sendMessage:@"findNotes"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
@@ -862,7 +862,7 @@
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:3 type:TType_I32 optional:NO name:@"offset"], @(offset), nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:4 type:TType_I32 optional:NO name:@"maxNotes"], @(maxNotes), nil],
                             ]];
-  return [TProtocolUtil readMessage:@"findNotes"
+  return [ENTProtocolUtil readMessage:@"findNotes"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMNoteList class]],
@@ -874,14 +874,14 @@
 
 - (int32_t) findNoteOffset: (NSString *) authenticationToken filter: (EDAMNoteFilter *) filter guid: (EDAMGuid) guid
 {
-  [TProtocolUtil sendMessage:@"findNoteOffset"
+  [ENTProtocolUtil sendMessage:@"findNoteOffset"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRUCT optional:NO name:@"filter" valueType:TType_STRUCT valueClass:[EDAMNoteFilter class]], filter, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:3 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                             ]];
-  return [[TProtocolUtil readMessage:@"findNoteOffset"
+  return [[ENTProtocolUtil readMessage:@"findNoteOffset"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_I32 optional:NO name:@"success"],
@@ -893,7 +893,7 @@
 
 - (EDAMNotesMetadataList *) findNotesMetadata: (NSString *) authenticationToken filter: (EDAMNoteFilter *) filter offset: (int32_t) offset maxNotes: (int32_t) maxNotes resultSpec: (EDAMNotesMetadataResultSpec *) resultSpec
 {
-  [TProtocolUtil sendMessage:@"findNotesMetadata"
+  [ENTProtocolUtil sendMessage:@"findNotesMetadata"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
@@ -902,7 +902,7 @@
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:4 type:TType_I32 optional:NO name:@"maxNotes"], @(maxNotes), nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:5 type:TType_STRUCT optional:NO name:@"resultSpec" valueType:TType_STRUCT valueClass:[EDAMNotesMetadataResultSpec class]], resultSpec, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"findNotesMetadata"
+  return [ENTProtocolUtil readMessage:@"findNotesMetadata"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMNotesMetadataList class]],
@@ -914,14 +914,14 @@
 
 - (EDAMNoteCollectionCounts *) findNoteCounts: (NSString *) authenticationToken filter: (EDAMNoteFilter *) filter withTrash: (BOOL) withTrash
 {
-  [TProtocolUtil sendMessage:@"findNoteCounts"
+  [ENTProtocolUtil sendMessage:@"findNoteCounts"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRUCT optional:NO name:@"filter" valueType:TType_STRUCT valueClass:[EDAMNoteFilter class]], filter, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:3 type:TType_BOOL optional:NO name:@"withTrash"], @(withTrash), nil],
                             ]];
-  return [TProtocolUtil readMessage:@"findNoteCounts"
+  return [ENTProtocolUtil readMessage:@"findNoteCounts"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMNoteCollectionCounts class]],
@@ -933,7 +933,7 @@
 
 - (EDAMNote *) getNote: (NSString *) authenticationToken guid: (EDAMGuid) guid withContent: (BOOL) withContent withResourcesData: (BOOL) withResourcesData withResourcesRecognition: (BOOL) withResourcesRecognition withResourcesAlternateData: (BOOL) withResourcesAlternateData
 {
-  [TProtocolUtil sendMessage:@"getNote"
+  [ENTProtocolUtil sendMessage:@"getNote"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
@@ -943,7 +943,7 @@
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:5 type:TType_BOOL optional:NO name:@"withResourcesRecognition"], @(withResourcesRecognition), nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:6 type:TType_BOOL optional:NO name:@"withResourcesAlternateData"], @(withResourcesAlternateData), nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getNote"
+  return [ENTProtocolUtil readMessage:@"getNote"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMNote class]],
@@ -955,13 +955,13 @@
 
 - (EDAMLazyMap *) getNoteApplicationData: (NSString *) authenticationToken guid: (EDAMGuid) guid
 {
-  [TProtocolUtil sendMessage:@"getNoteApplicationData"
+  [ENTProtocolUtil sendMessage:@"getNoteApplicationData"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getNoteApplicationData"
+  return [ENTProtocolUtil readMessage:@"getNoteApplicationData"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMLazyMap class]],
@@ -973,14 +973,14 @@
 
 - (NSString *) getNoteApplicationDataEntry: (NSString *) authenticationToken guid: (EDAMGuid) guid key: (NSString *) key
 {
-  [TProtocolUtil sendMessage:@"getNoteApplicationDataEntry"
+  [ENTProtocolUtil sendMessage:@"getNoteApplicationDataEntry"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:3 type:TType_STRING optional:NO name:@"key"], key, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getNoteApplicationDataEntry"
+  return [ENTProtocolUtil readMessage:@"getNoteApplicationDataEntry"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRING optional:NO name:@"success"],
@@ -992,7 +992,7 @@
 
 - (int32_t) setNoteApplicationDataEntry: (NSString *) authenticationToken guid: (EDAMGuid) guid key: (NSString *) key value: (NSString *) value
 {
-  [TProtocolUtil sendMessage:@"setNoteApplicationDataEntry"
+  [ENTProtocolUtil sendMessage:@"setNoteApplicationDataEntry"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
@@ -1000,7 +1000,7 @@
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:3 type:TType_STRING optional:NO name:@"key"], key, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:4 type:TType_STRING optional:NO name:@"value"], value, nil],
                             ]];
-  return [[TProtocolUtil readMessage:@"setNoteApplicationDataEntry"
+  return [[ENTProtocolUtil readMessage:@"setNoteApplicationDataEntry"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_I32 optional:NO name:@"success"],
@@ -1012,14 +1012,14 @@
 
 - (int32_t) unsetNoteApplicationDataEntry: (NSString *) authenticationToken guid: (EDAMGuid) guid key: (NSString *) key
 {
-  [TProtocolUtil sendMessage:@"unsetNoteApplicationDataEntry"
+  [ENTProtocolUtil sendMessage:@"unsetNoteApplicationDataEntry"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:3 type:TType_STRING optional:NO name:@"key"], key, nil],
                             ]];
-  return [[TProtocolUtil readMessage:@"unsetNoteApplicationDataEntry"
+  return [[ENTProtocolUtil readMessage:@"unsetNoteApplicationDataEntry"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_I32 optional:NO name:@"success"],
@@ -1031,13 +1031,13 @@
 
 - (NSString *) getNoteContent: (NSString *) authenticationToken guid: (EDAMGuid) guid
 {
-  [TProtocolUtil sendMessage:@"getNoteContent"
+  [ENTProtocolUtil sendMessage:@"getNoteContent"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getNoteContent"
+  return [ENTProtocolUtil readMessage:@"getNoteContent"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRING optional:NO name:@"success"],
@@ -1049,7 +1049,7 @@
 
 - (NSString *) getNoteSearchText: (NSString *) authenticationToken guid: (EDAMGuid) guid noteOnly: (BOOL) noteOnly tokenizeForIndexing: (BOOL) tokenizeForIndexing
 {
-  [TProtocolUtil sendMessage:@"getNoteSearchText"
+  [ENTProtocolUtil sendMessage:@"getNoteSearchText"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
@@ -1057,7 +1057,7 @@
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:3 type:TType_BOOL optional:NO name:@"noteOnly"], @(noteOnly), nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:4 type:TType_BOOL optional:NO name:@"tokenizeForIndexing"], @(tokenizeForIndexing), nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getNoteSearchText"
+  return [ENTProtocolUtil readMessage:@"getNoteSearchText"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRING optional:NO name:@"success"],
@@ -1069,13 +1069,13 @@
 
 - (NSString *) getResourceSearchText: (NSString *) authenticationToken guid: (EDAMGuid) guid
 {
-  [TProtocolUtil sendMessage:@"getResourceSearchText"
+  [ENTProtocolUtil sendMessage:@"getResourceSearchText"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getResourceSearchText"
+  return [ENTProtocolUtil readMessage:@"getResourceSearchText"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRING optional:NO name:@"success"],
@@ -1087,13 +1087,13 @@
 
 - (NSArray *) getNoteTagNames: (NSString *) authenticationToken guid: (EDAMGuid) guid
 {
-  [TProtocolUtil sendMessage:@"getNoteTagNames"
+  [ENTProtocolUtil sendMessage:@"getNoteTagNames"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getNoteTagNames"
+  return [ENTProtocolUtil readMessage:@"getNoteTagNames"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_LIST optional:NO name:@"success" valueType:TType_STRING valueClass:NULL],
@@ -1105,13 +1105,13 @@
 
 - (EDAMNote *) createNote: (NSString *) authenticationToken note: (EDAMNote *) note
 {
-  [TProtocolUtil sendMessage:@"createNote"
+  [ENTProtocolUtil sendMessage:@"createNote"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRUCT optional:NO name:@"note" valueType:TType_STRUCT valueClass:[EDAMNote class]], note, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"createNote"
+  return [ENTProtocolUtil readMessage:@"createNote"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMNote class]],
@@ -1123,13 +1123,13 @@
 
 - (EDAMNote *) updateNote: (NSString *) authenticationToken note: (EDAMNote *) note
 {
-  [TProtocolUtil sendMessage:@"updateNote"
+  [ENTProtocolUtil sendMessage:@"updateNote"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRUCT optional:NO name:@"note" valueType:TType_STRUCT valueClass:[EDAMNote class]], note, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"updateNote"
+  return [ENTProtocolUtil readMessage:@"updateNote"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMNote class]],
@@ -1141,13 +1141,13 @@
 
 - (int32_t) deleteNote: (NSString *) authenticationToken guid: (EDAMGuid) guid
 {
-  [TProtocolUtil sendMessage:@"deleteNote"
+  [ENTProtocolUtil sendMessage:@"deleteNote"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                             ]];
-  return [[TProtocolUtil readMessage:@"deleteNote"
+  return [[ENTProtocolUtil readMessage:@"deleteNote"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_I32 optional:NO name:@"success"],
@@ -1159,13 +1159,13 @@
 
 - (int32_t) expungeNote: (NSString *) authenticationToken guid: (EDAMGuid) guid
 {
-  [TProtocolUtil sendMessage:@"expungeNote"
+  [ENTProtocolUtil sendMessage:@"expungeNote"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                             ]];
-  return [[TProtocolUtil readMessage:@"expungeNote"
+  return [[ENTProtocolUtil readMessage:@"expungeNote"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_I32 optional:NO name:@"success"],
@@ -1177,13 +1177,13 @@
 
 - (int32_t) expungeNotes: (NSString *) authenticationToken noteGuids: (NSArray *) noteGuids
 {
-  [TProtocolUtil sendMessage:@"expungeNotes"
+  [ENTProtocolUtil sendMessage:@"expungeNotes"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_LIST optional:NO name:@"noteGuids" valueType:TType_STRING valueClass:NULL], noteGuids, nil],
                             ]];
-  return [[TProtocolUtil readMessage:@"expungeNotes"
+  return [[ENTProtocolUtil readMessage:@"expungeNotes"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_I32 optional:NO name:@"success"],
@@ -1195,12 +1195,12 @@
 
 - (int32_t) expungeInactiveNotes: (NSString *) authenticationToken
 {
-  [TProtocolUtil sendMessage:@"expungeInactiveNotes"
+  [ENTProtocolUtil sendMessage:@"expungeInactiveNotes"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                             ]];
-  return [[TProtocolUtil readMessage:@"expungeInactiveNotes"
+  return [[ENTProtocolUtil readMessage:@"expungeInactiveNotes"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_I32 optional:NO name:@"success"],
@@ -1211,14 +1211,14 @@
 
 - (EDAMNote *) copyNote: (NSString *) authenticationToken noteGuid: (EDAMGuid) noteGuid toNotebookGuid: (EDAMGuid) toNotebookGuid
 {
-  [TProtocolUtil sendMessage:@"copyNote"
+  [ENTProtocolUtil sendMessage:@"copyNote"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"noteGuid"], noteGuid, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:3 type:TType_STRING optional:NO name:@"toNotebookGuid"], toNotebookGuid, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"copyNote"
+  return [ENTProtocolUtil readMessage:@"copyNote"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMNote class]],
@@ -1230,13 +1230,13 @@
 
 - (NSArray *) listNoteVersions: (NSString *) authenticationToken noteGuid: (EDAMGuid) noteGuid
 {
-  [TProtocolUtil sendMessage:@"listNoteVersions"
+  [ENTProtocolUtil sendMessage:@"listNoteVersions"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"noteGuid"], noteGuid, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"listNoteVersions"
+  return [ENTProtocolUtil readMessage:@"listNoteVersions"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_LIST optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMNoteVersionId class]],
@@ -1248,7 +1248,7 @@
 
 - (EDAMNote *) getNoteVersion: (NSString *) authenticationToken noteGuid: (EDAMGuid) noteGuid updateSequenceNum: (int32_t) updateSequenceNum withResourcesData: (BOOL) withResourcesData withResourcesRecognition: (BOOL) withResourcesRecognition withResourcesAlternateData: (BOOL) withResourcesAlternateData
 {
-  [TProtocolUtil sendMessage:@"getNoteVersion"
+  [ENTProtocolUtil sendMessage:@"getNoteVersion"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
@@ -1258,7 +1258,7 @@
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:5 type:TType_BOOL optional:NO name:@"withResourcesRecognition"], @(withResourcesRecognition), nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:6 type:TType_BOOL optional:NO name:@"withResourcesAlternateData"], @(withResourcesAlternateData), nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getNoteVersion"
+  return [ENTProtocolUtil readMessage:@"getNoteVersion"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMNote class]],
@@ -1270,7 +1270,7 @@
 
 - (EDAMResource *) getResource: (NSString *) authenticationToken guid: (EDAMGuid) guid withData: (BOOL) withData withRecognition: (BOOL) withRecognition withAttributes: (BOOL) withAttributes withAlternateData: (BOOL) withAlternateData
 {
-  [TProtocolUtil sendMessage:@"getResource"
+  [ENTProtocolUtil sendMessage:@"getResource"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
@@ -1280,7 +1280,7 @@
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:5 type:TType_BOOL optional:NO name:@"withAttributes"], @(withAttributes), nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:6 type:TType_BOOL optional:NO name:@"withAlternateData"], @(withAlternateData), nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getResource"
+  return [ENTProtocolUtil readMessage:@"getResource"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMResource class]],
@@ -1292,13 +1292,13 @@
 
 - (EDAMLazyMap *) getResourceApplicationData: (NSString *) authenticationToken guid: (EDAMGuid) guid
 {
-  [TProtocolUtil sendMessage:@"getResourceApplicationData"
+  [ENTProtocolUtil sendMessage:@"getResourceApplicationData"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getResourceApplicationData"
+  return [ENTProtocolUtil readMessage:@"getResourceApplicationData"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMLazyMap class]],
@@ -1310,14 +1310,14 @@
 
 - (NSString *) getResourceApplicationDataEntry: (NSString *) authenticationToken guid: (EDAMGuid) guid key: (NSString *) key
 {
-  [TProtocolUtil sendMessage:@"getResourceApplicationDataEntry"
+  [ENTProtocolUtil sendMessage:@"getResourceApplicationDataEntry"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:3 type:TType_STRING optional:NO name:@"key"], key, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getResourceApplicationDataEntry"
+  return [ENTProtocolUtil readMessage:@"getResourceApplicationDataEntry"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRING optional:NO name:@"success"],
@@ -1329,7 +1329,7 @@
 
 - (int32_t) setResourceApplicationDataEntry: (NSString *) authenticationToken guid: (EDAMGuid) guid key: (NSString *) key value: (NSString *) value
 {
-  [TProtocolUtil sendMessage:@"setResourceApplicationDataEntry"
+  [ENTProtocolUtil sendMessage:@"setResourceApplicationDataEntry"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
@@ -1337,7 +1337,7 @@
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:3 type:TType_STRING optional:NO name:@"key"], key, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:4 type:TType_STRING optional:NO name:@"value"], value, nil],
                             ]];
-  return [[TProtocolUtil readMessage:@"setResourceApplicationDataEntry"
+  return [[ENTProtocolUtil readMessage:@"setResourceApplicationDataEntry"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_I32 optional:NO name:@"success"],
@@ -1349,14 +1349,14 @@
 
 - (int32_t) unsetResourceApplicationDataEntry: (NSString *) authenticationToken guid: (EDAMGuid) guid key: (NSString *) key
 {
-  [TProtocolUtil sendMessage:@"unsetResourceApplicationDataEntry"
+  [ENTProtocolUtil sendMessage:@"unsetResourceApplicationDataEntry"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:3 type:TType_STRING optional:NO name:@"key"], key, nil],
                             ]];
-  return [[TProtocolUtil readMessage:@"unsetResourceApplicationDataEntry"
+  return [[ENTProtocolUtil readMessage:@"unsetResourceApplicationDataEntry"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_I32 optional:NO name:@"success"],
@@ -1368,13 +1368,13 @@
 
 - (int32_t) updateResource: (NSString *) authenticationToken resource: (EDAMResource *) resource
 {
-  [TProtocolUtil sendMessage:@"updateResource"
+  [ENTProtocolUtil sendMessage:@"updateResource"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRUCT optional:NO name:@"resource" valueType:TType_STRUCT valueClass:[EDAMResource class]], resource, nil],
                             ]];
-  return [[TProtocolUtil readMessage:@"updateResource"
+  return [[ENTProtocolUtil readMessage:@"updateResource"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_I32 optional:NO name:@"success"],
@@ -1386,13 +1386,13 @@
 
 - (NSData *) getResourceData: (NSString *) authenticationToken guid: (EDAMGuid) guid
 {
-  [TProtocolUtil sendMessage:@"getResourceData"
+  [ENTProtocolUtil sendMessage:@"getResourceData"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getResourceData"
+  return [ENTProtocolUtil readMessage:@"getResourceData"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_BINARY optional:NO name:@"success"],
@@ -1404,7 +1404,7 @@
 
 - (EDAMResource *) getResourceByHash: (NSString *) authenticationToken noteGuid: (EDAMGuid) noteGuid contentHash: (NSData *) contentHash withData: (BOOL) withData withRecognition: (BOOL) withRecognition withAlternateData: (BOOL) withAlternateData
 {
-  [TProtocolUtil sendMessage:@"getResourceByHash"
+  [ENTProtocolUtil sendMessage:@"getResourceByHash"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
@@ -1414,7 +1414,7 @@
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:5 type:TType_BOOL optional:NO name:@"withRecognition"], @(withRecognition), nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:6 type:TType_BOOL optional:NO name:@"withAlternateData"], @(withAlternateData), nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getResourceByHash"
+  return [ENTProtocolUtil readMessage:@"getResourceByHash"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMResource class]],
@@ -1426,13 +1426,13 @@
 
 - (NSData *) getResourceRecognition: (NSString *) authenticationToken guid: (EDAMGuid) guid
 {
-  [TProtocolUtil sendMessage:@"getResourceRecognition"
+  [ENTProtocolUtil sendMessage:@"getResourceRecognition"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getResourceRecognition"
+  return [ENTProtocolUtil readMessage:@"getResourceRecognition"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_BINARY optional:NO name:@"success"],
@@ -1444,13 +1444,13 @@
 
 - (NSData *) getResourceAlternateData: (NSString *) authenticationToken guid: (EDAMGuid) guid
 {
-  [TProtocolUtil sendMessage:@"getResourceAlternateData"
+  [ENTProtocolUtil sendMessage:@"getResourceAlternateData"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getResourceAlternateData"
+  return [ENTProtocolUtil readMessage:@"getResourceAlternateData"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_BINARY optional:NO name:@"success"],
@@ -1462,13 +1462,13 @@
 
 - (EDAMResourceAttributes *) getResourceAttributes: (NSString *) authenticationToken guid: (EDAMGuid) guid
 {
-  [TProtocolUtil sendMessage:@"getResourceAttributes"
+  [ENTProtocolUtil sendMessage:@"getResourceAttributes"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getResourceAttributes"
+  return [ENTProtocolUtil readMessage:@"getResourceAttributes"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMResourceAttributes class]],
@@ -1480,13 +1480,13 @@
 
 - (EDAMNotebook *) getPublicNotebook: (EDAMUserID) userId publicUri: (NSString *) publicUri
 {
-  [TProtocolUtil sendMessage:@"getPublicNotebook"
+  [ENTProtocolUtil sendMessage:@"getPublicNotebook"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_I32 optional:NO name:@"userId"], @(userId), nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"publicUri"], publicUri, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getPublicNotebook"
+  return [ENTProtocolUtil readMessage:@"getPublicNotebook"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMNotebook class]],
@@ -1497,13 +1497,13 @@
 
 - (EDAMSharedNotebook *) createSharedNotebook: (NSString *) authenticationToken sharedNotebook: (EDAMSharedNotebook *) sharedNotebook
 {
-  [TProtocolUtil sendMessage:@"createSharedNotebook"
+  [ENTProtocolUtil sendMessage:@"createSharedNotebook"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRUCT optional:NO name:@"sharedNotebook" valueType:TType_STRUCT valueClass:[EDAMSharedNotebook class]], sharedNotebook, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"createSharedNotebook"
+  return [ENTProtocolUtil readMessage:@"createSharedNotebook"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMSharedNotebook class]],
@@ -1515,14 +1515,14 @@
 
 - (EDAMSharedNotebook *) shareNotebook: (NSString *) authenticationToken sharedNotebook: (EDAMSharedNotebook *) sharedNotebook message: (NSString *) message
 {
-  [TProtocolUtil sendMessage:@"shareNotebook"
+  [ENTProtocolUtil sendMessage:@"shareNotebook"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRUCT optional:NO name:@"sharedNotebook" valueType:TType_STRUCT valueClass:[EDAMSharedNotebook class]], sharedNotebook, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:3 type:TType_STRING optional:NO name:@"message"], message, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"shareNotebook"
+  return [ENTProtocolUtil readMessage:@"shareNotebook"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMSharedNotebook class]],
@@ -1534,13 +1534,13 @@
 
 - (int32_t) updateSharedNotebook: (NSString *) authenticationToken sharedNotebook: (EDAMSharedNotebook *) sharedNotebook
 {
-  [TProtocolUtil sendMessage:@"updateSharedNotebook"
+  [ENTProtocolUtil sendMessage:@"updateSharedNotebook"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRUCT optional:NO name:@"sharedNotebook" valueType:TType_STRUCT valueClass:[EDAMSharedNotebook class]], sharedNotebook, nil],
                             ]];
-  return [[TProtocolUtil readMessage:@"updateSharedNotebook"
+  return [[ENTProtocolUtil readMessage:@"updateSharedNotebook"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_I32 optional:NO name:@"success"],
@@ -1552,14 +1552,14 @@
 
 - (int32_t) setSharedNotebookRecipientSettings: (NSString *) authenticationToken sharedNotebookId: (int64_t) sharedNotebookId recipientSettings: (EDAMSharedNotebookRecipientSettings *) recipientSettings
 {
-  [TProtocolUtil sendMessage:@"setSharedNotebookRecipientSettings"
+  [ENTProtocolUtil sendMessage:@"setSharedNotebookRecipientSettings"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_I64 optional:NO name:@"sharedNotebookId"], @(sharedNotebookId), nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:3 type:TType_STRUCT optional:NO name:@"recipientSettings" valueType:TType_STRUCT valueClass:[EDAMSharedNotebookRecipientSettings class]], recipientSettings, nil],
                             ]];
-  return [[TProtocolUtil readMessage:@"setSharedNotebookRecipientSettings"
+  return [[ENTProtocolUtil readMessage:@"setSharedNotebookRecipientSettings"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_I32 optional:NO name:@"success"],
@@ -1571,7 +1571,7 @@
 
 - (int32_t) sendMessageToSharedNotebookMembers: (NSString *) authenticationToken notebookGuid: (EDAMGuid) notebookGuid messageText: (NSString *) messageText recipients: (NSArray *) recipients
 {
-  [TProtocolUtil sendMessage:@"sendMessageToSharedNotebookMembers"
+  [ENTProtocolUtil sendMessage:@"sendMessageToSharedNotebookMembers"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
@@ -1579,7 +1579,7 @@
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:3 type:TType_STRING optional:NO name:@"messageText"], messageText, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:4 type:TType_LIST optional:NO name:@"recipients" valueType:TType_STRING valueClass:NULL], recipients, nil],
                             ]];
-  return [[TProtocolUtil readMessage:@"sendMessageToSharedNotebookMembers"
+  return [[ENTProtocolUtil readMessage:@"sendMessageToSharedNotebookMembers"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_I32 optional:NO name:@"success"],
@@ -1591,12 +1591,12 @@
 
 - (NSArray *) listSharedNotebooks: (NSString *) authenticationToken
 {
-  [TProtocolUtil sendMessage:@"listSharedNotebooks"
+  [ENTProtocolUtil sendMessage:@"listSharedNotebooks"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"listSharedNotebooks"
+  return [ENTProtocolUtil readMessage:@"listSharedNotebooks"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_LIST optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMSharedNotebook class]],
@@ -1608,13 +1608,13 @@
 
 - (int32_t) expungeSharedNotebooks: (NSString *) authenticationToken sharedNotebookIds: (NSArray *) sharedNotebookIds
 {
-  [TProtocolUtil sendMessage:@"expungeSharedNotebooks"
+  [ENTProtocolUtil sendMessage:@"expungeSharedNotebooks"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_LIST optional:NO name:@"sharedNotebookIds" valueType:TType_I64 valueClass:NULL], sharedNotebookIds, nil],
                             ]];
-  return [[TProtocolUtil readMessage:@"expungeSharedNotebooks"
+  return [[ENTProtocolUtil readMessage:@"expungeSharedNotebooks"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_I32 optional:NO name:@"success"],
@@ -1626,13 +1626,13 @@
 
 - (EDAMLinkedNotebook *) createLinkedNotebook: (NSString *) authenticationToken linkedNotebook: (EDAMLinkedNotebook *) linkedNotebook
 {
-  [TProtocolUtil sendMessage:@"createLinkedNotebook"
+  [ENTProtocolUtil sendMessage:@"createLinkedNotebook"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRUCT optional:NO name:@"linkedNotebook" valueType:TType_STRUCT valueClass:[EDAMLinkedNotebook class]], linkedNotebook, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"createLinkedNotebook"
+  return [ENTProtocolUtil readMessage:@"createLinkedNotebook"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMLinkedNotebook class]],
@@ -1644,13 +1644,13 @@
 
 - (int32_t) updateLinkedNotebook: (NSString *) authenticationToken linkedNotebook: (EDAMLinkedNotebook *) linkedNotebook
 {
-  [TProtocolUtil sendMessage:@"updateLinkedNotebook"
+  [ENTProtocolUtil sendMessage:@"updateLinkedNotebook"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRUCT optional:NO name:@"linkedNotebook" valueType:TType_STRUCT valueClass:[EDAMLinkedNotebook class]], linkedNotebook, nil],
                             ]];
-  return [[TProtocolUtil readMessage:@"updateLinkedNotebook"
+  return [[ENTProtocolUtil readMessage:@"updateLinkedNotebook"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_I32 optional:NO name:@"success"],
@@ -1662,12 +1662,12 @@
 
 - (NSArray *) listLinkedNotebooks: (NSString *) authenticationToken
 {
-  [TProtocolUtil sendMessage:@"listLinkedNotebooks"
+  [ENTProtocolUtil sendMessage:@"listLinkedNotebooks"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"listLinkedNotebooks"
+  return [ENTProtocolUtil readMessage:@"listLinkedNotebooks"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_LIST optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMLinkedNotebook class]],
@@ -1679,13 +1679,13 @@
 
 - (int32_t) expungeLinkedNotebook: (NSString *) authenticationToken guid: (EDAMGuid) guid
 {
-  [TProtocolUtil sendMessage:@"expungeLinkedNotebook"
+  [ENTProtocolUtil sendMessage:@"expungeLinkedNotebook"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                             ]];
-  return [[TProtocolUtil readMessage:@"expungeLinkedNotebook"
+  return [[ENTProtocolUtil readMessage:@"expungeLinkedNotebook"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_I32 optional:NO name:@"success"],
@@ -1697,13 +1697,13 @@
 
 - (EDAMAuthenticationResult *) authenticateToSharedNotebook: (NSString *) shareKeyOrGlobalId authenticationToken: (NSString *) authenticationToken
 {
-  [TProtocolUtil sendMessage:@"authenticateToSharedNotebook"
+  [ENTProtocolUtil sendMessage:@"authenticateToSharedNotebook"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"shareKeyOrGlobalId"], shareKeyOrGlobalId, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"authenticateToSharedNotebook"
+  return [ENTProtocolUtil readMessage:@"authenticateToSharedNotebook"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMAuthenticationResult class]],
@@ -1715,12 +1715,12 @@
 
 - (EDAMSharedNotebook *) getSharedNotebookByAuth: (NSString *) authenticationToken
 {
-  [TProtocolUtil sendMessage:@"getSharedNotebookByAuth"
+  [ENTProtocolUtil sendMessage:@"getSharedNotebookByAuth"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"getSharedNotebookByAuth"
+  return [ENTProtocolUtil readMessage:@"getSharedNotebookByAuth"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMSharedNotebook class]],
@@ -1732,13 +1732,13 @@
 
 - (void) emailNote: (NSString *) authenticationToken parameters: (EDAMNoteEmailParameters *) parameters
 {
-  [TProtocolUtil sendMessage:@"emailNote"
+  [ENTProtocolUtil sendMessage:@"emailNote"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRUCT optional:NO name:@"parameters" valueType:TType_STRUCT valueClass:[EDAMNoteEmailParameters class]], parameters, nil],
                             ]];
-  [TProtocolUtil readMessage:@"emailNote"
+  [ENTProtocolUtil readMessage:@"emailNote"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:1 type:TType_STRUCT optional:NO name:@"userException" valueType:TType_STRUCT valueClass:[EDAMUserException class]],
@@ -1749,13 +1749,13 @@
 
 - (NSString *) shareNote: (NSString *) authenticationToken guid: (EDAMGuid) guid
 {
-  [TProtocolUtil sendMessage:@"shareNote"
+  [ENTProtocolUtil sendMessage:@"shareNote"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"shareNote"
+  return [ENTProtocolUtil readMessage:@"shareNote"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRING optional:NO name:@"success"],
@@ -1767,13 +1767,13 @@
 
 - (void) stopSharingNote: (NSString *) authenticationToken guid: (EDAMGuid) guid
 {
-  [TProtocolUtil sendMessage:@"stopSharingNote"
+  [ENTProtocolUtil sendMessage:@"stopSharingNote"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                             ]];
-  [TProtocolUtil readMessage:@"stopSharingNote"
+  [ENTProtocolUtil readMessage:@"stopSharingNote"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:1 type:TType_STRUCT optional:NO name:@"userException" valueType:TType_STRUCT valueClass:[EDAMUserException class]],
@@ -1784,14 +1784,14 @@
 
 - (EDAMAuthenticationResult *) authenticateToSharedNote: (NSString *) guid noteKey: (NSString *) noteKey authenticationToken: (NSString *) authenticationToken
 {
-  [TProtocolUtil sendMessage:@"authenticateToSharedNote"
+  [ENTProtocolUtil sendMessage:@"authenticateToSharedNote"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"guid"], guid, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRING optional:NO name:@"noteKey"], noteKey, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:3 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"authenticateToSharedNote"
+  return [ENTProtocolUtil readMessage:@"authenticateToSharedNote"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMAuthenticationResult class]],
@@ -1803,14 +1803,14 @@
 
 - (EDAMRelatedResult *) findRelated: (NSString *) authenticationToken query: (EDAMRelatedQuery *) query resultSpec: (EDAMRelatedResultSpec *) resultSpec
 {
-  [TProtocolUtil sendMessage:@"findRelated"
+  [ENTProtocolUtil sendMessage:@"findRelated"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRUCT optional:NO name:@"query" valueType:TType_STRUCT valueClass:[EDAMRelatedQuery class]], query, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:3 type:TType_STRUCT optional:NO name:@"resultSpec" valueType:TType_STRUCT valueClass:[EDAMRelatedResultSpec class]], resultSpec, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"findRelated"
+  return [ENTProtocolUtil readMessage:@"findRelated"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMRelatedResult class]],
@@ -1822,13 +1822,13 @@
 
 - (EDAMBusinessQueryResult *) findInBusiness: (NSString *) authenticationToken query: (EDAMBusinessQuery *) query
 {
-  [TProtocolUtil sendMessage:@"findInBusiness"
+  [ENTProtocolUtil sendMessage:@"findInBusiness"
                   toProtocol:_outProtocol
                 withArgPairs:@[
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:1 type:TType_STRING optional:NO name:@"authenticationToken"], authenticationToken, nil],
                                [NSArray arrayWithObjects:[FATField fieldWithIndex:2 type:TType_STRUCT optional:NO name:@"query" valueType:TType_STRUCT valueClass:[EDAMBusinessQuery class]], query, nil],
                             ]];
-  return [TProtocolUtil readMessage:@"findInBusiness"
+  return [ENTProtocolUtil readMessage:@"findInBusiness"
                 fromProtocol:_inProtocol
            withResponseTypes:@[
                               [FATField fieldWithIndex:0 type:TType_STRUCT optional:NO name:@"success" valueType:TType_STRUCT valueClass:[EDAMBusinessQueryResult class]],

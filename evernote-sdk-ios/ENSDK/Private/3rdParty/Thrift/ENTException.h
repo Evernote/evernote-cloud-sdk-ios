@@ -19,9 +19,9 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol TProtocol;
+@protocol ENTProtocol;
 
-@interface TException : NSException 
+@interface ENTException : NSException 
 
 + (id) exceptionWithName:(NSString *) name;
 
@@ -35,23 +35,23 @@
 @end
 
 enum {
-  TApplicationException_UNKNOWN = 0,
-  TApplicationException_UNKNOWN_METHOD = 1,
-  TApplicationException_INVALID_MESSAGE_TYPE = 2,
-  TApplicationException_WRONG_METHOD_NAME = 3,
-  TApplicationException_BAD_SEQUENCE_ID = 4,
-  TApplicationException_MISSING_RESULT = 5,
-  TApplicationException_INTERNAL_ERROR = 6,
-  TApplicationException_PROTOCOL_ERROR = 7
+  ENTApplicationException_UNKNOWN = 0,
+  ENTApplicationException_UNKNOWN_METHOD = 1,
+  ENTApplicationException_INVALID_MESSAGE_TYPE = 2,
+  ENTApplicationException_WRONG_METHOD_NAME = 3,
+  ENTApplicationException_BAD_SEQUENCE_ID = 4,
+  ENTApplicationException_MISSING_RESULT = 5,
+  ENTApplicationException_INTERNAL_ERROR = 6,
+  ENTApplicationException_PROTOCOL_ERROR = 7
 };
 
-@interface TApplicationException : TException
+@interface ENTApplicationException : ENTException
 
-+ (TApplicationException *) read: (id <TProtocol>) protocol;
++ (ENTApplicationException *) read: (id <ENTProtocol>) protocol;
 
-- (void) write: (id <TProtocol>) protocol;
+- (void) write: (id <ENTProtocol>) protocol;
 
-+ (TApplicationException *) exceptionWithType: (int) type
++ (ENTApplicationException *) exceptionWithType: (int) type
                                        reason: (NSString *) message;
 
 @end

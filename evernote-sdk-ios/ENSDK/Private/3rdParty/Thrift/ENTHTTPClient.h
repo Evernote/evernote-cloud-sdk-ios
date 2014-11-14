@@ -18,9 +18,9 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "TTransport.h"
+#import "ENTTransport.h"
 
-@interface THTTPClient : NSObject <TTransport>
+@interface ENTHTTPClient : NSObject <ENTTransport>
 
 - (id) initWithURL:(NSURL *)aURL;
 

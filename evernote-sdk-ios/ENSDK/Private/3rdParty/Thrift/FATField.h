@@ -28,7 +28,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "TProtocol.h"
+#import "ENTProtocol.h"
 
 @interface FATField : NSObject
 

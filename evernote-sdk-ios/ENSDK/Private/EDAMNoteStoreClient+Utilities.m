@@ -27,8 +27,8 @@
  */
 
 #import "EDAMNoteStoreClient+Utilities.h"
-#import "TProtocol.h"
-#import "TTransport.h"
+#import "ENTProtocol.h"
+#import "ENTTransport.h"
 
 @implementation EDAMNoteStoreClient (Utilities)
 

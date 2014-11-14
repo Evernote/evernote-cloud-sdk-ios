@@ -17,25 +17,18 @@
  * under the License.
  */
 
-#import "TTransport.h"
+#import "ENTProtocol.h"
+#import "ENTTransport.h"
 
-@implementation TTransportException
+@interface ENTBinaryProtocol : NSObject <ENTProtocol>
 
-+ (id) exceptionWithReason: (NSString *) reason
-                     error: (NSError *) error
-{
-  NSDictionary * userInfo = nil;
-  if (error != nil) {
-    userInfo = @{ @"error" : error };
-  }
-  
-  return [super exceptionWithName: @"TTransportException"
-                           reason: reason
-                         userInfo: userInfo];
-}
+- (id) initWithTransport: (id <ENTTransport>) transport;
 
-+ (id) exceptionWithReason: (NSString *) reason {
-  return [self exceptionWithReason: reason error: nil];
-}
+- (id) initWithTransport: (id <ENTTransport>) transport
+              strictRead: (BOOL) strictRead
+             strictWrite: (BOOL) strictWrite;
+
+- (int32_t) messageSizeLimit;
+- (void) setMessageSizeLimit: (int32_t) sizeLimit;
 
 @end

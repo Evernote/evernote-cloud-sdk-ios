@@ -17,10 +17,10 @@
  * under the License.
  */
 
-#import "TException.h"
-#import "TProtocol.h"
+#import "ENTException.h"
+#import "ENTProtocol.h"
 
-@implementation TException
+@implementation ENTException
 
 + (id) exceptionWithName: (NSString *) name {
   return [self exceptionWithName: name reason: @"unknown" error: nil];
@@ -60,7 +60,7 @@
 
 @end
 
-@implementation TApplicationException {
+@implementation ENTApplicationException {
   int _type;
 }
 
@@ -71,19 +71,19 @@
   
   NSString * name;
   switch (type) {
-    case TApplicationException_UNKNOWN_METHOD:
+    case ENTApplicationException_UNKNOWN_METHOD:
       name = @"Unknown method";
       break;
-    case TApplicationException_INVALID_MESSAGE_TYPE:
+    case ENTApplicationException_INVALID_MESSAGE_TYPE:
       name = @"Invalid message type";
       break;
-    case TApplicationException_WRONG_METHOD_NAME:
+    case ENTApplicationException_WRONG_METHOD_NAME:
       name = @"Wrong method name";
       break;
-    case TApplicationException_BAD_SEQUENCE_ID:
+    case ENTApplicationException_BAD_SEQUENCE_ID:
       name = @"Bad sequence ID";
       break;
-    case TApplicationException_MISSING_RESULT:
+    case ENTApplicationException_MISSING_RESULT:
       name = @"Missing result";
       break;
     default:
@@ -96,9 +96,9 @@
 }
 
 
-+ (TApplicationException *) read: (id <TProtocol>) protocol {
++ (ENTApplicationException *) read: (id <ENTProtocol>) protocol {
   NSString * reason = nil;
-  int type = TApplicationException_UNKNOWN;
+  int type = ENTApplicationException_UNKNOWN;
   int fieldType;
   int fieldID;
   
@@ -116,28 +116,28 @@
         if (fieldType == TType_STRING) {
           reason = [protocol readString];
         } else {
-          [TProtocolUtil skipType: fieldType onProtocol: protocol];
+          [ENTProtocolUtil skipType: fieldType onProtocol: protocol];
         }
         break;
       case 2:
         if (fieldType == TType_I32) {
           type = [protocol readI32];
         } else {
-          [TProtocolUtil skipType: fieldType onProtocol: protocol];
+          [ENTProtocolUtil skipType: fieldType onProtocol: protocol];
         }
         break;
       default:
-        [TProtocolUtil skipType: fieldType onProtocol: protocol];
+        [ENTProtocolUtil skipType: fieldType onProtocol: protocol];
         break;
     }
     [protocol readFieldEnd];
   }
   [protocol readStructEnd];
   
-  return [TApplicationException exceptionWithType: type reason: reason];
+  return [ENTApplicationException exceptionWithType: type reason: reason];
 }
 
-- (void) write: (id <TProtocol>) protocol {
+- (void) write: (id <ENTProtocol>) protocol {
   [protocol writeStructBeginWithName: @"TApplicationException"];
   
   if ([self reason] != nil) {
@@ -159,10 +159,10 @@
 }
 
 
-+ (TApplicationException *) exceptionWithType: (int) type
++ (ENTApplicationException *) exceptionWithType: (int) type
                                        reason: (NSString *) reason
 {
-  return [[TApplicationException alloc] initWithType: type
+  return [[ENTApplicationException alloc] initWithType: type
                                               reason: reason];
 }
 

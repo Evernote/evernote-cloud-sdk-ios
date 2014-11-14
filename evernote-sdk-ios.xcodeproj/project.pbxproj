@@ -255,26 +255,26 @@
 		BE7E5F421921808B00A4DA30 /* FATObject.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F301921808B00A4DA30 /* FATObject.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		BE7E5F431921808B00A4DA30 /* FATObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F311921808B00A4DA30 /* FATObject.m */; };
 		BE7E5F441921808B00A4DA30 /* FATObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F311921808B00A4DA30 /* FATObject.m */; };
-		BE7E5F461921808B00A4DA30 /* TBinaryProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F331921808B00A4DA30 /* TBinaryProtocol.h */; };
-		BE7E5F471921808B00A4DA30 /* TBinaryProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F331921808B00A4DA30 /* TBinaryProtocol.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		BE7E5F481921808B00A4DA30 /* TBinaryProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F341921808B00A4DA30 /* TBinaryProtocol.m */; };
-		BE7E5F491921808B00A4DA30 /* TBinaryProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F341921808B00A4DA30 /* TBinaryProtocol.m */; };
-		BE7E5F4A1921808B00A4DA30 /* TException.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F351921808B00A4DA30 /* TException.h */; };
-		BE7E5F4B1921808B00A4DA30 /* TException.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F351921808B00A4DA30 /* TException.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		BE7E5F4C1921808B00A4DA30 /* TException.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F361921808B00A4DA30 /* TException.m */; };
-		BE7E5F4D1921808B00A4DA30 /* TException.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F361921808B00A4DA30 /* TException.m */; };
-		BE7E5F4E1921808B00A4DA30 /* THTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F371921808B00A4DA30 /* THTTPClient.h */; };
-		BE7E5F4F1921808B00A4DA30 /* THTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F371921808B00A4DA30 /* THTTPClient.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		BE7E5F501921808B00A4DA30 /* THTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F381921808B00A4DA30 /* THTTPClient.m */; };
-		BE7E5F511921808B00A4DA30 /* THTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F381921808B00A4DA30 /* THTTPClient.m */; };
-		BE7E5F521921808B00A4DA30 /* TProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F391921808B00A4DA30 /* TProtocol.h */; };
-		BE7E5F531921808B00A4DA30 /* TProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F391921808B00A4DA30 /* TProtocol.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		BE7E5F541921808B00A4DA30 /* TProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F3A1921808B00A4DA30 /* TProtocol.m */; };
-		BE7E5F551921808B00A4DA30 /* TProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F3A1921808B00A4DA30 /* TProtocol.m */; };
-		BE7E5F561921808B00A4DA30 /* TTransport.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F3B1921808B00A4DA30 /* TTransport.h */; };
-		BE7E5F571921808B00A4DA30 /* TTransport.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F3B1921808B00A4DA30 /* TTransport.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		BE7E5F581921808B00A4DA30 /* TTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F3C1921808B00A4DA30 /* TTransport.m */; };
-		BE7E5F591921808B00A4DA30 /* TTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F3C1921808B00A4DA30 /* TTransport.m */; };
+		BE7E5F461921808B00A4DA30 /* ENTBinaryProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F331921808B00A4DA30 /* ENTBinaryProtocol.h */; };
+		BE7E5F471921808B00A4DA30 /* ENTBinaryProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F331921808B00A4DA30 /* ENTBinaryProtocol.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		BE7E5F481921808B00A4DA30 /* ENTBinaryProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F341921808B00A4DA30 /* ENTBinaryProtocol.m */; };
+		BE7E5F491921808B00A4DA30 /* ENTBinaryProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F341921808B00A4DA30 /* ENTBinaryProtocol.m */; };
+		BE7E5F4A1921808B00A4DA30 /* ENTException.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F351921808B00A4DA30 /* ENTException.h */; };
+		BE7E5F4B1921808B00A4DA30 /* ENTException.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F351921808B00A4DA30 /* ENTException.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		BE7E5F4C1921808B00A4DA30 /* ENTException.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F361921808B00A4DA30 /* ENTException.m */; };
+		BE7E5F4D1921808B00A4DA30 /* ENTException.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F361921808B00A4DA30 /* ENTException.m */; };
+		BE7E5F4E1921808B00A4DA30 /* ENTHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F371921808B00A4DA30 /* ENTHTTPClient.h */; };
+		BE7E5F4F1921808B00A4DA30 /* ENTHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F371921808B00A4DA30 /* ENTHTTPClient.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		BE7E5F501921808B00A4DA30 /* ENTHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F381921808B00A4DA30 /* ENTHTTPClient.m */; };
+		BE7E5F511921808B00A4DA30 /* ENTHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F381921808B00A4DA30 /* ENTHTTPClient.m */; };
+		BE7E5F521921808B00A4DA30 /* ENTProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F391921808B00A4DA30 /* ENTProtocol.h */; };
+		BE7E5F531921808B00A4DA30 /* ENTProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F391921808B00A4DA30 /* ENTProtocol.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		BE7E5F541921808B00A4DA30 /* ENTProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F3A1921808B00A4DA30 /* ENTProtocol.m */; };
+		BE7E5F551921808B00A4DA30 /* ENTProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F3A1921808B00A4DA30 /* ENTProtocol.m */; };
+		BE7E5F561921808B00A4DA30 /* ENTTransport.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F3B1921808B00A4DA30 /* ENTTransport.h */; };
+		BE7E5F571921808B00A4DA30 /* ENTTransport.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F3B1921808B00A4DA30 /* ENTTransport.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		BE7E5F581921808B00A4DA30 /* ENTTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F3C1921808B00A4DA30 /* ENTTransport.m */; };
+		BE7E5F591921808B00A4DA30 /* ENTTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F3C1921808B00A4DA30 /* ENTTransport.m */; };
 		BEA8992F1913215C001619FE /* angle-mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEA8992E1913215C001619FE /* angle-mask@2x.png */; };
 		BEA899921917F59C001619FE /* ENStoreClient.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E245018EBA5D500BD7E6E /* ENStoreClient.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		BEA899931917F7E8001619FE /* ENLinkedNotebookRef.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E244418EBA5D500BD7E6E /* ENLinkedNotebookRef.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -510,16 +510,16 @@
 		BE7E5F301921808B00A4DA30 /* FATObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FATObject.h; sourceTree = "<group>"; };
 		BE7E5F311921808B00A4DA30 /* FATObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FATObject.m; sourceTree = "<group>"; };
 		BE7E5F321921808B00A4DA30 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		BE7E5F331921808B00A4DA30 /* TBinaryProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBinaryProtocol.h; sourceTree = "<group>"; };
-		BE7E5F341921808B00A4DA30 /* TBinaryProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBinaryProtocol.m; sourceTree = "<group>"; };
-		BE7E5F351921808B00A4DA30 /* TException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TException.h; sourceTree = "<group>"; };
-		BE7E5F361921808B00A4DA30 /* TException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TException.m; sourceTree = "<group>"; };
-		BE7E5F371921808B00A4DA30 /* THTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THTTPClient.h; sourceTree = "<group>"; };
-		BE7E5F381921808B00A4DA30 /* THTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THTTPClient.m; sourceTree = "<group>"; };
-		BE7E5F391921808B00A4DA30 /* TProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TProtocol.h; sourceTree = "<group>"; };
-		BE7E5F3A1921808B00A4DA30 /* TProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TProtocol.m; sourceTree = "<group>"; };
-		BE7E5F3B1921808B00A4DA30 /* TTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTransport.h; sourceTree = "<group>"; };
-		BE7E5F3C1921808B00A4DA30 /* TTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTransport.m; sourceTree = "<group>"; };
+		BE7E5F331921808B00A4DA30 /* ENTBinaryProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENTBinaryProtocol.h; sourceTree = "<group>"; };
+		BE7E5F341921808B00A4DA30 /* ENTBinaryProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENTBinaryProtocol.m; sourceTree = "<group>"; };
+		BE7E5F351921808B00A4DA30 /* ENTException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENTException.h; sourceTree = "<group>"; };
+		BE7E5F361921808B00A4DA30 /* ENTException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENTException.m; sourceTree = "<group>"; };
+		BE7E5F371921808B00A4DA30 /* ENTHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENTHTTPClient.h; sourceTree = "<group>"; };
+		BE7E5F381921808B00A4DA30 /* ENTHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENTHTTPClient.m; sourceTree = "<group>"; };
+		BE7E5F391921808B00A4DA30 /* ENTProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENTProtocol.h; sourceTree = "<group>"; };
+		BE7E5F3A1921808B00A4DA30 /* ENTProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENTProtocol.m; sourceTree = "<group>"; };
+		BE7E5F3B1921808B00A4DA30 /* ENTTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENTTransport.h; sourceTree = "<group>"; };
+		BE7E5F3C1921808B00A4DA30 /* ENTTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENTTransport.m; sourceTree = "<group>"; };
 		BEA8992E1913215C001619FE /* angle-mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "angle-mask@2x.png"; sourceTree = "<group>"; };
 		BECDD2EE18F5C8F3003736EE /* ENPreferencesStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENPreferencesStore.h; sourceTree = "<group>"; };
 		BECDD2EF18F5C8F3003736EE /* ENPreferencesStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENPreferencesStore.m; sourceTree = "<group>"; };
@@ -955,16 +955,16 @@
 				BE7E5F301921808B00A4DA30 /* FATObject.h */,
 				BE7E5F311921808B00A4DA30 /* FATObject.m */,
 				BE7E5F321921808B00A4DA30 /* LICENSE */,
-				BE7E5F331921808B00A4DA30 /* TBinaryProtocol.h */,
-				BE7E5F341921808B00A4DA30 /* TBinaryProtocol.m */,
-				BE7E5F351921808B00A4DA30 /* TException.h */,
-				BE7E5F361921808B00A4DA30 /* TException.m */,
-				BE7E5F371921808B00A4DA30 /* THTTPClient.h */,
-				BE7E5F381921808B00A4DA30 /* THTTPClient.m */,
-				BE7E5F391921808B00A4DA30 /* TProtocol.h */,
-				BE7E5F3A1921808B00A4DA30 /* TProtocol.m */,
-				BE7E5F3B1921808B00A4DA30 /* TTransport.h */,
-				BE7E5F3C1921808B00A4DA30 /* TTransport.m */,
+				BE7E5F331921808B00A4DA30 /* ENTBinaryProtocol.h */,
+				BE7E5F341921808B00A4DA30 /* ENTBinaryProtocol.m */,
+				BE7E5F351921808B00A4DA30 /* ENTException.h */,
+				BE7E5F361921808B00A4DA30 /* ENTException.m */,
+				BE7E5F371921808B00A4DA30 /* ENTHTTPClient.h */,
+				BE7E5F381921808B00A4DA30 /* ENTHTTPClient.m */,
+				BE7E5F391921808B00A4DA30 /* ENTProtocol.h */,
+				BE7E5F3A1921808B00A4DA30 /* ENTProtocol.m */,
+				BE7E5F3B1921808B00A4DA30 /* ENTTransport.h */,
+				BE7E5F3C1921808B00A4DA30 /* ENTTransport.m */,
 			);
 			path = Thrift;
 			sourceTree = "<group>";
@@ -1018,7 +1018,7 @@
 				BE2E24D918EBA5D500BD7E6E /* ENXMLSaxParser.h in Headers */,
 				BE2E24A818EBA5D500BD7E6E /* ENSSKeychain.h in Headers */,
 				BE4C731B195B859A001E5EF6 /* ENShareURLHelper.h in Headers */,
-				BE7E5F461921808B00A4DA30 /* TBinaryProtocol.h in Headers */,
+				BE7E5F461921808B00A4DA30 /* ENTBinaryProtocol.h in Headers */,
 				86D49E40191DA4A8001C3581 /* RMSTextField.h in Headers */,
 				86CB761B18FF4554002F267E /* ENTheme.h in Headers */,
 				BE2E249018EBA5D500BD7E6E /* ENResource.h in Headers */,
@@ -1031,7 +1031,7 @@
 				BE2E246E18EBA5D500BD7E6E /* ENSDKAdvanced.h in Headers */,
 				BECDD2F818F77C0E003736EE /* ENPlaintextNoteContent.h in Headers */,
 				BE2E249418EBA5D500BD7E6E /* ENSession.h in Headers */,
-				BE7E5F4E1921808B00A4DA30 /* THTTPClient.h in Headers */,
+				BE7E5F4E1921808B00A4DA30 /* ENTHTTPClient.h in Headers */,
 				BE7E5F3D1921808B00A4DA30 /* FATField.h in Headers */,
 				BE2E25D318F3745700BD7E6E /* ENBusinessNoteStoreClient.h in Headers */,
 				BE2E24C518EBA5D500BD7E6E /* ENCredentials.h in Headers */,
@@ -1057,7 +1057,7 @@
 				862E76C7192AB962003D0A32 /* ENNotebookPickerView.h in Headers */,
 				BE2E247118EBA5D500BD7E6E /* ENMLUtility.h in Headers */,
 				BE2E24C318EBA5D500BD7E6E /* ENAuthCache.h in Headers */,
-				BE7E5F4A1921808B00A4DA30 /* TException.h in Headers */,
+				BE7E5F4A1921808B00A4DA30 /* ENTException.h in Headers */,
 				BE2E24A218EBA5D500BD7E6E /* KSXMLAttributes.h in Headers */,
 				86C54DDD191D8F0900670865 /* ENNotebookTypeView.h in Headers */,
 				BE2E24CB18EBA5D500BD7E6E /* ENLinkedNotebookRef.h in Headers */,
@@ -1069,7 +1069,7 @@
 				BECDD2F418F77BC3003736EE /* ENNoteContent.h in Headers */,
 				BE2E24D618EBA5D500BD7E6E /* ENSDKPrivate.h in Headers */,
 				BE2E246F18EBA5D500BD7E6E /* ENUserStoreClient.h in Headers */,
-				BE7E5F561921808B00A4DA30 /* TTransport.h in Headers */,
+				BE7E5F561921808B00A4DA30 /* ENTTransport.h in Headers */,
 				BE2E247718EBA5D500BD7E6E /* ENMLWriter.h in Headers */,
 				BE7E5F411921808B00A4DA30 /* FATObject.h in Headers */,
 				BE2E24C718EBA5D500BD7E6E /* ENCredentialStore.h in Headers */,
@@ -1096,7 +1096,7 @@
 				BE2E24CF18EBA5D500BD7E6E /* ENNotebookChooserViewController.h in Headers */,
 				BE2E24A018EBA5D500BD7E6E /* KSWriter.h in Headers */,
 				BE2E24CD18EBA5D500BD7E6E /* ENLinkedNoteStoreClient.h in Headers */,
-				BE7E5F521921808B00A4DA30 /* TProtocol.h in Headers */,
+				BE7E5F521921808B00A4DA30 /* ENTProtocol.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1113,14 +1113,14 @@
 				860DF41318FCCE51002B4793 /* ENResource.h in Headers */,
 				860DF41518FCCE51002B4793 /* ENNoteRef.h in Headers */,
 				860DF41718FCCE51002B4793 /* ENError.h in Headers */,
-				BE7E5F4B1921808B00A4DA30 /* TException.h in Headers */,
-				BE7E5F4F1921808B00A4DA30 /* THTTPClient.h in Headers */,
+				BE7E5F4B1921808B00A4DA30 /* ENTException.h in Headers */,
+				BE7E5F4F1921808B00A4DA30 /* ENTHTTPClient.h in Headers */,
 				BE4BF7601925736300564DA3 /* ENNoteSearch.h in Headers */,
 				BE7E5F3E1921808B00A4DA30 /* FATField.h in Headers */,
-				BE7E5F571921808B00A4DA30 /* TTransport.h in Headers */,
-				BE7E5F471921808B00A4DA30 /* TBinaryProtocol.h in Headers */,
+				BE7E5F571921808B00A4DA30 /* ENTTransport.h in Headers */,
+				BE7E5F471921808B00A4DA30 /* ENTBinaryProtocol.h in Headers */,
 				BE7E5F421921808B00A4DA30 /* FATObject.h in Headers */,
-				BE7E5F531921808B00A4DA30 /* TProtocol.h in Headers */,
+				BE7E5F531921808B00A4DA30 /* ENTProtocol.h in Headers */,
 				860DF41918FCCE51002B4793 /* ENSDKLogging.h in Headers */,
 				860DF42D18FCCF06002B4793 /* ENSaveToEvernoteActivity.h in Headers */,
 				862E76C8192AB962003D0A32 /* ENNotebookPickerView.h in Headers */,
@@ -1294,10 +1294,10 @@
 				BE2E24D518EBA5D500BD7E6E /* ENOAuthViewController.m in Sources */,
 				BE2E24DF18EBA5D500BD7E6E /* ENSaveToEvernoteActivity.m in Sources */,
 				BE2E246118EBA5D500BD7E6E /* EDAMErrors.m in Sources */,
-				BE7E5F581921808B00A4DA30 /* TTransport.m in Sources */,
+				BE7E5F581921808B00A4DA30 /* ENTTransport.m in Sources */,
 				BE2E24A518EBA5D500BD7E6E /* KSXMLWriter.m in Sources */,
 				BE2E24C218EBA5D500BD7E6E /* EDAMNoteStoreClient+Utilities.m in Sources */,
-				BE7E5F4C1921808B00A4DA30 /* TException.m in Sources */,
+				BE7E5F4C1921808B00A4DA30 /* ENTException.m in Sources */,
 				BE7E5F431921808B00A4DA30 /* FATObject.m in Sources */,
 				BE2E247F18EBA5D500BD7E6E /* NSRegularExpression+ENAGRegex.m in Sources */,
 				BE48C70519116D3400025618 /* ENWebResource.m in Sources */,
@@ -1307,9 +1307,9 @@
 				BE2E246718EBA5D500BD7E6E /* EDAMTypes.m in Sources */,
 				BE2E248718EBA5D500BD7E6E /* NSDate+EDAMAdditions.m in Sources */,
 				BE2E24A918EBA5D500BD7E6E /* ENSSKeychain.m in Sources */,
-				BE7E5F501921808B00A4DA30 /* THTTPClient.m in Sources */,
+				BE7E5F501921808B00A4DA30 /* ENTHTTPClient.m in Sources */,
 				BE2E246518EBA5D500BD7E6E /* EDAMNoteStore.m in Sources */,
-				BE7E5F541921808B00A4DA30 /* TProtocol.m in Sources */,
+				BE7E5F541921808B00A4DA30 /* ENTProtocol.m in Sources */,
 				86D49E46191DA4A8001C3581 /* RMSTokenConstraintManager.m in Sources */,
 				BECDD3C9190A2DE7003736EE /* ENSDKResourceLoader.m in Sources */,
 				BE2E247618EBA5D500BD7E6E /* ENMIMEUtils.m in Sources */,
@@ -1352,7 +1352,7 @@
 				BE2E25DD18F4DCE600BD7E6E /* ENSDKPrivate.m in Sources */,
 				86CD513919D9DAD600DCC747 /* ENCommonUtils.m in Sources */,
 				BE2E248318EBA5D500BD7E6E /* NSData+EvernoteSDK.m in Sources */,
-				BE7E5F481921808B00A4DA30 /* TBinaryProtocol.m in Sources */,
+				BE7E5F481921808B00A4DA30 /* ENTBinaryProtocol.m in Sources */,
 				BE2E24D018EBA5D500BD7E6E /* ENNotebookChooserViewController.m in Sources */,
 				BE2E249118EBA5D500BD7E6E /* ENResource.m in Sources */,
 				BE2E247418EBA5D500BD7E6E /* ENEncryptedContentInfo.m in Sources */,
@@ -1380,10 +1380,10 @@
 				860DF49418FDDFDB002B4793 /* ENAuthCache.m in Sources */,
 				860DF49518FDDFDB002B4793 /* ENCredentials.m in Sources */,
 				860DF49618FDDFDB002B4793 /* ENCredentialStore.m in Sources */,
-				BE7E5F591921808B00A4DA30 /* TTransport.m in Sources */,
+				BE7E5F591921808B00A4DA30 /* ENTTransport.m in Sources */,
 				860DF49718FDDFDB002B4793 /* ENHTMLtoENMLConverter.m in Sources */,
 				860DF49818FDDFDB002B4793 /* ENLinkedNotebookRef.m in Sources */,
-				BE7E5F4D1921808B00A4DA30 /* TException.m in Sources */,
+				BE7E5F4D1921808B00A4DA30 /* ENTException.m in Sources */,
 				BE7E5F441921808B00A4DA30 /* FATObject.m in Sources */,
 				860DF49918FDDFDB002B4793 /* ENLinkedNoteStoreClient.m in Sources */,
 				860DF49A18FDDFDB002B4793 /* ENBusinessNoteStoreClient.m in Sources */,
@@ -1393,9 +1393,9 @@
 				860DF49C18FDDFDB002B4793 /* ENOAuthAuthenticator.m in Sources */,
 				860DF49D18FDDFDB002B4793 /* ENOAuthViewController.m in Sources */,
 				860DF49E18FDDFDB002B4793 /* ENStoreClient.m in Sources */,
-				BE7E5F511921808B00A4DA30 /* THTTPClient.m in Sources */,
+				BE7E5F511921808B00A4DA30 /* ENTHTTPClient.m in Sources */,
 				860DF49F18FDDFDB002B4793 /* ENXMLSaxParser.m in Sources */,
-				BE7E5F551921808B00A4DA30 /* TProtocol.m in Sources */,
+				BE7E5F551921808B00A4DA30 /* ENTProtocol.m in Sources */,
 				860DF4A018FDDFDB002B4793 /* NSString+ENScrubbing.m in Sources */,
 				860DF4A118FDDFDB002B4793 /* ENPreferencesStore.m in Sources */,
 				860DF4A218FDDFDB002B4793 /* ENPlaintextNoteContent.m in Sources */,
@@ -1439,7 +1439,7 @@
 				86CD513B19D9DBDF00DCC747 /* ENCommonUtils.m in Sources */,
 				860DF44C18FCD022002B4793 /* EDAMTypes.m in Sources */,
 				860DF44E18FCD022002B4793 /* EDAMUserStore.m in Sources */,
-				BE7E5F491921808B00A4DA30 /* TBinaryProtocol.m in Sources */,
+				BE7E5F491921808B00A4DA30 /* ENTBinaryProtocol.m in Sources */,
 				860DF45018FCD022002B4793 /* ENMLConstants.m in Sources */,
 				860DF45218FCD022002B4793 /* ENMLUtility.m in Sources */,
 				862E76CA192AB962003D0A32 /* ENNotebookPickerView.m in Sources */,

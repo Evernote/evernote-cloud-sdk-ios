@@ -28,8 +28,8 @@
 
 #import "ENUserStoreClient.h"
 #import "ENSDKPrivate.h"
-#import "TBinaryProtocol.h"
-#import "THTTPClient.h"
+#import "ENTBinaryProtocol.h"
+#import "ENTHTTPClient.h"
 
 @interface ENUserStoreClient ()
 @property (nonatomic, strong) EDAMUserStoreClient * client;
@@ -47,8 +47,8 @@
     self = [super init];
     if (self) {
         NSURL * url = [NSURL URLWithString:userStoreUrl];
-        THTTPClient * transport = [[THTTPClient alloc] initWithURL:url];
-        TBinaryProtocol * protocol = [[TBinaryProtocol alloc] initWithTransport:transport];
+        ENTHTTPClient * transport = [[ENTHTTPClient alloc] initWithURL:url];
+        ENTBinaryProtocol * protocol = [[ENTBinaryProtocol alloc] initWithTransport:transport];
         self.client = [[EDAMUserStoreClient alloc] initWithProtocol:protocol];
         self.authenticationToken = authenticationToken;
     }

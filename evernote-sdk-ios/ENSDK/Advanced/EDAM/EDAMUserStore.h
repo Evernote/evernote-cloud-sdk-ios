@@ -35,8 +35,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import "TProtocol.h"
-#import "TException.h"
+#import "ENTProtocol.h"
+#import "ENTException.h"
 #import "FATObject.h"
 #import "EDAMTypes.h"
 #import "EDAMErrors.h"
@@ -107,8 +107,8 @@
 @end
 
 @interface EDAMUserStoreClient : NSObject <EDAMUserStore> 
-- (id) initWithProtocol: (id <TProtocol>) protocol;
-- (id) initWithInProtocol: (id <TProtocol>) inProtocol outProtocol: (id <TProtocol>) outProtocol;
+- (id) initWithProtocol: (id <ENTProtocol>) protocol;
+- (id) initWithInProtocol: (id <ENTProtocol>) inProtocol outProtocol: (id <ENTProtocol>) outProtocol;
 @end
 
 @interface EDAMUserStoreConstants : NSObject 

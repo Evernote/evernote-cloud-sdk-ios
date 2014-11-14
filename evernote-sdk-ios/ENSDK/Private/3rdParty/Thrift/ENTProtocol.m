@@ -17,18 +17,18 @@
  * under the License.
  */
 
-#import "TProtocol.h"
+#import "ENTProtocol.h"
 
 #import "FATField.h"
 #import "FATObject.h"
-#import "TTransport.h"
+#import "ENTTransport.h"
 
-@implementation TProtocolException
+@implementation ENTProtocolException
 @end
 
-@implementation TProtocolUtil
+@implementation ENTProtocolUtil
 
-+ (void) skipType: (int) type onProtocol: (id <TProtocol>) protocol {
++ (void) skipType: (int) type onProtocol: (id <ENTProtocol>) protocol {
   switch (type) {
     case TType_BOOL:
       [protocol readBool];
@@ -105,7 +105,7 @@
 }
 
 + (id) _readValueForField:(FATField *)field
-             fromProtocol:(id<TProtocol>)inProtocol
+             fromProtocol:(id<ENTProtocol>)inProtocol
 {
   id fieldValue = nil;
   switch (field.type) {
@@ -213,7 +213,7 @@
   return fieldValue;
 }
 
-+ (void) readFromProtocol:(id<TProtocol>)inProtocol
++ (void) readFromProtocol:(id<ENTProtocol>)inProtocol
                ontoObject:(id)object
 {
   [inProtocol readStructBeginReturningName: NULL];
@@ -262,7 +262,7 @@
 
 + (void) _writeValue:(id)fieldValue
             forField:(FATField *)field
-          toProtocol:(id<TProtocol>)outProtocol
+          toProtocol:(id<ENTProtocol>)outProtocol
 {
   switch (field.type) {
     case TType_BOOL:
@@ -341,13 +341,13 @@
 }
 
 + (id) readMessage:(NSString *)message
-      fromProtocol:(id<TProtocol>)inProtocol
+      fromProtocol:(id<ENTProtocol>)inProtocol
  withResponseTypes:(NSArray *)responseTypes
 {
   int msgType = 0;
   [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
   if (msgType == TMessageType_EXCEPTION) {
-    TApplicationException * x = [TApplicationException read: inProtocol];
+    ENTApplicationException * x = [ENTApplicationException read: inProtocol];
     [inProtocol readMessageEnd];
     @throw x;
   }
@@ -383,7 +383,7 @@
     }
     
     if (matched == NO) {
-      [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+      [ENTProtocolUtil skipType: fieldType onProtocol: inProtocol];
     }
   }
   
@@ -411,7 +411,7 @@
   }
     
   if (nonExceptionTypesPresent) {
-    @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
+    @throw [ENTApplicationException exceptionWithType: ENTApplicationException_MISSING_RESULT
                                              reason: [message stringByAppendingString:@" failed: unknown result"]];
   }
     
@@ -419,7 +419,7 @@
 }
 
 + (void) writeObject:(id)object
-        ontoProtocol:(id<TProtocol>)outProtocol
+        ontoProtocol:(id<ENTProtocol>)outProtocol
 {
   [outProtocol writeStructBeginWithName: [[object class] structName]];
   
@@ -449,7 +449,7 @@
 }
 
 + (void) sendMessage:(NSString *)messageName
-          toProtocol:(id<TProtocol>)outProtocol
+          toProtocol:(id<ENTProtocol>)outProtocol
         withArgPairs:(NSArray *)argPairs
 {
   [outProtocol writeMessageBeginWithName: messageName type: TMessageType_CALL sequenceID: 0];

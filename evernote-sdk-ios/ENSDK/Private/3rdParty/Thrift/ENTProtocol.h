@@ -18,9 +18,9 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "TException.h"
+#import "ENTException.h"
 
-@protocol TTransport;
+@protocol ENTTransport;
 
 enum {
   TMessageType_CALL = 1,
@@ -47,9 +47,9 @@ enum {
 };
 
 
-@protocol TProtocol <NSObject>
+@protocol ENTProtocol <NSObject>
 
-- (id <TTransport>) transport;
+- (id <ENTTransport>) transport;
 
 - (void) readMessageBeginReturningName: (NSString **) name
                                   type: (int *) type
@@ -142,25 +142,25 @@ enum {
 
 @end
 
-@interface TProtocolException : TException
+@interface ENTProtocolException : ENTException
 @end
 
-@interface TProtocolUtil : NSObject
+@interface ENTProtocolUtil : NSObject
 
-+ (void) skipType: (int) type onProtocol: (id <TProtocol>) protocol;
++ (void) skipType: (int) type onProtocol: (id <ENTProtocol>) protocol;
 
-+ (void) readFromProtocol:(id<TProtocol>)inProtocol
++ (void) readFromProtocol:(id<ENTProtocol>)inProtocol
                ontoObject:(id)object;
 
 + (id) readMessage:(NSString *)message
-      fromProtocol:(id<TProtocol>)inProtocol
+      fromProtocol:(id<ENTProtocol>)inProtocol
  withResponseTypes:(NSArray *)responseTypes;
 
 + (void) writeObject:(id)object
-        ontoProtocol:(id<TProtocol>)outProtocol;
+        ontoProtocol:(id<ENTProtocol>)outProtocol;
 
 + (void) sendMessage:(NSString *)messageName
-          toProtocol:(id<TProtocol>)outProtocol
+          toProtocol:(id<ENTProtocol>)outProtocol
         withArgPairs:(NSArray *)argPairs;
 
 @end

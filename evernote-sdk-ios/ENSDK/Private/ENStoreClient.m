@@ -192,7 +192,7 @@ NSString * ENStoreClientDidFailWithAuthenticationErrorNotification = @"ENStoreCl
             int edamErrorCode = [[(id)exception errorCode] intValue];
             sanitizedErrorCode = [[self class] sanitizedErrorCodeFromEDAMErrorCode:edamErrorCode];
             userInfo[@"EDAMErrorCode"] = @(edamErrorCode); // Put this in the user info in case the caller cares.            
-        } else if ([exception isKindOfClass:[TException class]]) {
+        } else if ([exception isKindOfClass:[ENTException class]]) {
             // treat any Thrift errors as a transport error
             // we could create separate error codes for the various TException subclasses
             sanitizedErrorCode = ENErrorCodeConnectionFailed;

@@ -30,8 +30,8 @@
 #import "ENSDKPrivate.h"
 #import "ENAuthCache.h"
 #import "EDAMNoteStoreClient+Utilities.h"
-#import "THTTPClient.h"
-#import "TBinaryProtocol.h"
+#import "ENTHTTPClient.h"
+#import "ENTBinaryProtocol.h"
 #import "ENSession.h"
 
 // This is the Evernote standard reasonable recommendation for a single findNotes call and won't break in future.
@@ -115,8 +115,8 @@
     if (!_client) {
         NSString * noteStoreUrl = [self noteStoreUrl];
         NSURL * url = [NSURL URLWithString:noteStoreUrl];
-        THTTPClient * transport = [[THTTPClient alloc] initWithURL:url];
-        TBinaryProtocol * protocol = [[TBinaryProtocol alloc] initWithTransport:transport];
+        ENTHTTPClient * transport = [[ENTHTTPClient alloc] initWithURL:url];
+        ENTBinaryProtocol * protocol = [[ENTBinaryProtocol alloc] initWithTransport:transport];
         _client = [[EDAMNoteStoreClient alloc] initWithProtocol:protocol];
         
         // Bind progress handlers if they are pending attachment.
