@@ -127,9 +127,11 @@ NS_ENUM(NSInteger, SampleFunctions) {
         case kSampleFunctionsViewAppNotesList:
             cell.textLabel.text = @"View this app's notes";
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            break;
             
         default:
-            ;
+            NSAssert(0, @"indexPath not valid");
+            break;
     }
     return cell;
 }
@@ -138,20 +140,7 @@ NS_ENUM(NSInteger, SampleFunctions) {
 {
     switch (indexPath.row) {
         case kSampleFunctionsUnauthenticate:
-            if ([[ENSession sharedSession] isAuthenticated]) {
-                [[ENSession sharedSession] unauthenticate];
-                [self update];
-            } else {
-                [[ENSession sharedSession] authenticateWithViewController:self
-                                                       preferRegistration:NO
-                                                               completion:^(NSError *authenticateError) {
-                    if (!authenticateError) {
-                        [self update];
-                    } else if (authenticateError.code != ENErrorCodeCancelled) {
-                        [self showSimpleAlertWithMessage:@"Could not authenticate."];
-                    }
-                }];
-            }
+            [self logInOrLogOut];
             break;
             
         case kSampleFunctionsUserInfo:
@@ -174,20 +163,12 @@ NS_ENUM(NSInteger, SampleFunctions) {
         }
         case kSampleFunctionsCreatePhotoNote:
         {
-            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-                UIImagePickerController * picker = [[UIImagePickerController alloc] init];
-                picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                picker.delegate = self;
-                [self presentViewController:picker animated:YES completion:nil];
-            }
+            [self createPhotoNoteIfAvailable];
             break;
         }
         case kSampleFunctionsClipWebPage:
         {
-            self.webView = [[UIWebView alloc] initWithFrame:self.view.window.bounds];
-            self.webView.delegate = self;
-            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-            [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://developer.apple.com/xcode/"]]];
+            [self createWebClipNote];
             break;
         }
         case kSampleFunctionsViewAppNotesList:
@@ -197,9 +178,42 @@ NS_ENUM(NSInteger, SampleFunctions) {
             break;
         }
         default:
-            ;
+            break;
     }
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)logInOrLogOut {
+    if ([[ENSession sharedSession] isAuthenticated]) {
+        [[ENSession sharedSession] unauthenticate];
+        [self update];
+    } else {
+        [[ENSession sharedSession] authenticateWithViewController:self
+                                               preferRegistration:NO
+                                                       completion:^(NSError *authenticateError) {
+                                                           if (!authenticateError) {
+                                                               [self update];
+                                                           } else if (authenticateError.code != ENErrorCodeCancelled) {
+                                                               [self showSimpleAlertWithMessage:@"Could not authenticate."];
+                                                           }
+                                                       }];
+    }
+}
+
+- (void)createPhotoNoteIfAvailable {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        picker.delegate = self;
+        [self presentViewController:picker animated:YES completion:nil];
+    }
+}
+
+- (void)createWebClipNote {
+    self.webView = [[UIWebView alloc] initWithFrame:self.view.window.bounds];
+    self.webView.delegate = self;
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://developer.apple.com/xcode/"]]];
 }
 
 - (void)clipWebView
