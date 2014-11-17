@@ -11,7 +11,7 @@
 #import "UserInfoViewController.h"
 #import "TagsInfoViewController.h"
 #import "SaveActivityViewController.h"
-#import "ViewAppNotesViewController.h"
+#import "SearchNotesViewController.h"
 #import "SVProgressHUD.h"
 
 #define PHOTO_MAX_WIDTH 500
@@ -125,7 +125,7 @@ NS_ENUM(NSInteger, SampleFunctions) {
             break;
             
         case kSampleFunctionsViewAppNotesList:
-            cell.textLabel.text = @"View this app's notes";
+            cell.textLabel.text = @"Search notes via keyword";
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
             
@@ -173,8 +173,8 @@ NS_ENUM(NSInteger, SampleFunctions) {
         }
         case kSampleFunctionsViewAppNotesList:
         {
-            ViewAppNotesViewController * vanvc = [[ViewAppNotesViewController alloc] init];
-            [self.navigationController pushViewController:vanvc animated:YES];
+            SearchNotesViewController * searchVC = [[SearchNotesViewController alloc] init];
+            [self.navigationController pushViewController:searchVC animated:YES];
             break;
         }
         default:

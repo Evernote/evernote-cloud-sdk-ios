@@ -6,18 +6,26 @@
 //  Copyright (c) 2014 Evernote Corporation. All rights reserved.
 //
 
-#import "ViewAppNotesViewController.h"
+#import "SearchNotesResultViewController.h"
 #import <ENSDK/ENSDK.h>
 #import "ViewNoteViewController.h"
 #import "SVProgressHUD.h"
 
-@interface ViewAppNotesViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface SearchNotesResultViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, strong) NSString *keyword;
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) NSArray * findNotesResults;
 @property (nonatomic, strong) NSMutableDictionary * thumbnails;
 @end
 
-@implementation ViewAppNotesViewController
+@implementation SearchNotesResultViewController
+
+- (instancetype)initWithKeyword:(NSString *)keyword {
+    if (self = [super init]) {
+        self.keyword = keyword;
+    }
+    return self;
+}
 
 - (void)loadView
 {
@@ -36,7 +44,7 @@
     self.navigationItem.title = @"Notes";
     
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-    [[ENSession sharedSession] findNotesWithSearch:[ENNoteSearch noteSearchCreatedByThisApplication]
+    [[ENSession sharedSession] findNotesWithSearch:[ENNoteSearch noteSearchWithSearchString:self.keyword]
                                         inNotebook:nil
                                            orScope:ENSessionSearchScopeAll
                                          sortOrder:ENSessionSortOrderRecentlyCreated

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewAppNotesViewController : UIViewController
+@interface SearchNotesResultViewController : UIViewController
+
+- (instancetype)initWithKeyword:(NSString *)keyword;
 
 @end

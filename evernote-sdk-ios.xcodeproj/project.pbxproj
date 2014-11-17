@@ -72,6 +72,7 @@
 		860DF4A218FDDFDB002B4793 /* ENPlaintextNoteContent.m in Sources */ = {isa = PBXBuildFile; fileRef = BECDD2F718F77C0E003736EE /* ENPlaintextNoteContent.m */; };
 		860DF4A318FDDFDB002B4793 /* ENHTMLNoteContent.m in Sources */ = {isa = PBXBuildFile; fileRef = BECDD2FB18F78072003736EE /* ENHTMLNoteContent.m */; };
 		860DF4A418FDE14F002B4793 /* NSString+XMLAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E241018EBA5D500BD7E6E /* NSString+XMLAdditions.m */; };
+		8618798A1A1A7E6400E04B4D /* SearchNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 861879891A1A7E6400E04B4D /* SearchNotesViewController.m */; };
 		862E76C7192AB962003D0A32 /* ENNotebookPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 862E76C5192AB962003D0A32 /* ENNotebookPickerView.h */; };
 		862E76C8192AB962003D0A32 /* ENNotebookPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 862E76C5192AB962003D0A32 /* ENNotebookPickerView.h */; };
 		862E76C9192AB962003D0A32 /* ENNotebookPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 862E76C6192AB962003D0A32 /* ENNotebookPickerView.m */; };
@@ -216,7 +217,7 @@
 		BE2E25D918F4D6C300BD7E6E /* ENMLConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E25D718F4D6C200BD7E6E /* ENMLConstants.h */; };
 		BE2E25DA18F4D6C300BD7E6E /* ENMLConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E25D818F4D6C200BD7E6E /* ENMLConstants.m */; };
 		BE2E25DD18F4DCE600BD7E6E /* ENSDKPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E25DC18F4DCE600BD7E6E /* ENSDKPrivate.m */; };
-		BE4695CC192ECE4D00ADE15F /* ViewAppNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4695CB192ECE4D00ADE15F /* ViewAppNotesViewController.m */; };
+		BE4695CC192ECE4D00ADE15F /* SearchNotesResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4695CB192ECE4D00ADE15F /* SearchNotesResultViewController.m */; };
 		BE4695CF192ED90E00ADE15F /* ViewNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4695CE192ED90E00ADE15F /* ViewNoteViewController.m */; };
 		BE48C6F719102CC600025618 /* ENWebContentTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = BE48C6F519102CC600025618 /* ENWebContentTransformer.h */; };
 		BE48C6F919102CC600025618 /* ENWebContentTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE48C6F619102CC600025618 /* ENWebContentTransformer.m */; };
@@ -341,6 +342,8 @@
 		0BB3D1B41524ED96001C4534 /* evernote-sdk-ios-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "evernote-sdk-ios-Prefix.pch"; sourceTree = "<group>"; };
 		0BB3D24D1524EEF3001C4534 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8600EC161A15D97400F8F838 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		861879881A1A7E6400E04B4D /* SearchNotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchNotesViewController.h; sourceTree = "<group>"; };
+		861879891A1A7E6400E04B4D /* SearchNotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchNotesViewController.m; sourceTree = "<group>"; };
 		862E76C5192AB962003D0A32 /* ENNotebookPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENNotebookPickerView.h; sourceTree = "<group>"; };
 		862E76C6192AB962003D0A32 /* ENNotebookPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENNotebookPickerView.m; sourceTree = "<group>"; };
 		865C383118F8BA2400ECB2BA /* ENSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ENSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -482,8 +485,8 @@
 		BE2E25D718F4D6C200BD7E6E /* ENMLConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENMLConstants.h; sourceTree = "<group>"; };
 		BE2E25D818F4D6C200BD7E6E /* ENMLConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENMLConstants.m; sourceTree = "<group>"; };
 		BE2E25DC18F4DCE600BD7E6E /* ENSDKPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENSDKPrivate.m; sourceTree = "<group>"; };
-		BE4695CA192ECE4D00ADE15F /* ViewAppNotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewAppNotesViewController.h; sourceTree = "<group>"; };
-		BE4695CB192ECE4D00ADE15F /* ViewAppNotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewAppNotesViewController.m; sourceTree = "<group>"; };
+		BE4695CA192ECE4D00ADE15F /* SearchNotesResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchNotesResultViewController.h; sourceTree = "<group>"; };
+		BE4695CB192ECE4D00ADE15F /* SearchNotesResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchNotesResultViewController.m; sourceTree = "<group>"; };
 		BE4695CD192ED90E00ADE15F /* ViewNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewNoteViewController.h; sourceTree = "<group>"; };
 		BE4695CE192ED90E00ADE15F /* ViewNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewNoteViewController.m; sourceTree = "<group>"; };
 		BE48C6F519102CC600025618 /* ENWebContentTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENWebContentTransformer.h; sourceTree = "<group>"; };
@@ -985,11 +988,13 @@
 				86D792B319E862DF008664DF /* TagsInfoViewController.m */,
 				BECDD3A7190908A9003736EE /* UserInfoViewController.h */,
 				BECDD3A8190908A9003736EE /* UserInfoViewController.m */,
-				BE4695CA192ECE4D00ADE15F /* ViewAppNotesViewController.h */,
-				BE4695CB192ECE4D00ADE15F /* ViewAppNotesViewController.m */,
 				BE4695CD192ED90E00ADE15F /* ViewNoteViewController.h */,
 				BE4695CE192ED90E00ADE15F /* ViewNoteViewController.m */,
 				8600EC161A15D97400F8F838 /* Launch Screen.xib */,
+				861879881A1A7E6400E04B4D /* SearchNotesViewController.h */,
+				861879891A1A7E6400E04B4D /* SearchNotesViewController.m */,
+				BE4695CA192ECE4D00ADE15F /* SearchNotesResultViewController.h */,
+				BE4695CB192ECE4D00ADE15F /* SearchNotesResultViewController.m */,
 			);
 			path = EvernoteSDKSample;
 			sourceTree = "<group>";
@@ -1461,13 +1466,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BECDD3881908FFC2003736EE /* MainViewController.m in Sources */,
-				BE4695CC192ECE4D00ADE15F /* ViewAppNotesViewController.m in Sources */,
+				BE4695CC192ECE4D00ADE15F /* SearchNotesResultViewController.m in Sources */,
 				BECDD3AC19090FBA003736EE /* SaveActivityViewController.m in Sources */,
 				BE4695CF192ED90E00ADE15F /* ViewNoteViewController.m in Sources */,
 				BECDD3A9190908A9003736EE /* UserInfoViewController.m in Sources */,
 				BECDD37F1908FFC1003736EE /* AppDelegate.m in Sources */,
 				86D792B419E862DF008664DF /* TagsInfoViewController.m in Sources */,
 				BECDD37B1908FFC1003736EE /* main.m in Sources */,
+				8618798A1A1A7E6400E04B4D /* SearchNotesViewController.m in Sources */,
 				BE48C71919131AC200025618 /* SVProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
