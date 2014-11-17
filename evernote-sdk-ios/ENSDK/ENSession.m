@@ -1118,10 +1118,10 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
     
     // Validate the scope and sort arguments.
     if (notebook && scope != ENSessionSearchScopeNone) {
-        ENSDKLogError(@"No search scope necessary if notebook provided.");
+        ENSDKLogInfo(@"No search scope necessary if notebook provided.");
         scope = ENSessionSearchScopeNone;
     } else if (!notebook && scope == ENSessionSearchScopeNone) {
-        ENSDKLogError(@"Search scope or notebook must be specified. Defaulting to personal scope.");
+        ENSDKLogInfo(@"Search scope or notebook must be specified. Defaulting to personal scope.");
         scope = ENSessionSearchScopeDefault;
     }
     

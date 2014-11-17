@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ENSDK/ENSDK.h>
 
-@interface SearchNotesResultViewController : UIViewController
+@interface NoteListResultViewController : UIViewController
 
-- (instancetype)initWithKeyword:(NSString *)keyword;
+- (instancetype)initWithNoteSearch:(ENNoteSearch *)search notebook:(ENNotebook *)notebook;
 
 @end

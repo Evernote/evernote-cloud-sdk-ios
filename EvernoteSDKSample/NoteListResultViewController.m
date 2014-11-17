@@ -6,23 +6,24 @@
 //  Copyright (c) 2014 Evernote Corporation. All rights reserved.
 //
 
-#import "SearchNotesResultViewController.h"
-#import <ENSDK/ENSDK.h>
+#import "NoteListResultViewController.h"
 #import "ViewNoteViewController.h"
 #import "SVProgressHUD.h"
 
-@interface SearchNotesResultViewController () <UITableViewDataSource, UITableViewDelegate>
-@property (nonatomic, strong) NSString *keyword;
+@interface NoteListResultViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, strong) ENNoteSearch *noteSearch;
+@property (nonatomic, strong) ENNotebook *notebookToSearch;
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) NSArray * findNotesResults;
 @property (nonatomic, strong) NSMutableDictionary * thumbnails;
 @end
 
-@implementation SearchNotesResultViewController
+@implementation NoteListResultViewController
 
-- (instancetype)initWithKeyword:(NSString *)keyword {
+- (instancetype)initWithNoteSearch:(ENNoteSearch *)search notebook:(ENNotebook *)notebook{
     if (self = [super init]) {
-        self.keyword = keyword;
+        self.noteSearch = search;
+        self.notebookToSearch = notebook;
     }
     return self;
 }
@@ -44,8 +45,8 @@
     self.navigationItem.title = @"Notes";
     
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-    [[ENSession sharedSession] findNotesWithSearch:[ENNoteSearch noteSearchWithSearchString:self.keyword]
-                                        inNotebook:nil
+    [[ENSession sharedSession] findNotesWithSearch:self.noteSearch
+                                        inNotebook:self.notebookToSearch
                                            orScope:ENSessionSearchScopeAll
                                          sortOrder:ENSessionSortOrderRecentlyCreated
                                         maxResults:0

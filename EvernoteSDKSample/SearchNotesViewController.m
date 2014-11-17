@@ -8,7 +8,7 @@
 
 #import "SearchNotesViewController.h"
 #import <ENSDK/ENSDK.h>
-#import "SearchNotesResultViewController.h"
+#import "NoteListResultViewController.h"
 
 @interface SearchNotesViewController ()
 
@@ -33,7 +33,7 @@
     [self.backgroundView addSubview:self.instructionLabel];
     
     self.keywordField = [[UITextField alloc] initWithFrame:keywordFrame];
-    [self.keywordField setPlaceholder:@"Evernote Business"];
+    [self.keywordField setText:@"Evernote Business"];
     [self.keywordField setTextAlignment:NSTextAlignmentCenter];
     [self.backgroundView addSubview:self.keywordField];
     
@@ -43,7 +43,7 @@
 }
 
 - (void)searchNotes {
-    SearchNotesResultViewController *resultVC = [[SearchNotesResultViewController alloc] initWithKeyword:self.keywordField.text];
+    NoteListResultViewController *resultVC = [[NoteListResultViewController alloc] initWithNoteSearch:[ENNoteSearch noteSearchWithSearchString: self.keywordField.text] notebook:nil];
     [self.navigationController pushViewController:resultVC animated:YES];
 }
 

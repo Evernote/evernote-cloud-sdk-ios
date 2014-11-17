@@ -13,6 +13,7 @@
 #import "SaveActivityViewController.h"
 #import "WebClipViewController.h"
 #import "SearchNotesViewController.h"
+#import "NotebooksViewController.h"
 #import "SVProgressHUD.h"
 #import "CommonUtils.h"
 
@@ -25,7 +26,8 @@ NS_ENUM(NSInteger, SampleFunctions) {
     kSampleFunctionsSaveActivity,
     kSampleFunctionsCreatePhotoNote,
     kSampleFunctionsClipWebPage,
-    kSampleFunctionsViewAppNotesList,
+    kSampleFunctionsSearchNotes,
+    kSampleFunctionsViewMyNotes,
     
     kSampleFunctionsMaxValue
 };
@@ -117,8 +119,13 @@ NS_ENUM(NSInteger, SampleFunctions) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
             
-        case kSampleFunctionsViewAppNotesList:
+        case kSampleFunctionsSearchNotes:
             cell.textLabel.text = @"Search notes via keyword";
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            break;
+            
+        case kSampleFunctionsViewMyNotes:
+            cell.textLabel.text = @"View my notes";
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
             
@@ -161,14 +168,20 @@ NS_ENUM(NSInteger, SampleFunctions) {
         }
         case kSampleFunctionsClipWebPage:
         {
-            WebClipViewController *webClipVC = [[WebClipViewController alloc] init];
+            WebClipViewController * webClipVC = [[WebClipViewController alloc] init];
             [self.navigationController pushViewController:webClipVC animated:YES];
             break;
         }
-        case kSampleFunctionsViewAppNotesList:
+        case kSampleFunctionsSearchNotes:
         {
             SearchNotesViewController * searchVC = [[SearchNotesViewController alloc] init];
             [self.navigationController pushViewController:searchVC animated:YES];
+            break;
+        }
+        case kSampleFunctionsViewMyNotes:
+        {
+            NotebooksViewController * notebooksVC = [[NotebooksViewController alloc] init];
+            [self.navigationController pushViewController:notebooksVC animated:YES];
             break;
         }
         default:
