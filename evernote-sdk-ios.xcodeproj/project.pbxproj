@@ -73,6 +73,8 @@
 		860DF4A318FDDFDB002B4793 /* ENHTMLNoteContent.m in Sources */ = {isa = PBXBuildFile; fileRef = BECDD2FB18F78072003736EE /* ENHTMLNoteContent.m */; };
 		860DF4A418FDE14F002B4793 /* NSString+XMLAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E241018EBA5D500BD7E6E /* NSString+XMLAdditions.m */; };
 		8618798A1A1A7E6400E04B4D /* SearchNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 861879891A1A7E6400E04B4D /* SearchNotesViewController.m */; };
+		8628FA551A1A915200AEF402 /* WebClipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8628FA541A1A915200AEF402 /* WebClipViewController.m */; };
+		8628FA581A1A94DA00AEF402 /* CommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8628FA571A1A94DA00AEF402 /* CommonUtils.m */; };
 		862E76C7192AB962003D0A32 /* ENNotebookPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 862E76C5192AB962003D0A32 /* ENNotebookPickerView.h */; };
 		862E76C8192AB962003D0A32 /* ENNotebookPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 862E76C5192AB962003D0A32 /* ENNotebookPickerView.h */; };
 		862E76C9192AB962003D0A32 /* ENNotebookPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 862E76C6192AB962003D0A32 /* ENNotebookPickerView.m */; };
@@ -344,6 +346,10 @@
 		8600EC161A15D97400F8F838 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		861879881A1A7E6400E04B4D /* SearchNotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchNotesViewController.h; sourceTree = "<group>"; };
 		861879891A1A7E6400E04B4D /* SearchNotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchNotesViewController.m; sourceTree = "<group>"; };
+		8628FA531A1A915200AEF402 /* WebClipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebClipViewController.h; sourceTree = "<group>"; };
+		8628FA541A1A915200AEF402 /* WebClipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebClipViewController.m; sourceTree = "<group>"; };
+		8628FA561A1A94DA00AEF402 /* CommonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtils.h; sourceTree = "<group>"; };
+		8628FA571A1A94DA00AEF402 /* CommonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtils.m; sourceTree = "<group>"; };
 		862E76C5192AB962003D0A32 /* ENNotebookPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENNotebookPickerView.h; sourceTree = "<group>"; };
 		862E76C6192AB962003D0A32 /* ENNotebookPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENNotebookPickerView.m; sourceTree = "<group>"; };
 		865C383118F8BA2400ECB2BA /* ENSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ENSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -995,6 +1001,10 @@
 				861879891A1A7E6400E04B4D /* SearchNotesViewController.m */,
 				BE4695CA192ECE4D00ADE15F /* SearchNotesResultViewController.h */,
 				BE4695CB192ECE4D00ADE15F /* SearchNotesResultViewController.m */,
+				8628FA531A1A915200AEF402 /* WebClipViewController.h */,
+				8628FA541A1A915200AEF402 /* WebClipViewController.m */,
+				8628FA561A1A94DA00AEF402 /* CommonUtils.h */,
+				8628FA571A1A94DA00AEF402 /* CommonUtils.m */,
 			);
 			path = EvernoteSDKSample;
 			sourceTree = "<group>";
@@ -1470,10 +1480,12 @@
 				BECDD3AC19090FBA003736EE /* SaveActivityViewController.m in Sources */,
 				BE4695CF192ED90E00ADE15F /* ViewNoteViewController.m in Sources */,
 				BECDD3A9190908A9003736EE /* UserInfoViewController.m in Sources */,
+				8628FA551A1A915200AEF402 /* WebClipViewController.m in Sources */,
 				BECDD37F1908FFC1003736EE /* AppDelegate.m in Sources */,
 				86D792B419E862DF008664DF /* TagsInfoViewController.m in Sources */,
 				BECDD37B1908FFC1003736EE /* main.m in Sources */,
 				8618798A1A1A7E6400E04B4D /* SearchNotesViewController.m in Sources */,
+				8628FA581A1A94DA00AEF402 /* CommonUtils.m in Sources */,
 				BE48C71919131AC200025618 /* SVProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,8 +11,10 @@
 #import "UserInfoViewController.h"
 #import "TagsInfoViewController.h"
 #import "SaveActivityViewController.h"
+#import "WebClipViewController.h"
 #import "SearchNotesViewController.h"
 #import "SVProgressHUD.h"
+#import "CommonUtils.h"
 
 #define PHOTO_MAX_WIDTH 500
 
@@ -28,7 +30,7 @@ NS_ENUM(NSInteger, SampleFunctions) {
     kSampleFunctionsMaxValue
 };
 
-@interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIWebViewDelegate>
+@interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) UIWebView * webView;
 @end
@@ -61,16 +63,6 @@ NS_ENUM(NSInteger, SampleFunctions) {
     } else {
         [self.navigationItem setTitle:nil];
     }
-}
-
-- (void)showSimpleAlertWithMessage:(NSString *)message
-{
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil
-                                                     message:message
-                                                    delegate:nil
-                                           cancelButtonTitle:nil
-                                           otherButtonTitles:@"OK", nil];
-    [alert show];
 }
 
 #pragma mark - UITableView
@@ -122,6 +114,7 @@ NS_ENUM(NSInteger, SampleFunctions) {
             
         case kSampleFunctionsClipWebPage:
             cell.textLabel.text = @"Clip web page";
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
             
         case kSampleFunctionsViewAppNotesList:
@@ -168,7 +161,8 @@ NS_ENUM(NSInteger, SampleFunctions) {
         }
         case kSampleFunctionsClipWebPage:
         {
-            [self createWebClipNote];
+            WebClipViewController *webClipVC = [[WebClipViewController alloc] init];
+            [self.navigationController pushViewController:webClipVC animated:YES];
             break;
         }
         case kSampleFunctionsViewAppNotesList:
@@ -194,7 +188,7 @@ NS_ENUM(NSInteger, SampleFunctions) {
                                                            if (!authenticateError) {
                                                                [self update];
                                                            } else if (authenticateError.code != ENErrorCodeCancelled) {
-                                                               [self showSimpleAlertWithMessage:@"Could not authenticate."];
+                                                               [CommonUtils showSimpleAlertWithMessage:@"Could not authenticate."];
                                                            }
                                                        }];
     }
@@ -207,62 +201,6 @@ NS_ENUM(NSInteger, SampleFunctions) {
         picker.delegate = self;
         [self presentViewController:picker animated:YES completion:nil];
     }
-}
-
-- (void)createWebClipNote {
-    self.webView = [[UIWebView alloc] initWithFrame:self.view.window.bounds];
-    self.webView.delegate = self;
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://developer.apple.com/xcode/"]]];
-}
-
-- (void)clipWebView
-{
-    UIWebView * webView = self.webView;
-    self.webView.delegate = nil;
-    [self.webView stopLoading];
-    self.webView = nil;
-    
-    [ENNote populateNoteFromWebView:webView completion:^(ENNote * note) {
-        if (!note) {
-            [self finishClip];
-            return;
-        }
-        [[ENSession sharedSession] uploadNote:note notebook:nil completion:^(ENNoteRef *noteRef, NSError *uploadNoteError) {
-            NSString * message = nil;
-            if (noteRef) {
-                message = @"Web note created.";
-            } else {
-                message = @"Failed to create web note.";
-            }
-            [self finishClip];
-            [self showSimpleAlertWithMessage:message];
-        }];
-    }];
-}
-
-- (void)finishClip
-{
-    [SVProgressHUD dismiss];
-}
-
-#pragma mark - UIWebViewDelegate
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(clipWebView) object:nil];
-    NSLog(@"Web view fail: %@", error);
-    self.webView = nil;
-    [self finishClip];
-    [self showSimpleAlertWithMessage:@"Failed to load web page to clip."];
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    // At the end of every load complete, cancel a pending perform and start a new one. We wait for 3
-    // seconds for the page to "settle down"
-    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(clipWebView) object:nil];
-    [self performSelector:@selector(clipWebView) withObject:nil afterDelay:3.0];
 }
 
 #pragma mark - UIImagePickerController
@@ -293,7 +231,7 @@ NS_ENUM(NSInteger, SampleFunctions) {
             message = @"Failed to create photo note.";
         }
         [SVProgressHUD dismiss];
-        [self showSimpleAlertWithMessage:message];
+        [CommonUtils showSimpleAlertWithMessage:message];
     }];
     
     [picker dismissViewControllerAnimated:YES completion:nil];
