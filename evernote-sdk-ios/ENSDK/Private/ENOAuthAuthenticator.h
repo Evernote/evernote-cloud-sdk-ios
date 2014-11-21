@@ -27,6 +27,7 @@
  */
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "ENUserStoreClient.h"
 #import "ENCredentials.h"
 

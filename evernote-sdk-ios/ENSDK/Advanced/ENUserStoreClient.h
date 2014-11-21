@@ -27,7 +27,7 @@
  */
 
 #import "ENStoreClient.h"
-#import "ENSDKAdvanced.h"
+#import "EDAM.h"
 
 @interface ENUserStoreClient : ENStoreClient
 

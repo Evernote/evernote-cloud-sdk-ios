@@ -71,6 +71,11 @@
  */
 @property (nonatomic, readonly) ENPreferencesStore * preferences;
 
+/**
+ *  The user store client that manages the Evernote user account.
+ */
+@property (nonatomic, readonly) ENUserStoreClient * userStore;
+
 // The following accessors all allow retrieval of an appropriate note store client to perform API operations with.
 
 /**
