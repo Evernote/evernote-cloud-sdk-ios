@@ -135,7 +135,11 @@
 
 - (NSString *)defaultNoteTitleForViewController:(ENSaveToEvernoteViewController *)viewController
 {
-    return self.noteTitle;
+    if (self.preparedNote.title) {
+        return self.preparedNote.title;
+    } else {
+        return self.noteTitle;
+    }
 }
 
 - (void)viewController:(ENSaveToEvernoteViewController *)viewController didFinishWithSuccess:(BOOL)success uploadError:(NSError *)error
