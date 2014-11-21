@@ -8,6 +8,7 @@
 
 #import "ViewNoteViewController.h"
 #import "SVProgressHUD.h"
+#import "CommonUtils.h"
 
 @interface ViewNoteViewController () <UIWebViewDelegate>
 @property (nonatomic, strong) UIWebView * webView;
@@ -28,6 +29,9 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = self.noteTitle;
+    
+    UIBarButtonItem *viewInEvernoteItem = [[UIBarButtonItem alloc] initWithTitle:@"View in Evernote" style:UIBarButtonItemStylePlain target:self action:@selector(viewInEvernote)];
+    self.navigationItem.rightBarButtonItem = viewInEvernoteItem;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -65,6 +69,13 @@
     }];
 }
 
+- (void)viewInEvernote {
+    BOOL result = [[ENSession sharedSession] viewNoteInEvernote:self.noteRef];
+    if (result == NO) {
+        [CommonUtils showSimpleAlertWithMessage:@"Evernote App not installed"];
+    }
+}
+
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     self.doneLoading = YES;
@@ -75,4 +86,5 @@
     // Don't allow user to navigate from here.
     return !self.doneLoading;
 }
+
 @end

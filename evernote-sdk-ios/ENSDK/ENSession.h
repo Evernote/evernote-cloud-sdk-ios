@@ -403,4 +403,16 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
                     maxDimension:(NSUInteger)maxDimension
                       completion:(ENSessionDownloadNoteThumbnailCompletionHandler)completion;
 
+#pragma mark - Interaction with Evernote app
+
+/**
+ *  View this note in the Evernote app
+ *
+ *  @param noteRef The note to view
+ *
+ *  @return No means the Evernote app is not installed or not available. Yes does not guarantee that this note is successfuly opened,
+ *          as the user could have logged into another account in the Evernote app.
+ */
+- (BOOL)viewNoteInEvernote:(ENNoteRef *)noteRef;
+
 @end

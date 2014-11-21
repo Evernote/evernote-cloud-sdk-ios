@@ -39,6 +39,7 @@
 #import "NSDate+EDAMAdditions.h"
 #import "NSString+URLEncoding.h"
 #import "ENShareURLHelper.h"
+#import "ENCommonUtils.h"
 
 // Strings visible publicly.
 NSString * const ENSessionHostSandbox = @"sandbox.evernote.com";
@@ -1558,6 +1559,17 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
             }
         });
     });
+}
+
+#pragma mark - Interaction with Evernote app
+
+- (BOOL)viewNoteInEvernote:(ENNoteRef *)noteRef {
+    if (IsEvernoteInstalled() == NO) {
+        return NO;
+    }
+    
+    NSString *viewNoteURLScheme = [NSString stringWithFormat:@"evernote:///view/%d/%@/%@/%@/", self.userID, [self shardIdForNoteRef:noteRef], noteRef.guid, noteRef.guid];
+    return [[UIApplication sharedApplication] openURL:[NSURL URLWithString:viewNoteURLScheme]];
 }
 
 #pragma mark - Private routines
