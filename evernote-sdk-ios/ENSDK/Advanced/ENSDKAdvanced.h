@@ -191,6 +191,16 @@
  *  @return The hash for this resource.
  */
 - (NSData *)dataHash;
+
+/**
+ *  An optional dictionary of attributes which are used at upload time only to apply to an EDAMResource's attributes during
+ *  its creation. The keys in the dictionary should be valid keys in an EDAMResourceAttributes, e.g. "fileName", or "applicationData";
+ *  the values are the objects to apply.
+ *
+ *  Note that downloaded resources do not populate this dictionary; if you need to inspect properties of an EDAMResource that aren't
+ *  represented by ENResource, you should use ENNoteStoreClient's -getResourceWithGuid... method to download the EDAMResource directly.
+ */
+@property (nonatomic, strong) NSDictionary * edamAttributes;
 @end
 
 @interface ENNoteRef (Advanced)

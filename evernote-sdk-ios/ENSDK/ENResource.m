@@ -32,6 +32,7 @@
 @interface ENResource ()
 @property (nonatomic, copy) NSString * sourceUrl;
 @property (nonatomic, strong) NSData * dataHash;
+@property (nonatomic, strong) NSDictionary * edamAttributes;
 @end
 
 @implementation ENResource
@@ -124,7 +125,22 @@
     if (self.sourceUrl) {
         attributes.sourceURL = self.sourceUrl;
     }
+    
     resource.attributes = attributes;
+    
+    // set EDAM attributes if edamAttributes dictionary is not nil
+    for (NSString * key in self.edamAttributes.allKeys) {
+        id value = [self.edamAttributes valueForKey:key];
+        @try {
+            [resource.attributes setValue:value forKey:key];
+        }
+        @catch (NSException *exception) {
+            ENSDKLogError(@"Unable to set value %@ for key %@ on EDAMResource.attributes", value, key);
+            if ([[exception name] isEqualToString: NSUndefinedKeyException]) {
+                ENSDKLogError(@"Key %@ not found on EDAMResource.attributes", key);
+            }
+        }
+    }
 
     return resource;
 }
