@@ -55,4 +55,22 @@
  *  @return A valid note content instance.
  */
 + (instancetype)noteContentWithSanitizedHTML:(NSString *)html;
+
+/**
+ *  Class method to create a note content object from an ENML string.
+ *
+ *  @param string An EMML string.
+ *
+ *  @return A valid note content instance.
+ */
++ (instancetype)noteContentWithENML:(NSString *)enml;
+
+/**
+ *  Instance getter method for retrieving the receiver's ENML.
+ *
+ *
+ *  @return Vaid ENML in NSString format.
+ */
+- (NSString *)enml;
+
 @end
