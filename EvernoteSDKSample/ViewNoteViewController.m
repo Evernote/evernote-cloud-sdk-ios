@@ -7,12 +7,14 @@
 //
 
 #import "ViewNoteViewController.h"
+#import "ResourcesTableTableViewController.h"
 #import "SVProgressHUD.h"
 #import "CommonUtils.h"
 
 @interface ViewNoteViewController () <UIWebViewDelegate>
 @property (nonatomic, strong) UIWebView * webView;
 @property (nonatomic, assign) BOOL doneLoading;
+@property (nonatomic, strong) ENNote *note;
 @end
 
 @implementation ViewNoteViewController
@@ -30,8 +32,8 @@
     [super viewDidLoad];
     self.navigationItem.title = self.noteTitle;
     
-    UIBarButtonItem *viewInEvernoteItem = [[UIBarButtonItem alloc] initWithTitle:@"View in Evernote" style:UIBarButtonItemStylePlain target:self action:@selector(viewInEvernote)];
-    self.navigationItem.rightBarButtonItem = viewInEvernoteItem;
+    UIBarButtonItem *menuItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(showMenu)];
+    self.navigationItem.rightBarButtonItem = menuItem;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -44,6 +46,7 @@
         }
     } completion:^(ENNote *note, NSError *downloadNoteError) {
         if (note && self.webView) {
+            self.note = note;
             [self loadWebDataFromNote:note];
         } else {
             NSLog(@"Error downloading note contents %@", downloadNoteError);
@@ -54,7 +57,6 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    self.webView = nil;
     [SVProgressHUD dismiss];
 }
 
@@ -67,6 +69,18 @@
               textEncodingName:nil
                        baseURL:nil];
     }];
+}
+
+- (void)showMenu {
+    UIAlertController *menuController = [[UIAlertController alloc] init];
+    [menuController addAction:[UIAlertAction actionWithTitle:@"View Resources" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        ResourcesTableTableViewController *vc = [[ResourcesTableTableViewController alloc] initWithNote:self.note];
+        [self.navigationController pushViewController:vc animated:YES];
+    }]];
+    [menuController addAction:[UIAlertAction actionWithTitle:@"View this note in Evernote" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self viewInEvernote];
+    }]];
+    [self presentViewController:menuController animated:YES completion:nil];
 }
 
 - (void)viewInEvernote {
