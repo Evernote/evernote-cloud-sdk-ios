@@ -53,16 +53,17 @@
 - (void)addCredentials:(ENCredentials *)credentials
 {
     // saves auth token to keychain
-    [credentials saveToKeychain];
-    
-    // add it to our host => credentials dict
-    [self.store setObject:credentials forKey:credentials.host];
+    BOOL saved = [credentials saveToKeychain];
+    if (saved) {
+        // add it to our host => credentials dict
+        [self.store setObject:credentials forKey:credentials.host];
+    }
 }
 
 - (ENCredentials *)credentialsForHost:(NSString *)host
 {
     ENCredentials * credentials = [self.store objectForKey:host];
-    if (credentials && ![credentials areValid]) {
+    if (credentials && (![credentials areValid] || [credentials authenticationToken] == nil)) {
         [self removeCredentials:credentials];
         return nil;
     }
