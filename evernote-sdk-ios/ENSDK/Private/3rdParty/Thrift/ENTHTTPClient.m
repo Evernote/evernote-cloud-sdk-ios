@@ -18,13 +18,13 @@
  */
 
 #import "ENTHTTPClient.h"
-#import "ENAFURLConnectionOperation.h"
+#import "AFNetworking.h"
 
 typedef void (^ProgressBlock)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite);
 
 @interface ENTHTTPClient()
 
-@property (nonatomic,strong) ENAFURLConnectionOperation *httpOperation;
+@property (nonatomic,strong) AFURLConnectionOperation *httpOperation;
 @property (strong, nonatomic) NSMutableData *requestData;
 @property (strong, nonatomic) NSData *responseData;
 @property (assign, nonatomic) int responseDataOffset;
@@ -103,7 +103,7 @@ typedef void (^ProgressBlock)(NSUInteger bytesWritten, long long totalBytesWritt
     NSURLResponse * response;
     NSError * error;
     NSData *responseData = nil;
-    self.httpOperation = [[ENAFURLConnectionOperation alloc] initWithRequest:request];
+    self.httpOperation = [[AFURLConnectionOperation alloc] initWithRequest:request];
     
     if(self.uploadBlock) {
         [self.httpOperation setUploadProgressBlock:self.uploadBlock];

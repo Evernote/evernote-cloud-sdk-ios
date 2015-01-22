@@ -27,7 +27,7 @@
  */
 
 #import "ENCredentials.h"
-#import "ENSSKeychain.h"
+#import "SSKeychain.h"
 
 @interface ENCredentials()
 
@@ -76,7 +76,7 @@ authenticationResult:(EDAMAuthenticationResult *)authenticationResult
 {
     // auth token gets saved to the keychain
     NSError *error;
-    BOOL success = [ENSSKeychain setPassword:_authenticationToken 
+    BOOL success = [SSKeychain setPassword:_authenticationToken
                                 forService:self.host
                                    account:self.edamUserId 
                                      error:&error];
@@ -89,13 +89,13 @@ authenticationResult:(EDAMAuthenticationResult *)authenticationResult
 
 - (void)deleteFromKeychain
 {
-    [ENSSKeychain deletePasswordForService:self.host account:self.edamUserId];
+    [SSKeychain deletePasswordForService:self.host account:self.edamUserId];
 }
 
 - (NSString *)authenticationToken
 {
     NSError *error;
-    NSString *token = [ENSSKeychain passwordForService:self.host account:self.edamUserId error:&error];
+    NSString *token = [SSKeychain passwordForService:self.host account:self.edamUserId error:&error];
     if (!token) {
         NSLog(@"Error getting password from keychain: %@", error);
     }

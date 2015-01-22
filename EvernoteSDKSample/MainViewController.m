@@ -53,8 +53,6 @@ NS_ENUM(NSInteger, SampleFunctions) {
     UIBarButtonItem * backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:NULL];
     [self.navigationItem setBackBarButtonItem:backButton];
     [self update];
-    
-    [SVProgressHUD setBackgroundColor:[UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:0.7]];
 }
 
 - (void)update

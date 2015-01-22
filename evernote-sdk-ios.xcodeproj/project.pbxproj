@@ -49,9 +49,6 @@
 		860DF48718FDDDC4002B4793 /* KSWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E240918EBA5D500BD7E6E /* KSWriter.m */; };
 		860DF48818FDDDC4002B4793 /* KSXMLAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E240B18EBA5D500BD7E6E /* KSXMLAttributes.m */; };
 		860DF48918FDDDC4002B4793 /* KSXMLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E240D18EBA5D500BD7E6E /* KSXMLWriter.m */; };
-		860DF48A18FDDE33002B4793 /* ENSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E241418EBA5D500BD7E6E /* ENSSKeychain.m */; };
-		860DF48B18FDDE61002B4793 /* ENAFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23FC18EBA5D500BD7E6E /* ENAFURLConnectionOperation.m */; };
-		860DF48C18FDDE61002B4793 /* ENGCOAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23FF18EBA5D500BD7E6E /* ENGCOAuth.m */; };
 		860DF49018FDDEE2002B4793 /* ENSaveToEvernoteActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E245B18EBA5D500BD7E6E /* ENSaveToEvernoteActivity.m */; };
 		860DF49218FDDFDB002B4793 /* ENSDKPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E25DC18F4DCE600BD7E6E /* ENSDKPrivate.m */; };
 		860DF49318FDDFDB002B4793 /* EDAMNoteStoreClient+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E243B18EBA5D500BD7E6E /* EDAMNoteStoreClient+Utilities.m */; };
@@ -114,6 +111,11 @@
 		86D49E4A191DA4A8001C3581 /* RMSTokenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86D49E3E191DA4A8001C3581 /* RMSTokenView.m */; };
 		86D49E4B191DA4A8001C3581 /* RMSTokenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86D49E3E191DA4A8001C3581 /* RMSTokenView.m */; };
 		86D792B419E862DF008664DF /* TagsInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86D792B319E862DF008664DF /* TagsInfoViewController.m */; };
+		86EE2CC71A71CAE7000FAEA8 /* libPods-SSKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86EE2CC61A71CAE7000FAEA8 /* libPods-SSKeychain.a */; };
+		86EE2CC91A71CB17000FAEA8 /* libPods-SVProgressHUD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86EE2CC81A71CB17000FAEA8 /* libPods-SVProgressHUD.a */; };
+		86EE2CCB1A71CE8C000FAEA8 /* libPods-AFNetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86EE2CCA1A71CE8C000FAEA8 /* libPods-AFNetworking.a */; };
+		86EE2CCD1A71D107000FAEA8 /* libPods-cocoa-oauth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86EE2CCC1A71D107000FAEA8 /* libPods-cocoa-oauth.a */; };
+		86EE2CCF1A71D133000FAEA8 /* libPods-NSData+Base64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86EE2CCE1A71D133000FAEA8 /* libPods-NSData+Base64.a */; };
 		86F2D7FB1909ECD300C0AA7F /* libevernote-sdk-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB3D1AD1524ED96001C4534 /* libevernote-sdk-ios.a */; };
 		86F2D7FD1909EDAA00C0AA7F /* ENSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 86F2D7FC1909EDAA00C0AA7F /* ENSDKResources.bundle */; };
 		86F2D802190A348F00C0AA7F /* ENSDKResourceLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = BECDD3C7190A2DE7003736EE /* ENSDKResourceLoader.m */; };
@@ -168,10 +170,6 @@
 		BE2E249318EBA5D500BD7E6E /* ENSDKLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23F518EBA5D500BD7E6E /* ENSDKLogging.h */; };
 		BE2E249418EBA5D500BD7E6E /* ENSession.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23F618EBA5D500BD7E6E /* ENSession.h */; };
 		BE2E249518EBA5D500BD7E6E /* ENSession.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23F718EBA5D500BD7E6E /* ENSession.m */; };
-		BE2E249618EBA5D500BD7E6E /* ENAFURLConnectionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23FB18EBA5D500BD7E6E /* ENAFURLConnectionOperation.h */; };
-		BE2E249718EBA5D500BD7E6E /* ENAFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23FC18EBA5D500BD7E6E /* ENAFURLConnectionOperation.m */; };
-		BE2E249818EBA5D500BD7E6E /* ENGCOAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23FE18EBA5D500BD7E6E /* ENGCOAuth.h */; };
-		BE2E249918EBA5D500BD7E6E /* ENGCOAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23FF18EBA5D500BD7E6E /* ENGCOAuth.m */; };
 		BE2E249C18EBA5D500BD7E6E /* KSForwardingWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E240418EBA5D500BD7E6E /* KSForwardingWriter.h */; };
 		BE2E249D18EBA5D500BD7E6E /* KSForwardingWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E240518EBA5D500BD7E6E /* KSForwardingWriter.m */; };
 		BE2E249E18EBA5D500BD7E6E /* KSHTMLWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E240618EBA5D500BD7E6E /* KSHTMLWriter.h */; };
@@ -184,8 +182,6 @@
 		BE2E24A518EBA5D500BD7E6E /* KSXMLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E240D18EBA5D500BD7E6E /* KSXMLWriter.m */; };
 		BE2E24A618EBA5D500BD7E6E /* NSString+XMLAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E240F18EBA5D500BD7E6E /* NSString+XMLAdditions.h */; };
 		BE2E24A718EBA5D500BD7E6E /* NSString+XMLAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E241018EBA5D500BD7E6E /* NSString+XMLAdditions.m */; };
-		BE2E24A818EBA5D500BD7E6E /* ENSSKeychain.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E241318EBA5D500BD7E6E /* ENSSKeychain.h */; };
-		BE2E24A918EBA5D500BD7E6E /* ENSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E241418EBA5D500BD7E6E /* ENSSKeychain.m */; };
 		BE2E24C118EBA5D500BD7E6E /* EDAMNoteStoreClient+Utilities.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E243A18EBA5D500BD7E6E /* EDAMNoteStoreClient+Utilities.h */; };
 		BE2E24C218EBA5D500BD7E6E /* EDAMNoteStoreClient+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E243B18EBA5D500BD7E6E /* EDAMNoteStoreClient+Utilities.m */; };
 		BE2E24C318EBA5D500BD7E6E /* ENAuthCache.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E243C18EBA5D500BD7E6E /* ENAuthCache.h */; };
@@ -238,8 +234,6 @@
 		BE48C70F1912FC1300025618 /* ENLoadingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BE48C70D1912FC1300025618 /* ENLoadingViewController.h */; };
 		BE48C7111912FC1300025618 /* ENLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE48C70E1912FC1300025618 /* ENLoadingViewController.m */; };
 		BE48C7121912FC1300025618 /* ENLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE48C70E1912FC1300025618 /* ENLoadingViewController.m */; };
-		BE48C71819131AC200025618 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = BE48C71519131AC200025618 /* LICENSE.txt */; };
-		BE48C71919131AC200025618 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BE48C71719131AC200025618 /* SVProgressHUD.m */; };
 		BE4BF75F1925736300564DA3 /* ENNoteSearch.h in Headers */ = {isa = PBXBuildFile; fileRef = BE4BF75D1925736300564DA3 /* ENNoteSearch.h */; };
 		BE4BF7601925736300564DA3 /* ENNoteSearch.h in Headers */ = {isa = PBXBuildFile; fileRef = BE4BF75D1925736300564DA3 /* ENNoteSearch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE4BF7611925736300564DA3 /* ENNoteSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4BF75E1925736300564DA3 /* ENNoteSearch.m */; };
@@ -280,7 +274,6 @@
 		BE7E5F571921808B00A4DA30 /* ENTTransport.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F3B1921808B00A4DA30 /* ENTTransport.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		BE7E5F581921808B00A4DA30 /* ENTTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F3C1921808B00A4DA30 /* ENTTransport.m */; };
 		BE7E5F591921808B00A4DA30 /* ENTTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F3C1921808B00A4DA30 /* ENTTransport.m */; };
-		BEA8992F1913215C001619FE /* angle-mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEA8992E1913215C001619FE /* angle-mask@2x.png */; };
 		BEA899921917F59C001619FE /* ENStoreClient.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E245018EBA5D500BD7E6E /* ENStoreClient.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		BEA899931917F7E8001619FE /* ENLinkedNotebookRef.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E244418EBA5D500BD7E6E /* ENLinkedNotebookRef.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		BECDD2F018F5C8F3003736EE /* ENPreferencesStore.h in Headers */ = {isa = PBXBuildFile; fileRef = BECDD2EE18F5C8F3003736EE /* ENPreferencesStore.h */; };
@@ -326,6 +319,7 @@
 		BECDD3AC19090FBA003736EE /* SaveActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BECDD3AB19090FBA003736EE /* SaveActivityViewController.m */; };
 		BECDD3C8190A2DE7003736EE /* ENSDKResourceLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = BECDD3C6190A2DE7003736EE /* ENSDKResourceLoader.h */; };
 		BECDD3C9190A2DE7003736EE /* ENSDKResourceLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = BECDD3C7190A2DE7003736EE /* ENSDKResourceLoader.m */; };
+		EA0D928720A67819EAF3623D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE13354BA6200A26500D0DCB /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -345,6 +339,8 @@
 		0BB3D1B01524ED96001C4534 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0BB3D1B41524ED96001C4534 /* evernote-sdk-ios-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "evernote-sdk-ios-Prefix.pch"; sourceTree = "<group>"; };
 		0BB3D24D1524EEF3001C4534 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1C96EBC240670BD41D10BA7A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		7A4920BECC83E5CE2ADB4A77 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8600EC161A15D97400F8F838 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		861879881A1A7E6400E04B4D /* SearchNotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchNotesViewController.h; sourceTree = "<group>"; };
 		861879891A1A7E6400E04B4D /* SearchNotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchNotesViewController.m; sourceTree = "<group>"; };
@@ -385,6 +381,12 @@
 		86D49E3E191DA4A8001C3581 /* RMSTokenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSTokenView.m; sourceTree = "<group>"; };
 		86D792B219E862DF008664DF /* TagsInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagsInfoViewController.h; sourceTree = "<group>"; };
 		86D792B319E862DF008664DF /* TagsInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagsInfoViewController.m; sourceTree = "<group>"; };
+		86EE2CC41A71BDCD000FAEA8 /* libPods-SVProgressHUD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SVProgressHUD.a"; path = "Pods/build/Debug-iphoneos/libPods-SVProgressHUD.a"; sourceTree = "<group>"; };
+		86EE2CC61A71CAE7000FAEA8 /* libPods-SSKeychain.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SSKeychain.a"; path = "Pods/build/Debug-iphoneos/libPods-SSKeychain.a"; sourceTree = "<group>"; };
+		86EE2CC81A71CB17000FAEA8 /* libPods-SVProgressHUD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SVProgressHUD.a"; path = "Pods/build/Debug-iphoneos/libPods-SVProgressHUD.a"; sourceTree = "<group>"; };
+		86EE2CCA1A71CE8C000FAEA8 /* libPods-AFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-AFNetworking.a"; path = "Pods/build/Debug-iphoneos/libPods-AFNetworking.a"; sourceTree = "<group>"; };
+		86EE2CCC1A71D107000FAEA8 /* libPods-cocoa-oauth.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-cocoa-oauth.a"; path = "Pods/build/Debug-iphoneos/libPods-cocoa-oauth.a"; sourceTree = "<group>"; };
+		86EE2CCE1A71D133000FAEA8 /* libPods-NSData+Base64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-NSData+Base64.a"; path = "Pods/build/Debug-iphoneos/libPods-NSData+Base64.a"; sourceTree = "<group>"; };
 		86F2D7FC1909EDAA00C0AA7F /* ENSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ENSDKResources.bundle; sourceTree = SOURCE_ROOT; };
 		A9BE476B1781FAFA00471BF7 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		BE2E23BF18EBA5D400BD7E6E /* EDAM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDAM.h; sourceTree = "<group>"; };
@@ -438,11 +440,6 @@
 		BE2E23F518EBA5D500BD7E6E /* ENSDKLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENSDKLogging.h; sourceTree = "<group>"; };
 		BE2E23F618EBA5D500BD7E6E /* ENSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENSession.h; sourceTree = "<group>"; };
 		BE2E23F718EBA5D500BD7E6E /* ENSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENSession.m; sourceTree = "<group>"; };
-		BE2E23FB18EBA5D500BD7E6E /* ENAFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENAFURLConnectionOperation.h; sourceTree = "<group>"; };
-		BE2E23FC18EBA5D500BD7E6E /* ENAFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENAFURLConnectionOperation.m; sourceTree = "<group>"; };
-		BE2E23FE18EBA5D500BD7E6E /* ENGCOAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENGCOAuth.h; sourceTree = "<group>"; };
-		BE2E23FF18EBA5D500BD7E6E /* ENGCOAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENGCOAuth.m; sourceTree = "<group>"; };
-		BE2E240018EBA5D500BD7E6E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		BE2E240418EBA5D500BD7E6E /* KSForwardingWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSForwardingWriter.h; sourceTree = "<group>"; };
 		BE2E240518EBA5D500BD7E6E /* KSForwardingWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSForwardingWriter.m; sourceTree = "<group>"; };
 		BE2E240618EBA5D500BD7E6E /* KSHTMLWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSHTMLWriter.h; sourceTree = "<group>"; };
@@ -456,9 +453,6 @@
 		BE2E240E18EBA5D500BD7E6E /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		BE2E240F18EBA5D500BD7E6E /* NSString+XMLAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XMLAdditions.h"; sourceTree = "<group>"; };
 		BE2E241018EBA5D500BD7E6E /* NSString+XMLAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XMLAdditions.m"; sourceTree = "<group>"; };
-		BE2E241218EBA5D500BD7E6E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		BE2E241318EBA5D500BD7E6E /* ENSSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENSSKeychain.h; sourceTree = "<group>"; };
-		BE2E241418EBA5D500BD7E6E /* ENSSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENSSKeychain.m; sourceTree = "<group>"; };
 		BE2E243A18EBA5D500BD7E6E /* EDAMNoteStoreClient+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EDAMNoteStoreClient+Utilities.h"; sourceTree = "<group>"; };
 		BE2E243B18EBA5D500BD7E6E /* EDAMNoteStoreClient+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EDAMNoteStoreClient+Utilities.m"; sourceTree = "<group>"; };
 		BE2E243C18EBA5D500BD7E6E /* ENAuthCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENAuthCache.h; sourceTree = "<group>"; };
@@ -511,9 +505,6 @@
 		BE48C7081911713300025618 /* ENWebArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENWebArchive.m; sourceTree = "<group>"; };
 		BE48C70D1912FC1300025618 /* ENLoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENLoadingViewController.h; sourceTree = "<group>"; };
 		BE48C70E1912FC1300025618 /* ENLoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENLoadingViewController.m; sourceTree = "<group>"; };
-		BE48C71519131AC200025618 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		BE48C71619131AC200025618 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
-		BE48C71719131AC200025618 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		BE4BF75D1925736300564DA3 /* ENNoteSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENNoteSearch.h; sourceTree = "<group>"; };
 		BE4BF75E1925736300564DA3 /* ENNoteSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENNoteSearch.m; sourceTree = "<group>"; };
 		BE4BF763192C4B5200564DA3 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
@@ -535,7 +526,6 @@
 		BE7E5F3A1921808B00A4DA30 /* ENTProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENTProtocol.m; sourceTree = "<group>"; };
 		BE7E5F3B1921808B00A4DA30 /* ENTTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENTTransport.h; sourceTree = "<group>"; };
 		BE7E5F3C1921808B00A4DA30 /* ENTTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENTTransport.m; sourceTree = "<group>"; };
-		BEA8992E1913215C001619FE /* angle-mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "angle-mask@2x.png"; sourceTree = "<group>"; };
 		BECDD2EE18F5C8F3003736EE /* ENPreferencesStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENPreferencesStore.h; sourceTree = "<group>"; };
 		BECDD2EF18F5C8F3003736EE /* ENPreferencesStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENPreferencesStore.m; sourceTree = "<group>"; };
 		BECDD2F218F77BC3003736EE /* ENNoteContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENNoteContent.h; sourceTree = "<group>"; };
@@ -560,6 +550,7 @@
 		BECDD3AB19090FBA003736EE /* SaveActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveActivityViewController.m; sourceTree = "<group>"; };
 		BECDD3C6190A2DE7003736EE /* ENSDKResourceLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENSDKResourceLoader.h; sourceTree = "<group>"; };
 		BECDD3C7190A2DE7003736EE /* ENSDKResourceLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENSDKResourceLoader.m; sourceTree = "<group>"; };
+		DE13354BA6200A26500D0DCB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -567,6 +558,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86EE2CCF1A71D133000FAEA8 /* libPods-NSData+Base64.a in Frameworks */,
+				86EE2CCD1A71D107000FAEA8 /* libPods-cocoa-oauth.a in Frameworks */,
+				86EE2CCB1A71CE8C000FAEA8 /* libPods-AFNetworking.a in Frameworks */,
+				86EE2CC71A71CAE7000FAEA8 /* libPods-SSKeychain.a in Frameworks */,
 				0BB3D1B11524ED96001C4534 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -582,12 +577,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86EE2CC91A71CB17000FAEA8 /* libPods-SVProgressHUD.a in Frameworks */,
 				86F2D7FB1909ECD300C0AA7F /* libevernote-sdk-ios.a in Frameworks */,
 				BECDD3A61909009B003736EE /* libxml2.dylib in Frameworks */,
 				BECDD3721908FFC1003736EE /* CoreGraphics.framework in Frameworks */,
 				BECDD3A31908FFE8003736EE /* MobileCoreServices.framework in Frameworks */,
 				BECDD3731908FFC1003736EE /* UIKit.framework in Frameworks */,
 				BECDD3711908FFC1003736EE /* Foundation.framework in Frameworks */,
+				EA0D928720A67819EAF3623D /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,6 +599,7 @@
 				BECDD3741908FFC1003736EE /* EvernoteSDKSample */,
 				0BB3D1AF1524ED96001C4534 /* Frameworks */,
 				0BB3D1AE1524ED96001C4534 /* Products */,
+				7253F54A1105215EAA02B877 /* Pods */,
 			);
 			indentWidth = 4;
 			sourceTree = "<group>";
@@ -621,12 +619,19 @@
 		0BB3D1AF1524ED96001C4534 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				86EE2CCE1A71D133000FAEA8 /* libPods-NSData+Base64.a */,
+				86EE2CCC1A71D107000FAEA8 /* libPods-cocoa-oauth.a */,
+				86EE2CCA1A71CE8C000FAEA8 /* libPods-AFNetworking.a */,
+				86EE2CC81A71CB17000FAEA8 /* libPods-SVProgressHUD.a */,
+				86EE2CC61A71CAE7000FAEA8 /* libPods-SSKeychain.a */,
+				86EE2CC41A71BDCD000FAEA8 /* libPods-SVProgressHUD.a */,
 				BE2E25B018EDE1C100BD7E6E /* MobileCoreServices.framework */,
 				A9BE476B1781FAFA00471BF7 /* libxml2.dylib */,
 				0BB3D1B01524ED96001C4534 /* Foundation.framework */,
 				0BB3D24D1524EEF3001C4534 /* UIKit.framework */,
 				BE2E24E818EDD4A300BD7E6E /* CoreGraphics.framework */,
 				865C383418F8BA2400ECB2BA /* Other Frameworks */,
+				DE13354BA6200A26500D0DCB /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -646,6 +651,15 @@
 				0BB3D1B41524ED96001C4534 /* evernote-sdk-ios-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7253F54A1105215EAA02B877 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7A4920BECC83E5CE2ADB4A77 /* Pods.debug.xcconfig */,
+				1C96EBC240670BD41D10BA7A /* Pods.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		865C383418F8BA2400ECB2BA /* Other Frameworks */ = {
@@ -863,31 +877,9 @@
 			children = (
 				BE7E5F2D1921808B00A4DA30 /* Thrift */,
 				86D49E37191DA4A8001C3581 /* RMSTokenView */,
-				BE2E23FA18EBA5D500BD7E6E /* AFNetworking */,
-				BE2E23FD18EBA5D500BD7E6E /* cocoa-oauth */,
 				BE2E240318EBA5D500BD7E6E /* KSHTMLWriter */,
-				BE2E241118EBA5D500BD7E6E /* SSKeychain */,
 			);
 			path = 3rdParty;
-			sourceTree = "<group>";
-		};
-		BE2E23FA18EBA5D500BD7E6E /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				BE2E23FB18EBA5D500BD7E6E /* ENAFURLConnectionOperation.h */,
-				BE2E23FC18EBA5D500BD7E6E /* ENAFURLConnectionOperation.m */,
-			);
-			path = AFNetworking;
-			sourceTree = "<group>";
-		};
-		BE2E23FD18EBA5D500BD7E6E /* cocoa-oauth */ = {
-			isa = PBXGroup;
-			children = (
-				BE2E23FE18EBA5D500BD7E6E /* ENGCOAuth.h */,
-				BE2E23FF18EBA5D500BD7E6E /* ENGCOAuth.m */,
-				BE2E240018EBA5D500BD7E6E /* LICENSE */,
-			);
-			path = "cocoa-oauth";
 			sourceTree = "<group>";
 		};
 		BE2E240318EBA5D500BD7E6E /* KSHTMLWriter */ = {
@@ -908,16 +900,6 @@
 				BE2E241018EBA5D500BD7E6E /* NSString+XMLAdditions.m */,
 			);
 			path = KSHTMLWriter;
-			sourceTree = "<group>";
-		};
-		BE2E241118EBA5D500BD7E6E /* SSKeychain */ = {
-			isa = PBXGroup;
-			children = (
-				BE2E241218EBA5D500BD7E6E /* LICENSE */,
-				BE2E241318EBA5D500BD7E6E /* ENSSKeychain.h */,
-				BE2E241418EBA5D500BD7E6E /* ENSSKeychain.m */,
-			);
-			path = SSKeychain;
 			sourceTree = "<group>";
 		};
 		BE2E245718EBA5D500BD7E6E /* Resources */ = {
@@ -941,25 +923,6 @@
 				862E76C6192AB962003D0A32 /* ENNotebookPickerView.m */,
 			);
 			path = SendToEvernoteActivity;
-			sourceTree = "<group>";
-		};
-		BE48C71319131AC200025618 /* 3rdparty */ = {
-			isa = PBXGroup;
-			children = (
-				BE48C71419131AC200025618 /* SVProgressHUD */,
-			);
-			path = 3rdparty;
-			sourceTree = "<group>";
-		};
-		BE48C71419131AC200025618 /* SVProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				BE48C71519131AC200025618 /* LICENSE.txt */,
-				BE48C71619131AC200025618 /* SVProgressHUD.h */,
-				BE48C71719131AC200025618 /* SVProgressHUD.m */,
-				BEA8992E1913215C001619FE /* angle-mask@2x.png */,
-			);
-			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
 		BE7E5F2D1921808B00A4DA30 /* Thrift */ = {
@@ -987,7 +950,6 @@
 		BECDD3741908FFC1003736EE /* EvernoteSDKSample */ = {
 			isa = PBXGroup;
 			children = (
-				BE48C71319131AC200025618 /* 3rdparty */,
 				BECDD37D1908FFC1003736EE /* AppDelegate.h */,
 				BECDD37E1908FFC1003736EE /* AppDelegate.m */,
 				BECDD3891908FFC2003736EE /* Images.xcassets */,
@@ -1041,7 +1003,6 @@
 				BE2E249C18EBA5D500BD7E6E /* KSForwardingWriter.h in Headers */,
 				BE2E246218EBA5D500BD7E6E /* EDAMLimits.h in Headers */,
 				BE2E24D918EBA5D500BD7E6E /* ENXMLSaxParser.h in Headers */,
-				BE2E24A818EBA5D500BD7E6E /* ENSSKeychain.h in Headers */,
 				BE4C731B195B859A001E5EF6 /* ENShareURLHelper.h in Headers */,
 				BE7E5F461921808B00A4DA30 /* ENTBinaryProtocol.h in Headers */,
 				86D49E40191DA4A8001C3581 /* RMSTextField.h in Headers */,
@@ -1099,7 +1060,6 @@
 				BE7E5F411921808B00A4DA30 /* FATObject.h in Headers */,
 				BE2E24C718EBA5D500BD7E6E /* ENCredentialStore.h in Headers */,
 				86CB761418FF33D4002F267E /* ENSaveToEvernoteViewController.h in Headers */,
-				BE2E249618EBA5D500BD7E6E /* ENAFURLConnectionOperation.h in Headers */,
 				BE2E248118EBA5D500BD7E6E /* NSString+EDAMNilAdditions.h in Headers */,
 				BE2E24DC18EBA5D500BD7E6E /* NSString+ENScrubbing.h in Headers */,
 				BE2E248E18EBA5D500BD7E6E /* ENNoteRef.h in Headers */,
@@ -1117,7 +1077,6 @@
 				BECDD3C8190A2DE7003736EE /* ENSDKResourceLoader.h in Headers */,
 				BE2E247C18EBA5D500BD7E6E /* ENXMLWriter.h in Headers */,
 				BECDD2FC18F78072003736EE /* ENHTMLNoteContent.h in Headers */,
-				BE2E249818EBA5D500BD7E6E /* ENGCOAuth.h in Headers */,
 				BE2E24CF18EBA5D500BD7E6E /* ENNotebookChooserViewController.h in Headers */,
 				BE2E24A018EBA5D500BD7E6E /* KSWriter.h in Headers */,
 				BE2E24CD18EBA5D500BD7E6E /* ENLinkedNoteStoreClient.h in Headers */,
@@ -1187,11 +1146,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0BB3D1BA1524ED96001C4534 /* Build configuration list for PBXNativeTarget "evernote-sdk-ios" */;
 			buildPhases = (
+				905B7047C9E7517ED399FD33 /* Check Pods Manifest.lock */,
 				0BB3D1A91524ED96001C4534 /* Sources */,
 				0BB3D1AA1524ED96001C4534 /* Frameworks */,
 				0BB3D1AB1524ED96001C4534 /* Headers */,
 				414BD857983A4B8ABFEAD915 /* Warn for TODO and FIXME comments */,
 				A9BF37341787497F00680B34 /* CopyFiles */,
+				26537FABBF447625A49BBCC7 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1224,9 +1185,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BECDD3A11908FFC2003736EE /* Build configuration list for PBXNativeTarget "EvernoteSDKSample" */;
 			buildPhases = (
+				A76D9D45260569C4436CA29C /* Check Pods Manifest.lock */,
 				BECDD36C1908FFC1003736EE /* Sources */,
 				BECDD36D1908FFC1003736EE /* Frameworks */,
 				BECDD36E1908FFC1003736EE /* Resources */,
+				B3645891FF2277DE1869D40A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1260,9 +1223,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				BECDD36F1908FFC1003736EE /* EvernoteSDKSample */,
 				0BB3D1AC1524ED96001C4534 /* evernote-sdk-ios */,
 				865C383018F8BA2400ECB2BA /* ENSDK */,
-				BECDD36F1908FFC1003736EE /* EvernoteSDKSample */,
 			);
 		};
 /* End PBXProject section */
@@ -1280,8 +1243,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEA8992F1913215C001619FE /* angle-mask@2x.png in Resources */,
-				BE48C71819131AC200025618 /* LICENSE.txt in Resources */,
 				86F2D7FD1909EDAA00C0AA7F /* ENSDKResources.bundle in Resources */,
 				BECDD38A1908FFC2003736EE /* Images.xcassets in Resources */,
 				BECDD3791908FFC1003736EE /* InfoPlist.strings in Resources */,
@@ -1292,6 +1253,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		26537FABBF447625A49BBCC7 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		414BD857983A4B8ABFEAD915 /* Warn for TODO and FIXME comments */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1305,6 +1281,51 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "KEYWORDS=\"TODO:|FIXME:|\\?\\?\\?:|\\!\\!\\!:\"\nfind \"${SRCROOT}\" -ipath \"${SRCROOT}/pods\" -prune -o \\( -name \"*.h\" -or -name \"*.m\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | perl -p -e \"s/($KEYWORDS)/ warning: \\$1/\"\n";
+		};
+		905B7047C9E7517ED399FD33 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A76D9D45260569C4436CA29C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B3645891FF2277DE1869D40A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1331,7 +1352,6 @@
 				BECDD2F118F5C8F3003736EE /* ENPreferencesStore.m in Sources */,
 				BE2E246718EBA5D500BD7E6E /* EDAMTypes.m in Sources */,
 				BE2E248718EBA5D500BD7E6E /* NSDate+EDAMAdditions.m in Sources */,
-				BE2E24A918EBA5D500BD7E6E /* ENSSKeychain.m in Sources */,
 				BE7E5F501921808B00A4DA30 /* ENTHTTPClient.m in Sources */,
 				BE2E246518EBA5D500BD7E6E /* EDAMNoteStore.m in Sources */,
 				BE7E5F541921808B00A4DA30 /* ENTProtocol.m in Sources */,
@@ -1344,7 +1364,6 @@
 				BE2E25D418F3745700BD7E6E /* ENBusinessNoteStoreClient.m in Sources */,
 				86CB761D18FF4554002F267E /* ENTheme.m in Sources */,
 				86C54DDF191D8F0900670865 /* ENNotebookTypeView.m in Sources */,
-				BE2E249718EBA5D500BD7E6E /* ENAFURLConnectionOperation.m in Sources */,
 				866F1C741905F01F0072F4C8 /* ENNotebookCell.m in Sources */,
 				BE4BF767192C4B5200564DA3 /* NSString+URLEncoding.m in Sources */,
 				BE2E24DA18EBA5D500BD7E6E /* ENXMLSaxParser.m in Sources */,
@@ -1357,7 +1376,6 @@
 				BE7E5F3F1921808B00A4DA30 /* FATField.m in Sources */,
 				BE2E248D18EBA5D500BD7E6E /* ENNotebook.m in Sources */,
 				BE2E248B18EBA5D500BD7E6E /* ENNote.m in Sources */,
-				BE2E249918EBA5D500BD7E6E /* ENGCOAuth.m in Sources */,
 				BE2E24CC18EBA5D500BD7E6E /* ENLinkedNotebookRef.m in Sources */,
 				BE2E25DA18F4D6C300BD7E6E /* ENMLConstants.m in Sources */,
 				BE2E247818EBA5D500BD7E6E /* ENMLWriter.m in Sources */,
@@ -1427,9 +1445,6 @@
 				860DF4A318FDDFDB002B4793 /* ENHTMLNoteContent.m in Sources */,
 				86D49E47191DA4A8001C3581 /* RMSTokenConstraintManager.m in Sources */,
 				860DF49018FDDEE2002B4793 /* ENSaveToEvernoteActivity.m in Sources */,
-				860DF48B18FDDE61002B4793 /* ENAFURLConnectionOperation.m in Sources */,
-				860DF48C18FDDE61002B4793 /* ENGCOAuth.m in Sources */,
-				860DF48A18FDDE33002B4793 /* ENSSKeychain.m in Sources */,
 				86F2D802190A348F00C0AA7F /* ENSDKResourceLoader.m in Sources */,
 				86CB761E18FF4554002F267E /* ENTheme.m in Sources */,
 				BE4BF768192C4B5200564DA3 /* NSString+URLEncoding.m in Sources */,
@@ -1498,7 +1513,6 @@
 				BECDD37B1908FFC1003736EE /* main.m in Sources */,
 				8618798A1A1A7E6400E04B4D /* SearchNotesViewController.m in Sources */,
 				8628FA581A1A94DA00AEF402 /* CommonUtils.m in Sources */,
-				BE48C71919131AC200025618 /* SVProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1609,14 +1623,23 @@
 		};
 		0BB3D1BB1524ED96001C4534 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A4920BECC83E5CE2ADB4A77 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/evernote_sdk_ios.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "evernote-sdk-ios/evernote-sdk-ios-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				HEADER_SEARCH_PATHS = "${SDKROOT}/usr/include/libxml2";
+				HEADER_SEARCH_PATHS = (
+					"${SDKROOT}/usr/include/libxml2",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/cocoa-oauth\"",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1625,14 +1648,23 @@
 		};
 		0BB3D1BC1524ED96001C4534 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C96EBC240670BD41D10BA7A /* Pods.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/evernote_sdk_ios.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "evernote-sdk-ios/evernote-sdk-ios-Prefix.pch";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				HEADER_SEARCH_PATHS = "${SDKROOT}/usr/include/libxml2";
+				HEADER_SEARCH_PATHS = (
+					"${SDKROOT}/usr/include/libxml2",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/cocoa-oauth\"",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1729,6 +1761,7 @@
 		};
 		BECDD39D1908FFC2003736EE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A4920BECC83E5CE2ADB4A77 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1751,6 +1784,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "EvernoteSDKSample/EvernoteSDKSample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1760,6 +1797,7 @@
 		};
 		BECDD39E1908FFC2003736EE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C96EBC240670BD41D10BA7A /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1779,6 +1817,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "EvernoteSDKSample/EvernoteSDKSample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
