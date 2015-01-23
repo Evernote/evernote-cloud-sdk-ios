@@ -164,10 +164,6 @@
 
     [self.tokenViews addObject:tokenView];
 
-    if (!self.textField.editing) {
-        tokenView.alpha = 0.0;
-    }
-    
     self.text = nil;
     
     if ([self.tokenDelegate respondsToSelector:@selector(tokenView:didAddTokenWithText:)]) {

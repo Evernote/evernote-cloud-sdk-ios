@@ -148,6 +148,9 @@ CGFloat kTextLeftPadding = 20;
     }];
     
     ENNote * note = [self.delegate noteForViewController:self];
+    for (NSString *tagName in note.tagNames) {
+        [self.tagsView addTokenWithText:tagName];
+    }
     [note generateWebArchiveData:^(NSData *data) {
         [self.noteView loadData:data
                       MIMEType:ENWebArchiveDataMIMEType
