@@ -51,7 +51,15 @@
     }
     
     ENNotebook *notebook = [self.notebookList objectAtIndex:indexPath.row];
-    [cell.textLabel setText:notebook.name];
+    NSString *nameToDisplay = notebook.name;
+    if (notebook.isBusinessNotebook) {
+        nameToDisplay = [NSString stringWithFormat:@"🏢 %@", nameToDisplay];
+    } else if (notebook.isShared) {
+        nameToDisplay = [NSString stringWithFormat:@"👥 %@", nameToDisplay];
+    } else {
+        nameToDisplay = [NSString stringWithFormat:@"👤 %@", nameToDisplay];
+    }
+    [cell.textLabel setText:nameToDisplay];
     
     return cell;
 }

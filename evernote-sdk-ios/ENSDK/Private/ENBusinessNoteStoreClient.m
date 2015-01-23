@@ -46,4 +46,26 @@
     NSAssert(self.delegate, @"ENBusinessNoteStoreClient delegate not set");
     return [self.delegate authenticationTokenForBusinessStoreClient:self];
 }
+
+- (void)createBusinessNotebook:(EDAMNotebook *)notebook
+                       success:(void(^)(EDAMLinkedNotebook *notebook))success
+                       failure:(void(^)(NSError *error))failure
+{
+    [self createNotebook:notebook success:^(EDAMNotebook *businessNotebook) {
+        EDAMSharedNotebook *sharedNotebook = businessNotebook.sharedNotebooks[0];
+        EDAMLinkedNotebook *linkedNotebook = [[EDAMLinkedNotebook alloc] init];
+        [linkedNotebook setSharedNotebookGlobalId:sharedNotebook.globalId];
+        [linkedNotebook setShareName:[businessNotebook name]];
+        [linkedNotebook setUsername:[ENSession sharedSession].businessUser.username];
+        [linkedNotebook setShardId:[ENSession sharedSession].businessUser.shardId];
+        [self createLinkedNotebook:linkedNotebook success:^(EDAMLinkedNotebook *businessLinkedNotebook) {
+            success(businessLinkedNotebook);
+        } failure:^(NSError *error) {
+            failure(error);
+        }];
+    } failure:^(NSError *error) {
+        failure(error);
+    }];
+}
+
 @end

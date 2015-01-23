@@ -38,5 +38,16 @@
 @property (nonatomic, weak) id<ENBusinessNoteStoreClientDelegate> delegate;
 @property (nonatomic, copy) NSString * noteStoreUrl;
 + (instancetype)noteStoreClientForBusiness;
-@end
 
+/** Asks the business to make a business notebook with the provided name, and the user joins the notebook.
+ 
+ @param  notebook The desired fields for the notebook must be provided on this object. The name of the notebook must be set. If a notebook exists in the business account with the same name (via case-insensitive compare), this will throw an EDAMUserException.
+ 
+ @param success Success completion block with the newly created Notebook. The server-side GUID will be saved in this object's 'guid' field.
+ @param failure Failure completion block.
+ */
+- (void)createBusinessNotebook:(EDAMNotebook *)notebook
+               success:(void(^)(EDAMLinkedNotebook *notebook))success
+               failure:(void(^)(NSError *error))failure;
+
+@end
