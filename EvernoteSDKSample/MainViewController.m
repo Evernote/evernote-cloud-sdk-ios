@@ -20,7 +20,6 @@
 #define PHOTO_MAX_WIDTH 500
 
 NS_ENUM(NSInteger, SampleFunctions) {
-    kSampleFunctionsUnauthenticate,
     kSampleFunctionsUserInfo,
     kSampleFunctionsTagsInfo,
     kSampleFunctionsSaveActivity,
@@ -35,6 +34,7 @@ NS_ENUM(NSInteger, SampleFunctions) {
 @interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) UIWebView * webView;
+@property (nonatomic, strong) UIBarButtonItem * loginItem;
 @end
 
 @implementation MainViewController
@@ -45,6 +45,14 @@ NS_ENUM(NSInteger, SampleFunctions) {
     [self.tableView setDelegate:self];
     [self.tableView setDataSource:self];
     [self.view addSubview:self.tableView];
+    
+    self.loginItem = [[UIBarButtonItem alloc] initWithTitle:nil style:UIBarButtonItemStyleDone target:self action:@selector(logInOrLogOut)];
+    self.navigationItem.rightBarButtonItem = self.loginItem;
+}
+
+- (void)updateLoginItem {
+    BOOL loggedIn = [[ENSession sharedSession] isAuthenticated];
+    [self.loginItem setTitle:(loggedIn? @"Logout" : @"Login")];
 }
 
 - (void)viewDidLoad
@@ -57,12 +65,14 @@ NS_ENUM(NSInteger, SampleFunctions) {
 
 - (void)update
 {
-    [self.tableView reloadData];
     if ([[ENSession sharedSession] isAuthenticated]) {
         [self.navigationItem setTitle:[[ENSession sharedSession] userDisplayName]];
     } else {
         [self.navigationItem setTitle:nil];
     }
+    [self updateLoginItem];
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableView
@@ -77,7 +87,7 @@ NS_ENUM(NSInteger, SampleFunctions) {
     if ([[ENSession sharedSession] isAuthenticated]) {
         return kSampleFunctionsMaxValue;
     } else {
-        return 1; // Authenticate
+        return 0; // Authenticate
     }
 }
 
@@ -85,14 +95,6 @@ NS_ENUM(NSInteger, SampleFunctions) {
 {
     UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     switch (indexPath.row) {
-        case kSampleFunctionsUnauthenticate:
-            if ([[ENSession sharedSession] isAuthenticated]) {
-                cell.textLabel.text = @"Unauthenticate";
-            } else {
-                cell.textLabel.text = @"Authenticate";
-            }
-            break;
-            
         case kSampleFunctionsUserInfo:
             cell.textLabel.text = @"User info";
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -137,10 +139,6 @@ NS_ENUM(NSInteger, SampleFunctions) {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.row) {
-        case kSampleFunctionsUnauthenticate:
-            [self logInOrLogOut];
-            break;
-            
         case kSampleFunctionsUserInfo:
         {
             UIViewController * vc = [[UserInfoViewController alloc] init];
