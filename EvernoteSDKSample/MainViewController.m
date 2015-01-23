@@ -11,8 +11,8 @@
 #import "UserInfoViewController.h"
 #import "TagsInfoViewController.h"
 #import "SaveActivityViewController.h"
-#import "SearchNotesViewController.h"
 #import "NotebooksViewController.h"
+#import "NoteListResultViewController.h"
 #import "SVProgressHUD.h"
 #import "CommonUtils.h"
 
@@ -119,7 +119,6 @@ NS_ENUM(NSInteger, SampleFunctions) {
             
         case kSampleFunctionsSearchNotes:
             cell.textLabel.text = @"Search notes via keyword";
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
             
         case kSampleFunctionsViewMyNotes:
@@ -167,8 +166,7 @@ NS_ENUM(NSInteger, SampleFunctions) {
         }
         case kSampleFunctionsSearchNotes:
         {
-            SearchNotesViewController * searchVC = [[SearchNotesViewController alloc] init];
-            [self.navigationController pushViewController:searchVC animated:YES];
+            [self showAlertToSearch];
             break;
         }
         case kSampleFunctionsViewMyNotes:
@@ -268,6 +266,25 @@ NS_ENUM(NSInteger, SampleFunctions) {
 - (void)finishClip
 {
     [SVProgressHUD dismiss];
+}
+
+#pragma mark - Search via keyword
+
+- (void)showAlertToSearch {
+    UIAlertController *searchController = [UIAlertController alertControllerWithTitle:@"Please enter the keyword:" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [searchController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.text = @"Evernote Business";
+    }];
+    UIAlertAction *clipAction = [UIAlertAction actionWithTitle:@"Search" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UITextField *keywordField = searchController.textFields[0];
+        NSString *keyword = keywordField.text;
+        NoteListResultViewController *resultVC = [[NoteListResultViewController alloc] initWithNoteSearch:[ENNoteSearch noteSearchWithSearchString: keyword] notebook:nil];
+        [self.navigationController pushViewController:resultVC animated:YES];
+    }];
+    UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    [searchController addAction:clipAction];
+    [searchController addAction:dismissAction];
+    [self presentViewController:searchController animated:YES completion:nil];
 }
 
 #pragma mark - UIImagePickerController
