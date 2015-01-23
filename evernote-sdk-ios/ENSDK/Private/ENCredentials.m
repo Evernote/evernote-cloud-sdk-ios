@@ -76,10 +76,11 @@ authenticationResult:(EDAMAuthenticationResult *)authenticationResult
 {
     // auth token gets saved to the keychain
     NSError *error;
-    BOOL success = [SSKeychain setPassword:_authenticationToken
-                                forService:self.host
-                                   account:self.edamUserId 
-                                     error:&error];
+
+    SSKeychainQuery *query = [self keychainQuery];
+    query.password = _authenticationToken;
+
+    BOOL success = [query save:&error];
     if (!success) {
         NSLog(@"Error saving to keychain: %@ %ld", error, (long)error.code);
         return NO;
@@ -89,13 +90,16 @@ authenticationResult:(EDAMAuthenticationResult *)authenticationResult
 
 - (void)deleteFromKeychain
 {
-    [SSKeychain deletePasswordForService:self.host account:self.edamUserId];
+    [[self keychainQuery] deleteItem:nil];
 }
 
 - (NSString *)authenticationToken
 {
     NSError *error;
-    NSString *token = [SSKeychain passwordForService:self.host account:self.edamUserId error:&error];
+    SSKeychainQuery* query = [self keychainQuery];
+    [query fetch:&error];
+
+    NSString *token = [query password];
     if (!token) {
         NSLog(@"Error getting password from keychain: %@", error);
     }
@@ -116,6 +120,16 @@ authenticationResult:(EDAMAuthenticationResult *)authenticationResult
     }
     
     return YES;
+}
+
+#pragma mark - SSKeyChain Helpers
+
+-(SSKeychainQuery*) keychainQuery
+{
+    SSKeychainQuery *query = [[SSKeychainQuery alloc] init];
+    query.service = self.host;
+    query.account = self.edamUserId;
+    return query;
 }
 
 #pragma mark - NSCoding
