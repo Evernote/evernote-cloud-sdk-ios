@@ -34,7 +34,10 @@
 {
     ENSaveToEvernoteActivity * sendActivity = [[ENSaveToEvernoteActivity alloc] init];
     sendActivity.delegate = self;
-    NSArray * items = [NSArray arrayWithObject:(self.textView.text)];
+    UIImage *logoImage = [UIImage imageNamed:@"scannable"];
+    NSURL *appURL = [NSURL URLWithString:@"https://evernote.com/products/scannable/"];
+    NSString *stringToAppend = [NSString stringWithFormat:@"%@\n", self.textView.text];
+    NSArray * items = @[stringToAppend, logoImage, appURL];
     UIActivityViewController * activityController = [[UIActivityViewController alloc] initWithActivityItems:items
                                                                                       applicationActivities:@[sendActivity]];
     if ([activityController respondsToSelector:@selector(popoverPresentationController)]) {
