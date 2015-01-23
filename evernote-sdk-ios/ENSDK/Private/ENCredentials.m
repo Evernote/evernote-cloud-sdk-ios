@@ -27,6 +27,8 @@
  */
 
 #import "ENCredentials.h"
+#import "ENSession.h"
+#import "ENSDKPrivate.h"
 #import "SSKeychain.h"
 
 @interface ENCredentials()
@@ -129,6 +131,9 @@ authenticationResult:(EDAMAuthenticationResult *)authenticationResult
     SSKeychainQuery *query = [[SSKeychainQuery alloc] init];
     query.service = self.host;
     query.account = self.edamUserId;
+    if ([ENSession keychainAccessGroup]) {
+        query.accessGroup = [ENSession keychainAccessGroup];
+    }
     return query;
 }
 

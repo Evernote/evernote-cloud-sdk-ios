@@ -141,6 +141,7 @@ static NSString * SessionHostOverride;
 static NSString * ConsumerKey, * ConsumerSecret;
 static NSString * DeveloperToken, * NoteStoreUrl;
 static NSString * SecurityApplicationGroupIdentifier;
+static NSString * _keychainGroup, * _keychainAccessGroup;
 static BOOL disableRefreshingNotebooksCacheOnLaunch;
 
 + (void)setSharedSessionConsumerKey:(NSString *)key
@@ -183,6 +184,17 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
 + (void) setSecurityApplicationGroupIdentifier:(NSString*)securityApplicationGroupIdentifier
 {
     SecurityApplicationGroupIdentifier = securityApplicationGroupIdentifier;
+}
+
++ (void) setKeychainGroup:(NSString*)keychainGroup
+{
+    _keychainGroup = keychainGroup;
+    _keychainAccessGroup = [[[self bundleSeedID] stringByAppendingString:@"."] stringByAppendingString:_keychainGroup];
+}
+
++ (NSString*) keychainAccessGroup
+{
+    return _keychainAccessGroup;
 }
 
 + (BOOL)checkSharedSessionSettings
@@ -1877,6 +1889,29 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
         ENSDKLogError(@"Primary note store operation failed authentication. Unauthenticating.");
         [self unauthenticate];
     }
+}
+
+#pragma mark - Keychain Sharing Helpers
+
+// programatically find bundleSeedId/App ID Prefix
++ (NSString *)bundleSeedID {
+    NSDictionary *query = [NSDictionary dictionaryWithObjectsAndKeys:
+                           (__bridge NSString *)kSecClassGenericPassword, (__bridge NSString *)kSecClass,
+                           @"bundleSeedID", kSecAttrAccount,
+                           @"", kSecAttrService,
+                           (id)kCFBooleanTrue, kSecReturnAttributes,
+                           nil];
+    CFDictionaryRef result = nil;
+    OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query, (CFTypeRef *)&result);
+    if (status == errSecItemNotFound)
+        status = SecItemAdd((__bridge CFDictionaryRef)query, (CFTypeRef *)&result);
+    if (status != errSecSuccess)
+        return nil;
+    NSString *accessGroup = [(__bridge NSDictionary *)result objectForKey:(__bridge NSString *)kSecAttrAccessGroup];
+    NSArray *components = [accessGroup componentsSeparatedByString:@"."];
+    NSString *bundleSeedID = [[components objectEnumerator] nextObject];
+    CFRelease(result);
+    return bundleSeedID;
 }
 
 @end

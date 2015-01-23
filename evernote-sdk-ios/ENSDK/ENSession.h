@@ -266,6 +266,13 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
  */
 + (void) setSecurityApplicationGroupIdentifier:(NSString*)securityApplicationGroupIdentifier;
 
+/**
+ *  The keychain groups used for keychain sharing. If not set, keychain sharing is disabled.
+ *
+ *  This should be the shared keychain group of your app in XCode "Capabilities" > "Keychain Sharing".
+ */
++ (void) setKeychainGroup:(NSString*)keychainGroup;
+
 #pragma mark - Authentication
 
 /**
