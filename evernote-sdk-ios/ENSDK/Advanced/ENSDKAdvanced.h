@@ -122,6 +122,22 @@
  *  @return A client for the note store that contains the notebook.
  */
 - (ENNoteStoreClient *)noteStoreForNotebook:(ENNotebook *)notebook;
+
+/**
+ *  Set to the security application group identifier, if the app should share authenticate with an application group.
+ *
+ *  @param the security application group identifier.
+ *  @see https://developer.apple.com/library/prerelease/ios/documentation/General/Conceptual/ExtensibilityPG/ExtensionScenarios.html#//apple_ref/doc/uid/TP40014214-CH21-SW6
+ */
++ (void) setSecurityApplicationGroupIdentifier:(NSString*)securityApplicationGroupIdentifier;
+
+/**
+ *  The keychain groups used for keychain sharing. If not set, keychain sharing is disabled.
+ *
+ *  This should be the shared keychain group of your app in XCode "Capabilities" > "Keychain Sharing".
+ */
++ (void) setKeychainGroup:(NSString*)keychainGroup;
+
 @end
 
 @interface ENSessionFindNotesResult (Advanced)
