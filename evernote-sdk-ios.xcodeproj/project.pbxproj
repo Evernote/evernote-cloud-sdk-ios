@@ -114,6 +114,7 @@
 		86DCC2011A71F153005BB128 /* libPods-cocoa-oauth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DCC1FD1A71F153005BB128 /* libPods-cocoa-oauth.a */; };
 		86DCC2021A71F153005BB128 /* libPods-NSData+Base64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DCC1FE1A71F153005BB128 /* libPods-NSData+Base64.a */; };
 		86DCC2031A71F153005BB128 /* libPods-SSKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DCC1FF1A71F153005BB128 /* libPods-SSKeychain.a */; };
+		86DCC2041A72F16A005BB128 /* ENBusinessNoteStoreClient.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E25D118F3745700BD7E6E /* ENBusinessNoteStoreClient.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		86EE2CC71A71CAE7000FAEA8 /* libPods-SSKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86EE2CC61A71CAE7000FAEA8 /* libPods-SSKeychain.a */; };
 		86EE2CC91A71CB17000FAEA8 /* libPods-SVProgressHUD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86EE2CC81A71CB17000FAEA8 /* libPods-SVProgressHUD.a */; };
 		86EE2CCB1A71CE8C000FAEA8 /* libPods-AFNetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86EE2CCA1A71CE8C000FAEA8 /* libPods-AFNetworking.a */; };
@@ -1117,6 +1118,7 @@
 				860DF42D18FCCF06002B4793 /* ENSaveToEvernoteActivity.h in Headers */,
 				862E76C8192AB962003D0A32 /* ENNotebookPickerView.h in Headers */,
 				BECDD34F1908DE29003736EE /* ENSDKAdvanced.h in Headers */,
+				86DCC2041A72F16A005BB128 /* ENBusinessNoteStoreClient.h in Headers */,
 				BECDD3501908DE29003736EE /* ENNoteStoreClient.h in Headers */,
 				BECDD3511908DE29003736EE /* ENUserStoreClient.h in Headers */,
 				BECDD3521908DE29003736EE /* ENPreferencesStore.h in Headers */,

@@ -120,7 +120,7 @@ static NSUInteger ENSessionNotebooksCacheValidity = (5 * 60);   // 5 minutes
 @property (nonatomic, strong) NSString * primaryAuthenticationToken;
 @property (nonatomic, strong) ENUserStoreClient * userStore;
 @property (nonatomic, strong) ENNoteStoreClient * primaryNoteStore;
-@property (nonatomic, strong) ENNoteStoreClient * businessNoteStore;
+@property (nonatomic, strong) ENBusinessNoteStoreClient * businessNoteStore;
 @property (nonatomic, strong) ENAuthCache * authCache;
 @property (nonatomic, strong) NSArray * notebooksCache;
 @property (nonatomic, strong) NSDate * notebooksCacheDate;
@@ -1702,7 +1702,7 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
     return _primaryNoteStore;
 }
 
-- (ENNoteStoreClient *)businessNoteStore
+- (ENBusinessNoteStoreClient *)businessNoteStore
 {
     if (!_businessNoteStore && [self isBusinessUser]) {
         ENBusinessNoteStoreClient * client = [ENBusinessNoteStoreClient noteStoreClientForBusiness];

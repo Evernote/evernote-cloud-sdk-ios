@@ -215,10 +215,11 @@ NS_ENUM(NSInteger, SampleFunctions) {
         textField.text = @"https://evernote.com/products/scannable/";
         [textField setKeyboardType:UIKeyboardTypeURL];
     }];
+    __weak typeof(self) weakSelf = self;
     UIAlertAction *clipAction = [UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         UITextField *urlField = clipController.textFields[0];
         NSString *urlString = urlField.text;
-        [self loadWebViewWithURLString:urlString];
+        [weakSelf loadWebViewWithURLString:urlString];
     }];
     UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     [clipController addAction:clipAction];
@@ -275,11 +276,12 @@ NS_ENUM(NSInteger, SampleFunctions) {
     [searchController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.text = @"Evernote Business";
     }];
+    __weak typeof(self) weakSelf = self;
     UIAlertAction *clipAction = [UIAlertAction actionWithTitle:@"Search" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         UITextField *keywordField = searchController.textFields[0];
         NSString *keyword = keywordField.text;
         NoteListResultViewController *resultVC = [[NoteListResultViewController alloc] initWithNoteSearch:[ENNoteSearch noteSearchWithSearchString: keyword] notebook:nil];
-        [self.navigationController pushViewController:resultVC animated:YES];
+        [weakSelf.navigationController pushViewController:resultVC animated:YES];
     }];
     UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     [searchController addAction:clipAction];

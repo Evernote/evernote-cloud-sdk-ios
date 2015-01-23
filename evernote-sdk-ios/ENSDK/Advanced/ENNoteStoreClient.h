@@ -27,7 +27,8 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "ENSDKAdvanced.h"
+#import <ENSDK/ENSDK.h>
+#import "EDAM.h"
 #import "ENStoreClient.h"
 #import "ENLinkedNotebookRef.h"
 

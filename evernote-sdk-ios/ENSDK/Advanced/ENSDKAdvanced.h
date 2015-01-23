@@ -28,12 +28,12 @@
 
 #import <ENSDK/ENSDK.h>
 #import "EDAM.h"
-#import "ENNoteStoreClient.h"
 #import "ENUserStoreClient.h"
 #import "ENPreferencesStore.h"
 #import "NSDate+EDAMAdditions.h"
 #import "ENMLWriter.h"
-@class ENNoteStoreClient;
+#import "ENNoteStoreClient.h"
+#import "ENBusinessNoteStoreClient.h"
 
 @interface ENSession (Advanced)
 /**
@@ -92,7 +92,7 @@
  *
  *  @return A client for the user's business note store, or nil if the user is not a member of a business.
  */
-- (ENNoteStoreClient *)businessNoteStore;
+- (ENBusinessNoteStoreClient *)businessNoteStore;
 
 /**
  *  Every linked notebook requires its own note store client instance to access.

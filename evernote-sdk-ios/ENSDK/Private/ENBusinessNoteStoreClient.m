@@ -58,7 +58,7 @@
         [linkedNotebook setShareName:[businessNotebook name]];
         [linkedNotebook setUsername:[ENSession sharedSession].businessUser.username];
         [linkedNotebook setShardId:[ENSession sharedSession].businessUser.shardId];
-        [self createLinkedNotebook:linkedNotebook success:^(EDAMLinkedNotebook *businessLinkedNotebook) {
+        [[ENSession sharedSession].primaryNoteStore createLinkedNotebook:linkedNotebook success:^(EDAMLinkedNotebook *businessLinkedNotebook) {
             success(businessLinkedNotebook);
         } failure:^(NSError *error) {
             failure(error);
