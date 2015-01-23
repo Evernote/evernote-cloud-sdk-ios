@@ -9,6 +9,7 @@
 #import "NoteListResultViewController.h"
 #import "ViewNoteViewController.h"
 #import "SVProgressHUD.h"
+#import "CommonUtils.h"
 
 @interface NoteListResultViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) ENNoteSearch *noteSearch;
@@ -55,28 +56,18 @@
                                             if (!findNotesResults) {
                                                 if ([findNotesError.domain isEqualToString:ENErrorDomain] &&
                                                     findNotesError.code == ENErrorCodePermissionDenied) {
-                                                    [self showSimpleAlertWithMessage:@"Permission denied for note find. Maybe your app only has read access?"];
+                                                    [CommonUtils showSimpleAlertWithMessage:@"Permission denied for note find. Maybe your app only has read access?"];
                                                 } else {
-                                                    [self showSimpleAlertWithMessage:@"Error searching for notes"];
+                                                    [CommonUtils showSimpleAlertWithMessage:@"Error searching for notes"];
                                                 }
                                                 NSLog(@"findNotesError: %@", findNotesError);
                                             } else if (findNotesResults.count == 0) {
-                                                [self showSimpleAlertWithMessage:@"No notes from this app! Go back to menu to create some."];
+                                                [CommonUtils showSimpleAlertWithMessage:@"No notes found."];
                                             } else {
                                                 self.findNotesResults = findNotesResults;
                                                 [self.tableView reloadData];
                                             }
                                         }];
-}
-
-- (void)showSimpleAlertWithMessage:(NSString *)message
-{
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil
-                                                     message:message
-                                                    delegate:nil
-                                           cancelButtonTitle:nil
-                                           otherButtonTitles:@"OK", nil];
-    [alert show];
 }
 
 #pragma mark - UITableView
