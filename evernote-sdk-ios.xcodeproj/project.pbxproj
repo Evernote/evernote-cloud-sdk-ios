@@ -71,7 +71,6 @@
 		860DF4A418FDE14F002B4793 /* NSString+XMLAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E241018EBA5D500BD7E6E /* NSString+XMLAdditions.m */; };
 		8618798A1A1A7E6400E04B4D /* SearchNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 861879891A1A7E6400E04B4D /* SearchNotesViewController.m */; };
 		86254FCE1A1AA0D5005A3425 /* NotebooksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86254FCD1A1AA0D5005A3425 /* NotebooksViewController.m */; };
-		8628FA551A1A915200AEF402 /* WebClipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8628FA541A1A915200AEF402 /* WebClipViewController.m */; };
 		8628FA581A1A94DA00AEF402 /* CommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8628FA571A1A94DA00AEF402 /* CommonUtils.m */; };
 		862E76C7192AB962003D0A32 /* ENNotebookPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 862E76C5192AB962003D0A32 /* ENNotebookPickerView.h */; };
 		862E76C8192AB962003D0A32 /* ENNotebookPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 862E76C5192AB962003D0A32 /* ENNotebookPickerView.h */; };
@@ -346,8 +345,6 @@
 		861879891A1A7E6400E04B4D /* SearchNotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchNotesViewController.m; sourceTree = "<group>"; };
 		86254FCC1A1AA0D5005A3425 /* NotebooksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotebooksViewController.h; sourceTree = "<group>"; };
 		86254FCD1A1AA0D5005A3425 /* NotebooksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotebooksViewController.m; sourceTree = "<group>"; };
-		8628FA531A1A915200AEF402 /* WebClipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebClipViewController.h; sourceTree = "<group>"; };
-		8628FA541A1A915200AEF402 /* WebClipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebClipViewController.m; sourceTree = "<group>"; };
 		8628FA561A1A94DA00AEF402 /* CommonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtils.h; sourceTree = "<group>"; };
 		8628FA571A1A94DA00AEF402 /* CommonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtils.m; sourceTree = "<group>"; };
 		862E76C5192AB962003D0A32 /* ENNotebookPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENNotebookPickerView.h; sourceTree = "<group>"; };
@@ -969,8 +966,6 @@
 				861879891A1A7E6400E04B4D /* SearchNotesViewController.m */,
 				BE4695CA192ECE4D00ADE15F /* NoteListResultViewController.h */,
 				BE4695CB192ECE4D00ADE15F /* NoteListResultViewController.m */,
-				8628FA531A1A915200AEF402 /* WebClipViewController.h */,
-				8628FA541A1A915200AEF402 /* WebClipViewController.m */,
 				8628FA561A1A94DA00AEF402 /* CommonUtils.h */,
 				8628FA571A1A94DA00AEF402 /* CommonUtils.m */,
 				86254FCC1A1AA0D5005A3425 /* NotebooksViewController.h */,
@@ -1507,7 +1502,6 @@
 				BE4695CF192ED90E00ADE15F /* ViewNoteViewController.m in Sources */,
 				BECDD3A9190908A9003736EE /* UserInfoViewController.m in Sources */,
 				86361AA01A5762CC0042FB95 /* ResourcesTableTableViewController.m in Sources */,
-				8628FA551A1A915200AEF402 /* WebClipViewController.m in Sources */,
 				BECDD37F1908FFC1003736EE /* AppDelegate.m in Sources */,
 				86D792B419E862DF008664DF /* TagsInfoViewController.m in Sources */,
 				BECDD37B1908FFC1003736EE /* main.m in Sources */,

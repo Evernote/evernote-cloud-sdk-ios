@@ -39,7 +39,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [SVProgressHUD showProgress:0.0 status:nil maskType:SVProgressHUDMaskTypeClear];
+    [SVProgressHUD showProgress:0.0 status:nil maskType:SVProgressHUDMaskTypeBlack];
     [[ENSession sharedSession] downloadNote:self.noteRef progress:^(CGFloat progress) {
         if (self.webView) {
             [SVProgressHUD showProgress:progress];

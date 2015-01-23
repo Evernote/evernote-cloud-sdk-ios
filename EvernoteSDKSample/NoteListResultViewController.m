@@ -44,7 +44,7 @@
     [super viewDidLoad];
     self.navigationItem.title = @"Notes";
     
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     [[ENSession sharedSession] findNotesWithSearch:self.noteSearch
                                         inNotebook:self.notebookToSearch
                                            orScope:ENSessionSearchScopeAll

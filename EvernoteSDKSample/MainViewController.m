@@ -11,7 +11,6 @@
 #import "UserInfoViewController.h"
 #import "TagsInfoViewController.h"
 #import "SaveActivityViewController.h"
-#import "WebClipViewController.h"
 #import "SearchNotesViewController.h"
 #import "NotebooksViewController.h"
 #import "SVProgressHUD.h"
@@ -31,7 +30,7 @@ NS_ENUM(NSInteger, SampleFunctions) {
     kSampleFunctionsMaxValue
 };
 
-@interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIWebViewDelegate>
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) UIWebView * webView;
 @property (nonatomic, strong) UIBarButtonItem * loginItem;
@@ -116,7 +115,6 @@ NS_ENUM(NSInteger, SampleFunctions) {
             
         case kSampleFunctionsClipWebPage:
             cell.textLabel.text = @"Clip web page";
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
             
         case kSampleFunctionsSearchNotes:
@@ -164,8 +162,7 @@ NS_ENUM(NSInteger, SampleFunctions) {
         }
         case kSampleFunctionsClipWebPage:
         {
-            WebClipViewController * webClipVC = [[WebClipViewController alloc] init];
-            [self.navigationController pushViewController:webClipVC animated:YES];
+            [self showAlertToClipWebPage];
             break;
         }
         case kSampleFunctionsSearchNotes:
@@ -212,6 +209,67 @@ NS_ENUM(NSInteger, SampleFunctions) {
     }
 }
 
+#pragma - Web Clipping
+
+- (void)showAlertToClipWebPage {
+    UIAlertController *clipController = [UIAlertController alertControllerWithTitle:@"Please enter the URL:" message:@"The web page with the URL will be saved in Evernote" preferredStyle:UIAlertControllerStyleAlert];
+    [clipController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.text = @"https://evernote.com/products/scannable/";
+        [textField setKeyboardType:UIKeyboardTypeURL];
+    }];
+    UIAlertAction *clipAction = [UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UITextField *urlField = clipController.textFields[0];
+        NSString *urlString = urlField.text;
+        [self loadWebViewWithURLString:urlString];
+    }];
+    UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    [clipController addAction:clipAction];
+    [clipController addAction:dismissAction];
+    [self presentViewController:clipController animated:YES completion:nil];
+}
+
+- (void)loadWebViewWithURLString:(NSString *)urlString {
+    NSURL *urlToClip = [NSURL URLWithString:urlString];
+    if (urlToClip == nil) {
+        [CommonUtils showSimpleAlertWithMessage:@"URL not valid"];
+        return;
+    }
+    
+    self.webView = [[UIWebView alloc] initWithFrame:self.view.window.bounds];
+    self.webView.delegate = self;
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:urlToClip]];
+}
+
+- (void)clipWebPage {
+    UIWebView * webView = self.webView;
+    self.webView.delegate = nil;
+    [self.webView stopLoading];
+    self.webView = nil;
+    
+    [ENNote populateNoteFromWebView:webView completion:^(ENNote * note) {
+        if (!note) {
+            [self finishClip];
+            return;
+        }
+        [[ENSession sharedSession] uploadNote:note notebook:nil completion:^(ENNoteRef *noteRef, NSError *uploadNoteError) {
+            NSString * message = nil;
+            if (noteRef) {
+                message = @"Web note created.";
+            } else {
+                message = @"Failed to create web note.";
+            }
+            [self finishClip];
+            [CommonUtils showSimpleAlertWithMessage:message];
+        }];
+    }];
+}
+
+- (void)finishClip
+{
+    [SVProgressHUD dismiss];
+}
+
 #pragma mark - UIImagePickerController
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -231,7 +289,7 @@ NS_ENUM(NSInteger, SampleFunctions) {
     ENNote * note = [[ENNote alloc] init];
     note.title = @"Photo note";
     [note addResource:resource];
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     [[ENSession sharedSession] uploadNote:note notebook:nil completion:^(ENNoteRef *noteRef, NSError *uploadNoteError) {
         NSString * message = nil;
         if (noteRef) {
@@ -250,4 +308,24 @@ NS_ENUM(NSInteger, SampleFunctions) {
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - UIWebViewDelegate
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(clipWebPage) object:nil];
+    NSLog(@"Web view fail: %@", error);
+    self.webView = nil;
+    [self finishClip];
+    [CommonUtils showSimpleAlertWithMessage:@"Failed to load web page to clip."];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    // At the end of every load complete, cancel a pending perform and start a new one. We wait for 3
+    // seconds for the page to "settle down"
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(clipWebPage) object:nil];
+    [self performSelector:@selector(clipWebPage) withObject:nil afterDelay:3.0];
+}
+
 @end
