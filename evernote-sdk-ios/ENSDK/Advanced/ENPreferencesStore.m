@@ -29,6 +29,8 @@
 #import "ENPreferencesStore.h"
 #import "ENSDKPrivate.h"
 
+static NSString * ENPreferencesStoreFilename = @"com.evernote.evernote-sdk-ios.plist";
+
 @interface ENPreferencesStore ()
 @property (nonatomic, strong) NSString * pathname;
 @property (nonatomic, strong) NSMutableDictionary * store;
@@ -51,10 +53,31 @@
     return self;
 }
 
+- (id)initWithURL:(NSURL*)fileURL
+{
+    self = [super init];
+    if (self) {
+        self.pathname = [fileURL path];
+        [self load];
+    }
+    return self;
+}
+
 - (id)init
 {
     [NSException raise:NSInvalidArgumentException format:@"Must call -initWithStoreFilename:"];
     return nil;
+}
+
++(instancetype) preferenceStoreWithSecurityApplicationGroupIdentifier:(NSString*)groupId
+{
+    NSURL* URL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:groupId];
+    return [[self alloc] initWithURL:[URL URLByAppendingPathComponent:ENPreferencesStoreFilename]];
+}
+
++(instancetype) defaultPreferenceStore
+{
+    return [[self alloc] initWithStoreFilename:ENPreferencesStoreFilename];
 }
 
 - (id)objectForKey:(NSString *)key

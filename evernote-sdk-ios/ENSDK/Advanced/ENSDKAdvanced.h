@@ -218,3 +218,11 @@
  */
 @property (nonatomic, readonly) NSString * guid;
 @end
+
+@interface ENPreferencesStore (Advanced)
+
++(instancetype) defaultPreferenceStore;
+
++(instancetype) preferenceStoreWithSecurityApplicationGroupIdentifier:(NSString*)groupId;
+
+@end

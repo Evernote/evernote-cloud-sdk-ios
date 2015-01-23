@@ -258,6 +258,14 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
  */
 + (void)setDisableRefreshingNotebooksCacheOnLaunch:(BOOL)disable;
 
+/**
+ *  Set to the security application group identifier, if the app should share authenticate with an application group.
+ *
+ *  @param the security application group identifier.
+ *  @see https://developer.apple.com/library/prerelease/ios/documentation/General/Conceptual/ExtensibilityPG/ExtensionScenarios.html#//apple_ref/doc/uid/TP40014214-CH21-SW6
+ */
++ (void) setSecurityApplicationGroupIdentifier:(NSString*)securityApplicationGroupIdentifier;
+
 #pragma mark - Authentication
 
 /**
