@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0BB3D1B11524ED96001C4534 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB3D1B01524ED96001C4534 /* Foundation.framework */; };
+		4C13F460A401E7C3790FE2F7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE13354BA6200A26500D0DCB /* libPods.a */; };
 		8600EC171A15D97400F8F838 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8600EC161A15D97400F8F838 /* Launch Screen.xib */; };
 		860DF40A18FCCE51002B4793 /* ENSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23F418EBA5D500BD7E6E /* ENSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		860DF40B18FCCE51002B4793 /* ENSession.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23F618EBA5D500BD7E6E /* ENSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -110,6 +111,10 @@
 		86D49E4A191DA4A8001C3581 /* RMSTokenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86D49E3E191DA4A8001C3581 /* RMSTokenView.m */; };
 		86D49E4B191DA4A8001C3581 /* RMSTokenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86D49E3E191DA4A8001C3581 /* RMSTokenView.m */; };
 		86D792B419E862DF008664DF /* TagsInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86D792B319E862DF008664DF /* TagsInfoViewController.m */; };
+		86DCC2001A71F153005BB128 /* libPods-AFNetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DCC1FC1A71F153005BB128 /* libPods-AFNetworking.a */; };
+		86DCC2011A71F153005BB128 /* libPods-cocoa-oauth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DCC1FD1A71F153005BB128 /* libPods-cocoa-oauth.a */; };
+		86DCC2021A71F153005BB128 /* libPods-NSData+Base64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DCC1FE1A71F153005BB128 /* libPods-NSData+Base64.a */; };
+		86DCC2031A71F153005BB128 /* libPods-SSKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86DCC1FF1A71F153005BB128 /* libPods-SSKeychain.a */; };
 		86EE2CC71A71CAE7000FAEA8 /* libPods-SSKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86EE2CC61A71CAE7000FAEA8 /* libPods-SSKeychain.a */; };
 		86EE2CC91A71CB17000FAEA8 /* libPods-SVProgressHUD.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86EE2CC81A71CB17000FAEA8 /* libPods-SVProgressHUD.a */; };
 		86EE2CCB1A71CE8C000FAEA8 /* libPods-AFNetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 86EE2CCA1A71CE8C000FAEA8 /* libPods-AFNetworking.a */; };
@@ -378,6 +383,10 @@
 		86D49E3E191DA4A8001C3581 /* RMSTokenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMSTokenView.m; sourceTree = "<group>"; };
 		86D792B219E862DF008664DF /* TagsInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagsInfoViewController.h; sourceTree = "<group>"; };
 		86D792B319E862DF008664DF /* TagsInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagsInfoViewController.m; sourceTree = "<group>"; };
+		86DCC1FC1A71F153005BB128 /* libPods-AFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-AFNetworking.a"; path = "Pods/build/Debug-iphoneos/libPods-AFNetworking.a"; sourceTree = "<group>"; };
+		86DCC1FD1A71F153005BB128 /* libPods-cocoa-oauth.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-cocoa-oauth.a"; path = "Pods/build/Debug-iphoneos/libPods-cocoa-oauth.a"; sourceTree = "<group>"; };
+		86DCC1FE1A71F153005BB128 /* libPods-NSData+Base64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-NSData+Base64.a"; path = "Pods/build/Debug-iphoneos/libPods-NSData+Base64.a"; sourceTree = "<group>"; };
+		86DCC1FF1A71F153005BB128 /* libPods-SSKeychain.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SSKeychain.a"; path = "Pods/build/Debug-iphoneos/libPods-SSKeychain.a"; sourceTree = "<group>"; };
 		86EE2CC41A71BDCD000FAEA8 /* libPods-SVProgressHUD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SVProgressHUD.a"; path = "Pods/build/Debug-iphoneos/libPods-SVProgressHUD.a"; sourceTree = "<group>"; };
 		86EE2CC61A71CAE7000FAEA8 /* libPods-SSKeychain.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SSKeychain.a"; path = "Pods/build/Debug-iphoneos/libPods-SSKeychain.a"; sourceTree = "<group>"; };
 		86EE2CC81A71CB17000FAEA8 /* libPods-SVProgressHUD.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-SVProgressHUD.a"; path = "Pods/build/Debug-iphoneos/libPods-SVProgressHUD.a"; sourceTree = "<group>"; };
@@ -567,6 +576,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86DCC2001A71F153005BB128 /* libPods-AFNetworking.a in Frameworks */,
+				86DCC2011A71F153005BB128 /* libPods-cocoa-oauth.a in Frameworks */,
+				86DCC2021A71F153005BB128 /* libPods-NSData+Base64.a in Frameworks */,
+				86DCC2031A71F153005BB128 /* libPods-SSKeychain.a in Frameworks */,
+				4C13F460A401E7C3790FE2F7 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -616,6 +630,10 @@
 		0BB3D1AF1524ED96001C4534 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				86DCC1FC1A71F153005BB128 /* libPods-AFNetworking.a */,
+				86DCC1FD1A71F153005BB128 /* libPods-cocoa-oauth.a */,
+				86DCC1FE1A71F153005BB128 /* libPods-NSData+Base64.a */,
+				86DCC1FF1A71F153005BB128 /* libPods-SSKeychain.a */,
 				86EE2CCE1A71D133000FAEA8 /* libPods-NSData+Base64.a */,
 				86EE2CCC1A71D107000FAEA8 /* libPods-cocoa-oauth.a */,
 				86EE2CCA1A71CE8C000FAEA8 /* libPods-AFNetworking.a */,
@@ -1162,10 +1180,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 865C384118F8BA2400ECB2BA /* Build configuration list for PBXNativeTarget "ENSDK" */;
 			buildPhases = (
+				6E9C6796EBF2B2B0DD75836E /* Check Pods Manifest.lock */,
 				865C382D18F8BA2400ECB2BA /* Sources */,
 				865C382E18F8BA2400ECB2BA /* Frameworks */,
 				865C382F18F8BA2400ECB2BA /* Resources */,
 				860DF40918FCCE28002B4793 /* Headers */,
+				FF599728F861EE0531206E4F /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1277,6 +1297,21 @@
 			shellPath = /bin/sh;
 			shellScript = "KEYWORDS=\"TODO:|FIXME:|\\?\\?\\?:|\\!\\!\\!:\"\nfind \"${SRCROOT}\" -ipath \"${SRCROOT}/pods\" -prune -o \\( -name \"*.h\" -or -name \"*.m\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | perl -p -e \"s/($KEYWORDS)/ warning: \\$1/\"\n";
 		};
+		6E9C6796EBF2B2B0DD75836E /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		905B7047C9E7517ED399FD33 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1308,6 +1343,21 @@
 			showEnvVarsInLog = 0;
 		};
 		B3645891FF2277DE1869D40A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FF599728F861EE0531206E4F /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1667,6 +1717,7 @@
 		};
 		865C383F18F8BA2400ECB2BA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A4920BECC83E5CE2ADB4A77 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1695,9 +1746,17 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"${SDKROOT}/usr/include/libxml2",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/cocoa-oauth\"",
+					"\"${PODS_ROOT}/Headers/Public/SSKeychain\"",
 				);
 				INFOPLIST_FILE = "ENSDK/ENSDK-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				LINK_WITH_STANDARD_LIBRARIES = NO;
 				MACH_O_TYPE = mh_object;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
@@ -1712,6 +1771,7 @@
 		};
 		865C384018F8BA2400ECB2BA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C96EBC240670BD41D10BA7A /* Pods.release.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1738,9 +1798,17 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"${SDKROOT}/usr/include/libxml2",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/cocoa-oauth\"",
+					"\"${PODS_ROOT}/Headers/Public/SSKeychain\"",
 				);
 				INFOPLIST_FILE = "ENSDK/ENSDK-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				LINK_WITH_STANDARD_LIBRARIES = NO;
 				MACH_O_TYPE = mh_object;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
