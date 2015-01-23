@@ -50,7 +50,6 @@ NSString * const ENSessionDidUnauthenticateNotification = @"ENSessionDidUnauthen
 static NSString * ENSessionBootstrapServerBaseURLStringCN  = @"app.yinxiang.com";
 static NSString * ENSessionBootstrapServerBaseURLStringUS  = @"www.evernote.com";
 
-static NSString * ENSessionPreferencesFilename = @"com.evernote.evernote-sdk-ios.plist";
 static NSString * ENSessionPreferencesCredentialStore = @"CredentialStore";
 static NSString * ENSessionPreferencesCurrentProfileName = @"CurrentProfileName";
 static NSString * ENSessionPreferencesUser = @"User";
@@ -141,6 +140,8 @@ static NSUInteger ENSessionNotebooksCacheValidity = (5 * 60);   // 5 minutes
 static NSString * SessionHostOverride;
 static NSString * ConsumerKey, * ConsumerSecret;
 static NSString * DeveloperToken, * NoteStoreUrl;
+static NSString * SecurityApplicationGroupIdentifier;
+static NSString * _keychainGroup, * _keychainAccessGroup;
 static BOOL disableRefreshingNotebooksCacheOnLaunch;
 
 + (void)setSharedSessionConsumerKey:(NSString *)key
@@ -178,6 +179,22 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
 + (void)setDisableRefreshingNotebooksCacheOnLaunch:(BOOL)disable
 {
     disableRefreshingNotebooksCacheOnLaunch = disable;
+}
+
++ (void) setSecurityApplicationGroupIdentifier:(NSString*)securityApplicationGroupIdentifier
+{
+    SecurityApplicationGroupIdentifier = securityApplicationGroupIdentifier;
+}
+
++ (void) setKeychainGroup:(NSString*)keychainGroup
+{
+    _keychainGroup = keychainGroup;
+    _keychainAccessGroup = [[[self bundleSeedID] stringByAppendingString:@"."] stringByAppendingString:_keychainGroup];
+}
+
++ (NSString*) keychainAccessGroup
+{
+    return _keychainAccessGroup;
 }
 
 + (BOOL)checkSharedSessionSettings
@@ -225,7 +242,7 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
 - (void)startup
 {
     self.logger = [[ENSessionDefaultLogger alloc] init];
-    self.preferences = [[ENPreferencesStore alloc] initWithStoreFilename:ENSessionPreferencesFilename];
+    self.preferences = SecurityApplicationGroupIdentifier ? [ENPreferencesStore preferenceStoreWithSecurityApplicationGroupIdentifier:SecurityApplicationGroupIdentifier] : [ENPreferencesStore defaultPreferenceStore];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(storeClientFailedAuthentication:)
@@ -1872,6 +1889,29 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
         ENSDKLogError(@"Primary note store operation failed authentication. Unauthenticating.");
         [self unauthenticate];
     }
+}
+
+#pragma mark - Keychain Sharing Helpers
+
+// programatically find bundleSeedId/App ID Prefix
++ (NSString *)bundleSeedID {
+    NSDictionary *query = [NSDictionary dictionaryWithObjectsAndKeys:
+                           (__bridge NSString *)kSecClassGenericPassword, (__bridge NSString *)kSecClass,
+                           @"bundleSeedID", kSecAttrAccount,
+                           @"", kSecAttrService,
+                           (id)kCFBooleanTrue, kSecReturnAttributes,
+                           nil];
+    CFDictionaryRef result = nil;
+    OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query, (CFTypeRef *)&result);
+    if (status == errSecItemNotFound)
+        status = SecItemAdd((__bridge CFDictionaryRef)query, (CFTypeRef *)&result);
+    if (status != errSecSuccess)
+        return nil;
+    NSString *accessGroup = [(__bridge NSDictionary *)result objectForKey:(__bridge NSString *)kSecAttrAccessGroup];
+    NSArray *components = [accessGroup componentsSeparatedByString:@"."];
+    NSString *bundleSeedID = [[components objectEnumerator] nextObject];
+    CFRelease(result);
+    return bundleSeedID;
 }
 
 @end

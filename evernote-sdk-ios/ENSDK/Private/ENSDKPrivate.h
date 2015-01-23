@@ -38,6 +38,7 @@ extern NSString * const ENBootstrapProfileNameChina;
 
 @interface ENSession (Private)
 @property (nonatomic, readonly) EDAMUserID userID;
++(NSString*) keychainAccessGroup;
 @end
 
 @interface ENNotebook (Private)
