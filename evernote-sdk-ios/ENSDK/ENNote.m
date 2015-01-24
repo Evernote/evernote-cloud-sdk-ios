@@ -149,7 +149,7 @@
     NSString * enml = [self enmlContent];
     if (!enml) {
         ENNoteContent * emptyContent = [ENNoteContent noteContentWithString:@""];
-        enml = [emptyContent enmlWithResources:self.resources];
+        enml = [emptyContent enmlWithNote:self];
     }
     
     // Convert our ENResources to EDAM resources to send into the converter utility. We'll be asking for image resources
@@ -237,7 +237,7 @@
 - (NSString *)enmlContent
 {
     if (!self.cachedENMLContent) {
-        self.cachedENMLContent = [self.content enmlWithResources:self.resources];
+        self.cachedENMLContent = [self.content enmlWithNote:self];
     }
     return self.cachedENMLContent;
 }
@@ -272,7 +272,7 @@
     note.content = [self enmlContent];
     if (!note.content) {
         ENNoteContent * emptyContent = [ENNoteContent noteContentWithString:@""];
-        note.content = [emptyContent enmlWithResources:self.resources];
+        note.content = [emptyContent enmlWithNote:self];
     }
     // Invalidate the derivative content fields.
     note.contentHash = nil;

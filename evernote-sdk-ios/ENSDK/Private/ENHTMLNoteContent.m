@@ -28,6 +28,7 @@
 
 #import "ENHTMLNoteContent.h"
 #import "ENHTMLtoENMLConverter.h"
+#import "ENNote.h"
 
 @interface ENHTMLNoteContent ()
 @property (nonatomic, copy) NSString * html;
@@ -43,7 +44,7 @@
     return self;
 }
 
-- (NSString *)enmlWithResources:(NSArray *)resources
+- (NSString *)enmlWithNote:(ENNote *)note
 {
     //XXX: Doesn't handle resources (yet?)
     ENHTMLtoENMLConverter * converter = [[ENHTMLtoENMLConverter alloc] init];

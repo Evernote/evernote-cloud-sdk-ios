@@ -27,7 +27,7 @@
  */
 
 #import "ENNoteContent.h"
-#import "ENPlaintextNoteContent.h"
+#import "ENPlainNoteContent.h"
 #import "ENHTMLNoteContent.h"
 #import "ENSDKPrivate.h"
 
@@ -38,7 +38,12 @@
 @implementation ENNoteContent
 + (instancetype)noteContentWithString:(NSString *)string;
 {
-    return [[ENPlaintextNoteContent alloc] initWithString:string];
+    return [[ENPlainNoteContent alloc] initWithString:string];
+}
+
++ (instancetype)noteContentWithContentArray:(NSArray *)contentArray
+{
+    return [[ENPlainNoteContent alloc] initWithContents:contentArray];
 }
 
 + (instancetype)noteContentWithSanitizedHTML:(NSString *)html
@@ -60,7 +65,7 @@
     return self;
 }
 
-- (NSString *)enmlWithResources:(NSArray *)resources
+- (NSString *)enmlWithNote:(ENNote *)note
 {
     // If we are using precooked ENML, we assume the resources have already been validly written
     // into the document.
@@ -70,6 +75,6 @@
 - (NSString *)enml
 {
     // This accessor chooses not to append any resource/media info to the end of the content.
-    return [self enmlWithResources:nil];
+    return [self enmlWithNote:nil];
 }
 @end

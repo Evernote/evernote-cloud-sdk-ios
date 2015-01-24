@@ -28,6 +28,17 @@
 
 #import "ENNoteContent.h"
 
-@interface ENPlaintextNoteContent : ENNoteContent
-- (id)initWithString:(NSString *)string;
+@interface ENPlainNoteContent : ENNoteContent
+
+- (instancetype)initWithString:(NSString *)string;
+
+/**
+ *  Use contentArray to populate the note content
+ *
+ *  @param contentArray NSArray of contents, allow NSString and UIImage
+ *
+ *  @return populated note content object
+ */
+- (instancetype)initWithContents:(NSArray *)contentArray;
+
 @end

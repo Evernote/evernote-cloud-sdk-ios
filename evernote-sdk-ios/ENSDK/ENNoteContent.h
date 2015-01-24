@@ -43,6 +43,15 @@
 + (instancetype)noteContentWithString:(NSString *)string;
 
 /**
+ *  Class method to create a note content object for a content array
+ *
+ *  @param contentArray NSArray containing NSString or UIImage objects
+ *
+ *  @return A valid note content instance.
+ */
++ (instancetype)noteContentWithContentArray:(NSArray *)contentArray;
+
+/**
  *  Class method to create a note content object from a string of sanitized HTML string. 
  *  "Sanitized" HTML means that any desired CSS styles are inlined into the DOM (versus being
  *  remote resources or a single <style> block.)
@@ -55,4 +64,5 @@
  *  @return A valid note content instance.
  */
 + (instancetype)noteContentWithSanitizedHTML:(NSString *)html;
+
 @end

@@ -74,7 +74,7 @@ extern NSString * const ENBootstrapProfileNameChina;
 @end
 
 @interface ENNoteContent (Private)
-- (NSString *)enmlWithResources:(NSArray *)resources;
+- (NSString *)enmlWithNote:(ENNote *)note;
 @end
 
 @interface ENNoteStoreClient (Private)

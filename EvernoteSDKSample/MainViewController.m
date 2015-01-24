@@ -26,6 +26,7 @@ NS_ENUM(NSInteger, SampleFunctions) {
     kSampleFunctionsClipWebPage,
     kSampleFunctionsSearchNotes,
     kSampleFunctionsViewMyNotes,
+    kSampleFunctionsCustomizeNote,
     
     kSampleFunctionsMaxValue
 };
@@ -125,6 +126,10 @@ NS_ENUM(NSInteger, SampleFunctions) {
             cell.textLabel.text = @"View my notes";
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
+        
+        case kSampleFunctionsCustomizeNote:
+            cell.textLabel.text = @"Save a customized note";
+            break;
             
         default:
             NSAssert(0, @"indexPath not valid");
@@ -173,6 +178,11 @@ NS_ENUM(NSInteger, SampleFunctions) {
         {
             NotebooksViewController * notebooksVC = [[NotebooksViewController alloc] init];
             [self.navigationController pushViewController:notebooksVC animated:YES];
+            break;
+        }
+        case kSampleFunctionsCustomizeNote:
+        {
+            [self saveCustomizedNote];
             break;
         }
         default:
@@ -345,6 +355,44 @@ NS_ENUM(NSInteger, SampleFunctions) {
     // seconds for the page to "settle down"
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(clipWebPage) object:nil];
     [self performSelector:@selector(clipWebPage) withObject:nil afterDelay:3.0];
+}
+
+#pragma mark - Customize a note
+
+- (void)saveCustomizedNote {
+    ENNote *noteToSave = [[ENNote alloc] init];
+    noteToSave.title = @"Customized Note";
+    NSString *content1 = @"Today I'm writing about my favorite apps on my iPhone\n";
+    NSString *content2 = @"The first one is Evernote";
+    UIImage *content3 = [UIImage imageNamed:@"evernote1"];
+    NSString *content4 = @"I use it all the time on my phone";
+    UIImage *content5 = [UIImage imageNamed:@"evernote2"];
+    NSString *content6 = @"I can even read WSJ with it";
+    UIImage *content7 = [UIImage imageNamed:@"evernote3"];
+    NSString *content8 = @"\nThe second one is Penulimate";
+    UIImage *content9 = [UIImage imageNamed:@"penultimate1"];
+    NSString *content10 = @"I can draw stuff in Penultimate and sync with Evernote";
+    UIImage *content11 = [UIImage imageNamed:@"penultimate2"];
+    NSString *content12 = @"\nThe third app is Skitch";
+    UIImage *content13 = [UIImage imageNamed:@"skitch1"];
+    NSString *content14 = @"I can quickly markup something and send to my friends, or co workers. \nIt's so awesome";
+    UIImage *content15 = [UIImage imageNamed:@"skitch2"];
+    NSString *content16 = @"Surprisingly all of those apps are from Evernote!\n";
+    NSString *content17 = @"Go download them all from http://www.evernote.com";
+    ENNoteContent *noteContent = [ENNoteContent noteContentWithContentArray:@[content1, content2, content3, content4, content5, content6, content7, content8, content9, content10,
+                                                                              content11, content12, content13, content14, content15, content16, content17]];
+    [noteToSave setContent:noteContent];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    [[ENSession sharedSession] uploadNote:noteToSave notebook:nil completion:^(ENNoteRef *noteRef, NSError *uploadNoteError) {
+        NSString * message = nil;
+        if (noteRef) {
+            message = @"Customized note saved.";
+        } else {
+            message = @"Failed to save customized note.";
+        }
+        [SVProgressHUD dismiss];
+        [CommonUtils showSimpleAlertWithMessage:message];
+    }];
 }
 
 @end

@@ -26,43 +26,72 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ENPlaintextNoteContent.h"
+#import "ENPlainNoteContent.h"
 #import "ENSDKPrivate.h"
 #import "ENMLWriter.h"
 
-@interface ENPlaintextNoteContent ()
-@property (nonatomic, copy) NSString * string;
+@interface ENPlainNoteContent ()
+@property (nonatomic, copy) NSArray * contents;
 @end
 
-@implementation ENPlaintextNoteContent
-- (id)initWithString:(NSString *)string
+@implementation ENPlainNoteContent
+- (instancetype)initWithString:(NSString *)string
 {
     self = [super init];
     if (self) {
-        self.string = string;
+        self.contents = @[string];
     }
     return self;
 }
 
-- (NSString *)enmlWithResources:(NSArray *)resources
+- (instancetype)initWithContents:(NSArray *)contentArray
 {
+    self = [super init];
+    if (self) {
+        self.contents = contentArray;
+    }
+    return self;
+}
+
+- (NSString *)enmlWithNote:(ENNote *)note
+{
+    NSMutableArray *resourcesToAppend = [NSMutableArray array];
+    
     // Wrap each line in a div. Empty lines get <br/>
     // From: http://dev.evernote.com/doc/articles/enml.php "representing plaintext notes"
     ENMLWriter * writer = [[ENMLWriter alloc] init];
     [writer startDocument];
-    for (NSString * line in [self.string componentsSeparatedByString:@"\n"]) {
-        [writer startElement:@"div"];
-        if (line.length == 0) {
-            [writer writeElement:@"br" withAttributes:nil content:nil];
-        } else {
-            [writer writeString:line];
+    
+    for (NSObject *obj in self.contents) {
+        if ([obj isKindOfClass:[NSString class]]) {
+            NSString *stringObj = (NSString *)obj;
+            for (NSString * line in [stringObj componentsSeparatedByString:@"\n"]) {
+                [writer startElement:@"div"];
+                if (line.length == 0) {
+                    [writer writeElement:@"br" withAttributes:nil content:nil];
+                } else {
+                    [writer writeString:line];
+                }
+                [writer endElement];
+            }
         }
-        [writer endElement];
+        if ([obj isKindOfClass:[UIImage class]]) {
+            UIImage *imageObj = (UIImage *)obj;
+            ENResource *newResource = [[ENResource alloc] initWithImage:imageObj];
+            [resourcesToAppend addObject:newResource];
+            [writer writeResourceWithDataHash:newResource.dataHash mime:newResource.mimeType attributes:nil];
+        }
     }
-    for (ENResource * resource in resources) {
+
+    // do for remaining resources
+    for (ENResource * resource in note.resources) {
         [writer writeResourceWithDataHash:resource.dataHash mime:resource.mimeType attributes:nil];
     }
     [writer endDocument];
+    if ([resourcesToAppend count]) {
+        [note setResources:[note.resources arrayByAddingObjectsFromArray:resourcesToAppend]];
+    }
+    
     return writer.contents;
 }
 @end
