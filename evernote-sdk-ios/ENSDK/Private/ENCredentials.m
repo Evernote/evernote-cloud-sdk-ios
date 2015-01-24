@@ -128,6 +128,7 @@ authenticationResult:(EDAMAuthenticationResult *)authenticationResult
 
 -(SSKeychainQuery*) keychainQuery
 {
+    [SSKeychain setAccessibilityType:kSecAttrAccessibleAlways];
     SSKeychainQuery *query = [[SSKeychainQuery alloc] init];
     query.service = self.host;
     query.account = self.edamUserId;
