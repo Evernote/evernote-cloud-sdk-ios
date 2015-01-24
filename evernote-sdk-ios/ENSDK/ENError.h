@@ -44,3 +44,12 @@ typedef NS_ENUM(NSInteger, ENErrorCode) {
     ENErrorCodeRateLimitReached,
     ENErrorCodeCancelled
 };
+
+@interface ENError : NSObject
+
++ (NSError *)connectionFailedError;
++ (NSError *)noteSizeLimitReachedError;
++ (NSError *)errorFromException:(NSException *)exception;
++ (ENErrorCode)sanitizedErrorCodeFromEDAMErrorCode:(int)code;
+
+@end

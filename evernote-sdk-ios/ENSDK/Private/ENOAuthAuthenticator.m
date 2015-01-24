@@ -175,9 +175,7 @@ NSString * ENOAuthAuthenticatorAuthInfoAppNotebookIsLinked = @"ENOAuthAuthentica
     NSURLConnection * connection = [NSURLConnection connectionWithRequest:tempTokenRequest delegate:self];
     if (!connection) {
         // can't make connection, so immediately fail.
-        [self completeAuthenticationWithError:[NSError errorWithDomain:ENErrorDomain
-                                                                  code:ENErrorCodeConnectionFailed
-                                                              userInfo:nil]];
+        [self completeAuthenticationWithError:[ENError connectionFailedError]];
     }
 }
 
@@ -696,9 +694,7 @@ NSString * ENOAuthAuthenticatorAuthInfoAppNotebookIsLinked = @"ENOAuthAuthentica
     NSURLConnection * connection = [NSURLConnection connectionWithRequest:authTokenRequest delegate:self];
     if (!connection) {
         // can't make connection, so immediately fail.
-        [self completeAuthenticationWithError:[NSError errorWithDomain:ENErrorDomain
-                                                                  code:ENErrorCodeConnectionFailed
-                                                              userInfo:nil]];
+        [self completeAuthenticationWithError:[ENError connectionFailedError]];
     };
 }
 

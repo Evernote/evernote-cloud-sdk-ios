@@ -850,7 +850,7 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
     // the sizes are a function of the user's service level, which can change.
     if (![note validateForLimits]) {
         ENSDKLogError(@"Note failed limits validation. Cannot upload. %@", self);
-        completion(nil, [NSError errorWithDomain:ENErrorDomain code:ENErrorCodeLimitReached userInfo:nil]);
+        completion(nil, [ENError noteSizeLimitReachedError]);
     }
     
     ENSessionUploadNoteContext * context = [[ENSessionUploadNoteContext alloc] init];
