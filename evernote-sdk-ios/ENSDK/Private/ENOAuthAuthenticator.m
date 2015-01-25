@@ -33,7 +33,7 @@
 #import "ENCredentials.h"
 #import "ENCredentialStore.h"
 #import "ENSDKPrivate.h"
-#import "GCOAuth.h"
+#import "ENGCOAuth.h"
 #import "NSString+URLEncoding.h"
 
 #import "NSRegularExpression+ENAGRegex.h"
@@ -162,7 +162,7 @@ NSString * ENOAuthAuthenticatorAuthInfoAppNotebookIsLinked = @"ENOAuthAuthentica
     }
 
     // OAuth step 1: temporary credentials (aka request token) request
-    NSURLRequest * tempTokenRequest = [GCOAuth URLRequestForPath:@"/oauth"
+    NSURLRequest * tempTokenRequest = [ENGCOAuth URLRequestForPath:@"/oauth"
                                                     GETParameters:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                    [self oauthCallback], @"oauth_callback", nil]
                                                            scheme:OAUTH_PROTOCOL_SCHEME
@@ -682,7 +682,7 @@ NSString * ENOAuthAuthenticatorAuthInfoAppNotebookIsLinked = @"ENOAuthAuthentica
     NSString *oauthToken = [parameters objectForKey:@"oauth_token"];
     NSString *oauthVerifier = [parameters objectForKey:@"oauth_verifier"];
     self.userSelectedLinkedAppNotebook = [[parameters objectForKey:@"sandbox_lnb"] boolValue];
-    NSURLRequest *authTokenRequest = [GCOAuth URLRequestForPath:@"/oauth"
+    NSURLRequest *authTokenRequest = [ENGCOAuth URLRequestForPath:@"/oauth"
                                                     GETParameters:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                    oauthVerifier, @"oauth_verifier", nil]
                                                            scheme:OAUTH_PROTOCOL_SCHEME

@@ -29,7 +29,7 @@
 #import "ENCredentials.h"
 #import "ENSession.h"
 #import "ENSDKPrivate.h"
-#import "SSKeychain.h"
+#import "ENSSKeychain.h"
 
 @interface ENCredentials()
 
@@ -79,7 +79,7 @@ authenticationResult:(EDAMAuthenticationResult *)authenticationResult
     // auth token gets saved to the keychain
     NSError *error;
 
-    SSKeychainQuery *query = [self keychainQuery];
+    ENSSKeychainQuery *query = [self keychainQuery];
     query.password = _authenticationToken;
 
     BOOL success = [query save:&error];
@@ -98,7 +98,7 @@ authenticationResult:(EDAMAuthenticationResult *)authenticationResult
 - (NSString *)authenticationToken
 {
     NSError *error;
-    SSKeychainQuery* query = [self keychainQuery];
+    ENSSKeychainQuery* query = [self keychainQuery];
     [query fetch:&error];
 
     NSString *token = [query password];
@@ -124,12 +124,12 @@ authenticationResult:(EDAMAuthenticationResult *)authenticationResult
     return YES;
 }
 
-#pragma mark - SSKeyChain Helpers
+#pragma mark - ENSSKeychain Helpers
 
--(SSKeychainQuery*) keychainQuery
+-(ENSSKeychainQuery*) keychainQuery
 {
-    [SSKeychain setAccessibilityType:kSecAttrAccessibleAlways];
-    SSKeychainQuery *query = [[SSKeychainQuery alloc] init];
+    [ENSSKeychain setAccessibilityType:kSecAttrAccessibleAlways];
+    ENSSKeychainQuery *query = [[ENSSKeychainQuery alloc] init];
     query.service = self.host;
     query.account = self.edamUserId;
     if ([ENSession keychainAccessGroup]) {

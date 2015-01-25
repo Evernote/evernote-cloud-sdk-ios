@@ -16,8 +16,8 @@ SIMULATOR_DIR=${WRK_DIR}/Release-iphonesimulator/${FMK_NAME}.framework
 echo "Building $FMK_NAME library."
 
 # Building both architectures.
-xcodebuild -workspace "${SRCROOT}/evernote-sdk-ios.xcworkspace" -configuration "Release" -scheme "${FMK_NAME}" -sdk iphoneos CONFIGURATION_BUILD_DIR="${WRK_DIR}/Release-iphoneos/"
-xcodebuild -workspace "${SRCROOT}/evernote-sdk-ios.xcworkspace" -configuration "Release" -scheme "${FMK_NAME}" -sdk iphonesimulator CONFIGURATION_BUILD_DIR="${WRK_DIR}/Release-iphonesimulator/"
+xcodebuild -project "${SRCROOT}/evernote-sdk-ios.xcodeproj" -configuration "Release" -target "${FMK_NAME}" -sdk iphoneos
+xcodebuild -project "${SRCROOT}/evernote-sdk-ios.xcodeproj" -configuration "Release" -target "${FMK_NAME}" -sdk iphonesimulator
 
 # Cleaning the oldest.
 if [ -d "${INSTALL_DIR}" ]
