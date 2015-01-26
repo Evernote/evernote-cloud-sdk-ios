@@ -32,7 +32,6 @@
 #import "ENTheme.h"
 
 @interface ENSaveToEvernoteActivity () <ENSendToEvernoteViewControllerDelegate>
-@property (nonatomic, strong) ENNote * preparedNote;
 @property (nonatomic, strong) NSArray * notebooks;
 @end
 
@@ -73,6 +72,10 @@
 
 - (void)prepareWithActivityItems:(NSArray *)activityItems
 {
+    if (self.preparedNote != nil) {
+        return;
+    }
+    
     NSMutableArray * strings = [NSMutableArray array];
     NSMutableArray * images = [NSMutableArray array];
     NSMutableArray * resources = [NSMutableArray array];

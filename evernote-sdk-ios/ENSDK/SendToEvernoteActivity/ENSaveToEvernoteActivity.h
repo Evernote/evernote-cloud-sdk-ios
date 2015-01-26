@@ -44,5 +44,6 @@
 
 @interface ENSaveToEvernoteActivity : UIActivity
 @property (nonatomic, copy) NSString * noteTitle;
+@property (nonatomic, strong) ENNote * preparedNote;
 @property (nonatomic, weak) id<ENSaveToEvernoteActivityDelegate> delegate;
 @end
