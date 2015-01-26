@@ -137,10 +137,10 @@
     if(self.isSwitchingAllowed) {
         NSString *leftButtonTitle = nil;
         if([self.currentProfileName isEqualToString:ENBootstrapProfileNameChina]) {
-            leftButtonTitle = NSLocalizedStringFromTable(@"Evernote-International", @"EvernoteSDK", nil);
+            leftButtonTitle = ENSDKLocalizedString(@"Evernote-International", @"Evernote-International");
         }
         else {
-            leftButtonTitle = NSLocalizedStringFromTable(@"Evernote-China", @"EvernoteSDK", nil);
+            leftButtonTitle = ENSDKLocalizedString(@"Evernote-China", @"Evernote-China");
         }
         UIBarButtonItem* switchProfileButton = [[UIBarButtonItem alloc] initWithTitle:leftButtonTitle style:UIBarButtonItemStylePlain target:self action:@selector(switchProfile:)];
         self.navigationItem.leftBarButtonItem = switchProfileButton;

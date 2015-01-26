@@ -53,7 +53,7 @@
 
 - (void)viewDidLoad
 {
-    self.title = NSLocalizedString(@"Notebooks", @"Notebooks");
+    self.title = ENSDKLocalizedString(@"Notebooks", @"Notebooks");
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [super viewDidLoad];
@@ -155,13 +155,13 @@
     if (tableView == self.tableView) {
         NSString *headerTitle = nil;
         if (section == _sections.currentNotebookSection) {
-            headerTitle = [NSLocalizedString(@"Current", @"Current") uppercaseString];
+            headerTitle = [ENSDKLocalizedString(@"Current", @"Current") uppercaseString];
         }
         else if (section == _sections.recentNotebooksSection) {
-            headerTitle = [NSLocalizedString(@"Recent Notebooks", @"Recent Notebooks") uppercaseString];
+            headerTitle = [ENSDKLocalizedString(@"Recent Notebooks", @"Recent Notebooks") uppercaseString];
         }
         else {
-            headerTitle = [NSLocalizedString(@"All Notebooks", @"All Notebooks") uppercaseString];
+            headerTitle = [ENSDKLocalizedString(@"All Notebooks", @"All Notebooks") uppercaseString];
         }
         return [self headerViewWithTitle:headerTitle
                          backgroundColor:[UIColor colorWithWhite:1. alpha:backgroundColorAlpha]

@@ -34,6 +34,7 @@
 #import "ENMLWriter.h"
 #import "ENNoteStoreClient.h"
 #import "ENBusinessNoteStoreClient.h"
+#import "ENSDKPrivate.h"
 
 @interface ENSession (Advanced)
 /**

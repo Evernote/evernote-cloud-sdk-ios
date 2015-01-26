@@ -33,6 +33,7 @@
 #import "ENTheme.h"
 #import "RMSTokenView.h"
 #import "ENNotebookPickerView.h"
+#import "ENSDKPrivate.h"
 
 #define kTitleViewHeight        50.0
 #define kTagsViewHeight         44.0
@@ -113,20 +114,19 @@ CGFloat kTextLeftPadding = 20;
                                                                        metrics:nil
                                                                          views:NSDictionaryOfVariableBindings(titleField)]];
     
-    self.navigationItem.title = NSLocalizedString(@"Save To Evernote", @"Save To Evernote");
+    self.navigationItem.title = ENSDKLocalizedString(@"Save To Evernote", @"Save To Evernote");
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
     
-    self.saveButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Save", @"Save") style:UIBarButtonItemStylePlain target:self action:@selector(save:)];
+    self.saveButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)];
     self.navigationItem.rightBarButtonItem = self.saveButtonItem;
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     self.saveButtonItem.enabled = NO;
     self.titleField.text = [self.delegate defaultNoteTitleForViewController:self];
     if (self.titleField.text.length == 0) {
-        [self.titleField setPlaceholder:NSLocalizedString(@"Add Title", @"Add Title")];
+        [self.titleField setPlaceholder:ENSDKLocalizedString(@"Add Title", @"Add Title")];
     }
 
-    self.tagsView.placeholder = NSLocalizedString(@"Add Tag", @"Add Tag");
+    self.tagsView.placeholder = ENSDKLocalizedString(@"Add Tag", @"Add Tag");
 }
 
 - (void)viewDidLoad
@@ -198,7 +198,7 @@ CGFloat kTextLeftPadding = 20;
     // Populate the metadata fields we offered.
     note.title = self.titleField.text;
     if (note.title.length == 0) {
-        note.title = NSLocalizedString(@"Untitled note", @"Untitled note");
+        note.title = ENSDKLocalizedString(@"Untitled note", @"Untitled note");
     }
     
     NSArray * tags = [self.tagsView tokens];

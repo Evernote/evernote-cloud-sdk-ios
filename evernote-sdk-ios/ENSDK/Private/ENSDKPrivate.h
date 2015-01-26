@@ -124,3 +124,6 @@ extern NSString * const ENBootstrapProfileNameChina;
     do { \
         [[ENSession sharedSession].logger evernoteLogErrorString:[NSString stringWithFormat:__VA_ARGS__]]; \
     } while(0);
+
+#define ENSDKLocalizedString(key, comment) \
+NSLocalizedStringFromTable(key, @"EvernoteSDK", comment)

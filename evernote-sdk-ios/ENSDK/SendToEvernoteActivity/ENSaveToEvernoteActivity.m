@@ -30,6 +30,7 @@
 #import "ENSaveToEvernoteViewController.h"
 #import "ENSDK.h"
 #import "ENTheme.h"
+#import "ENSDKPrivate.h"
 
 @interface ENSaveToEvernoteActivity () <ENSendToEvernoteViewControllerDelegate>
 @property (nonatomic, strong) NSArray * notebooks;
@@ -48,7 +49,7 @@
 
 - (NSString *)activityTitle
 {
-    return NSLocalizedString(@"Save to Evernote", @"Save to Evernote");
+    return ENSDKLocalizedString(@"Save to Evernote", @"Save to Evernote");
 }
 
 - (UIImage *)activityImage

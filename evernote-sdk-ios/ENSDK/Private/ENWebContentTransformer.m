@@ -139,7 +139,7 @@
     title = note.sourceUrl;
   }
   if (title == nil) {
-    title = NSLocalizedString(@"Untitled", @"Untitled");
+    title = ENSDKLocalizedString(@"Untitled", @"Untitled");
   }
   note.title = title;
   

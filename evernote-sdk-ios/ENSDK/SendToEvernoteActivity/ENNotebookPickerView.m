@@ -8,6 +8,7 @@
 
 #import "ENNotebookPickerView.h"
 #import "ENTheme.h"
+#import "ENSDKPrivate.h"
 
 extern CGFloat kTextLeftPadding;
 CGFloat kLabelButtonSpace = 10.0;
@@ -20,7 +21,7 @@ CGFloat kLabelButtonSpace = 10.0;
     if (self) {
         // Initialization code
         UILabel *notebookLabel = [[UILabel alloc] init];
-        [notebookLabel setText:NSLocalizedString(@"Notebook", @"Notebook")];
+        [notebookLabel setText:ENSDKLocalizedString(@"Notebook", @"Notebook")];
         [notebookLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:15.0]];
         [self addSubview:notebookLabel];
         self.notebookLabel = notebookLabel;

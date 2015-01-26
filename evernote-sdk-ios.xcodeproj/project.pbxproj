@@ -84,6 +84,7 @@
 		862CE9FA1A757B5100D0DB23 /* ENSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 862CE9F31A757B5100D0DB23 /* ENSSKeychainQuery.m */; };
 		862CE9FB1A757B5100D0DB23 /* ENSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 862CE9F31A757B5100D0DB23 /* ENSSKeychainQuery.m */; };
 		862CE9FF1A757C4B00D0DB23 /* ENSSKeychain.strings in Resources */ = {isa = PBXBuildFile; fileRef = 862CE9FD1A757C4B00D0DB23 /* ENSSKeychain.strings */; };
+		862CEA221A76F6D400D0DB23 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 862CEA211A76F6D400D0DB23 /* Localizable.strings */; };
 		862E76C7192AB962003D0A32 /* ENNotebookPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 862E76C5192AB962003D0A32 /* ENNotebookPickerView.h */; };
 		862E76C8192AB962003D0A32 /* ENNotebookPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 862E76C5192AB962003D0A32 /* ENNotebookPickerView.h */; };
 		862E76C9192AB962003D0A32 /* ENNotebookPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 862E76C6192AB962003D0A32 /* ENNotebookPickerView.m */; };
@@ -362,6 +363,7 @@
 		862CE9F21A757B5100D0DB23 /* ENSSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENSSKeychainQuery.h; sourceTree = "<group>"; };
 		862CE9F31A757B5100D0DB23 /* ENSSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENSSKeychainQuery.m; sourceTree = "<group>"; };
 		862CE9FE1A757C4B00D0DB23 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ENSSKeychain.strings; sourceTree = "<group>"; };
+		862CEA211A76F6D400D0DB23 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		862E76C5192AB962003D0A32 /* ENNotebookPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENNotebookPickerView.h; sourceTree = "<group>"; };
 		862E76C6192AB962003D0A32 /* ENNotebookPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENNotebookPickerView.m; sourceTree = "<group>"; };
 		86361A9E1A5762CC0042FB95 /* ResourcesTableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcesTableTableViewController.h; sourceTree = "<group>"; };
@@ -730,6 +732,7 @@
 				BE2E23F818EBA5D500BD7E6E /* Private */,
 				BE2E245918EBA5D500BD7E6E /* SendToEvernoteActivity */,
 				86F2D7FC1909EDAA00C0AA7F /* ENSDKResources.bundle */,
+				862CEA211A76F6D400D0DB23 /* Localizable.strings */,
 			);
 			path = ENSDK;
 			sourceTree = "<group>";
@@ -1290,6 +1293,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				862CE9FF1A757C4B00D0DB23 /* ENSSKeychain.strings in Resources */,
+				862CEA221A76F6D400D0DB23 /* Localizable.strings in Resources */,
 				865C383D18F8BA2400ECB2BA /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
