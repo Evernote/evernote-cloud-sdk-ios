@@ -28,6 +28,7 @@
 
 #import "ENSDKPrivate.h"
 #import "NSData+EvernoteSDK.h"
+#import "ENMLUtility.h"
 
 @interface ENResource ()
 @property (nonatomic, copy) NSString * sourceUrl;
@@ -144,4 +145,10 @@
 
     return resource;
 }
+
+- (NSString*) mediaTag
+{
+    return [ENMLUtility mediaTagWithDataHash:self.dataHash mime:self.mimeType];
+}
+
 @end
