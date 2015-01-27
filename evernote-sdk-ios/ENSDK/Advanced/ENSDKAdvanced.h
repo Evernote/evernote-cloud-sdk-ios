@@ -218,6 +218,12 @@
  *  represented by ENResource, you should use ENNoteStoreClient's -getResourceWithGuid... method to download the EDAMResource directly.
  */
 @property (nonatomic, strong) NSDictionary * edamAttributes;
+
+/**
+ *  The Evernote service guid for the resource. Valid only with a note store client
+ *  that also corresponds to this resource; see ENSession to retrieve an appropriate note store client.
+ */
+@property (nonatomic, readonly) NSString * guid;
 @end
 
 @interface ENNoteRef (Advanced)

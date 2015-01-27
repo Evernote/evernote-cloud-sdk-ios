@@ -34,6 +34,7 @@
 @property (nonatomic, copy) NSString * sourceUrl;
 @property (nonatomic, strong) NSData * dataHash;
 @property (nonatomic, strong) NSDictionary * edamAttributes;
+@property (nonatomic, copy) NSString * guid;
 @end
 
 @implementation ENResource
@@ -48,6 +49,7 @@
     resource.mimeType = serviceResource.mime;
     resource.filename = serviceResource.attributes.fileName;
     resource.sourceUrl = serviceResource.attributes.sourceURL;
+    resource.guid = serviceResource.guid;
     return resource;
 }
 
