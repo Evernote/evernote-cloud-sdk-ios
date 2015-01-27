@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <ENSDK/ENSDK.h>
 
-@interface ResourcesTableTableViewController : UITableViewController
+@interface ResourcesListTableViewController : UITableViewController
 
 - (id)initWithNote:(ENNote *)note;
 

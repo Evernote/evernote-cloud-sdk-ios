@@ -6,18 +6,18 @@
 //  Copyright (c) 2014 Evernote Corporation. All rights reserved.
 //
 
-#import "ViewNoteViewController.h"
-#import "ResourcesTableTableViewController.h"
+#import "NoteDetailViewController.h"
+#import "ResourcesListTableViewController.h"
 #import "SVProgressHUD.h"
 #import "CommonUtils.h"
 
-@interface ViewNoteViewController () <UIWebViewDelegate>
+@interface NoteDetailViewController () <UIWebViewDelegate>
 @property (nonatomic, strong) UIWebView * webView;
 @property (nonatomic, assign) BOOL doneLoading;
 @property (nonatomic, strong) ENNote *note;
 @end
 
-@implementation ViewNoteViewController
+@implementation NoteDetailViewController
 
 - (void)loadView
 {
@@ -74,7 +74,7 @@
 - (void)showMenu {
     UIAlertController *menuController = [[UIAlertController alloc] init];
     [menuController addAction:[UIAlertAction actionWithTitle:@"View Resources" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        ResourcesTableTableViewController *vc = [[ResourcesTableTableViewController alloc] initWithNote:self.note];
+        ResourcesListTableViewController *vc = [[ResourcesListTableViewController alloc] initWithNote:self.note];
         [self.navigationController pushViewController:vc animated:YES];
     }]];
     [menuController addAction:[UIAlertAction actionWithTitle:@"View this note in Evernote" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {

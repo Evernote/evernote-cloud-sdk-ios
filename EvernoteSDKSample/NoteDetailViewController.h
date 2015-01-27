@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <ENSDK/ENSDK.h>
 
-@interface ViewNoteViewController : UIViewController
+@interface NoteDetailViewController : UIViewController
 @property (nonatomic, strong) ENNoteRef * noteRef;
 @property (nonatomic, strong) NSString * noteTitle;
 @end

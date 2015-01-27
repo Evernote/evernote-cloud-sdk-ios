@@ -7,7 +7,7 @@
 //
 
 #import "NoteListResultViewController.h"
-#import "ViewNoteViewController.h"
+#import "NoteDetailViewController.h"
 #import "SVProgressHUD.h"
 #import "CommonUtils.h"
 
@@ -110,7 +110,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ENSessionFindNotesResult * result = self.findNotesResults[indexPath.row];
-    ViewNoteViewController * vc = [[ViewNoteViewController alloc] init];
+    NoteDetailViewController * vc = [[NoteDetailViewController alloc] init];
     vc.noteRef = result.noteRef;
     vc.noteTitle = result.title;
     [self.navigationController pushViewController:vc animated:YES];

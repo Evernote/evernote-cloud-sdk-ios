@@ -6,17 +6,17 @@
 //  Copyright (c) 2015 Evernote Corporation. All rights reserved.
 //
 
-#import "ResourcesTableTableViewController.h"
+#import "ResourcesListTableViewController.h"
 #import "CommonUtils.h"
 
-@interface ResourcesTableTableViewController ()
+@interface ResourcesListTableViewController ()
 
 @property (nonatomic, strong) ENNote *note;
 @property (nonatomic, strong) NSArray *resourceList;
 
 @end
 
-@implementation ResourcesTableTableViewController
+@implementation ResourcesListTableViewController
 
 - (id)initWithNote:(ENNote *)note{
     if (self = [super init]) {
