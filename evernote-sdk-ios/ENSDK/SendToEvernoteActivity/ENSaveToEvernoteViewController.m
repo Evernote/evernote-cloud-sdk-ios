@@ -114,7 +114,7 @@ CGFloat kTextLeftPadding = 20;
                                                                        metrics:nil
                                                                          views:NSDictionaryOfVariableBindings(titleField)]];
     
-    self.navigationItem.title = ENSDKLocalizedString(@"Save To Evernote", @"Save To Evernote");
+    self.navigationItem.title = ENSDKLocalizedString(@"Save to Evernote", @"Save to Evernote");
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
     
     self.saveButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save:)];

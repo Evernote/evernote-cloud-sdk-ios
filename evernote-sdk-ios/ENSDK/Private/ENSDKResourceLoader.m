@@ -32,8 +32,7 @@
 @implementation ENSDKResourceLoader
 + (NSString *)pathToResourceNamed:(NSString *)name extension:(NSString *)extension
 {
-    NSBundle * bundle = [NSBundle bundleWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"ENSDKResources" ofType:@"bundle"]];
-    NSString * path = [bundle pathForResource:name ofType:extension];
+    NSString * path = [ENSDKResourceBundle pathForResource:name ofType:extension];
     if (!path) {
         ENSDKLogError(@"Failed to load resource from ENSDKResources.bundle. Is it included in your app?");
         assert(path);

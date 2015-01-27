@@ -52,13 +52,13 @@ NS_ENUM(NSInteger, SampleFunctions) {
 
 - (void)updateLoginItem {
     BOOL loggedIn = [[ENSession sharedSession] isAuthenticated];
-    [self.loginItem setTitle:(loggedIn? @"Logout" : @"Login")];
+    [self.loginItem setTitle:(loggedIn? NSLocalizedString(@"Logout", @"Logout"): NSLocalizedString(@"Login", @"Login"))];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIBarButtonItem * backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:NULL];
+    UIBarButtonItem * backButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", @"Back") style:UIBarButtonItemStylePlain target:nil action:NULL];
     [self.navigationItem setBackBarButtonItem:backButton];
     [self update];
     
@@ -98,39 +98,39 @@ NS_ENUM(NSInteger, SampleFunctions) {
     UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     switch (indexPath.row) {
         case kSampleFunctionsUserInfo:
-            cell.textLabel.text = @"User info";
+            cell.textLabel.text = NSLocalizedString(@"User info", @"User info");
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
             
         case kSampleFunctionsTagsInfo:
-            cell.textLabel.text = @"Tags";
+            cell.textLabel.text = NSLocalizedString(@"Tags", @"Tags");
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
             
         case kSampleFunctionsSaveActivity:
-            cell.textLabel.text = @"Save Activity";
+            cell.textLabel.text = NSLocalizedString(@"Save Activity", @"Save Activity");
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
             
         case kSampleFunctionsCreatePhotoNote:
-            cell.textLabel.text = @"Create photo note";
+            cell.textLabel.text = NSLocalizedString(@"Create photo note", @"Create photo note");
             break;
             
         case kSampleFunctionsClipWebPage:
-            cell.textLabel.text = @"Clip web page";
+            cell.textLabel.text = NSLocalizedString(@"Clip web page", @"Clip web page");
             break;
             
         case kSampleFunctionsSearchNotes:
-            cell.textLabel.text = @"Search notes via keyword";
+            cell.textLabel.text = NSLocalizedString(@"Search notes via keyword", @"Search notes via keyword");
             break;
             
         case kSampleFunctionsViewMyNotes:
-            cell.textLabel.text = @"View my notes";
+            cell.textLabel.text = NSLocalizedString(@"View my notes", @"View my notes");
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
         
         case kSampleFunctionsCustomizeNote:
-            cell.textLabel.text = @"Save a customized note";
+            cell.textLabel.text = NSLocalizedString(@"Save a customized note", @"Save a customized note");
             break;
             
         default:

@@ -1,0 +1,31 @@
+/* 
+  Localizable.strings
+  evernote-sdk-ios
+
+  Created by Eric Cheng on 1/26/15.
+  Copyright (c) 2015 Evernote Corporation. All rights reserved.
+*/
+
+"Save to Evernote" = "保存到印象笔记";
+
+"Add Title" = "添加标题";
+
+"Add Tag" = "添加标签";
+
+"Untitled note" = "未命名笔记";
+
+"Untitled" = "未命名";
+
+"Notebooks" = "笔记本";
+
+"Current" = "当前";
+
+"Recent Notebooks" = "最近使用的笔记本";
+
+"All Notebooks" = "所有的笔记本";
+
+"Notebook" = "笔记本";
+
+"Evernote-International" = "Evernote国际版";
+
+"Evernote-China" = "印象笔记";

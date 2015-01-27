@@ -84,7 +84,7 @@
 		862CE9FA1A757B5100D0DB23 /* ENSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 862CE9F31A757B5100D0DB23 /* ENSSKeychainQuery.m */; };
 		862CE9FB1A757B5100D0DB23 /* ENSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 862CE9F31A757B5100D0DB23 /* ENSSKeychainQuery.m */; };
 		862CE9FF1A757C4B00D0DB23 /* ENSSKeychain.strings in Resources */ = {isa = PBXBuildFile; fileRef = 862CE9FD1A757C4B00D0DB23 /* ENSSKeychain.strings */; };
-		862CEA221A76F6D400D0DB23 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 862CEA211A76F6D400D0DB23 /* Localizable.strings */; };
+		862CEA2E1A77273C00D0DB23 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 862CEA301A77273C00D0DB23 /* Localizable.strings */; };
 		862E76C7192AB962003D0A32 /* ENNotebookPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 862E76C5192AB962003D0A32 /* ENNotebookPickerView.h */; };
 		862E76C8192AB962003D0A32 /* ENNotebookPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 862E76C5192AB962003D0A32 /* ENNotebookPickerView.h */; };
 		862E76C9192AB962003D0A32 /* ENNotebookPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 862E76C6192AB962003D0A32 /* ENNotebookPickerView.m */; };
@@ -363,7 +363,10 @@
 		862CE9F21A757B5100D0DB23 /* ENSSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENSSKeychainQuery.h; sourceTree = "<group>"; };
 		862CE9F31A757B5100D0DB23 /* ENSSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENSSKeychainQuery.m; sourceTree = "<group>"; };
 		862CE9FE1A757C4B00D0DB23 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ENSSKeychain.strings; sourceTree = "<group>"; };
-		862CEA211A76F6D400D0DB23 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		862CEA2C1A77271A00D0DB23 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		862CEA2D1A77271A00D0DB23 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		862CEA2F1A77273C00D0DB23 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		862CEA311A77275600D0DB23 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		862E76C5192AB962003D0A32 /* ENNotebookPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENNotebookPickerView.h; sourceTree = "<group>"; };
 		862E76C6192AB962003D0A32 /* ENNotebookPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENNotebookPickerView.m; sourceTree = "<group>"; };
 		86361A9E1A5762CC0042FB95 /* ResourcesTableTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourcesTableTableViewController.h; sourceTree = "<group>"; };
@@ -495,7 +498,6 @@
 		BE2E245318EBA5D500BD7E6E /* ENXMLSaxParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENXMLSaxParser.m; sourceTree = "<group>"; };
 		BE2E245518EBA5D500BD7E6E /* NSString+ENScrubbing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ENScrubbing.h"; sourceTree = "<group>"; };
 		BE2E245618EBA5D500BD7E6E /* NSString+ENScrubbing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ENScrubbing.m"; sourceTree = "<group>"; };
-		BE2E245818EBA5D500BD7E6E /* EvernoteSDK.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = EvernoteSDK.strings; sourceTree = "<group>"; };
 		BE2E245A18EBA5D500BD7E6E /* ENSaveToEvernoteActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENSaveToEvernoteActivity.h; sourceTree = "<group>"; };
 		BE2E245B18EBA5D500BD7E6E /* ENSaveToEvernoteActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENSaveToEvernoteActivity.m; sourceTree = "<group>"; };
 		BE2E24E818EDD4A300BD7E6E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -642,7 +644,7 @@
 		0BB3D1B21524ED96001C4534 /* evernote-sdk-ios */ = {
 			isa = PBXGroup;
 			children = (
-				BE2E23BC18EBA5D400BD7E6E /* ENSDK */,
+				BE2E23BC18EBA5D400BD7E6E /* EvernoteSDK */,
 				0BB3D1B31524ED96001C4534 /* Supporting Files */,
 			);
 			path = "evernote-sdk-ios";
@@ -705,7 +707,7 @@
 			path = RMSTokenView;
 			sourceTree = "<group>";
 		};
-		BE2E23BC18EBA5D400BD7E6E /* ENSDK */ = {
+		BE2E23BC18EBA5D400BD7E6E /* EvernoteSDK */ = {
 			isa = PBXGroup;
 			children = (
 				BE2E23F418EBA5D500BD7E6E /* ENSDK.h */,
@@ -732,8 +734,8 @@
 				BE2E23F818EBA5D500BD7E6E /* Private */,
 				BE2E245918EBA5D500BD7E6E /* SendToEvernoteActivity */,
 				86F2D7FC1909EDAA00C0AA7F /* ENSDKResources.bundle */,
-				862CEA211A76F6D400D0DB23 /* Localizable.strings */,
 			);
+			name = EvernoteSDK;
 			path = ENSDK;
 			sourceTree = "<group>";
 		};
@@ -848,7 +850,6 @@
 				BE2E245318EBA5D500BD7E6E /* ENXMLSaxParser.m */,
 				BE2E245518EBA5D500BD7E6E /* NSString+ENScrubbing.h */,
 				BE2E245618EBA5D500BD7E6E /* NSString+ENScrubbing.m */,
-				BE2E245718EBA5D500BD7E6E /* Resources */,
 				BECDD2F618F77C0E003736EE /* ENPlainNoteContent.h */,
 				BECDD2F718F77C0E003736EE /* ENPlainNoteContent.m */,
 				BECDD2FA18F78072003736EE /* ENHTMLNoteContent.h */,
@@ -940,14 +941,6 @@
 			path = SSKeychain;
 			sourceTree = "<group>";
 		};
-		BE2E245718EBA5D500BD7E6E /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				BE2E245818EBA5D500BD7E6E /* EvernoteSDK.strings */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		BE2E245918EBA5D500BD7E6E /* SendToEvernoteActivity */ = {
 			isa = PBXGroup;
 			children = (
@@ -1031,6 +1024,7 @@
 				86254FCD1A1AA0D5005A3425 /* NotebooksViewController.m */,
 				86361A9E1A5762CC0042FB95 /* ResourcesTableTableViewController.h */,
 				86361A9F1A5762CC0042FB95 /* ResourcesTableTableViewController.m */,
+				862CEA301A77273C00D0DB23 /* Localizable.strings */,
 			);
 			path = EvernoteSDKSample;
 			sourceTree = "<group>";
@@ -1274,6 +1268,7 @@
 				en,
 				"zh-cn",
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 0BB3D1A21524ED96001C4534;
 			productRefGroup = 0BB3D1AE1524ED96001C4534 /* Products */;
@@ -1293,7 +1288,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				862CE9FF1A757C4B00D0DB23 /* ENSSKeychain.strings in Resources */,
-				862CEA221A76F6D400D0DB23 /* Localizable.strings in Resources */,
 				865C383D18F8BA2400ECB2BA /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1305,6 +1299,7 @@
 				BEA8992F1913215C001619FE /* angle-mask@2x.png in Resources */,
 				BE48C71819131AC200025618 /* LICENSE.txt in Resources */,
 				86F2D7FD1909EDAA00C0AA7F /* ENSDKResources.bundle in Resources */,
+				862CEA2E1A77273C00D0DB23 /* Localizable.strings in Resources */,
 				8603EFF61A731A680002AE28 /* Images.xcassets in Resources */,
 				BECDD3791908FFC1003736EE /* InfoPlist.strings in Resources */,
 				8600EC171A15D97400F8F838 /* Launch Screen.xib in Resources */,
@@ -1535,10 +1530,20 @@
 			name = ENSSKeychain.strings;
 			sourceTree = "<group>";
 		};
+		862CEA301A77273C00D0DB23 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				862CEA2F1A77273C00D0DB23 /* zh-Hans */,
+				862CEA311A77275600D0DB23 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		865C383B18F8BA2400ECB2BA /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				865C383C18F8BA2400ECB2BA /* en */,
+				862CEA2C1A77271A00D0DB23 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1547,6 +1552,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				BECDD3781908FFC1003736EE /* en */,
+				862CEA2D1A77271A00D0DB23 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

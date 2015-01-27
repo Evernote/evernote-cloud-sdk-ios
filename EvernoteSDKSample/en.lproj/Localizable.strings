@@ -1,0 +1,29 @@
+/* 
+  Localizable.strings
+  evernote-sdk-ios
+
+  Created by Eric Cheng on 1/26/15.
+  Copyright (c) 2015 Evernote Corporation. All rights reserved.
+*/
+
+"Login" = "Login";
+
+"Logout" = "Logout";
+
+"Back" = "Back";
+
+"User info" = "User info";
+
+"Tags" = "Tags";
+
+"Save Activity" = "Save Activity";
+
+"Create photo note" = "Create photo note";
+
+"Clip web page" = "Clip web page";
+
+"Search notes via keyword" = "Search notes via keyword";
+
+"View my notes" = "View my notes";
+
+"Save a customized note" = "Save a customized note";
