@@ -73,6 +73,7 @@
 		860DF4A218FDDFDB002B4793 /* ENPlainNoteContent.m in Sources */ = {isa = PBXBuildFile; fileRef = BECDD2F718F77C0E003736EE /* ENPlainNoteContent.m */; };
 		860DF4A318FDDFDB002B4793 /* ENHTMLNoteContent.m in Sources */ = {isa = PBXBuildFile; fileRef = BECDD2FB18F78072003736EE /* ENHTMLNoteContent.m */; };
 		860DF4A418FDE14F002B4793 /* NSString+XMLAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E241018EBA5D500BD7E6E /* NSString+XMLAdditions.m */; };
+		8623FE4C1A796B2400763E63 /* ENNoteRefInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E244A18EBA5D500BD7E6E /* ENNoteRefInternal.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		86254FCE1A1AA0D5005A3425 /* NotebooksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86254FCD1A1AA0D5005A3425 /* NotebooksViewController.m */; };
 		8628FA581A1A94DA00AEF402 /* CommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8628FA571A1A94DA00AEF402 /* CommonUtils.m */; };
 		862CE9F41A757B5100D0DB23 /* ENSSKeychain.h in Headers */ = {isa = PBXBuildFile; fileRef = 862CE9F01A757B5100D0DB23 /* ENSSKeychain.h */; };
@@ -1185,6 +1186,7 @@
 				BECDD35D1908DE2A003736EE /* ENMLWriter.h in Headers */,
 				BECDD35E1908DE2A003736EE /* ENXMLDTD.h in Headers */,
 				86D49E49191DA4A8001C3581 /* RMSTokenView.h in Headers */,
+				8623FE4C1A796B2400763E63 /* ENNoteRefInternal.h in Headers */,
 				BECDD35F1908DE2A003736EE /* ENXMLUtils.h in Headers */,
 				BECDD3601908DE2A003736EE /* ENXMLWriter.h in Headers */,
 				862CE9F51A757B5100D0DB23 /* ENSSKeychain.h in Headers */,
