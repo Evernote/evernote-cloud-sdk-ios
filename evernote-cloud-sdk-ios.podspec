@@ -16,6 +16,6 @@ Pod::Spec.new do |spec|
   spec.resource = "ENSDKResources.bundle"
   spec.requires_arc = true
   
-  spec.framework = "QuartzCore", "CoreText", "MobileCoreServices", "Foundation", "UIKit"
+  spec.framework = "MobileCoreServices", "Foundation", "UIKit"
   spec.library = "xml2"
 end

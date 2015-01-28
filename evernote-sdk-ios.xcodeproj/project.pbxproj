@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0BB3D1B11524ED96001C4534 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB3D1B01524ED96001C4534 /* Foundation.framework */; };
-		4C13F460A401E7C3790FE2F7 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		8600EC171A15D97400F8F838 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8600EC161A15D97400F8F838 /* Launch Screen.xib */; };
 		8603EFF61A731A680002AE28 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8603EFF51A731A680002AE28 /* Images.xcassets */; };
 		860DF40A18FCCE51002B4793 /* ENSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23F418EBA5D500BD7E6E /* ENSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -586,7 +585,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C13F460A401E7C3790FE2F7 /* (null) in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
