@@ -73,6 +73,7 @@ CGFloat kTextLeftPadding = 20;
     UIView *paddingView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kTextLeftPadding, 0)];
     titleField.leftView = paddingView1;
     titleField.leftViewMode = UITextFieldViewModeAlways;
+    titleField.clearButtonMode = UITextFieldViewModeWhileEditing;
     [self.view addSubview:titleField];
     self.titleField = titleField;
     
@@ -122,9 +123,7 @@ CGFloat kTextLeftPadding = 20;
     
     self.saveButtonItem.enabled = NO;
     self.titleField.text = [self.delegate defaultNoteTitleForViewController:self];
-    if (self.titleField.text.length == 0) {
-        [self.titleField setPlaceholder:ENSDKLocalizedString(@"Add Title", @"Add Title")];
-    }
+    [self.titleField setPlaceholder:ENSDKLocalizedString(@"Add Title", @"Add Title")];
 
     self.tagsView.placeholder = ENSDKLocalizedString(@"Add Tag", @"Add Tag");
 }
