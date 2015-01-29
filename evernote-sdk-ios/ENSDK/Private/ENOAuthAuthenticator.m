@@ -72,6 +72,7 @@ NSString * ENOAuthAuthenticatorAuthInfoAppNotebookIsLinked = @"ENOAuthAuthentica
 @property (nonatomic, copy) NSString * tokenSecret;
 @property (nonatomic, assign) BOOL isMultitaskLoginDisabled;
 @property (nonatomic, assign) BOOL isSwitchingInProgress;
+@property (nonatomic, assign) BOOL isActiveBecauseOfCallback;
 
 @property (nonatomic, assign) BOOL userSelectedLinkedAppNotebook;
 
@@ -314,7 +315,8 @@ NSString * ENOAuthAuthenticatorAuthInfoAppNotebookIsLinked = @"ENOAuthAuthentica
     
     if (state == ENOAuthAuthenticatorStateLoggedOut ||
         state == ENOAuthAuthenticatorStateAuthenticated ||
-        state == ENOAuthAuthenticatorStateGotCallback) {
+        state == ENOAuthAuthenticatorStateGotCallback ||
+        self.isActiveBecauseOfCallback) {
         return;
     }
     [self gotCallbackURL:nil];
@@ -646,9 +648,19 @@ NSString * ENOAuthAuthenticatorAuthInfoAppNotebookIsLinked = @"ENOAuthAuthentica
     // Check if we need to switch profiles
     else if ([hostName isEqualToString:[url scheme]] == YES
              && [@"incorrectProfile" isEqualToString:[url host]] == YES) {
+        [self enableIsActiveBecauseOfCallback];
         return [self canHandleSwitchProfileURL:url];
     }
     return  canHandle;
+}
+
+- (void)enableIsActiveBecauseOfCallback {
+    self.isActiveBecauseOfCallback = YES;
+    [self performSelector:@selector(disableIsActiveBecauseOfCallback) withObject:nil afterDelay:2.0];
+}
+
+- (void)disableIsActiveBecauseOfCallback {
+    self.isActiveBecauseOfCallback = NO;
 }
 
 - (BOOL) canHandleSwitchProfileURL:(NSURL *)url {
