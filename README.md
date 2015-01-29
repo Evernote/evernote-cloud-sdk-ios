@@ -29,7 +29,11 @@ Yes. (To use the SDK in a non-ARC project, please use the -fobjc-arc compiler fl
 
 ### Can I use this library with CocoaPods?
 
-Not yet. We know this is useful and intend to publish there when the SDK stabilizes and leaves beta.
+Yes! Just add 
+```
+pod 'evernote-cloud-sdk-ios'
+```
+to your Podfile
 
 ### Where can I find out more about the Evernote for Developers?
 
