@@ -29,7 +29,7 @@ Yes. (To use the SDK in a non-ARC project, please use the -fobjc-arc compiler fl
 
 ### Can I use this library with CocoaPods?
 
-Yes! Just add 
+Yes! Just add
 ```
 pod 'evernote-cloud-sdk-ios'
 ```
@@ -48,3 +48,8 @@ Yes. Please specify preferRegistration parameter as YES when calling
                             completion:(ENSessionAuthenticateCompletionHandler)completion;
 ```
 on [ENSession sharedSession]
+
+### Where can I find the release notes?
+
+ You can find it [here](CHANGES.md).
+ 

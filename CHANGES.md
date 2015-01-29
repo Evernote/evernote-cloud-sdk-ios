@@ -1,10 +1,15 @@
+= 2.0.1
+
+* Improvements to 'Save to Evernote' share sheet
+* Bug fixes
+
 = 2.0
 
 * New workflow-oriented SDK surface via ENSession. (EDAM layer still available; see README).
 * SDK builds as a .framework via a command-line script for easy inclusion in projects.
 * Significantly streamlined code size.
 
-= 1.3.0 
+= 1.3.0
 
 * ENML writer
 * Support for creating Reminders using Evernote app
@@ -39,7 +44,7 @@
 * View a note using Evernote for iOS app
 * Utility function to check if a business notebook is writable
 * Demonstrate how to fetch large number of notes
-* Sample code for all of the above 
+* Sample code for all of the above
 
 = 1.0.1 / 2013-01-10
 
@@ -111,7 +116,7 @@
 
 = 0.1.1 / 2012-05-03
 
-* Improve NSURLConnection handling and error detection to EvernoteSession. 
+* Improve NSURLConnection handling and error detection to EvernoteSession.
 Includes trapping non-200 HTTP response codes, as might be returned by a failed initial OAuth temp token request.
 
 * Add UnitTests target, EvernoteSessionTests, and OCMock.
