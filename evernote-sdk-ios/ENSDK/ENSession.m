@@ -927,7 +927,6 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
     context.note.updated = @([[NSDate date] edamTimestamp]);
     
     context.note.guid = context.refToReplace.guid;
-    context.note.active = @YES;
     
     if (context.progress) {
         context.noteStore.uploadProgressHandler = context.progress;
