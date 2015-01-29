@@ -12,15 +12,17 @@
 @interface ResourcesListTableViewController ()
 
 @property (nonatomic, strong) ENNote *note;
+@property (nonatomic, strong) ENNoteRef *noteRef;
 @property (nonatomic, strong) NSArray *resourceList;
 
 @end
 
 @implementation ResourcesListTableViewController
 
-- (id)initWithNote:(ENNote *)note{
+- (id)initWithNote:(ENNote *)note noteRef:(ENNoteRef *)noteRef{
     if (self = [super init]) {
         self.note = note;
+        self.noteRef = noteRef;
     }
     return self;
 }

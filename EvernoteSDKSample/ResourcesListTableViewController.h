@@ -11,6 +11,6 @@
 
 @interface ResourcesListTableViewController : UITableViewController
 
-- (id)initWithNote:(ENNote *)note;
+- (id)initWithNote:(ENNote *)note noteRef:(ENNoteRef *)noteRef;
 
 @end

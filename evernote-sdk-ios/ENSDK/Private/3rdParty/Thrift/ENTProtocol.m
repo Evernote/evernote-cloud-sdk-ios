@@ -368,7 +368,7 @@
     BOOL matched = NO;
     for (FATField *aResponseType in responseTypes) {
       if (aResponseType.index == (uint32_t)fieldID) {
-        if ((uint32_t)fieldType != aResponseType.type) {
+        if (aResponseType.type != (uint32_t)fieldType && aResponseType.type != TType_BINARY && fieldType != TType_STRING) {
           NSLog(@"Skipping field:%@ due to type mismatch (received:%i)", aResponseType, fieldType);
         }
         else {

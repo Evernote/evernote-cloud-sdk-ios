@@ -74,7 +74,7 @@
 - (void)showMenu {
     UIAlertController *menuController = [[UIAlertController alloc] init];
     [menuController addAction:[UIAlertAction actionWithTitle:@"View Resources" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        ResourcesListTableViewController *vc = [[ResourcesListTableViewController alloc] initWithNote:self.note];
+        ResourcesListTableViewController *vc = [[ResourcesListTableViewController alloc] initWithNote:self.note noteRef:self.noteRef];
         [self.navigationController pushViewController:vc animated:YES];
     }]];
     [menuController addAction:[UIAlertAction actionWithTitle:@"View this note in Evernote" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
