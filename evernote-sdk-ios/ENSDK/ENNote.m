@@ -173,6 +173,7 @@
     }
     
     ENMLUtility * utility = [[ENMLUtility alloc] init];
+    NSURL * sourceURL = self.sourceUrl ? [NSURL URLWithString:self.sourceUrl] : nil;
     [utility convertENMLToHTML:enml withReferencedResources:edamResources completionBlock:^(NSString * html, NSError * error) {
         if (!html) {
             ENSDKLogInfo(@"+webArchiveData failed to convert ENML to HTML: %@", error);
@@ -182,7 +183,6 @@
         
         // Create main resource from the HTML.
         NSData * htmlData = [html dataUsingEncoding:NSUTF8StringEncoding];
-        NSURL * sourceURL = self.sourceUrl ? [NSURL URLWithString:self.sourceUrl] : nil;
         ENWebResource * mainResource = [[ENWebResource alloc] initWithData:htmlData
                                                                        URL:sourceURL
                                                                   MIMEType:@"text/html"
