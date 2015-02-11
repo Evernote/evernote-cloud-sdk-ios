@@ -137,7 +137,9 @@
 - (void)getSyncStateWithSuccess:(void(^)(EDAMSyncState *syncState))success
                         failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getSyncState:self.authenticationToken];
     } success:success failure:failure];
 }
@@ -148,7 +150,9 @@
                      success:(void(^)(EDAMSyncChunk *syncChunk))success
                      failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getSyncChunk:self.authenticationToken afterUSN:afterUSN maxEntries:maxEntries fullSyncOnly:fullSyncOnly];
     } success:success failure:failure];
 }
@@ -159,7 +163,9 @@
                              success:(void(^)(EDAMSyncChunk *syncChunk))success
                              failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getFilteredSyncChunk:self.authenticationToken afterUSN:afterUSN maxEntries:maxEntries filter:filter];
     } success:success failure:failure];
 }
@@ -168,7 +174,9 @@
                            success:(void(^)(EDAMSyncState *syncState))success
                            failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getLinkedNotebookSyncState:self.authenticationToken linkedNotebook:linkedNotebook];
     } success:success failure:failure];
 }
@@ -178,7 +186,9 @@
 - (void)listNotebooksWithSuccess:(void(^)(NSArray *notebooks))success
                          failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client listNotebooks:self.authenticationToken];
     } success:success failure:failure];
 }
@@ -187,7 +197,9 @@
                     success:(void(^)(EDAMNotebook *notebook))success
                     failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getNotebook:self.authenticationToken guid:guid];
     } success:success failure:failure];
 }
@@ -199,7 +211,9 @@
                            success:(void(^)(EDAMSyncChunk *syncChunk))success
                            failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getLinkedNotebookSyncChunk:self.authenticationToken linkedNotebook:linkedNotebook afterUSN:afterUSN maxEntries:maxEntries fullSyncOnly:fullSyncOnly];
     } success:success failure:failure];
 }
@@ -207,7 +221,9 @@
 - (void)getDefaultNotebookWithSuccess:(void(^)(EDAMNotebook *notebook))success
                               failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getDefaultNotebook:self.authenticationToken];
     } success:success failure:failure];
 }
@@ -217,7 +233,9 @@
                failure:(void(^)(NSError *error))failure
 {
     [[ENSession sharedSession] listNotebooks_cleanCache];
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client createNotebook:self.authenticationToken notebook:notebook];
     } success:success failure:failure];
 }
@@ -226,18 +244,22 @@
                success:(void(^)(int32_t usn))success
                failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncInt32Block:^int32_t {
-        return [self.client updateNotebook:self.authenticationToken notebook:notebook];
-    } success:success failure:failure];
+         __strong typeof(weakSelf) self = weakSelf;
+         return [self.client updateNotebook:self.authenticationToken notebook:notebook];
+     } success:success failure:failure];
 }
 
 - (void)expungeNotebookWithGuid:(EDAMGuid)guid
                         success:(void(^)(int32_t usn))success
                         failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncInt32Block:^int32_t {
-        return [self.client expungeNotebook:self.authenticationToken guid:guid];
-    } success:success failure:failure];
+         __strong typeof(weakSelf) self = weakSelf;
+         return [self.client expungeNotebook:self.authenticationToken guid:guid];
+     } success:success failure:failure];
 }
 
 #pragma mark - NoteStore tags methods
@@ -245,7 +267,9 @@
 - (void)listTagsWithSuccess:(void(^)(NSArray *tags))success
                     failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client listTags:self.authenticationToken];
     } success:success failure:failure];
 }
@@ -254,7 +278,9 @@
                            success:(void(^)(NSArray *tags))success
                            failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client listTagsByNotebook:self.authenticationToken notebookGuid:guid];
     } success:success failure:failure];
 };
@@ -263,7 +289,9 @@
                success:(void(^)(EDAMTag *tag))success
                failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getTag:self.authenticationToken guid:guid];
     } success:success failure:failure];
 }
@@ -272,7 +300,9 @@
           success:(void(^)(EDAMTag *tag))success
           failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client createTag:self.authenticationToken tag:tag];
     } success:success failure:failure];
 }
@@ -281,16 +311,20 @@
           success:(void(^)(int32_t usn))success
           failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncInt32Block:^int32_t {
-        return [self.client updateTag:self.authenticationToken tag:tag];
-    } success:success failure:failure];
+         __strong typeof(weakSelf) self = weakSelf;
+         return [self.client updateTag:self.authenticationToken tag:tag];
+     } success:success failure:failure];
 }
 
 - (void)untagAllWithGuid:(EDAMGuid)guid
                  success:(void(^)())success
                  failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncVoidBlock:^ {
+        __strong typeof(weakSelf) self = weakSelf;
         [self.client untagAll:self.authenticationToken guid:guid];
     } success:success failure:failure];
 }
@@ -299,9 +333,11 @@
                    success:(void(^)(int32_t usn))success
                    failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncInt32Block:^int32_t {
-        return [self.client expungeTag:self.authenticationToken guid:guid];
-    } success:success failure:failure];
+         __strong typeof(weakSelf) self = weakSelf;
+         return [self.client expungeTag:self.authenticationToken guid:guid];
+     } success:success failure:failure];
 }
 
 #pragma mark - NoteStore search methods
@@ -309,7 +345,9 @@
 - (void)listSearchesWithSuccess:(void(^)(NSArray *searches))success
                         failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client listSearches:self.authenticationToken];
     } success:success failure:failure];
 }
@@ -319,7 +357,9 @@
                   failure:(void(^)(NSError *error))failure
 
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getSearch:self.authenticationToken guid:guid];
     } success:success failure:failure];
 }
@@ -328,7 +368,9 @@
              success:(void(^)(EDAMSavedSearch *search))success
              failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client createSearch:self.authenticationToken search:search];
     } success:success failure:failure];
 }
@@ -337,18 +379,22 @@
              success:(void(^)(int32_t usn))success
              failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncInt32Block:^int32_t {
-        return [self.client updateSearch:self.authenticationToken search:search];
-    } success:success failure:failure];
+         __strong typeof(weakSelf) self = weakSelf;
+         return [self.client updateSearch:self.authenticationToken search:search];
+     } success:success failure:failure];
 }
 
 - (void)expungeSearchWithGuid:(EDAMGuid)guid
                       success:(void(^)(int32_t usn))success
                       failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncInt32Block:^int32_t {
-        return [self.client expungeSearch:self.authenticationToken guid:guid];
-    } success:success failure:failure];
+          __strong typeof(weakSelf) self = weakSelf;
+         return [self.client expungeSearch:self.authenticationToken guid:guid];
+     } success:success failure:failure];
 }
 
 #pragma mark - NoteStore notes methods
@@ -357,7 +403,9 @@
                      success:(void(^)(EDAMRelatedResult *result))success
                      failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client findRelated:self.authenticationToken query:query resultSpec:resultSpec];
     } success:success failure:failure];
 }
@@ -368,7 +416,9 @@
                     success:(void(^)(EDAMNoteList *list))success
                     failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client findNotes:self.authenticationToken filter:filter offset:offset maxNotes:maxNotes];
     } success:success failure:failure];
 }
@@ -378,9 +428,11 @@
                          success:(void(^)(int32_t offset))success
                          failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncInt32Block:^int32_t {
-        return [self.client findNoteOffset:self.authenticationToken filter:filter guid:guid];
-    } success:success failure:failure];
+         __strong typeof(weakSelf) self = weakSelf;
+         return [self.client findNoteOffset:self.authenticationToken filter:filter guid:guid];
+     } success:success failure:failure];
 }
 
 - (void)findNotesMetadataWithFilter:(EDAMNoteFilter *)filter
@@ -390,7 +442,9 @@
                             success:(void(^)(EDAMNotesMetadataList *metadata))success
                             failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client findNotesMetadata:self.authenticationToken filter:filter offset:offset maxNotes:maxNotes resultSpec:resultSpec];
     } success:success failure:failure];
 }
@@ -400,7 +454,9 @@
                          success:(void(^)(EDAMNoteCollectionCounts *counts))success
                          failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client findNoteCounts:self.authenticationToken filter:filter withTrash:withTrash];
     } success:success failure:failure];
 }
@@ -413,7 +469,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                 success:(void(^)(EDAMNote *note))success
                 failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getNote:self.authenticationToken guid:guid withContent:withContent withResourcesData:withResourcesData withResourcesRecognition:withResourcesRecognition withResourcesAlternateData:withResourcesAlternateData];
     } success:success failure:failure];
 }
@@ -422,7 +480,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                success:(void(^)(EDAMLazyMap *map))success
                                failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getNoteApplicationData:self.authenticationToken guid:guid];
     } success:success failure:failure];
 }
@@ -432,7 +492,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                     success:(void(^)(NSString *entry))success
                                     failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getNoteApplicationDataEntry:self.authenticationToken guid:guid key:key];
     } success:success failure:failure];
 }
@@ -443,9 +505,11 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                     success:(void(^)(int32_t usn))success
                                     failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncInt32Block:^int32_t {
-        return [self.client setNoteApplicationDataEntry:self.authenticationToken guid:guid key:key value:value];
-    } success:success failure:failure];
+         __strong typeof(weakSelf) self = weakSelf;
+         return [self.client setNoteApplicationDataEntry:self.authenticationToken guid:guid key:key value:value];
+     } success:success failure:failure];
 }
 
 - (void)unsetNoteApplicationDataEntryWithGuid:(EDAMGuid)guid
@@ -453,16 +517,20 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                       success:(void(^)(int32_t usn))success
                                       failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncInt32Block:^int32_t {
-        return [self.client unsetNoteApplicationDataEntry:self.authenticationToken guid:guid key:key];
-    } success:success failure:failure];
+         __strong typeof(weakSelf) self = weakSelf;
+         return [self.client unsetNoteApplicationDataEntry:self.authenticationToken guid:guid key:key];
+     } success:success failure:failure];
 }
 
 - (void)getNoteContentWithGuid:(EDAMGuid)guid
                        success:(void(^)(NSString *content))success
                        failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getNoteContent:self.authenticationToken guid:guid];
     } success:success failure:failure];
 }
@@ -473,7 +541,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                           success:(void(^)(NSString *text))success
                           failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getNoteSearchText:self.authenticationToken guid:guid noteOnly:noteOnly tokenizeForIndexing:tokenizeForIndexing];
     } success:success failure:failure];
 }
@@ -482,7 +552,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                               success:(void(^)(NSString *text))success
                               failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getResourceSearchText:self.authenticationToken guid:guid];
     } success:success failure:failure];
 }
@@ -491,7 +563,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                         success:(void(^)(NSArray *names))success
                         failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getNoteTagNames:self.authenticationToken guid:guid];
     } success:success failure:failure];
 }
@@ -500,7 +574,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
            success:(void(^)(EDAMNote *note))success
            failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client createNote:self.authenticationToken note:note];
     } success:success failure:failure];
 }
@@ -509,7 +585,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
            success:(void(^)(EDAMNote *note))success
            failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client updateNote:self.authenticationToken note:note];
     } success:success failure:failure];
 }
@@ -518,35 +596,43 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                    success:(void(^)(int32_t usn))success
                    failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncInt32Block:^int32_t {
-        return [self.client deleteNote:self.authenticationToken guid:guid];
-    } success:success failure:failure];
+         __strong typeof(weakSelf) self = weakSelf;
+         return [self.client deleteNote:self.authenticationToken guid:guid];
+     } success:success failure:failure];
 }
 
 - (void)expungeNoteWithGuid:(EDAMGuid)guid
                     success:(void(^)(int32_t usn))success
                     failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncInt32Block:^int32_t {
-        return [self.client expungeNote:self.authenticationToken guid:guid];
-    } success:success failure:failure];
+         __strong typeof(weakSelf) self = weakSelf;
+         return [self.client expungeNote:self.authenticationToken guid:guid];
+     } success:success failure:failure];
 }
 
 - (void)expungeNotesWithGuids:(NSMutableArray *)guids
                       success:(void(^)(int32_t usn))success
                       failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncInt32Block:^int32_t {
-        return [self.client expungeNotes:self.authenticationToken noteGuids:guids];
-    } success:success failure:failure];
+         __strong typeof(weakSelf) self = weakSelf;
+         return [self.client expungeNotes:self.authenticationToken noteGuids:guids];
+     } success:success failure:failure];
 }
 
 - (void)expungeInactiveNoteWithSuccess:(void(^)(int32_t usn))success
                                failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncInt32Block:^int32_t {
-        return [self.client expungeInactiveNotes:self.authenticationToken];
-    } success:success failure:failure];
+         __strong typeof(weakSelf) self = weakSelf;
+         return [self.client expungeInactiveNotes:self.authenticationToken];
+     } success:success failure:failure];
 }
 
 - (void)copyNoteWithGuid:(EDAMGuid)guid
@@ -554,7 +640,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                  success:(void(^)(EDAMNote *note))success
                  failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client copyNote:self.authenticationToken noteGuid:guid toNotebookGuid:toNotebookGuid];
     } success:success failure:failure];
 }
@@ -563,7 +651,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                          success:(void(^)(NSArray *versions))success
                          failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client listNoteVersions:self.authenticationToken noteGuid:guid];
     } success:success failure:failure];
 }
@@ -576,7 +666,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                        success:(void(^)(EDAMNote *note))success
                        failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getNoteVersion:self.authenticationToken noteGuid:guid updateSequenceNum:updateSequenceNum withResourcesData:withResourcesData withResourcesRecognition:withResourcesRecognition withResourcesAlternateData:withResourcesAlternateData];
     } success:success failure:failure];
 }
@@ -591,7 +683,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                     success:(void(^)(EDAMResource *resource))success
                     failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getResource:self.authenticationToken guid:guid withData:withData withRecognition:withRecognition withAttributes:withAttributes withAlternateData:withAlternateData];
     } success:success failure:failure];
 }
@@ -600,7 +694,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                    success:(void(^)(EDAMLazyMap *map))success
                                    failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getResourceApplicationData:self.authenticationToken guid:guid];
     } success:success failure:failure];
 }
@@ -610,7 +706,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                         success:(void(^)(NSString *entry))success
                                         failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getResourceApplicationDataEntry:self.authenticationToken guid:guid key:key];
     } success:success failure:failure];
 }
@@ -621,9 +719,11 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                         success:(void(^)(int32_t usn))success
                                         failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncInt32Block:^int32_t {
-        return [self.client setResourceApplicationDataEntry:self.authenticationToken guid:guid key:key value:value];
-    } success:success failure:failure];
+         __strong typeof(weakSelf) self = weakSelf;
+         return [self.client setResourceApplicationDataEntry:self.authenticationToken guid:guid key:key value:value];
+     } success:success failure:failure];
 }
 
 - (void)unsetResourceApplicationDataEntryWithGuid:(EDAMGuid)guid
@@ -631,25 +731,31 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                           success:(void(^)(int32_t usn))success
                                           failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncInt32Block:^int32_t {
-        return [self.client unsetResourceApplicationDataEntry:self.authenticationToken guid:guid key:key];
-    } success:success failure:failure];
+         __strong typeof(weakSelf) self = weakSelf;
+         return [self.client unsetResourceApplicationDataEntry:self.authenticationToken guid:guid key:key];
+     } success:success failure:failure];
 }
 
 - (void)updateResource:(EDAMResource *)resource
                success:(void(^)(int32_t usn))success
                failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncInt32Block:^int32_t {
-        return [self.client updateResource:self.authenticationToken resource:resource];
-    } success:success failure:failure];
+         __strong typeof(weakSelf) self = weakSelf;
+         return [self.client updateResource:self.authenticationToken resource:resource];
+     } success:success failure:failure];
 }
 
 - (void)getResourceDataWithGuid:(EDAMGuid)guid
                         success:(void(^)(NSData *data))success
                         failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getResourceData:self.authenticationToken guid:guid];
     } success:success failure:failure];
 }
@@ -662,7 +768,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                           success:(void(^)(EDAMResource *resource))success
                           failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getResourceByHash:self.authenticationToken noteGuid:guid contentHash:contentHash withData:withData withRecognition:withRecognition withAlternateData:withAlternateData];
     } success:success failure:failure];
 }
@@ -671,7 +779,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                success:(void(^)(NSData *data))success
                                failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getResourceRecognition:self.authenticationToken guid:guid];
     } success:success failure:failure];
 }
@@ -680,7 +790,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                  success:(void(^)(NSData *data))success
                                  failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getResourceAlternateData:self.authenticationToken guid:guid];
     } success:success failure:failure];
 }
@@ -689,7 +801,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                               success:(void(^)(EDAMResourceAttributes *attributes))success
                               failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getResourceAttributes:self.authenticationToken guid:guid];
     } success:success failure:failure];
 }
@@ -701,7 +815,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                             success:(void(^)(EDAMNotebook *notebook))success
                             failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getPublicNotebook:userId publicUri:publicUri];
     } success:success failure:failure];
 }
@@ -711,7 +827,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                      failure:(void(^)(NSError *error))failure
 
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client createSharedNotebook:self.authenticationToken sharedNotebook:sharedNotebook];
     } success:success failure:failure];
 }
@@ -722,15 +840,19 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                            success:(void(^)(int32_t numMessagesSent))success
                                            failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncInt32Block:^int32_t {
-        return [self.client sendMessageToSharedNotebookMembers:self.authenticationToken notebookGuid:guid messageText:messageText recipients:recipients];
-    } success:success failure:failure];
+         __strong typeof(weakSelf) self = weakSelf;
+         return [self.client sendMessageToSharedNotebookMembers:self.authenticationToken notebookGuid:guid messageText:messageText recipients:recipients];
+     } success:success failure:failure];
 }
 
 - (void)listSharedNotebooksWithSuccess:(void(^)(NSArray *sharedNotebooks))success
                                failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client listSharedNotebooks:self.authenticationToken];
     } success:success failure:failure];
 }
@@ -739,16 +861,20 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                               success:(void(^)(int32_t usn))success
                               failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncInt32Block:^int32_t {
-        return [self.client expungeSharedNotebooks:self.authenticationToken sharedNotebookIds:sharedNotebookIds];
-    } success:success failure:failure];
+         __strong typeof(weakSelf) self = weakSelf;
+         return [self.client expungeSharedNotebooks:self.authenticationToken sharedNotebookIds:sharedNotebookIds];
+     } success:success failure:failure];
 }
 
 - (void)createLinkedNotebook:(EDAMLinkedNotebook *)linkedNotebook
                      success:(void(^)(EDAMLinkedNotebook *linkedNotebook))success
                      failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client createLinkedNotebook:self.authenticationToken linkedNotebook:linkedNotebook];
     } success:success failure:failure];
 }
@@ -757,15 +883,19 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                      success:(void(^)(int32_t usn))success
                      failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncInt32Block:^int32_t {
-        return [self.client updateLinkedNotebook:self.authenticationToken linkedNotebook:linkedNotebook];
-    } success:success failure:failure];
+         __strong typeof(weakSelf) self = weakSelf;
+         return [self.client updateLinkedNotebook:self.authenticationToken linkedNotebook:linkedNotebook];
+     } success:success failure:failure];
 }
 
 - (void)listLinkedNotebooksWithSuccess:(void(^)(NSArray *linkedNotebooks))success
                                failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client listLinkedNotebooks:self.authenticationToken];
     } success:success failure:failure];
 }
@@ -774,16 +904,20 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                               success:(void(^)(int32_t usn))success
                               failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncInt32Block:^int32_t {
-        return [self.client expungeLinkedNotebook:self.authenticationToken guid:guid];
-    } success:success failure:failure];
+         __strong typeof(weakSelf) self = weakSelf;
+         return [self.client expungeLinkedNotebook:self.authenticationToken guid:guid];
+     } success:success failure:failure];
 }
 
 - (void)authenticateToSharedNotebook:(NSString *)shareKeyOrGlobalId
                              success:(void(^)(EDAMAuthenticationResult *result))success
                              failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client authenticateToSharedNotebook:shareKeyOrGlobalId authenticationToken:self.authenticationToken];
     } success:success failure:failure];
 }
@@ -792,7 +926,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                    failure:(void(^)(NSError *error))failure
 
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getSharedNotebookByAuth:self.authenticationToken];
     } success:success failure:failure];
 }
@@ -801,7 +937,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                         success:(void(^)())success
                         failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncVoidBlock:^ {
+        __strong typeof(weakSelf) self = weakSelf;
         [self.client emailNote:self.authenticationToken parameters:parameters];
     } success:success failure:failure];
 }
@@ -810,7 +948,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                   success:(void(^)(NSString *noteKey))success
                   failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client shareNote:self.authenticationToken guid:guid];
     } success:success failure:failure];
 }
@@ -819,7 +959,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                         success:(void(^)())success
                         failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncVoidBlock:^ {
+        __strong typeof(weakSelf) self = weakSelf;
         [self.client stopSharingNote:self.authenticationToken guid:guid];
     } success:success failure:failure];
 }
@@ -830,8 +972,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                  success:(void(^)(EDAMAuthenticationResult *result))success
                                  failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
-        return [self.client authenticateToSharedNote:guid noteKey:noteKey authenticationToken:authenticationToken];
+        return [weakSelf.client authenticateToSharedNote:guid noteKey:noteKey authenticationToken:authenticationToken];
     } success:success failure:failure];
 }
 
@@ -839,18 +982,22 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                      success:(void(^)(int32_t usn))success
                      failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncInt32Block:^int32_t {
-        return [self.client updateSharedNotebook:self.authenticationToken sharedNotebook:sharedNotebook];
-    } success:success failure:failure];
+         __strong typeof(weakSelf) self = weakSelf;
+         return [self.client updateSharedNotebook:self.authenticationToken sharedNotebook:sharedNotebook];
+     } success:success failure:failure];
 }
 
 - (void) setSharedNotebookRecipientSettingsWithSharedNotebookId: (int64_t) sharedNotebookId
                                               recipientSettings: (EDAMSharedNotebookRecipientSettings *) recipientSettings
                                                         success:(void(^)(int32_t usn))success
                                                         failure:(void(^)(NSError *error))failure {
-    [self invokeAsyncInt32Block:^int32_t{
-        return [self.client setSharedNotebookRecipientSettings:self.authenticationToken sharedNotebookId:sharedNotebookId recipientSettings:recipientSettings];
-    } success:success failure:failure];
+    __weak typeof(self) weakSelf = self;
+    [self invokeAsyncInt32Block:^int32_t {
+         __strong typeof(weakSelf) self = weakSelf;
+         return [self.client setSharedNotebookRecipientSettings:self.authenticationToken sharedNotebookId:sharedNotebookId recipientSettings:recipientSettings];
+     } success:success failure:failure];
 }
 
 - (void) cancelFirstOperation {
@@ -887,13 +1034,13 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
         success(results);
         return;
     }
-    
+
     // For this call, ask for the remaining number to fulfill the order, but don't exceed standard max.
     int32_t maxNotesThisCall = FIND_NOTES_DEFAULT_MAX_NOTES;
     if (maxResults > 0) {
         maxNotesThisCall = (int32_t)MIN(maxResults - results.count, (NSUInteger)maxNotesThisCall);
     }
-    
+
     [self findNotesMetadataWithFilter:filter
                                offset:offset
                              maxNotes:maxNotesThisCall

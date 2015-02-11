@@ -1554,8 +1554,10 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
     }
     
     // Get over to a concurrent background queue.
+    __weak typeof(self) weakSelf = self;
     dispatch_async(self.thumbnailQueue, ^{
         // Get the info we need for this note ref, then construct a standard request for the thumbnail.
+        __strong typeof(weakSelf) self = weakSelf;
         NSString * authToken = [self authenticationTokenForNoteRef:noteRef];
         NSString * shardId = [self shardIdForNoteRef:noteRef];
         

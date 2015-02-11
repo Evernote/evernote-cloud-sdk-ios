@@ -84,9 +84,11 @@
   }
   
   if (url != nil) {
+    __weak typeof(self) weakSelf = self;
     [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:url]
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                             __strong typeof(weakSelf) self = weakSelf;
                              if (data != nil) {
                                NSString *textEncodingName = [response textEncodingName];
                                if (textEncodingName == nil) {
@@ -202,6 +204,7 @@
                        mimeType:(NSString *)mimeType
                       sourceURL:(NSURL *)url
 {
+  __weak typeof(self) weakSelf = self;
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
     ENWebContentTransformer *transformer = [[ENWebContentTransformer alloc] init];
     transformer.title = title;
@@ -210,7 +213,7 @@
     
     ENNote *note = [transformer transformedValue:contents];
     dispatch_async(dispatch_get_main_queue(), ^{
-      [self completeWithNote:note];
+      [weakSelf completeWithNote:note];
     });
   });
 }
