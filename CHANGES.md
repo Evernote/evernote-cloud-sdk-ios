@@ -1,3 +1,7 @@
+= 2.0.2
+
+* Bug fixes
+
 = 2.0.1
 
 * Improvements to 'Save to Evernote' share sheet
