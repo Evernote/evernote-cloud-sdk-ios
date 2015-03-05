@@ -415,4 +415,15 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
  */
 - (BOOL)viewNoteInEvernote:(ENNoteRef *)noteRef;
 
+/**
+ *  View this note in the Evernote app and call callbackURL when done
+ *
+ *  @param noteRef      The note to view
+ *  @param callbackURL  callback URL to open after done with the note, something like YOURAPP_URL_SCHEME://callback
+ *
+ *  @return No means the Evernote app is not installed or not available. Yes does not guarantee that this note is successfuly opened,
+ *          as the user could have logged into another account in the Evernote app.
+ */
+- (BOOL)viewNoteInEvernote:(ENNoteRef *)noteRef callbackURL:(NSString *)callbackURL;
+
 @end

@@ -1614,6 +1614,15 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
     return [[UIApplication sharedApplication] openURL:[NSURL URLWithString:viewNoteURLScheme]];
 }
 
+- (BOOL)viewNoteInEvernote:(ENNoteRef *)noteRef callbackURL:(NSString *)callbackURL {
+    if (IsEvernoteInstalled() == NO) {
+        return NO;
+    }
+    
+    NSString *viewNoteURLScheme = [NSString stringWithFormat:@"evernote:///view/%d/%@/%@/%@/?callback=%@", self.userID, [self shardIdForNoteRef:noteRef], noteRef.guid, noteRef.guid, [callbackURL en_stringByUrlEncoding]];
+    return [[UIApplication sharedApplication] openURL:[NSURL URLWithString:viewNoteURLScheme]];
+}
+
 #pragma mark - Private routines
 
 #pragma mark - API helpers
