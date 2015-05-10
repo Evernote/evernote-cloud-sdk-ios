@@ -31,15 +31,22 @@ NS_ENUM(NSInteger, SampleFunctions) {
     kSampleFunctionsMaxValue
 };
 
-@interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIWebViewDelegate>
+@interface MainViewController () <UITableViewDataSource,
+                                  UITableViewDelegate,
+                                  UIImagePickerControllerDelegate,
+                                  UINavigationControllerDelegate,
+                                  UIWebViewDelegate>
+
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) UIWebView * webView;
 @property (nonatomic, strong) UIBarButtonItem * loginItem;
+
 @end
 
 @implementation MainViewController
 
 - (void)loadView {
+    
     [super loadView];
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     [self.tableView setDelegate:self];
@@ -51,12 +58,13 @@ NS_ENUM(NSInteger, SampleFunctions) {
 }
 
 - (void)updateLoginItem {
+    
     BOOL loggedIn = [[ENSession sharedSession] isAuthenticated];
     [self.loginItem setTitle:(loggedIn? NSLocalizedString(@"Logout", @"Logout"): NSLocalizedString(@"Login", @"Login"))];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
+
     [super viewDidLoad];
     UIBarButtonItem * backButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", @"Back") style:UIBarButtonItemStylePlain target:nil action:NULL];
     [self.navigationItem setBackBarButtonItem:backButton];
@@ -65,8 +73,8 @@ NS_ENUM(NSInteger, SampleFunctions) {
     [SVProgressHUD setBackgroundColor:[UIColor colorWithRed:0.7 green:0.7 blue:0.7 alpha:0.7]];
 }
 
-- (void)update
-{
+- (void)update {
+    
     if ([[ENSession sharedSession] isAuthenticated]) {
         [self.navigationItem setTitle:[[ENSession sharedSession] userDisplayName]];
     } else {
@@ -79,13 +87,13 @@ NS_ENUM(NSInteger, SampleFunctions) {
 
 #pragma mark - UITableView
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
     if ([[ENSession sharedSession] isAuthenticated]) {
         return kSampleFunctionsMaxValue;
     } else {
@@ -93,8 +101,8 @@ NS_ENUM(NSInteger, SampleFunctions) {
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     switch (indexPath.row) {
         case kSampleFunctionsUserInfo:
@@ -140,8 +148,8 @@ NS_ENUM(NSInteger, SampleFunctions) {
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     switch (indexPath.row) {
         case kSampleFunctionsUserInfo:
         {
@@ -276,8 +284,8 @@ NS_ENUM(NSInteger, SampleFunctions) {
     }];
 }
 
-- (void)finishClip
-{
+- (void)finishClip {
+    
     [SVProgressHUD dismiss];
 }
 

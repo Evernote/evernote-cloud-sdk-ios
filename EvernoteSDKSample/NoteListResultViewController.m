@@ -12,11 +12,13 @@
 #import "CommonUtils.h"
 
 @interface NoteListResultViewController () <UITableViewDataSource, UITableViewDelegate>
+
 @property (nonatomic, strong) ENNoteSearch *noteSearch;
 @property (nonatomic, strong) ENNotebook *notebookToSearch;
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) NSArray * findNotesResults;
 @property (nonatomic, strong) NSMutableDictionary * thumbnails;
+
 @end
 
 @implementation NoteListResultViewController

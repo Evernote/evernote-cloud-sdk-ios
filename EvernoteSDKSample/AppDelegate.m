@@ -22,6 +22,13 @@
                             consumerSecret:@"your secret"
                               optionalHost:ENSessionHostSandbox];
     
+    
+    // OPTION: Set personal, production account by commenting out sandbox service and uncomenting below code for production test.You can obtain DeveloperToken at https://www.evernote.com/api/DeveloperToken.action
+
+//   [ENSession setSharedSessionDeveloperToken:@""
+//                                noteStoreUrl:@""];
+
+    
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:
                    [[UIScreen mainScreen] bounds]];

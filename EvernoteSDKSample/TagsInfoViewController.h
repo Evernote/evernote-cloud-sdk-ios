@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TagsInfoViewController : UIViewController
+
 @property (nonatomic, strong) UITextView * textView;
+
 @end
