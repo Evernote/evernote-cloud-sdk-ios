@@ -26,7 +26,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <ENSDK/ENSDK.h>
+#import "ENSDK/ENSDK.h"
 #import "ENSDKAdvanced.h"
 #import "ENLinkedNotebookRef.h"
 #import "ENNoteRefInternal.h"
