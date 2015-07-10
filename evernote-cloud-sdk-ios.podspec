@@ -5,7 +5,7 @@ Pod::Spec.new do |spec|
   spec.homepage = "https://github.com/evernote/evernote-cloud-sdk-ios"
   spec.license = '  https://github.com/evernote/evernote-cloud-sdk-ios/blob/master/LICENSE'
   spec.authors = { 'Evernote' => 'devsupport@evernote.com' }
-  spec.source = { :git => "https://github.com/evernote/evernote-cloud-sdk-ios.git", :tag => "2.0.2"}
+  spec.source = { :git => "https://github.com/evernote/evernote-cloud-sdk-ios.git", :tag => "2.0.3"}
   spec.ios.deployment_target = "7.0"
   spec.xcconfig = {'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2'}
 
