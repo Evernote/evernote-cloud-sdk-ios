@@ -1,0 +1,31 @@
+/* 
+  Localizable.strings
+  evernote-sdk-ios
+
+  Created by Eric Cheng on 1/26/15.
+  Copyright (c) 2015 Evernote Corporation. All rights reserved.
+*/
+
+"Save to Evernote" = "Evernoteへ保存";
+
+"Add Title" = "タイトルを追加";
+
+"Add Tag" = "タグを追加";
+
+"Untitled note" = "無題のノート";
+
+"Untitled" = "無題";
+
+"Notebooks" = "ノートブック";
+
+"Current" = "現在";
+
+"Recent Notebooks" = "最近のノートブック";
+
+"All Notebooks" = "すべてのノートブック";
+
+"Notebook" = "ノートブック";
+
+"Evernote-International" = "Evernote-国際";
+
+"Evernote-China" = "Evernote-中国";

@@ -380,6 +380,7 @@
 		865C383C18F8BA2400ECB2BA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		866F1C701905F01F0072F4C8 /* ENNotebookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENNotebookCell.h; sourceTree = "<group>"; };
 		866F1C711905F01F0072F4C8 /* ENNotebookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENNotebookCell.m; sourceTree = "<group>"; };
+		86AB1CCE1B50607500CF2C57 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		86B198551901DB0A008F606A /* ENNotebookPickerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENNotebookPickerButton.h; sourceTree = "<group>"; };
 		86B198561901DB0A008F606A /* ENNotebookPickerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENNotebookPickerButton.m; sourceTree = "<group>"; };
 		86C54DDB191D8F0900670865 /* ENNotebookTypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENNotebookTypeView.h; sourceTree = "<group>"; };
@@ -1271,6 +1272,7 @@
 				"zh-cn",
 				Base,
 				"zh-Hans",
+				ja,
 			);
 			mainGroup = 0BB3D1A21524ED96001C4534;
 			productRefGroup = 0BB3D1AE1524ED96001C4534 /* Products */;
@@ -1537,6 +1539,7 @@
 			children = (
 				862CEA2F1A77273C00D0DB23 /* zh-Hans */,
 				862CEA311A77275600D0DB23 /* en */,
+				86AB1CCE1B50607500CF2C57 /* ja */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
