@@ -1,3 +1,8 @@
+= 2.0.3
+
+* Add Japanese localization
+* Bug fixes
+
 = 2.0.2
 
 * Bug fixes
