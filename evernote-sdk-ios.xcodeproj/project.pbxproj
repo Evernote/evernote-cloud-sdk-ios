@@ -401,6 +401,7 @@
 		86D792B219E862DF008664DF /* TagsInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagsInfoViewController.h; sourceTree = "<group>"; };
 		86D792B319E862DF008664DF /* TagsInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagsInfoViewController.m; sourceTree = "<group>"; };
 		86F2D7FC1909EDAA00C0AA7F /* ENSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ENSDKResources.bundle; sourceTree = SOURCE_ROOT; };
+		9A8685D31B53FD6700DBAEE2 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A9BE476B1781FAFA00471BF7 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		BE2E23BF18EBA5D400BD7E6E /* EDAM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDAM.h; sourceTree = "<group>"; };
 		BE2E23C018EBA5D400BD7E6E /* EDAMErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDAMErrors.h; sourceTree = "<group>"; };
@@ -1273,6 +1274,7 @@
 				Base,
 				"zh-Hans",
 				ja,
+				ko,
 			);
 			mainGroup = 0BB3D1A21524ED96001C4534;
 			productRefGroup = 0BB3D1AE1524ED96001C4534 /* Products */;
@@ -1540,6 +1542,7 @@
 				862CEA2F1A77273C00D0DB23 /* zh-Hans */,
 				862CEA311A77275600D0DB23 /* en */,
 				86AB1CCE1B50607500CF2C57 /* ja */,
+				9A8685D31B53FD6700DBAEE2 /* ko */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
