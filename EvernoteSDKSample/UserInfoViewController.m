@@ -24,7 +24,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.navigationItem setTitle:@"User Info"];
+    [self.navigationItem setTitle:NSLocalizedString(@"User info", @"User info")];
     ENSession *sesssion = [ENSession sharedSession];
     NSMutableString * str = [NSMutableString string];
     [str appendFormat:@"Display name: %@\n", [[ENSession sharedSession] userDisplayName]];

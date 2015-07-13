@@ -25,7 +25,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.navigationItem setTitle:@"Save Activity"];
+    [self.navigationItem setTitle:NSLocalizedString(@"Save Activity", @"Save Activity")];
     UIBarButtonItem * actionItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(action:)];
     [self.navigationItem setRightBarButtonItem:actionItem];
 }
