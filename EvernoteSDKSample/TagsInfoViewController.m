@@ -25,7 +25,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.navigationItem setTitle:@"Tags"];
+    [self.navigationItem setTitle:NSLocalizedString(@"Tags", @"Tags")];
     NSMutableString * str = [NSMutableString string];
     
     [self.textView setText:str];
