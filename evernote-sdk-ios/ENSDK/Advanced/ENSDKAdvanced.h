@@ -73,6 +73,12 @@
 @property (nonatomic, readonly) ENPreferencesStore * preferences;
 
 /**
+ *  Primary authentication token for the user, can be used to fetch personal notes and authenticate 
+ *  to get shared notes and business notes
+ */
+@property (nonatomic, strong) NSString * primaryAuthenticationToken;
+
+/**
  *  The user store client that manages the Evernote user account.
  */
 @property (nonatomic, readonly) ENUserStoreClient * userStore;
