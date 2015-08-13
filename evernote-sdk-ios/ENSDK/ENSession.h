@@ -279,6 +279,12 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
 - (void)unauthenticate;
 
 /**
+ *  Clear the preferences to a clean state, but not revoking the auth token
+ *  Useful for multi platform apps to keep their token on the service
+ */
+- (void)unauthenticateWithoutRevokingAccessToken;
+
+/**
  *  Should be called from your AppDelegate's -application:openURL:sourceApplication:annotation: to 
  *  handle authentication via app switching.
  *

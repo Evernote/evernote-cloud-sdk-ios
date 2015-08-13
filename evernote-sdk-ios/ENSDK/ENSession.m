@@ -468,14 +468,22 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
 // Unauthenticating while operations are pending may result in undefined behavior.
 - (void)unauthenticate
 {
-    ENSDKLogInfo(@"ENSession is unauthenticating.");
+    [self unauthenticateAndRevokeAccessToken:YES];
+}
 
+- (void)unauthenticateWithoutRevokingAccessToken {
+    [self unauthenticateAndRevokeAccessToken:NO];
+}
+
+- (void)unauthenticateAndRevokeAccessToken:(BOOL)shouldRevokeAccessToken {
+    ENSDKLogInfo(@"ENSession is unauthenticating.");
+    
     // Revoke the primary auth token, so the app session will not appear any longer on the user's
     // security page. This is purely opportunistic, of course, hence ignoring the result.
     // Note also that this is asynchronous, but the rest of this method gets rid of all the session state,
     // so keep the user store around long enough to see it through, but keep it separate from the
     // normal session state.
-    if (self.isAuthenticated) {
+    if (self.isAuthenticated && shouldRevokeAccessToken) {
         self.userStorePendingRevocation = self.userStore;
         [self.userStorePendingRevocation revokeLongSessionWithAuthenticationToken:self.primaryAuthenticationToken success:^{
             self.userStorePendingRevocation = nil;
