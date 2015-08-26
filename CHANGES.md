@@ -1,3 +1,8 @@
+= 2.0.4
+* Require iOS 8 now, will soon support iOS 9
+* Add Korean localization
+* Added some more login and logout options for developers
+
 = 2.0.3
 
 * Add Japanese localization
