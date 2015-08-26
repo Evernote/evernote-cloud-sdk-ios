@@ -432,4 +432,10 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
  */
 - (BOOL)viewNoteInEvernote:(ENNoteRef *)noteRef callbackURL:(NSString *)callbackURL;
 
+#pragma mark - Custom Evernote login in your app
+
+@property (nonatomic, copy) NSString *customEvernoteLoginTitle;
+
+@property (nonatomic, copy) NSString *customEvernoteLoginDescription;
+
 @end

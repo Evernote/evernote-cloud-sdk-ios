@@ -19,9 +19,9 @@
 #define PHOTO_MAX_WIDTH 500
 
 NS_ENUM(NSInteger, SampleFunctions) {
+    kSampleFunctionsSaveActivity,
     kSampleFunctionsUserInfo,
     kSampleFunctionsTagsInfo,
-    kSampleFunctionsSaveActivity,
     kSampleFunctionsCreatePhotoNote,
     kSampleFunctionsClipWebPage,
     kSampleFunctionsSearchNotes,
@@ -89,7 +89,7 @@ NS_ENUM(NSInteger, SampleFunctions) {
     if ([[ENSession sharedSession] isAuthenticated]) {
         return kSampleFunctionsMaxValue;
     } else {
-        return 0; // Authenticate
+        return 1; // Authenticate
     }
 }
 

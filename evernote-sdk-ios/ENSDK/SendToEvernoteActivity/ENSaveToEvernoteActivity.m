@@ -123,6 +123,16 @@
 
 - (UIViewController *)activityViewController
 {
+    if (![ENSession sharedSession].isAuthenticated) {
+        NSString *loginTitle = [ENSession sharedSession].customEvernoteLoginTitle.length ? [ENSession sharedSession].customEvernoteLoginTitle : ENSDKLocalizedString(@"Please login", @"Please login");
+        NSString *loginDescription = [ENSession sharedSession].customEvernoteLoginDescription.length ? [ENSession sharedSession].customEvernoteLoginDescription : ENSDKLocalizedString(@"Login to Evernote to proceed", @"Login to Evernote to proceed");
+        UIAlertController *loginAlertController = [UIAlertController alertControllerWithTitle:loginTitle message:loginDescription preferredStyle:UIAlertControllerStyleAlert];
+        [loginAlertController addAction:[UIAlertAction actionWithTitle:ENSDKLocalizedString(@"OK", @"OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self activityDidFinish:NO];
+        }]];
+        return loginAlertController;
+    }
+    
     ENSaveToEvernoteViewController * s2a = [[ENSaveToEvernoteViewController alloc] init];
     s2a.delegate = self;
     UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:s2a];

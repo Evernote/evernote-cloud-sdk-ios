@@ -32,6 +32,9 @@
 
 - (void)action:(id)sender
 {
+//    You can customize the Evernote login prompts
+    [ENSession sharedSession].customEvernoteLoginTitle = @"Custom Login Prompt";
+    [ENSession sharedSession].customEvernoteLoginDescription = @"Please login to Evernote service in order to proceed";
     ENSaveToEvernoteActivity * sendActivity = [[ENSaveToEvernoteActivity alloc] init];
     sendActivity.delegate = self;
     UIImage *logoImage = [UIImage imageNamed:@"scannable"];
