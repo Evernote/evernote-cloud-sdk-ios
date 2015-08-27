@@ -1,3 +1,6 @@
+= 2.0.5
+* Fix Cocoapods integration
+
 = 2.0.4
 * Require iOS 8 now, will soon support iOS 9
 * Add Korean localization
