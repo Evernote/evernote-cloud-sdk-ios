@@ -128,6 +128,7 @@
 		86F2D7FB1909ECD300C0AA7F /* libevernote-sdk-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB3D1AD1524ED96001C4534 /* libevernote-sdk-ios.a */; };
 		86F2D7FD1909EDAA00C0AA7F /* ENSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 86F2D7FC1909EDAA00C0AA7F /* ENSDKResources.bundle */; };
 		86F2D802190A348F00C0AA7F /* ENSDKResourceLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = BECDD3C7190A2DE7003736EE /* ENSDKResourceLoader.m */; };
+		86FC760F1B966EB5006E93DE /* Xcode_Release_Notes.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 86FC760E1B966EB5006E93DE /* Xcode_Release_Notes.pdf */; };
 		BE2E245F18EBA5D500BD7E6E /* EDAM.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23BF18EBA5D400BD7E6E /* EDAM.h */; };
 		BE2E246018EBA5D500BD7E6E /* EDAMErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23C018EBA5D400BD7E6E /* EDAMErrors.h */; };
 		BE2E246118EBA5D500BD7E6E /* EDAMErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23C118EBA5D400BD7E6E /* EDAMErrors.m */; };
@@ -401,6 +402,7 @@
 		86D792B219E862DF008664DF /* TagsInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagsInfoViewController.h; sourceTree = "<group>"; };
 		86D792B319E862DF008664DF /* TagsInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagsInfoViewController.m; sourceTree = "<group>"; };
 		86F2D7FC1909EDAA00C0AA7F /* ENSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ENSDKResources.bundle; sourceTree = SOURCE_ROOT; };
+		86FC760E1B966EB5006E93DE /* Xcode_Release_Notes.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Xcode_Release_Notes.pdf; sourceTree = "<group>"; };
 		9A8685D31B53FD6700DBAEE2 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A9BE476B1781FAFA00471BF7 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		BE2E23BF18EBA5D400BD7E6E /* EDAM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDAM.h; sourceTree = "<group>"; };
@@ -1002,6 +1004,7 @@
 		BECDD3741908FFC1003736EE /* EvernoteSDKSample */ = {
 			isa = PBXGroup;
 			children = (
+				86FC760E1B966EB5006E93DE /* Xcode_Release_Notes.pdf */,
 				8603EFF51A731A680002AE28 /* Images.xcassets */,
 				BE48C71319131AC200025618 /* 3rdparty */,
 				BECDD37D1908FFC1003736EE /* AppDelegate.h */,
@@ -1304,6 +1307,7 @@
 			files = (
 				BEA8992F1913215C001619FE /* angle-mask@2x.png in Resources */,
 				BE48C71819131AC200025618 /* LICENSE.txt in Resources */,
+				86FC760F1B966EB5006E93DE /* Xcode_Release_Notes.pdf in Resources */,
 				86F2D7FD1909EDAA00C0AA7F /* ENSDKResources.bundle in Resources */,
 				862CEA2E1A77273C00D0DB23 /* Localizable.strings in Resources */,
 				8603EFF61A731A680002AE28 /* Images.xcassets in Resources */,

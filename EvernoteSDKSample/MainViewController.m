@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import <ENSDK/ENSDK.h>
+#import <ENSDK/ENSDKAdvanced.h>
 #import "UserInfoViewController.h"
 #import "TagsInfoViewController.h"
 #import "SaveActivityViewController.h"
@@ -27,6 +28,8 @@ NS_ENUM(NSInteger, SampleFunctions) {
     kSampleFunctionsSearchNotes,
     kSampleFunctionsViewMyNotes,
     kSampleFunctionsCustomizeNote,
+    kSampleFunctionsCreateNoteWithPDF,
+    kSampleFunctionsUpdateNoteWithPDF,
     
     kSampleFunctionsMaxValue
 };
@@ -35,6 +38,7 @@ NS_ENUM(NSInteger, SampleFunctions) {
 @property (nonatomic, strong) UITableView * tableView;
 @property (nonatomic, strong) UIWebView * webView;
 @property (nonatomic, strong) UIBarButtonItem * loginItem;
+@property (nonatomic, strong) ENNoteRef *noteRefToReplace;
 @end
 
 @implementation MainViewController
@@ -133,6 +137,14 @@ NS_ENUM(NSInteger, SampleFunctions) {
             cell.textLabel.text = NSLocalizedString(@"Save a customized note", @"Save a customized note");
             break;
             
+        case kSampleFunctionsCreateNoteWithPDF:
+            cell.textLabel.text = NSLocalizedString(@"Create a new note with PDF", @"Create a new note with PDF");
+            break;
+            
+        case kSampleFunctionsUpdateNoteWithPDF:
+            cell.textLabel.text = NSLocalizedString(@"Replace an existing note with PDF", @"Replace an existing note with PDF");
+            break;
+            
         default:
             NSAssert(0, @"indexPath not valid");
             break;
@@ -187,6 +199,12 @@ NS_ENUM(NSInteger, SampleFunctions) {
             [self saveCustomizedNote];
             break;
         }
+        case kSampleFunctionsCreateNoteWithPDF:
+            [self createNewNoteWithPDF];
+            break;
+        case kSampleFunctionsUpdateNoteWithPDF:
+            [self updateExistingNoteWithPDF];
+            break;
         default:
             break;
     }
@@ -391,6 +409,66 @@ NS_ENUM(NSInteger, SampleFunctions) {
             message = @"Customized note saved.";
         } else {
             message = @"Failed to save customized note.";
+        }
+        [SVProgressHUD dismiss];
+        [CommonUtils showSimpleAlertWithMessage:message];
+    }];
+}
+
+#pragma mark - Verify Quota
+
+- (void)createNewNoteWithPDF {
+    ENNote *noteToSave = [[ENNote alloc] init];
+    noteToSave.title = [NSString stringWithFormat:@"Xcode release notes %@", [NSDate date]];
+    noteToSave.content = [ENNoteContent noteContentWithString:@"This is the official release notes from developer.apple.com"];
+    NSString *pdfPath=[[NSBundle mainBundle] pathForResource:@"Xcode_Release_Notes" ofType:@"pdf"];
+    [noteToSave addResource:[[ENResource alloc] initWithData:[NSData dataWithContentsOfFile:pdfPath] mimeType:@"application/pdf"]];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    [[ENSession sharedSession] uploadNote:noteToSave notebook:nil completion:^(ENNoteRef *noteRef, NSError *uploadNoteError) {
+        NSString * message = nil;
+        if (noteRef) {
+            message = @"New note with PDF saved.";
+            self.noteRefToReplace = noteRef;
+            
+            [[ENSession sharedSession].primaryNoteStore getSyncStateWithSuccess:^(EDAMSyncState *syncState) {
+                NSLog(@"Personal quota usage %lld", syncState.uploaded.longLongValue);
+            } failure:^(NSError *error) {
+                ENSDKLogError(@"Failed to get personal sync state");
+            }];
+
+        } else {
+            message = @"Failed to save note with PDF.";
+        }
+        [SVProgressHUD dismiss];
+        [CommonUtils showSimpleAlertWithMessage:message];
+    }];
+}
+
+- (void)updateExistingNoteWithPDF {
+    ENNote *noteToSave = [[ENNote alloc] init];
+    noteToSave.title = [NSString stringWithFormat:@"Xcode release notes %@", [NSDate date]];
+    NSString *contentString = [@"This is the official release notes from developer.apple.com" stringByAppendingString:@"\nAmmended"];
+    noteToSave.content = [ENNoteContent noteContentWithString: contentString];
+    NSString *pdfPath=[[NSBundle mainBundle] pathForResource:@"Xcode_Release_Notes" ofType:@"pdf"];
+    [noteToSave addResource:[[ENResource alloc] initWithData:[NSData dataWithContentsOfFile:pdfPath] mimeType:@"application/pdf"]];
+    if (self.noteRefToReplace == nil) {
+        [CommonUtils showSimpleAlertWithMessage:@"Must use create new note with PDF function first"];
+        return;
+    }
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    [[ENSession sharedSession] uploadNote:noteToSave policy:ENSessionUploadPolicyReplace toNotebook:nil orReplaceNote:self.noteRefToReplace progress:nil completion:^(ENNoteRef *noteRef, NSError *uploadNoteError) {
+        NSString * message = nil;
+        if (noteRef) {
+            message = @"New note with PDF updated.";
+            
+            [[ENSession sharedSession].primaryNoteStore getSyncStateWithSuccess:^(EDAMSyncState *syncState) {
+                NSLog(@"Personal quota usage %lld", syncState.uploaded.longLongValue);
+            } failure:^(NSError *error) {
+                ENSDKLogError(@"Failed to get personal sync state");
+            }];
+            
+        } else {
+            message = @"Failed to update note with PDF.";
         }
         [SVProgressHUD dismiss];
         [CommonUtils showSimpleAlertWithMessage:message];
