@@ -339,6 +339,9 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
  *  @param noteToReplace (optional) For replace policies, the reference to the note to replace.
  *  @param progress      (optional) A block that will receive updates from 0.0 to 1.0 indicating upload progress.
  *  @param completion    A block to receive the result of the operation (a note reference) or error.
+ *
+ *  When updating an existing note with resources, the Evernote service will not recalculate the usage quota for the already uploaded resources.
+ *  See detailed explanation here https://github.com/evernote/evernote-cloud-sdk-ios/issues/106
  */
 - (void)uploadNote:(ENNote *)note
             policy:(ENSessionUploadPolicy)policy
