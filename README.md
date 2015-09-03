@@ -21,7 +21,7 @@ FAQ
 
 ### What iOS versions are supported?
 
-This version of the SDK is designed for iOS 7 and above.
+This version of the SDK is designed for iOS 8.0 and above. If you want to support iOS 7, please checkout the [ios7](https://github.com/evernote/evernote-cloud-sdk-ios/tree/ios7) branch.
 
 ### Does the Evernote SDK support ARC?
 
