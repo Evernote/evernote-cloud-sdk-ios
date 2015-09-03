@@ -66,8 +66,8 @@
         [SVProgressHUD dismiss];
         [self.webView loadData:data
                       MIMEType:ENWebArchiveDataMIMEType
-              textEncodingName:nil
-                       baseURL:nil];
+              textEncodingName:@"utf-8"
+                       baseURL:[NSURL URLWithString:@"about:blank"]];
     }];
 }
 

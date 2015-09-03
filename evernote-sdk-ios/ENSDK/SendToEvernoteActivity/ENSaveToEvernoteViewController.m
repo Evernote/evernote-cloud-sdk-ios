@@ -153,8 +153,8 @@ CGFloat kTextLeftPadding = 20;
     [note generateWebArchiveData:^(NSData *data) {
         [self.noteView loadData:data
                       MIMEType:ENWebArchiveDataMIMEType
-              textEncodingName:nil
-                       baseURL:nil];
+              textEncodingName:@"utf-8"
+                       baseURL:[NSURL URLWithString:@"about:blank"]];
     }];
 }
 
