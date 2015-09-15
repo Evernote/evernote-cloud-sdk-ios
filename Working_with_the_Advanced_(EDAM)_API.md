@@ -5,11 +5,11 @@ The Evernote Cloud SDK exposes a simple, workflow oriented set of operations and
 
 ### What is the EDAM API?
 
-The EDAM (Evernote Data Access and Management) API is the name given to Evernote's full web service API, through which all Evernote and third-party apps access the service. It is not a REST-style interface; instead, Evernote provides client code that can talk to the service on your behalf. That API is [documented in full here](http://dev.evernote.com/doc/reference/). 
+The EDAM (Evernote Data Access and Management) API is the name given to Evernote's full web service API, through which all Evernote and third-party apps access the service. It is not a REST-style interface; instead, Evernote provides client code that can talk to the service on your behalf. That API is [documented in full here](http://dev.evernote.com/doc/reference/).
 
 ### Objects and basic concepts
 
-Unlike the primary SDK interface, where all objects have the `EN...` prefix, the EDAM objects and constants in the SDK all use the `EDAM...` prefix. Generally, a user's account information is hosted on a server endpoint called a "note store". You'll use a note store client object to call methods on the service, and use EDAM objects to send and receive data. 
+Unlike the primary SDK interface, where all objects have the `EN...` prefix, the EDAM objects and constants in the SDK all use the `EDAM...` prefix. Generally, a user's account information is hosted on a server endpoint called a "note store". You'll use a note store client object to call methods on the service, and use EDAM objects to send and receive data.
 
 When using the EDAM objects, if you want to create or read note content, be aware that it is kept natively in a form of HTML called ENML (Evernote Markup Language). There is a helper class called `ENMLWriter` in the SDK to help you produce this format.
 
@@ -19,11 +19,11 @@ By default, the headers you include in the SDK are intentionally compact and don
 
     #import <ENSDK/Advanced/ENSDKAdvanced.h>
 
-The "Advanced" header will both pull in the full EDAM layer, and also expose some additional properties on the `EN...` objects that will let you bridge between the two worlds more easily. 
+The "Advanced" header will both pull in the full EDAM layer, and also expose some additional properties on the `EN...` objects that will let you bridge between the two worlds more easily.
 
 ### Authentication
 
-The `ENSession` object still manages authentication and session maintenance for you. 
+The `ENSession` object still manages authentication and session maintenance for you.
 
 ### Getting a note store client
 
@@ -47,17 +47,17 @@ The following code snippet demonstrates how to create and upload a trivial new n
     [writer writeString:@"Hello World!"];
     [writer endDocument];
 
-	// Create a note locally.
+    // Create a note locally.
     EDAMNote * note = [[EDAMNote alloc] init];
     note.title = @"Test Note";
-    note.contents = writer.contents;
-  
+    note.content = writer.contents;
+
     // Create the note in the service, in the user's personal, default notebook.
     ENNoteStoreClient * noteStore = [[ENSession sharedSession] primaryNoteStore];
-    [noteStore createNote:note 
+    [noteStore createNote:note
 				  success:^(EDAMNote * resultNote) {
 					  // Succeeded. "resultNote" is populated with the service data for the new note.
-				  } 
+				  }
 				  failure:^(NSError * error) {
 					  // Call failed. Error will have extra information.
 				  }];
@@ -78,9 +78,9 @@ EDAMTimestamp | `-longLongValue`
 
 *A special note about timestamps*: Importing the advanced headers adds a category to `NSDate` that gives you two methods `+dateFromEDAMTimestamp:` and `-edamTimestamp` to convert between the integral value and a date object you can use.
 
-### Bridging with the `EN*` classes 
+### Bridging with the `EN*` classes
 
-You might want to, say, use the handy unified `-listNotebooks...` method on ENSession, or `-findNotes...` to save you some time, and then operate on the results using the EDAM methods. The normal public headers for the SDK keep all EDAM information private to avoid unnecessary confusion. However, once you import the advanced header, you get some additional properties on the standard objects that help you bridge the two APIs. 
+You might want to, say, use the handy unified `-listNotebooks...` method on ENSession, or `-findNotes...` to save you some time, and then operate on the results using the EDAM methods. The normal public headers for the SDK keep all EDAM information private to avoid unnecessary confusion. However, once you import the advanced header, you get some additional properties on the standard objects that help you bridge the two APIs.
 
 `ENNoteRef` points to a note that exists somewhere on the service. Let's say you want to download that note using the EDAM API. You can ask the session for a corresponding note store, and then use the `guid` property of the note ref to know which note you are referring to. e.g.
 
@@ -88,7 +88,7 @@ You might want to, say, use the handy unified `-listNotebooks...` method on ENSe
     ENNoteStoreClient * noteStore = [[ENSession sharedSession] noteStoreForNoteRef:noteRef];
     [noteStore getNoteWithGuid:noteRef.guid success:... failure...];
 
-`ENNotebook` offers similar additions, so you can use the main SDK's "listNotebooks" method to get the merged set of all user-visible notebooks, and then use one of those notebooks directly in the EDAM API. 
+`ENNotebook` offers similar additions, so you can use the main SDK's "listNotebooks" method to get the merged set of all user-visible notebooks, and then use one of those notebooks directly in the EDAM API.
 
 `ENNoteContent` has an advanced initializer that allows you to set it up with ENML directly.
 
