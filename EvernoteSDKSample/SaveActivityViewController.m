@@ -8,8 +8,10 @@
 
 #import "SaveActivityViewController.h"
 #import <ENSDK/ENSDK.h>
+#import "ENSaveToEvernoteViewController.h"
+#import "CommonUtils.h"
 
-@interface SaveActivityViewController () <ENSaveToEvernoteActivityDelegate>
+@interface SaveActivityViewController () <ENSaveToEvernoteActivityDelegate, ENSendToEvernoteViewControllerDelegate>
 
 @end
 
@@ -26,7 +28,8 @@
 {
     [super viewDidLoad];
     [self.navigationItem setTitle:NSLocalizedString(@"Save Activity", @"Save Activity")];
-    UIBarButtonItem * actionItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(action:)];
+//    UIBarButtonItem * actionItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(action:)];
+    UIBarButtonItem * actionItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveToEvernote)];
     [self.navigationItem setRightBarButtonItem:actionItem];
 }
 
@@ -49,6 +52,14 @@
     [self presentViewController:activityController animated:YES completion:nil];
 }
 
+- (void)saveToEvernote {
+    ENSaveToEvernoteViewController *vc = [[ENSaveToEvernoteViewController alloc] init];
+    vc.delegate = self;
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    nav.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentViewController:nav animated:YES completion:nil];
+}
+
 #pragma ENSaveToEvernoteActivityDelegate
 - (void)activity:(ENSaveToEvernoteActivity *)activity didFinishWithSuccess:(BOOL)success error:(NSError *)error {
     if (success) {
@@ -56,6 +67,35 @@
     } else {
         NSLog(@"Activity Error: %@", error);
     }
+}
+
+#pragma ENSaveToEvernoteViewController
+
+- (ENNote *)noteForViewController:(ENSaveToEvernoteViewController *)viewController {
+    ENNote *noteToSave = [[ENNote alloc] init];
+    noteToSave.content = [ENNoteContent noteContentWithString:self.textView.text];
+    return noteToSave;
+}
+
+- (NSString *)defaultNoteTitleForViewController:(ENSaveToEvernoteViewController *)viewController {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    
+    NSDate *date = [NSDate date];
+    
+    NSString *formattedDateString = [dateFormatter stringFromDate:date];
+
+    return [NSString stringWithFormat:@"Written on %@", formattedDateString];
+}
+
+- (void)viewController:(ENSaveToEvernoteViewController *)viewController didFinishWithSuccess:(BOOL)success uploadError:(NSError *)error {
+    if (success) {
+        [CommonUtils showSimpleAlertWithMessage:@"Note saved successfully!"];
+    } else {
+        [CommonUtils showSimpleAlertWithMessage:@"Note failed to save!"];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

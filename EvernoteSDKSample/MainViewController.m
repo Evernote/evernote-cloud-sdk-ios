@@ -108,7 +108,7 @@ NS_ENUM(NSInteger, SampleFunctions) {
             break;
             
         case kSampleFunctionsSaveActivity:
-            cell.textLabel.text = NSLocalizedString(@"Save Activity", @"Save Activity");
+            cell.textLabel.text = NSLocalizedString(@"Save to Evernote", @"Save to Evernote");
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
             
