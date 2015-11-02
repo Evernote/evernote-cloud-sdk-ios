@@ -68,6 +68,10 @@ Users will have the fastest OAuth experience in your app if they already have th
 			</array>
 		</dict>
 	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>en</string>
+	</array>
 
 Don't worry: authentication can still proceed if the Evernote app is not installed, but it will fall back to web-based OAuth. This is transparent to your app.
 
