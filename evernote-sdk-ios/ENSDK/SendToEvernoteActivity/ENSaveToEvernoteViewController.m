@@ -34,6 +34,7 @@
 #import "RMSTokenView.h"
 #import "ENNotebookPickerView.h"
 #import "ENSDKPrivate.h"
+#import "ENSaveToEvernoteActivity.h"
 
 #define kTitleViewHeight        50.0
 #define kTagsViewHeight         44.0

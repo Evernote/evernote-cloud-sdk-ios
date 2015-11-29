@@ -36,5 +36,5 @@
 #import "ENSession.h"
 #import "ENCommonUtils.h"
 
-#import "SendToEvernoteActivity/ENSaveToEvernoteActivity.h"
+#import "ENSaveToEvernoteActivity.h"
 
