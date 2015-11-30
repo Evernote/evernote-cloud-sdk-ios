@@ -27,7 +27,9 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <libxml/tree.h>
+
+typedef struct _xmlParserCtxt xmlParserCtxt;
+typedef xmlParserCtxt *xmlParserCtxtPtr;
 
 extern NSString * const ENXMLSaxParserErrorDomain;
 

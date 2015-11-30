@@ -31,6 +31,7 @@
 #import "ENXMLDTD.h"
 #import "ENXMLUtils.h"
 
+#import <libxml/tree.h>
 #include <libxml/HTMLtree.h>
 #include <unistd.h>
 
