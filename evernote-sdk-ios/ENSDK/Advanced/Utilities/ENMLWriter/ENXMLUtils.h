@@ -27,7 +27,8 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <libxml/xmlstring.h>
+
+typedef unsigned char xmlChar;
 
 static inline NSString * NSStringFromXmlCharWithLength( const xmlChar * ch, size_t length) {
   if (ch == NULL) {
