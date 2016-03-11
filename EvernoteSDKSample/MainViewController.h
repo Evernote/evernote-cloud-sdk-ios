@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MainViewController.h
 //  EvernoteSDKSample
 //
 //  Created by Ben Zotto on 4/24/14.
