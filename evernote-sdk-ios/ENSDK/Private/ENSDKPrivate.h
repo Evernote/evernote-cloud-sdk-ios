@@ -64,7 +64,7 @@ extern NSString * const ENBootstrapProfileNameChina;
 
 @interface ENNote (Private)
 - (id)initWithServiceNote:(EDAMNote *)note;
-- (NSString *)content;
+- (NSString *)enmlContent;
 - (void)setGuid:(NSString *)guid;
 - (void)setEnmlContent:(NSString *)enmlContent;
 - (void)setResources:(NSArray *)resources;
