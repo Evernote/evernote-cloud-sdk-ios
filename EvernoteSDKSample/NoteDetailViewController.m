@@ -12,6 +12,7 @@
 #import "CommonUtils.h"
 
 @interface NoteDetailViewController () <UIWebViewDelegate>
+
 @property (nonatomic, strong) UIWebView * webView;
 @property (nonatomic, assign) BOOL doneLoading;
 @property (nonatomic, strong) ENNote *note;
