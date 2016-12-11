@@ -53,6 +53,7 @@ NSString * ENStoreClientDidFailWithAuthenticationErrorNotification = @"ENStoreCl
                      success:(void(^)(BOOL val))success
                      failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     dispatch_async(self.queue, ^(void) {
         __block BOOL retVal = NO;
         @try {
@@ -67,7 +68,7 @@ NSString * ENStoreClientDidFailWithAuthenticationErrorNotification = @"ENStoreCl
             }
         }
         @catch (NSException *exception) {
-            [self handleException:exception withFailureBlock:failure];
+            [weakSelf handleException:exception withFailureBlock:failure];
         }
     });
 }
@@ -76,6 +77,7 @@ NSString * ENStoreClientDidFailWithAuthenticationErrorNotification = @"ENStoreCl
                       success:(void(^)(int32_t val))success
                       failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     dispatch_async(self.queue, ^(void) {
         __block int32_t retVal = -1;
         @try {
@@ -90,7 +92,7 @@ NSString * ENStoreClientDidFailWithAuthenticationErrorNotification = @"ENStoreCl
             }
         }
         @catch (NSException *exception) {
-            [self handleException:exception withFailureBlock:failure];
+            [weakSelf handleException:exception withFailureBlock:failure];
         }
     });
 }
@@ -100,6 +102,7 @@ NSString * ENStoreClientDidFailWithAuthenticationErrorNotification = @"ENStoreCl
                    success:(void(^)(id))success
                    failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     dispatch_async(self.queue, ^(void) {
         id retVal = nil;
         @try {
@@ -114,7 +117,7 @@ NSString * ENStoreClientDidFailWithAuthenticationErrorNotification = @"ENStoreCl
             }
         }
         @catch (NSException *exception) {
-            [self handleException:exception withFailureBlock:failure];
+            [weakSelf handleException:exception withFailureBlock:failure];
         }
     });
 }
@@ -123,6 +126,7 @@ NSString * ENStoreClientDidFailWithAuthenticationErrorNotification = @"ENStoreCl
                      success:(void(^)())success
                      failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     dispatch_async(self.queue, ^(void) {
         @try {
             if (block) {
@@ -136,7 +140,7 @@ NSString * ENStoreClientDidFailWithAuthenticationErrorNotification = @"ENStoreCl
             }
         }
         @catch (NSException *exception) {
-            [self handleException:exception withFailureBlock:failure];
+            [weakSelf handleException:exception withFailureBlock:failure];
         }
     });
 }
@@ -161,8 +165,9 @@ NSString * ENStoreClientDidFailWithAuthenticationErrorNotification = @"ENStoreCl
         (edamErrorCode == EDAMErrorCode_AUTH_EXPIRED ||
          edamErrorCode == EDAMErrorCode_INVALID_AUTH)) {
         ENSDKLogError(@"ENStoreClient got authentication EDAM error %u", edamErrorCode);
+        __weak typeof(self) weakSelf = self;
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:ENStoreClientDidFailWithAuthenticationErrorNotification object:self];
+            [[NSNotificationCenter defaultCenter] postNotificationName:ENStoreClientDidFailWithAuthenticationErrorNotification object:weakSelf];
         });
     }
 }

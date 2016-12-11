@@ -526,8 +526,9 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
 {
     if (self.uploadProgress) {
+        __weak typeof(self) weakSelf = self;
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.uploadProgress(bytesWritten, totalBytesWritten, totalBytesExpectedToWrite);
+            weakSelf.uploadProgress(bytesWritten, totalBytesWritten, totalBytesExpectedToWrite);
         });
     }
 }
@@ -556,8 +557,9 @@ didReceiveResponse:(NSURLResponse *)response
         long long totalBytesRead = self.totalBytesRead;
         long long expectedContentLength = self.response.expectedContentLength;
 
+        __weak typeof(self) weakSelf = self;
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.downloadProgress(dataLength, totalBytesRead, expectedContentLength);
+            weakSelf.downloadProgress(dataLength, totalBytesRead, expectedContentLength);
         });
     }
 }

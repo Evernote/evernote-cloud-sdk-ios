@@ -142,7 +142,9 @@ NSString * ENOAuthAuthenticatorAuthInfoAppNotebookIsLinked = @"ENOAuthAuthentica
     // Start bootstrapping
     NSString * locale = [[NSLocale currentLocale] localeIdentifier];
     ENUserStoreClient * userStore = [self.delegate userStoreClientForBootstrapping];
+    __weak typeof(self) weakSelf = self;
     [userStore getBootstrapInfoWithLocale:locale success:^(EDAMBootstrapInfo *info) {
+        __strong typeof(weakSelf) self = weakSelf;
         // Using first profile as the preferred profile.
         EDAMBootstrapProfile * profile = [info.profiles objectAtIndex:0];
         self.profiles = info.profiles;
@@ -152,7 +154,7 @@ NSString * ENOAuthAuthenticatorAuthInfoAppNotebookIsLinked = @"ENOAuthAuthentica
         [self startOauthAuthentication];
     } failure:^(NSError * error) {
         // start the OAuth dance to get credentials (auth token, noteStoreUrl, etc).
-        [self startOauthAuthentication];
+        [weakSelf startOauthAuthentication];
     }];
 }
 

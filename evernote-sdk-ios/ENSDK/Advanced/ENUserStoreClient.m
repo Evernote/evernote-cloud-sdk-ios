@@ -71,8 +71,9 @@
                            failure:(void(^)(NSError *error))failure
 
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncBoolBlock:^BOOL{
-        return [self.client checkVersion:clientName edamVersionMajor:edamVersionMajor edamVersionMinor:edamVersionMinor];
+        return [weakSelf.client checkVersion:clientName edamVersionMajor:edamVersionMajor edamVersionMinor:edamVersionMinor];
     } success:success failure:failure];
 }
 
@@ -80,15 +81,18 @@
                            success:(void(^)(EDAMBootstrapInfo *info))success
                            failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
-        return [self.client getBootstrapInfo:locale];
+        return [weakSelf.client getBootstrapInfo:locale];
     } success:success failure:failure];
 }
 
 - (void)getUserWithSuccess:(void(^)(EDAMUser *user))success
                    failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getUser:self.authenticationToken];
     } success:success failure:failure];
 }
@@ -97,15 +101,18 @@
                               success:(void(^)(EDAMPublicUserInfo *info))success
                               failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
-        return [self.client getPublicUserInfo:username];
+        return [weakSelf.client getPublicUserInfo:username];
     } success:success failure:failure];
 }
 
 - (void)getPremiumInfoWithSuccess:(void(^)(EDAMPremiumInfo *info))success
                           failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getPremiumInfo:self.authenticationToken];
     } success:success failure:failure];
 }
@@ -113,7 +120,9 @@
 - (void)getNoteStoreUrlWithSuccess:(void(^)(NSString *noteStoreUrl))success
                            failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client getNoteStoreUrl:self.authenticationToken];
     } success:success failure:failure];
 }
@@ -121,7 +130,9 @@
 - (void)authenticateToBusinessWithSuccess:(void(^)(EDAMAuthenticationResult *authenticationResult))success
                                   failure:(void(^)(NSError *error))failure
 {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncIdBlock:^id {
+        __strong typeof(weakSelf) self = weakSelf;
         return [self.client authenticateToBusiness:self.authenticationToken];
     } success:success failure:failure];
 }
@@ -129,8 +140,9 @@
 - (void)revokeLongSessionWithAuthenticationToken:(NSString*)authenticationToken
                                          success:(void(^)())success
                                          failure:(void(^)(NSError *error))failure {
+    __weak typeof(self) weakSelf = self;
     [self invokeAsyncVoidBlock:^void {
-        [self.client revokeLongSession:authenticationToken];
+        [weakSelf.client revokeLongSession:authenticationToken];
     } success:success failure:failure];
 }
 @end

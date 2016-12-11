@@ -82,8 +82,9 @@ typedef void (^ENMLHTMLCompletionBlock)(NSString* html, NSError *error);
     self.resources = resources;
     self.completionBlock = block;
     self.shouldInlineResources = shouldInline;
+    __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [self.xmlParser parse];
+        [weakSelf.xmlParser parse];
     });
 }
 
@@ -92,13 +93,17 @@ typedef void (^ENMLHTMLCompletionBlock)(NSString* html, NSError *error);
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
     [self.htmlWriter close];
+    __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
+        __strong typeof(weakSelf) self = weakSelf;
         self.completionBlock(self.outputHTML,nil);
     });
 }
 
 - (void) parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
+    __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
+        __strong typeof(weakSelf) self = weakSelf;
         self.completionBlock(nil,parseError);
     });
 }

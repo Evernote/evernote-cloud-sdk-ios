@@ -411,7 +411,9 @@
         NSString *text = [textField.text stringByReplacingCharactersInRange:range withString:string];
         // we call the delegate method on a dispatch queue in case it tries to
         // do something that would update the textField (e.g., adding a token).
+        __weak typeof(self) weakSelf = self;
         dispatch_async(dispatch_get_main_queue(), ^{
+            __strong typeof(weakSelf) self = weakSelf;
             [self.tokenDelegate tokenView:self didChangeText:text];
         });
     }
@@ -435,8 +437,10 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     [self textFieldShouldReturn:textField];
+    __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseInOut animations:^{
+            __strong typeof(weakSelf) self = weakSelf;
             self.scrollEnabled = NO;
             self.lineView.hidden = NO;
             if (self.tokens.count == 0) {
