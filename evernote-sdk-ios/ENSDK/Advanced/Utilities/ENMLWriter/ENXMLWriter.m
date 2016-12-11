@@ -179,8 +179,10 @@ static int ENXMLWriter_delegateCloseCallback(void * context) {
   if (success == NO) return NO;
   
   for (NSString *key in [attrDict allKeys]) {
-    [self writeAttributeName:key 
-                       value:[attrDict objectForKey:key]];
+    id value = attrDict[key];
+    if ([value isKindOfClass:[NSString class]]) {
+      [self writeAttributeName:key value:value];
+    }
   }
   
   return YES;
