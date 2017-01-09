@@ -33,11 +33,11 @@ int32_t VERSION_MASK = 0xffff0000;
 
 @implementation ENTBinaryProtocol
 
-- (id) initWithTransport: (id <ENTTransport>) transport {
+- (instancetype) initWithTransport: (id <ENTTransport>) transport {
   return [self initWithTransport: transport strictRead: NO strictWrite: NO];
 }
 
-- (id) initWithTransport: (id <ENTTransport>) transport
+- (instancetype) initWithTransport: (id <ENTTransport>) transport
               strictRead: (BOOL) strictRead
              strictWrite: (BOOL) strictWrite
 {
@@ -61,8 +61,7 @@ int32_t VERSION_MASK = 0xffff0000;
   
   [self.transport readAll: (uint8_t *) buffer offset: 0 length: size];
   buffer[size] = 0;
-  NSString * result = [NSString stringWithUTF8String: buffer];
-  free(buffer);
+  NSString * result = [[NSString alloc] initWithBytesNoCopy:buffer length:size encoding:NSUTF8StringEncoding freeWhenDone:YES];
   return result;
 }
 
@@ -218,7 +217,7 @@ int32_t VERSION_MASK = 0xffff0000;
   }
   
   [self.transport readAll: buff offset: 0 length: size];
-  return [NSData dataWithBytesNoCopy: buff length: size];
+  return [NSData dataWithBytesNoCopy: buff length: size freeWhenDone: YES];
 }
 
 - (void) readMapBeginReturningKeyType: (int *) keyType

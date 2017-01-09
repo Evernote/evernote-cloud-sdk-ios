@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0BB3D1B11524ED96001C4534 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB3D1B01524ED96001C4534 /* Foundation.framework */; };
+		6D9D5FFC1E23AC27001740D8 /* EDAMAuthenticationTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D9D5FFA1E23AC27001740D8 /* EDAMAuthenticationTypes.h */; };
+		6D9D5FFD1E23AC27001740D8 /* EDAMAuthenticationTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D9D5FFB1E23AC27001740D8 /* EDAMAuthenticationTypes.m */; };
 		8600EC171A15D97400F8F838 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8600EC161A15D97400F8F838 /* Launch Screen.xib */; };
 		8603EFF61A731A680002AE28 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8603EFF51A731A680002AE28 /* Images.xcassets */; };
 		860DF40A18FCCE51002B4793 /* ENSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23F418EBA5D500BD7E6E /* ENSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -353,6 +355,8 @@
 		0BB3D1B01524ED96001C4534 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0BB3D1B41524ED96001C4534 /* evernote-sdk-ios-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "evernote-sdk-ios-Prefix.pch"; sourceTree = "<group>"; };
 		0BB3D24D1524EEF3001C4534 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6D9D5FFA1E23AC27001740D8 /* EDAMAuthenticationTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDAMAuthenticationTypes.h; sourceTree = "<group>"; };
+		6D9D5FFB1E23AC27001740D8 /* EDAMAuthenticationTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EDAMAuthenticationTypes.m; sourceTree = "<group>"; };
 		8600EC161A15D97400F8F838 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		8603EFF51A731A680002AE28 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		86254FCC1A1AA0D5005A3425 /* NotebooksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotebooksViewController.h; sourceTree = "<group>"; };
@@ -761,6 +765,8 @@
 			isa = PBXGroup;
 			children = (
 				BE2E23BF18EBA5D400BD7E6E /* EDAM.h */,
+				6D9D5FFA1E23AC27001740D8 /* EDAMAuthenticationTypes.h */,
+				6D9D5FFB1E23AC27001740D8 /* EDAMAuthenticationTypes.m */,
 				BE2E23C018EBA5D400BD7E6E /* EDAMErrors.h */,
 				BE2E23C118EBA5D400BD7E6E /* EDAMErrors.m */,
 				BE2E23C218EBA5D400BD7E6E /* EDAMLimits.h */,
@@ -1054,6 +1060,7 @@
 				BE2E246218EBA5D500BD7E6E /* EDAMLimits.h in Headers */,
 				BE2E24D918EBA5D500BD7E6E /* ENXMLSaxParser.h in Headers */,
 				BE4C731B195B859A001E5EF6 /* ENShareURLHelper.h in Headers */,
+				6D9D5FFC1E23AC27001740D8 /* EDAMAuthenticationTypes.h in Headers */,
 				BE7E5F461921808B00A4DA30 /* ENTBinaryProtocol.h in Headers */,
 				86D49E40191DA4A8001C3581 /* RMSTextField.h in Headers */,
 				86CB761B18FF4554002F267E /* ENTheme.h in Headers */,
@@ -1338,6 +1345,7 @@
 			files = (
 				BE2E246318EBA5D500BD7E6E /* EDAMLimits.m in Sources */,
 				BE2E247D18EBA5D500BD7E6E /* ENXMLWriter.m in Sources */,
+				6D9D5FFD1E23AC27001740D8 /* EDAMAuthenticationTypes.m in Sources */,
 				BE2E24A318EBA5D500BD7E6E /* KSXMLAttributes.m in Sources */,
 				BE2E24D518EBA5D500BD7E6E /* ENOAuthViewController.m in Sources */,
 				BE2E24DF18EBA5D500BD7E6E /* ENSaveToEvernoteActivity.m in Sources */,

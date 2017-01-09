@@ -64,8 +64,8 @@
   int _type;
 }
 
-- (id) initWithType: (int) type
-             reason: (NSString *) reason
+- (instancetype) initWithType: (int) type
+                       reason: (NSString *) reason
 {
   _type = type;
   
