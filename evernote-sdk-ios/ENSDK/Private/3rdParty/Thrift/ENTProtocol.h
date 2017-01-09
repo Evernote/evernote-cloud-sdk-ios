@@ -161,6 +161,6 @@ enum {
 
 + (void) sendMessage:(NSString *)messageName
           toProtocol:(id<ENTProtocol>)outProtocol
-        withArgPairs:(NSArray *)argPairs;
+       withArguments:(NSArray *)arguments;
 
 @end

@@ -33,15 +33,23 @@
 @implementation EDAMNoteStoreClient (Utilities)
 
 - (void)cancel {
-    [[self.outProtocol transport] cancel];
+    [[_outProtocol transport] cancel];
 }
 
 - (void)setUploadProgressBlock:(void (^)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))block {
-    [[self.outProtocol transport] setUploadProgressBlock:block];
+    NSLog(@"Progress blocks have been deprecated");
+    if (block) {
+        block(1, 1, 1);
+    }
+//    [[_outProtocol transport] setUploadProgressBlock:block];
 }
 
 - (void)setDownloadProgressBlock:(void (^)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead))block {
-    [[self.inProtocol transport] setDownloadProgressBlock:block];
+    NSLog(@"Progress blocks have been deprecated");
+    if (block) {
+        block(1, 1, 1);
+    }
+//    [[_inProtocol transport] setDownloadProgressBlock:block];
 }
 
 @end
