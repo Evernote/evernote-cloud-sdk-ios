@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 by Evernote Corporation, All rights reserved.
+ * Copyright (c) 2017 by Evernote Corporation, All rights reserved.
  *
  * Use of the source code and binary libraries included in this package
  * is permitted under the following terms:
@@ -31,3 +31,4 @@
 #import "EDAMTypes.h"
 #import "EDAMUserStore.h"
 #import "EDAMErrors.h"
+#import "EDAMAuthenticationTypes.h"
