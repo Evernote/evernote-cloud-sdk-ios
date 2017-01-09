@@ -175,7 +175,7 @@
 
 #pragma mark - NoteStore notebook methods
 
-- (void)listNotebooksWithSuccess:(void(^)(NSArray *notebooks))success
+- (void)listNotebooksWithSuccess:(void(^)(NSArray<EDAMNotebook *> *notebooks))success
                          failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
@@ -242,7 +242,7 @@
 
 #pragma mark - NoteStore tags methods
 
-- (void)listTagsWithSuccess:(void(^)(NSArray *tags))success
+- (void)listTagsWithSuccess:(void(^)(NSArray<EDAMTag *> *tags))success
                     failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
@@ -251,7 +251,7 @@
 }
 
 - (void)listTagsByNotebookWithGuid:(EDAMGuid)guid
-                           success:(void(^)(NSArray *tags))success
+                           success:(void(^)(NSArray<EDAMTag *> *tags))success
                            failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
@@ -306,7 +306,7 @@
 
 #pragma mark - NoteStore search methods
 
-- (void)listSearchesWithSuccess:(void(^)(NSArray *searches))success
+- (void)listSearchesWithSuccess:(void(^)(NSArray<EDAMSavedSearch *> *searches))success
                         failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
@@ -488,7 +488,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
 }
 
 - (void)getNoteTagNamesWithGuid:(EDAMGuid)guid
-                        success:(void(^)(NSArray *names))success
+                        success:(void(^)(NSArray<NSString *> *names))success
                         failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
@@ -532,7 +532,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
     } success:success failure:failure];
 }
 
-- (void)expungeNotesWithGuids:(NSMutableArray *)guids
+- (void)expungeNotesWithGuids:(NSArray<EDAMGuid> *)guids
                       success:(void(^)(int32_t usn))success
                       failure:(void(^)(NSError *error))failure
 {
@@ -718,7 +718,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
 
 - (void)sendMessageToSharedNotebookMembersWithGuid:(EDAMGuid)guid
                                        messageText:(NSString *)messageText
-                                        recipients:(NSMutableArray *)recipients
+                                        recipients:(NSArray<NSString *> *)recipients
                                            success:(void(^)(int32_t numMessagesSent))success
                                            failure:(void(^)(NSError *error))failure
 {
@@ -727,7 +727,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
     } success:success failure:failure];
 }
 
-- (void)listSharedNotebooksWithSuccess:(void(^)(NSArray *sharedNotebooks))success
+- (void)listSharedNotebooksWithSuccess:(void(^)(NSArray<EDAMSharedNotebook *> *sharedNotebooks))success
                                failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
@@ -735,7 +735,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
     } success:success failure:failure];
 }
 
-- (void)expungeSharedNotebooksWithIds:(NSMutableArray *)sharedNotebookIds
+- (void)expungeSharedNotebooksWithIds:(NSArray<NSNumber *> *)sharedNotebookIds
                               success:(void(^)(int32_t usn))success
                               failure:(void(^)(NSError *error))failure
 {
@@ -862,7 +862,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
 - (void)findNotesMetadataWithFilter:(EDAMNoteFilter *)filter
                          maxResults:(NSUInteger)maxResults
                          resultSpec:(EDAMNotesMetadataResultSpec *)resultSpec
-                            success:(void(^)(NSArray *notesMetadataList))success
+                            success:(void(^)(NSArray<EDAMNoteMetadata *> *notesMetadataList))success
                             failure:(void(^)(NSError *error))failure
 {
     [self findNotesMetadataInternalWithFilter:filter
@@ -878,7 +878,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                      offset:(int32_t)offset
                                  resultSpec:(EDAMNotesMetadataResultSpec *)resultSpec
                                  maxResults:(NSUInteger)maxResults
-                                    results:(NSMutableArray *)results
+                                    results:(NSMutableArray<EDAMNoteMetadata *> *)results
                                     success:(void(^)(NSArray *notesMetadataList))success
                                     failure:(void(^)(NSError *error))failure
 {

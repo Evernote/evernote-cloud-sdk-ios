@@ -31,18 +31,20 @@
 #import "ENSDK.h"
 #import "ENSDKLogging.h"
 
+@class ENSessionFindNotesResult;
+
 extern NSString * const ENSessionHostSandbox;
 
 extern NSString * const ENSessionDidAuthenticateNotification;
 extern NSString * const ENSessionDidUnauthenticateNotification;
 
 typedef void (^ENSessionAuthenticateCompletionHandler)(NSError * authenticateError);
-typedef void (^ENSessionListNotebooksCompletionHandler)(NSArray * notebooks, NSError * listNotebooksError);
+typedef void (^ENSessionListNotebooksCompletionHandler)(NSArray<ENNotebook *> * notebooks, NSError * listNotebooksError);
 typedef void (^ENSessionProgressHandler)(CGFloat progress);
 typedef void (^ENSessionUploadNoteCompletionHandler)(ENNoteRef * noteRef, NSError * uploadNoteError);
 typedef void (^ENSessionShareNoteCompletionHandler)(NSString * url, NSError * shareNoteError);
 typedef void (^ENSessionDeleteNoteCompletionHandler)(NSError * deleteNoteError);
-typedef void (^ENSessionFindNotesCompletionHandler)(NSArray * findNotesResults, NSError * findNotesError);
+typedef void (^ENSessionFindNotesCompletionHandler)(NSArray<ENSessionFindNotesResult *> * findNotesResults, NSError * findNotesError);
 typedef void (^ENSessionDownloadNoteCompletionHandler)(ENNote * note, NSError * downloadNoteError);
 typedef void (^ENSessionDownloadNoteThumbnailCompletionHandler)(UIImage * thumbnail, NSError * downloadNoteThumbnailError);
 

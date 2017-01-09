@@ -169,7 +169,7 @@
  *  Note that downloaded notes do not populate this dictionary; if you need to inspect properties of an EDAMNote that aren't
  *  represented by ENNote, you should use ENNoteStoreClient's -getNoteWithGuid... method to download the EDAMNote directly.
  */
-@property (nonatomic, strong) NSDictionary * edamAttributes;
+@property (nonatomic, strong) NSDictionary<NSString *, id> * edamAttributes;
 @end
 
 @interface ENNoteContent (Advanced)
@@ -223,7 +223,7 @@
  *  Note that downloaded resources do not populate this dictionary; if you need to inspect properties of an EDAMResource that aren't
  *  represented by ENResource, you should use ENNoteStoreClient's -getResourceWithGuid... method to download the EDAMResource directly.
  */
-@property (nonatomic, strong) NSDictionary * edamAttributes;
+@property (nonatomic, strong) NSDictionary<NSString *, id> * edamAttributes;
 
 /**
  *  The Evernote service guid for the resource. Valid only with a note store client

@@ -32,6 +32,15 @@
 #import "ENStoreClient.h"
 #import "ENLinkedNotebookRef.h"
 
+@class EDAMSyncState, EDAMSyncChunk, EDAMSyncChunkFilter;
+@class EDAMNotebook, EDAMLinkedNotebook, EDAMSharedNotebook, EDAMSharedNotebookRecipientSettings;
+@class EDAMNote, EDAMTag, EDAMResource, EDAMResourceAttributes;
+@class EDAMSavedSearch, EDAMRelatedQuery, EDAMRelatedResultSpec;
+@class EDAMNoteFilter, EDAMNoteList, EDAMNotesMetadataResultSpec, EDAMNoteCollectionCounts;
+@class EDAMLazyMap;
+@class EDAMAuthenticationResult;
+@class EDAMNoteEmailParameters;
+
 typedef void (^ENNoteStoreClientProgressHandler)(CGFloat progress);
 
 // ! DO NOT INSTANTIATE THIS OBJECT DIRECTLY. GET ONE FROM AN AUTHENTICATED ENSESSION !
@@ -132,7 +141,7 @@ typedef void (^ENNoteStoreClientProgressHandler)(CGFloat progress);
  @param success Success completion block.
  @param failure Failure completion block.
  */
-- (void)listNotebooksWithSuccess:(void(^)(NSArray *notebooks))success
+- (void)listNotebooksWithSuccess:(void(^)(NSArray<EDAMNotebook *> *notebooks))success
                          failure:(void(^)(NSError *error))failure;
 
 /** Returns the current state of the notebook with the provided GUID. The notebook may be active or deleted (but not expunged).
@@ -193,7 +202,7 @@ typedef void (^ENNoteStoreClientProgressHandler)(CGFloat progress);
  @param success Success completion block.
  @param failure Failure completion block.
  */
-- (void)listTagsWithSuccess:(void(^)(NSArray *tags))success
+- (void)listTagsWithSuccess:(void(^)(NSArray<EDAMTag *> *tags))success
                     failure:(void(^)(NSError *error))failure;
 
 /** Returns a list of the tags that are applied to at least one note within the provided notebook. If the notebook is public, the authenticationToken may be ignored.
@@ -203,7 +212,7 @@ typedef void (^ENNoteStoreClientProgressHandler)(CGFloat progress);
  @param failure Failure completion block.
  */
 - (void)listTagsByNotebookWithGuid:(EDAMGuid)guid
-                           success:(void(^)(NSArray *tags))success
+                           success:(void(^)(NSArray<EDAMTag *> *tags))success
                            failure:(void(^)(NSError *error))failure;
 
 
@@ -269,7 +278,7 @@ typedef void (^ENNoteStoreClientProgressHandler)(CGFloat progress);
  @param success Success completion block.
  @param failure Failure completion block.
  */
-- (void)listSearchesWithSuccess:(void(^)(NSArray *searches))success
+- (void)listSearchesWithSuccess:(void(^)(NSArray<EDAMSavedSearch *> *searches))success
                         failure:(void(^)(NSError *error))failure;
 
 /** Returns the current state of the search with the provided GUID.
@@ -524,7 +533,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  @param failure Failure completion block.
  */
 - (void)getNoteTagNamesWithGuid:(EDAMGuid)guid
-                        success:(void(^)(NSArray *names))success
+                        success:(void(^)(NSArray<NSString *> *names))success
                         failure:(void(^)(NSError *error))failure;
 
 /** Asks the service to make a note with the provided set of information.
@@ -585,7 +594,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  @param success Success completion block.
  @param failure Failure completion block.
  */
-- (void)expungeNotesWithGuids:(NSMutableArray *)guids
+- (void)expungeNotesWithGuids:(NSArray<EDAMGuid> *)guids
                       success:(void(^)(int32_t usn))success
                       failure:(void(^)(NSError *error))failure;
 
@@ -625,7 +634,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  @param failure Failure completion block.
  */
 - (void)listNoteVersionsWithGuid:(EDAMGuid)guid
-                         success:(void(^)(NSArray *versions))success
+                         success:(void(^)(NSArray<EDAMNoteVersionId *> *versions))success
                          failure:(void(^)(NSError *error))failure;
 
 /** This can be used to retrieve a previous version of a Note after it has been updated within the service.
@@ -846,7 +855,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  */
 - (void)sendMessageToSharedNotebookMembersWithGuid:(EDAMGuid)guid
                                        messageText:(NSString *)messageText
-                                        recipients:(NSMutableArray *)recipients
+                                        recipients:(NSArray<NSString *> *)recipients
                                            success:(void(^)(int32_t numMessagesSent))success
                                            failure:(void(^)(NSError *error))failure;
 
@@ -855,7 +864,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  @param success Success completion block.
  @param failure Failure completion block.
  */
-- (void)listSharedNotebooksWithSuccess:(void(^)(NSArray *sharedNotebooks))success
+- (void)listSharedNotebooksWithSuccess:(void(^)(NSArray<EDAMSharedNotebook *> *sharedNotebooks))success
                                failure:(void(^)(NSError *error))failure;
 
 /** Expunges the SharedNotebooks in the user's account using the SharedNotebook.id as the identifier.
@@ -866,7 +875,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  @param success Success completion block.
  @param failure Failure completion block.
  */
-- (void)expungeSharedNotebooksWithIds:(NSMutableArray *)sharedNotebookIds
+- (void)expungeSharedNotebooksWithIds:(NSArray<NSNumber *> *)sharedNotebookIds
                               success:(void(^)(int32_t usn))success
                               failure:(void(^)(NSError *error))failure;
 
@@ -897,7 +906,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  @param success Success completion block.
  @param failure Failure completion block.
  */
-- (void)listLinkedNotebooksWithSuccess:(void(^)(NSArray *linkedNotebooks))success
+- (void)listLinkedNotebooksWithSuccess:(void(^)(NSArray<EDAMLinkedNotebook *> *linkedNotebooks))success
                                failure:(void(^)(NSError *error))failure;
 
 /** Permanently expunges the linked notebook from the account.

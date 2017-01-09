@@ -813,8 +813,8 @@
 				BE2E23DF18EBA5D400BD7E6E /* ENXMLWriter.m */,
 				BE2E23E018EBA5D400BD7E6E /* NSRegularExpression+ENAGRegex.h */,
 				BE2E23E118EBA5D400BD7E6E /* NSRegularExpression+ENAGRegex.m */,
-				BE2E23E218EBA5D400BD7E6E /* NSString+EDAMAdditions.m */,
 				BE2E23E318EBA5D400BD7E6E /* NSString+EDAMNilAdditions.h */,
+				BE2E23E218EBA5D400BD7E6E /* NSString+EDAMAdditions.m */,
 			);
 			path = ENMLWriter;
 			sourceTree = "<group>";

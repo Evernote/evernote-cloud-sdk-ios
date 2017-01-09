@@ -42,8 +42,8 @@
 - (id) initWithContentsOfFile:(NSString *)file;
 
 - (BOOL) isElementLegal:(NSString *)name;
-- (NSDictionary*) sanitizedAttributes:(NSDictionary*)attribDict
-                           forElement:(NSString *)elementName;
+- (NSDictionary<NSString *, id> *) sanitizedAttributes:(NSDictionary<NSString *, id> *)attribDict
+                                            forElement:(NSString *)elementName;
 - (BOOL) isAttributeLegal:(NSString *)attribute 
                 inElement:(NSString *)element;
 @end

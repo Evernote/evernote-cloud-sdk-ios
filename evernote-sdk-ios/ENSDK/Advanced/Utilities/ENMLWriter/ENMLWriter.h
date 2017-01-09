@@ -36,11 +36,11 @@
 + (NSString *) emptyNote;
 + (BOOL) validateURLComponents: (NSURL *) url;
 
-- (void) startDocumentWithAttributes:(NSDictionary *)attributes;
+- (void) startDocumentWithAttributes:(NSDictionary<NSString *, NSString *> *)attributes;
 
 - (void) writeResourceWithDataHash:(NSData *)dataHash
                               mime:(NSString *)mime
-                        attributes:(NSDictionary *)attributes;
+                        attributes:(NSDictionary<NSString *, NSString *> *)attributes;
 - (void) writeResource:(EDAMResource *)resource;
 - (void) writeEncryptedInfo:(ENEncryptedContentInfo *)encryptedInfo;
 - (void) writeTodoWithCheckedState:(BOOL)checkedState;

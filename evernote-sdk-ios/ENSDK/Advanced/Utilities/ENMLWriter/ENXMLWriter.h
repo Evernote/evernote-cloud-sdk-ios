@@ -49,14 +49,14 @@
 // given DTD.
 - (BOOL) startElement:(NSString *)elementName;
 - (BOOL) startElement:(NSString*)elementName 
-       withAttributes:(NSDictionary*)attrDict;
+       withAttributes:(NSDictionary<NSString *, NSString *>*)attrDict;
 
 - (void) endElement;
 
 // Returns NO if the element is not valid in the
 // given DTD.
 - (BOOL) writeElement:(NSString *)element
-       withAttributes:(NSDictionary *)attributes
+       withAttributes:(NSDictionary<NSString *, NSString *> *)attributes
               content:(NSString *)content;
 
 // Write an attribute.  The assumption here is that the attribute value has 

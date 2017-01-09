@@ -186,7 +186,7 @@
 }
 
 - (BOOL) startElement:(NSString*)elementName 
-       withAttributes:(NSDictionary*)attrDict 
+       withAttributes:(NSDictionary<NSString *, NSString *> *)attrDict
 {
   if ([elementName isEqualToString:@"a"]) {
     NSMutableDictionary *newAttributes = [NSMutableDictionary dictionaryWithDictionary:attrDict];
@@ -211,7 +211,7 @@
 #pragma mark
 - (void) writeResourceWithDataHash:(NSData *)dataHash
                               mime:(NSString *)mime
-                        attributes:(NSDictionary *)attributes
+                        attributes:(NSDictionary<NSString *, NSString *> *)attributes
 {
   NSMutableDictionary *mediaAttributes = [NSMutableDictionary dictionaryWithDictionary:attributes];
   

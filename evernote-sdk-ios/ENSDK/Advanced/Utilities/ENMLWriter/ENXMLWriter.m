@@ -173,7 +173,7 @@ static int ENXMLWriter_delegateCloseCallback(void * context) {
 }
 
 - (BOOL) startElement:(NSString*)elementName 
-       withAttributes:(NSDictionary*)attrDict 
+       withAttributes:(NSDictionary<NSString *, NSString *> *)attrDict
 {
   BOOL success = [self startElement:elementName];
   if (success == NO) return NO;
@@ -196,7 +196,7 @@ static int ENXMLWriter_delegateCloseCallback(void * context) {
 }
 
 - (BOOL) writeElement:(NSString *)element
-       withAttributes:(NSDictionary *)attributes
+       withAttributes:(NSDictionary<NSString *, NSString *> *)attributes
               content:(NSString *)content
 {
   BOOL success = [self startElement:element

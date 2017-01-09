@@ -60,7 +60,7 @@ typedef void (^ENNoteGenerateWebArchiveDataCompletionHandler)(NSData * data);
  *  N.B. This array is generally NOT populated on note download, even if the note that was downloaded
  *  is tagged on the service.
  */
-@property (nonatomic, copy) NSArray * tagNames;
+@property (nonatomic, copy) NSArray<NSString *> * tagNames;
 
 /**
  *  A flag indicating whether this note is a "reminder".
@@ -72,7 +72,7 @@ typedef void (^ENNoteGenerateWebArchiveDataCompletionHandler)(NSData * data);
  *
  *  @return An array of ENResources.
  */
-- (NSArray *)resources;
+- (NSArray<ENResource *> *)resources;
 
 /**
  *  Add a resource obejct to this note.

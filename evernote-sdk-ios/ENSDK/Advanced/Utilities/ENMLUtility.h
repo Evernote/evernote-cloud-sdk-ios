@@ -28,6 +28,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class EDAMResource;
+
 /** Utility methods to work with ENML.
  */
 @interface ENMLUtility : NSObject <NSXMLParserDelegate>
@@ -55,7 +57,7 @@
  @param  resources Array of EDAM resources, which will be inlined into the resulting HTML.
  @param  block The completion block that will be called on completion
  */
-- (void) convertENMLToHTML:(NSString*)enmlContent withInlinedResources:(NSArray*)resources completionBlock:(void(^)(NSString* html, NSError *error))block;
+- (void) convertENMLToHTML:(NSString*)enmlContent withInlinedResources:(NSArray<EDAMResource *> *)resources completionBlock:(void(^)(NSString* html, NSError *error))block;
 
 /** Utility function to convert ENML to HTML.
  
@@ -63,6 +65,6 @@
  @param  resources Array of EDAM resources, which will be referenced in the resulting HTML using the sourceURL property.
  @param  block The completion block that will be called on completion
  */
-- (void) convertENMLToHTML:(NSString*)enmlContent withReferencedResources:(NSArray*)resources completionBlock:(void(^)(NSString* html, NSError *error))block;
+- (void) convertENMLToHTML:(NSString*)enmlContent withReferencedResources:(NSArray<EDAMResource *> *)resources completionBlock:(void(^)(NSString* html, NSError *error))block;
 
 @end

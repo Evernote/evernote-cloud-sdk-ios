@@ -33,7 +33,7 @@
 + (NSRegularExpression *) enRegexWithPattern:(NSString *)pattern;
 - (BOOL) enFindInString:(NSString *)string;
 - (BOOL) enMatchesString:(NSString *)string;
-- (NSArray *) enCapturedSubstringsOfString:(NSString *)string;
+- (NSArray<NSString *> *) enCapturedSubstringsOfString:(NSString *)string;
 - (NSString *)enReplaceWithString:(NSString *)rep inString:(NSString *)str;
 
 @end

@@ -59,7 +59,7 @@
     return NSEqualRanges([result range], stringRange);
 }
 
-- (NSArray *) enCapturedSubstringsOfString:(NSString *)string {
+- (NSArray<NSString *> *) enCapturedSubstringsOfString:(NSString *)string {
     __block NSMutableArray *retVal = [NSMutableArray array];
     [self enumerateMatchesInString:string
                            options:0
