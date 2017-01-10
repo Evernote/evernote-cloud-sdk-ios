@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
                               mime:(nullable NSString *)mime
                         attributes:(nullable NSDictionary<NSString *, NSString *> *)attributes;
 - (void) writeResource:(EDAMResource *)resource;
-- (void) writeEncryptedInfo:(ENEncryptedContentInfo *)encryptedInfo;
+- (void) writeEncryptedInfo:(ENEncryptedContentInfo *)encryptedInfo NS_SWIFT_NAME(write(encryptedInfo:));
 - (void) writeTodoWithCheckedState:(BOOL)checkedState;
 
 @end
