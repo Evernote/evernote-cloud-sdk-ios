@@ -26,5 +26,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import "ENSDKPrivate.h"
+
 NSString * const ENBootstrapProfileNameInternational = @"Evernote";
 NSString * const ENBootstrapProfileNameChina = @"Evernote-China";
