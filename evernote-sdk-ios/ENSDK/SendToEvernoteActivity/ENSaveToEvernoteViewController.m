@@ -152,10 +152,13 @@ CGFloat kTextLeftPadding = 20;
         [self.tagsView addTokenWithText:tagName];
     }
     [note generateWebArchiveData:^(NSData *data) {
+        if (!data) {
+            return;
+        }
         [self.noteView loadData:data
-                      MIMEType:ENWebArchiveDataMIMEType
-              textEncodingName:nil
-                       baseURL:nil];
+                       MIMEType:ENWebArchiveDataMIMEType
+               textEncodingName:nil
+                        baseURL:nil];
     }];
 }
 

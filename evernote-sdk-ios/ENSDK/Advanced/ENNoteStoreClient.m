@@ -560,7 +560,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
 }
 
 - (void)listNoteVersionsWithGuid:(EDAMGuid)guid
-                         success:(void(^)(NSArray *versions))success
+                         success:(void(^)(NSArray<EDAMNoteVersionId *> *versions))success
                          failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
@@ -762,7 +762,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
     } success:success failure:failure];
 }
 
-- (void)listLinkedNotebooksWithSuccess:(void(^)(NSArray *linkedNotebooks))success
+- (void)listLinkedNotebooksWithSuccess:(void(^)(NSArray<EDAMLinkedNotebook *> *linkedNotebooks))success
                                failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
