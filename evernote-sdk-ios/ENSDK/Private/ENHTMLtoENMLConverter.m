@@ -116,7 +116,7 @@
   }
   else {
     BOOL success = [_enmlWriter startElement:tag
-                              withAttributes:attrDict];
+                                  attributes:attrDict];
     if (success == NO) {
       ENSDKLogInfo(@"startElement:%@ returned NO, skipping element and children", tag);
       _skipCount++;

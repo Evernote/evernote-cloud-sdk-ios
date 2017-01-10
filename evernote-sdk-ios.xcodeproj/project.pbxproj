@@ -44,7 +44,7 @@
 		860DF45A18FCD022002B4793 /* ENXMLDTD.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23DC18EBA5D400BD7E6E /* ENXMLDTD.m */; };
 		860DF45D18FCD022002B4793 /* ENXMLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23DF18EBA5D400BD7E6E /* ENXMLWriter.m */; };
 		860DF45F18FCD022002B4793 /* NSRegularExpression+ENAGRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23E118EBA5D400BD7E6E /* NSRegularExpression+ENAGRegex.m */; };
-		860DF46018FCD022002B4793 /* NSString+EDAMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23E218EBA5D400BD7E6E /* NSString+EDAMAdditions.m */; };
+		860DF46018FCD022002B4793 /* NSString+EDAMNilAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23E218EBA5D400BD7E6E /* NSString+EDAMNilAdditions.m */; };
 		860DF46318FCD022002B4793 /* NSData+EvernoteSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23E518EBA5D500BD7E6E /* NSData+EvernoteSDK.m */; };
 		860DF46718FCD022002B4793 /* NSDate+EDAMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23E918EBA5D500BD7E6E /* NSDate+EDAMAdditions.m */; };
 		860DF48518FDDDC4002B4793 /* KSForwardingWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E240518EBA5D500BD7E6E /* KSForwardingWriter.m */; };
@@ -161,7 +161,7 @@
 		BE2E247D18EBA5D500BD7E6E /* ENXMLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23DF18EBA5D400BD7E6E /* ENXMLWriter.m */; };
 		BE2E247E18EBA5D500BD7E6E /* NSRegularExpression+ENAGRegex.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23E018EBA5D400BD7E6E /* NSRegularExpression+ENAGRegex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE2E247F18EBA5D500BD7E6E /* NSRegularExpression+ENAGRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23E118EBA5D400BD7E6E /* NSRegularExpression+ENAGRegex.m */; };
-		BE2E248018EBA5D500BD7E6E /* NSString+EDAMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23E218EBA5D400BD7E6E /* NSString+EDAMAdditions.m */; };
+		BE2E248018EBA5D500BD7E6E /* NSString+EDAMNilAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23E218EBA5D400BD7E6E /* NSString+EDAMNilAdditions.m */; };
 		BE2E248118EBA5D500BD7E6E /* NSString+EDAMNilAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23E318EBA5D400BD7E6E /* NSString+EDAMNilAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE2E248218EBA5D500BD7E6E /* NSData+EvernoteSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23E418EBA5D400BD7E6E /* NSData+EvernoteSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE2E248318EBA5D500BD7E6E /* NSData+EvernoteSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23E518EBA5D500BD7E6E /* NSData+EvernoteSDK.m */; };
@@ -438,7 +438,7 @@
 		BE2E23DF18EBA5D400BD7E6E /* ENXMLWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENXMLWriter.m; sourceTree = "<group>"; };
 		BE2E23E018EBA5D400BD7E6E /* NSRegularExpression+ENAGRegex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSRegularExpression+ENAGRegex.h"; sourceTree = "<group>"; };
 		BE2E23E118EBA5D400BD7E6E /* NSRegularExpression+ENAGRegex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSRegularExpression+ENAGRegex.m"; sourceTree = "<group>"; };
-		BE2E23E218EBA5D400BD7E6E /* NSString+EDAMAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+EDAMAdditions.m"; sourceTree = "<group>"; };
+		BE2E23E218EBA5D400BD7E6E /* NSString+EDAMNilAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+EDAMNilAdditions.m"; sourceTree = "<group>"; };
 		BE2E23E318EBA5D400BD7E6E /* NSString+EDAMNilAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+EDAMNilAdditions.h"; sourceTree = "<group>"; };
 		BE2E23E418EBA5D400BD7E6E /* NSData+EvernoteSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+EvernoteSDK.h"; sourceTree = "<group>"; };
 		BE2E23E518EBA5D500BD7E6E /* NSData+EvernoteSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+EvernoteSDK.m"; sourceTree = "<group>"; };
@@ -814,7 +814,7 @@
 				BE2E23E018EBA5D400BD7E6E /* NSRegularExpression+ENAGRegex.h */,
 				BE2E23E118EBA5D400BD7E6E /* NSRegularExpression+ENAGRegex.m */,
 				BE2E23E318EBA5D400BD7E6E /* NSString+EDAMNilAdditions.h */,
-				BE2E23E218EBA5D400BD7E6E /* NSString+EDAMAdditions.m */,
+				BE2E23E218EBA5D400BD7E6E /* NSString+EDAMNilAdditions.m */,
 			);
 			path = ENMLWriter;
 			sourceTree = "<group>";
@@ -1396,7 +1396,7 @@
 				BE4C731D195B859A001E5EF6 /* ENShareURLHelper.m in Sources */,
 				BECDD2FD18F78072003736EE /* ENHTMLNoteContent.m in Sources */,
 				BE48C70B1911713300025618 /* ENWebArchive.m in Sources */,
-				BE2E248018EBA5D500BD7E6E /* NSString+EDAMAdditions.m in Sources */,
+				BE2E248018EBA5D500BD7E6E /* NSString+EDAMNilAdditions.m in Sources */,
 				BE2E24CA18EBA5D500BD7E6E /* ENHTMLtoENMLConverter.m in Sources */,
 				BE48C6FF19102DD900025618 /* ENWebClipNoteBuilder.m in Sources */,
 				BE2E249D18EBA5D500BD7E6E /* KSForwardingWriter.m in Sources */,
@@ -1507,7 +1507,7 @@
 				860DF45A18FCD022002B4793 /* ENXMLDTD.m in Sources */,
 				860DF45D18FCD022002B4793 /* ENXMLWriter.m in Sources */,
 				860DF45F18FCD022002B4793 /* NSRegularExpression+ENAGRegex.m in Sources */,
-				860DF46018FCD022002B4793 /* NSString+EDAMAdditions.m in Sources */,
+				860DF46018FCD022002B4793 /* NSString+EDAMNilAdditions.m in Sources */,
 				860DF46318FCD022002B4793 /* NSData+EvernoteSDK.m in Sources */,
 				86D49E43191DA4A8001C3581 /* RMSTextField.m in Sources */,
 				860DF46718FCD022002B4793 /* NSDate+EDAMAdditions.m in Sources */,

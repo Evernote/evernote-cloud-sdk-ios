@@ -49,33 +49,42 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Returns NO if the element is not valid in the
 // given DTD.
-- (BOOL) startElement:(NSString *)elementName;
-- (BOOL) startElement:(NSString*)elementName 
-       withAttributes:(nullable NSDictionary<NSString *, NSString *>*)attrDict;
+- (BOOL)startElement:(NSString *)element NS_SWIFT_NAME(start(element:));
+- (BOOL)startElement:(NSString *)element
+          attributes:(nullable NSDictionary<NSString *, NSString *> *)attributes NS_SWIFT_NAME(start(element:attributes:));
+
+- (BOOL) startElement:(NSString*)element
+       withAttributes:(nullable NSDictionary<NSString *, NSString *>*)attrDict
+    DEPRECATED_MSG_ATTRIBUTE("Use -startElement:attributes: instead.") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 - (void) endElement;
 
 // Returns NO if the element is not valid in the
 // given DTD.
+- (BOOL)writeElement:(NSString *)element
+          attributes:(nullable NSDictionary<NSString *, NSString *> *)attributes
+             content:(nullable NSString *)content NS_SWIFT_NAME(write(element:attributes:content:));
+
 - (BOOL) writeElement:(NSString *)element
        withAttributes:(nullable NSDictionary<NSString *, NSString *> *)attributes
-              content:(nullable NSString *)content;
+              content:(nullable NSString *)content
+    DEPRECATED_MSG_ATTRIBUTE("Use -writeElement:attributes:content instead.") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 // Write an attribute.  The assumption here is that the attribute value has 
 // *not* been escaped: e.g. foo&bar not foo&amp;bar
 // Returns NO if the attribute is not valid for
 // the current element in the DTD.
-- (BOOL) writeAttributeName:(NSString*)name 
-                      value:(NSString*)value;
+- (BOOL) writeAttributeName:(NSString*)attributeName
+                      value:(NSString*)value NS_SWIFT_NAME(write(attributeName:value:));
 
 // Write a raw string.  No escaping is performed.
-- (void) writeRawString:(nullable NSString *)rawString;
+- (void) writeRawString:(nullable NSString *)rawString NS_SWIFT_NAME(write(rawString:));
 
 // Write a string.  Escaping is performed.
 - (void) writeString:(nullable NSString *)string;
 
 - (void) startCDATA;
-- (void) writeCDATA:(NSString *)string;
+- (void) writeCDATA:(NSString *)CDATA NS_SWIFT_NAME(write(CDATA:));
 - (void) endCDATA;
 
 @end
@@ -85,5 +94,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) xmlWriter:(ENXMLWriter *)writer didGenerateData:(NSData*)data;
 - (void) xmlWriterDidEndWritingDocument:(ENXMLWriter *)writer;
 @end
+
 
 NS_ASSUME_NONNULL_END

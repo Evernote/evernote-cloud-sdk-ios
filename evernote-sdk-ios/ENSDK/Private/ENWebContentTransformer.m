@@ -343,7 +343,7 @@
   }
 
   [self.enmlWriter startElement:tagName
-                 withAttributes:newAttributes];
+                     attributes:newAttributes];
 }
 
 - (void) parser:(ENXMLSaxParser *)parser didEndElement:(NSString *)elementName {

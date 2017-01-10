@@ -151,7 +151,7 @@
 - (void) startDocumentWithAttributes:(NSDictionary *)attributes {
   [super startDocument];
   [self startElement:ENMLTagNote 
-      withAttributes:attributes];
+          attributes:attributes];
 }
 
 - (void) startDocument {
@@ -185,26 +185,25 @@
   return newAttributes;
 }
 
-- (BOOL) startElement:(NSString*)elementName 
-       withAttributes:(NSDictionary<NSString *, NSString *> *)attrDict
+- (BOOL)startElement:(NSString *)element attributes:(NSDictionary<NSString *,NSString *> *)attributes
 {
-  if ([elementName isEqualToString:@"a"]) {
-    NSMutableDictionary *newAttributes = [NSMutableDictionary dictionaryWithDictionary:attrDict];
-    NSArray *attributeKeys = [attrDict allKeys];
+  if ([element isEqualToString:@"a"]) {
+    NSMutableDictionary *newAttributes = [NSMutableDictionary dictionaryWithDictionary:attributes];
+    NSArray *attributeKeys = [attributes allKeys];
     for (NSString *aKey in attributeKeys) {
       if ([aKey hasPrefix:@"x-apple-"] == YES) {
         [newAttributes removeObjectForKey:aKey];
       }
     }
 
-    attrDict = [self validateURLAttribute:@"href"
+    attributes = [self validateURLAttribute:@"href"
                              inAttributes:newAttributes];
   }
-  else if ([elementName isEqualToString:@"img"]) {
-    attrDict = [self validateURLAttribute:@"src"
-                             inAttributes:attrDict];
+  else if ([element isEqualToString:@"img"]) {
+    attributes = [self validateURLAttribute:@"src"
+                             inAttributes:attributes];
   }
-  return [super startElement:elementName withAttributes:attrDict];
+  return [super startElement:element attributes:attributes];
 }
 
 #pragma mark -
@@ -222,7 +221,7 @@
   [mediaAttributes setObject:[dataHash enlowercaseHexDigits] forKey:@"hash"];
 
   [self writeElement:ENMLTagMedia 
-      withAttributes:mediaAttributes 
+          attributes:mediaAttributes
              content:nil];
 }
 
@@ -246,7 +245,7 @@
   }
   
   [self writeElement:ENMLTagCrypt
-      withAttributes:cryptAttributes 
+          attributes:cryptAttributes
              content:encryptedInfo.cipherText];
 }
 
@@ -257,7 +256,7 @@
   }
   
   [self writeElement:ENMLTagTodo
-      withAttributes:attributes 
+          attributes:attributes
              content:nil];
 }
 
