@@ -31,13 +31,21 @@
 @implementation NSString (EDAMNilAdditions)
 
 // see .h
-- (BOOL) enIsEqualToStringWithEmptyEqualToNull: (NSString *) s
+- (BOOL)enIsEqualToStringOrNil:(nullable NSString *)str
 {
-  if (s == nil && [self length] == 0) {
+  if (str == nil && [self length] == 0) {
     return YES;
   }
-  
-  return [self isEqualToString: s];
+  return [self isEqualToString: str];
+}
+
+
+
+#pragma mark - Deprecated
+
+- (BOOL) enIsEqualToStringWithEmptyEqualToNull: (NSString *) s
+{
+  return [self enIsEqualToStringOrNil:s];
 }
 
 @end

@@ -71,7 +71,7 @@
   }
   
   scheme = [components objectAtIndex: 2];
-  if (![scheme enIsEqualToStringWithEmptyEqualToNull: [url scheme]]) {
+  if (![scheme enIsEqualToStringOrNil: [url scheme]]) {
     NSLog(@"Scheme '%@' does not match scheme '%@'", scheme, [url scheme]);
     result = NO;
   }
@@ -95,22 +95,22 @@
     [hrefAuthority appendFormat: @"%@", [url port]];
   }
   
-  if (![authority enIsEqualToStringWithEmptyEqualToNull: hrefAuthority]) {
+  if (![authority enIsEqualToStringOrNil: hrefAuthority]) {
     NSLog(@"Authority '%@' does not match authority '%@'", authority, hrefAuthority);
     result = NO;
   }
   NSString * path = [components objectAtIndex: 5];
   path = [path stringByReplacingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
   NSString * urlPath = [url path];
-  if (![path enIsEqualToStringWithEmptyEqualToNull: urlPath]) {
+  if (![path enIsEqualToStringOrNil: urlPath]) {
     if ([scheme caseInsensitiveCompare: @"mailto"] == 0) {
-      if (! [path enIsEqualToStringWithEmptyEqualToNull: [url resourceSpecifier]]) {
+      if (! [path enIsEqualToStringOrNil: [url resourceSpecifier]]) {
         NSLog(@"Path '%@' does not match resource specifier '%@'", path, [url resourceSpecifier]);
         result = NO;
       }
     } else if ([path hasSuffix: @"/"]) {
       path = [path substringToIndex: [path length] - 1];
-      if (![path enIsEqualToStringWithEmptyEqualToNull: urlPath]) {
+      if (![path enIsEqualToStringOrNil: urlPath]) {
         NSLog(@"Path '%@' does not match path '%@'", path, urlPath);
         result = NO;
       }
@@ -120,12 +120,12 @@
     }
   }
   NSString * query = [components objectAtIndex: 7];
-  if (![query enIsEqualToStringWithEmptyEqualToNull: [url query]]) {
+  if (![query enIsEqualToStringOrNil: [url query]]) {
     NSLog(@"Query '%@' does not match query '%@'", query, [url query]);
     result = NO;
   }
   NSString * fragment = [components objectAtIndex: 9];
-  if (![fragment enIsEqualToStringWithEmptyEqualToNull: [url fragment]]) {
+  if (![fragment enIsEqualToStringOrNil: [url fragment]]) {
     NSLog(@"Fragment '%@' does not match fragment '%@'", fragment, [url fragment]);
     result = NO;
   }
