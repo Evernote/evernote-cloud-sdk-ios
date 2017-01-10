@@ -29,6 +29,8 @@
 #import "ENStoreClient.h"
 #import "EDAM.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface ENUserStoreClient : ENStoreClient
 
 // ! DO NOT INSTANTIATE THIS OBJECT DIRECTLY. GET ONE FROM AN AUTHENTICATED ENSESSION !
@@ -124,3 +126,5 @@
                                          success:(void(^)())success
                                          failure:(void(^)(NSError *error))failure;
 @end
+
+NS_ASSUME_NONNULL_END

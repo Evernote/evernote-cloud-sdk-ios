@@ -41,6 +41,8 @@
 @class EDAMAuthenticationResult;
 @class EDAMNoteEmailParameters;
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef void (^ENNoteStoreClientProgressHandler)(CGFloat progress);
 
 // ! DO NOT INSTANTIATE THIS OBJECT DIRECTLY. GET ONE FROM AN AUTHENTICATED ENSESSION !
@@ -987,7 +989,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  */
 - (void)authenticateToSharedNoteWithGuid:(NSString *)guid
                                  noteKey:(NSString *)noteKey
-                     authenticationToken:(NSString*)authenticationToken
+                     authenticationToken:(nullable NSString*)authenticationToken
                                  success:(void(^)(EDAMAuthenticationResult *result))success
                                  failure:(void(^)(NSError *error))failure;
 
@@ -1019,3 +1021,5 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
 - (void) cancelFirstOperation;
 
 @end
+
+NS_ASSUME_NONNULL_END

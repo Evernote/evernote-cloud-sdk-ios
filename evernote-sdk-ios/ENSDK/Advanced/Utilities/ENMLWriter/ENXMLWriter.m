@@ -97,7 +97,7 @@ static int ENXMLWriter_delegateCloseCallback(void * context) {
 #pragma mark -
 #pragma mark NSObject Methods
 - (id) initWithDelegate:(id)delegate {
-  self = [self init];
+  self = [super init];
   if (self != nil) {
     self.delegate = delegate;
   }

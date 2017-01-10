@@ -28,12 +28,15 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
 @interface ENEncryptedContentInfo : NSObject
 
 @property (nonatomic,copy) NSString *cipher;
 @property NSInteger keyLength;
-@property (nonatomic,copy) NSString *hint;
-@property (nonatomic,strong) NSMutableString *cipherText;
+@property (nonatomic, copy, nullable) NSString *hint;
+@property (nonatomic, strong, nullable) NSMutableString *cipherText;
 
 @end
+
+NS_ASSUME_NONNULL_END

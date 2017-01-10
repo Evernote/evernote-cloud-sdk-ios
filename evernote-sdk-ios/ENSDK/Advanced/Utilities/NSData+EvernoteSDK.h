@@ -28,6 +28,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /** Extra methods on `NSData` to deal with Evernote API data.
  */
 @interface NSData (EvernoteSDK)
@@ -44,6 +46,8 @@
  */
 - (NSString *) enlowercaseHexDigits;
 
-+ (NSData *) endataWithHexDigits: (NSString *) hexDigits;
++ (nullable NSData *) endataWithHexDigits: (NSString *) hexDigits;
 
 @end
+
+NS_ASSUME_NONNULL_END

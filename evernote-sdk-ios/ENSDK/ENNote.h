@@ -32,10 +32,12 @@
 @class ENNotebook;
 @class UIWebView;
 
+NS_ASSUME_NONNULL_BEGIN
+
 extern NSString * const ENWebArchiveDataMIMEType;
 
-typedef void (^ENNotePopulateFromWebViewCompletionHandler)(ENNote * note);
-typedef void (^ENNoteGenerateWebArchiveDataCompletionHandler)(NSData * data);
+typedef void (^ENNotePopulateFromWebViewCompletionHandler)(ENNote *_Nullable note);
+typedef void (^ENNoteGenerateWebArchiveDataCompletionHandler)(NSData *_Nullable data);
 
 /**
  *  This class represents a fully specified note. (It does not "point" to any particular
@@ -47,12 +49,12 @@ typedef void (^ENNoteGenerateWebArchiveDataCompletionHandler)(NSData * data);
 /**
  *  The title of the note.
  */
-@property (nonatomic, copy) NSString * title;
+@property (nonatomic, copy, nullable) NSString * title;
 
 /**
  *  The content of the note.
  */
-@property (nonatomic, strong) ENNoteContent * content;
+@property (nonatomic, strong, nullable) ENNoteContent * content;
 
 /**
  *  An array of strings containing tag names to attach to an uploaded note. If a tag name already
@@ -60,7 +62,7 @@ typedef void (^ENNoteGenerateWebArchiveDataCompletionHandler)(NSData * data);
  *  N.B. This array is generally NOT populated on note download, even if the note that was downloaded
  *  is tagged on the service.
  */
-@property (nonatomic, copy) NSArray<NSString *> * tagNames;
+@property (nonatomic, copy, nullable) NSArray<NSString *> * tagNames;
 
 /**
  *  A flag indicating whether this note is a "reminder".
@@ -113,3 +115,5 @@ typedef void (^ENNoteGenerateWebArchiveDataCompletionHandler)(NSData * data);
  */
 + (void)populateNoteFromWebView:(UIWebView *)webView completion:(ENNotePopulateFromWebViewCompletionHandler)completion;
 @end
+
+NS_ASSUME_NONNULL_END

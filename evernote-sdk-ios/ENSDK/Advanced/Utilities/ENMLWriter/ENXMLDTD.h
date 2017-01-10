@@ -28,9 +28,11 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface ENXMLDTD : NSObject
 
-@property ( strong, nonatomic) NSString *docTypeDeclaration;
+@property (strong, nonatomic, nullable) NSString *docTypeDeclaration;
 
 + (ENXMLDTD *) enexDTD;
 + (ENXMLDTD *) enml2dtd;
@@ -39,11 +41,13 @@
 + (ENXMLDTD *) specialDTD;
 
 
-- (id) initWithContentsOfFile:(NSString *)file;
+- (nullable id) initWithContentsOfFile:(NSString *)file;
 
 - (BOOL) isElementLegal:(NSString *)name;
-- (NSDictionary<NSString *, id> *) sanitizedAttributes:(NSDictionary<NSString *, id> *)attribDict
-                                            forElement:(NSString *)elementName;
+- (nullable NSDictionary<NSString *, id> *) sanitizedAttributes:(NSDictionary<NSString *, id> *)attribDict
+                                                     forElement:(NSString *)elementName;
 - (BOOL) isAttributeLegal:(NSString *)attribute 
                 inElement:(NSString *)element;
 @end
+
+NS_ASSUME_NONNULL_END

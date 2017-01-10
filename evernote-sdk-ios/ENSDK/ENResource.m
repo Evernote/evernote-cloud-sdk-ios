@@ -62,6 +62,7 @@
         self.filename = filename;
 
         if (!self.data) {
+            ENSDKLogError(@"[WARNING]: data is a required argument, this may become an assertion at a later date");
             return nil;
         }
     }

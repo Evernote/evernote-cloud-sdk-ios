@@ -28,6 +28,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  This class represents the content of a note.
  */
@@ -66,3 +68,5 @@
 + (instancetype)noteContentWithSanitizedHTML:(NSString *)html;
 
 @end
+
+NS_ASSUME_NONNULL_END

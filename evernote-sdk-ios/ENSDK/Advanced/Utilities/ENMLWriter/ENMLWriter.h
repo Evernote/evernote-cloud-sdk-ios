@@ -31,18 +31,22 @@
 
 @class EDAMResource;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface ENMLWriter : ENXMLWriter
 
 + (NSString *) emptyNote;
-+ (BOOL) validateURLComponents: (NSURL *) url;
++ (BOOL) validateURLComponents: (nullable NSURL *) url;
 
-- (void) startDocumentWithAttributes:(NSDictionary<NSString *, NSString *> *)attributes;
+- (void) startDocumentWithAttributes:(nullable NSDictionary<NSString *, NSString *> *)attributes;
 
 - (void) writeResourceWithDataHash:(NSData *)dataHash
-                              mime:(NSString *)mime
-                        attributes:(NSDictionary<NSString *, NSString *> *)attributes;
+                              mime:(nullable NSString *)mime
+                        attributes:(nullable NSDictionary<NSString *, NSString *> *)attributes;
 - (void) writeResource:(EDAMResource *)resource;
 - (void) writeEncryptedInfo:(ENEncryptedContentInfo *)encryptedInfo;
 - (void) writeTodoWithCheckedState:(BOOL)checkedState;
 
 @end
+
+NS_ASSUME_NONNULL_END

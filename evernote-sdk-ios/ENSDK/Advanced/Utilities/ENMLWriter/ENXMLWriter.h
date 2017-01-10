@@ -30,17 +30,19 @@
 
 #import "ENXMLDTD.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol ENXMLWriterDelegate;
 
 @interface ENXMLWriter : NSObject
 
-@property (weak, nonatomic) id<ENXMLWriterDelegate> delegate;
+@property (weak, nonatomic, nullable) id<ENXMLWriterDelegate> delegate;
 
-@property (strong, nonatomic) ENXMLDTD *dtd;
+@property (strong, nonatomic, nullable) ENXMLDTD *dtd;
 @property (assign, nonatomic) NSUInteger openElementCount;
-@property (strong, readonly, nonatomic) NSString *contents;
+@property (strong, readonly, nonatomic, nullable) NSString *contents;
 
-- (id) initWithDelegate:(id<ENXMLWriterDelegate>)delegate;
+- (id) initWithDelegate:(nullable id<ENXMLWriterDelegate>)delegate;
 
 - (void) startDocument;
 - (void) endDocument;
@@ -49,15 +51,15 @@
 // given DTD.
 - (BOOL) startElement:(NSString *)elementName;
 - (BOOL) startElement:(NSString*)elementName 
-       withAttributes:(NSDictionary<NSString *, NSString *>*)attrDict;
+       withAttributes:(nullable NSDictionary<NSString *, NSString *>*)attrDict;
 
 - (void) endElement;
 
 // Returns NO if the element is not valid in the
 // given DTD.
 - (BOOL) writeElement:(NSString *)element
-       withAttributes:(NSDictionary<NSString *, NSString *> *)attributes
-              content:(NSString *)content;
+       withAttributes:(nullable NSDictionary<NSString *, NSString *> *)attributes
+              content:(nullable NSString *)content;
 
 // Write an attribute.  The assumption here is that the attribute value has 
 // *not* been escaped: e.g. foo&bar not foo&amp;bar
@@ -67,10 +69,10 @@
                       value:(NSString*)value;
 
 // Write a raw string.  No escaping is performed.
-- (void) writeRawString:(NSString *)rawString;
+- (void) writeRawString:(nullable NSString *)rawString;
 
 // Write a string.  Escaping is performed.
-- (void) writeString:(NSString *)string;
+- (void) writeString:(nullable NSString *)string;
 
 - (void) startCDATA;
 - (void) writeCDATA:(NSString *)string;
@@ -83,3 +85,5 @@
 - (void) xmlWriter:(ENXMLWriter *)writer didGenerateData:(NSData*)data;
 - (void) xmlWriterDidEndWritingDocument:(ENXMLWriter *)writer;
 @end
+
+NS_ASSUME_NONNULL_END

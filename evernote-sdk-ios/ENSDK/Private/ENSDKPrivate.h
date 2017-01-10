@@ -94,7 +94,7 @@ extern NSString * const ENBootstrapProfileNameChina;
 - (void)findNotesMetadataWithFilter:(EDAMNoteFilter *)filter
                          maxResults:(NSUInteger)maxResults
                          resultSpec:(EDAMNotesMetadataResultSpec *)resultSpec
-                            success:(void(^)(NSArray *notesMetadataList))success
+                            success:(void(^)(NSArray<EDAMNoteMetadata *> *notesMetadataList))success
                             failure:(void(^)(NSError *error))failure;
 @end
 

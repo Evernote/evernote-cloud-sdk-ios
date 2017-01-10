@@ -28,6 +28,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  This class represents a notebook in the Evernote service.
  */
@@ -36,12 +38,12 @@
 /**
  *  The name of the notebook.
  */
-@property (nonatomic, readonly) NSString * name;
+@property (nonatomic, readonly, nullable) NSString * name;
 
 /**
  *  The best-available display name for the owner of this notebook.
  */
-@property (nonatomic, readonly) NSString * ownerDisplayName;
+@property (nonatomic, readonly, nullable) NSString * ownerDisplayName;
 
 /**
  *  A flag indicating if this notebook is read/write for the current user.
@@ -103,3 +105,5 @@
  */
 @property (nonatomic, readonly) BOOL isDefaultNotebook;
 @end
+
+NS_ASSUME_NONNULL_END

@@ -29,6 +29,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  This class represents a resource attached to an Evernote note. A resource is often an image,
  *  but can be any file with any MIME type. The resource is typically referred to from within the 
@@ -49,7 +51,7 @@
 /**
  *  A filename associated with the resource. This is not required.
  */
-@property (nonatomic, copy) NSString * filename;
+@property (nonatomic, copy, nullable) NSString * filename;
 
 /**
  *  Designated initializer for a resource.
@@ -60,7 +62,7 @@
  *
  *  @return A resouce object instance.
  */
-- (id)initWithData:(NSData *)data mimeType:(NSString *)mimeType filename:(NSString *)filename;
+- (id)initWithData:(NSData *)data mimeType:(NSString *)mimeType filename:(nullable NSString *)filename;
 
 /**
  *  Initializer for data and MIME type.
@@ -92,3 +94,5 @@
 - (NSString*) mediaTag;
 
 @end
+
+NS_ASSUME_NONNULL_END
