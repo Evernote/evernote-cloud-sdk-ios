@@ -34,14 +34,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic, nullable) NSString *docTypeDeclaration;
 
-+ (ENXMLDTD *) enexDTD;
-+ (ENXMLDTD *) enml2dtd;
-+ (ENXMLDTD *) lat1DTD;
-+ (ENXMLDTD *) symbolDTD;
-+ (ENXMLDTD *) specialDTD;
+@property(class, readonly, nonatomic) ENXMLDTD *enexDTD;
+@property(class, readonly, nonatomic) ENXMLDTD *enml2dtd;
+@property(class, readonly, nonatomic) ENXMLDTD *lat1DTD;
+@property(class, readonly, nonatomic) ENXMLDTD *symbolDTD;
+@property(class, readonly, nonatomic) ENXMLDTD *specialDTD;
 
 
-- (nullable id) initWithContentsOfFile:(NSString *)file;
+- (nullable id) initWithContentsOfFile:(NSString *)file NS_DESIGNATED_INITIALIZER;
 
 - (BOOL) isElementLegal:(NSString *)name;
 - (nullable NSDictionary<NSString *, id> *) sanitizedAttributes:(NSDictionary<NSString *, id> *)attribDict

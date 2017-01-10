@@ -38,13 +38,11 @@ NS_ASSUME_NONNULL_BEGIN
  
  @returns The MD5 hash
  */
-- (NSData *) enmd5;
+@property (readonly, nonatomic) NSData *enmd5;
 
-/** hex representation of data (used in ENML media)
- 
- @returns The hex representation in lower case
+/** hex representation of data (used in ENML media) in lower case
  */
-- (NSString *) enlowercaseHexDigits;
+@property (readonly, nonatomic) NSString *enlowercaseHexDigits;
 
 + (nullable NSData *) endataWithHexDigits: (NSString *) hexDigits;
 

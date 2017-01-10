@@ -200,7 +200,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return A note content object.
  */
-- (NSString *)enml;
+@property (readonly, nonatomic) NSString *enml;
 @end
 
 @interface ENResource (Advanced)

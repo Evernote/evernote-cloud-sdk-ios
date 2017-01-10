@@ -66,7 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return An initialized note search object.
  */
-- (id)initWithSearchString:(NSString *)searchString;
+- (id)initWithSearchString:(NSString *)searchString NS_DESIGNATED_INITIALIZER;
 @end
 
 NS_ASSUME_NONNULL_END

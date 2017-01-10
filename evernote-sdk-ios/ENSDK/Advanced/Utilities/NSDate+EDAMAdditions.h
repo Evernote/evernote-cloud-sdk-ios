@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Convert an NSDate to an edam timestamp
  */
-- (int64_t) edamTimestamp;
+@property (readonly, nonatomic) int64_t edamTimestamp;
 
 @end
 

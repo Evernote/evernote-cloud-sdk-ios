@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) NSUInteger openElementCount;
 @property (strong, readonly, nonatomic, nullable) NSString *contents;
 
-- (id) initWithDelegate:(nullable id<ENXMLWriterDelegate>)delegate;
+- (id) initWithDelegate:(nullable id<ENXMLWriterDelegate>)delegate NS_DESIGNATED_INITIALIZER; 
 
 - (void) startDocument;
 - (void) endDocument;

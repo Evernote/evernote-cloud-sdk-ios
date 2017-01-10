@@ -74,7 +74,7 @@ typedef void (^ENNoteGenerateWebArchiveDataCompletionHandler)(NSData *_Nullable 
  *
  *  @return An array of ENResources.
  */
-- (NSArray<ENResource *> *)resources;
+@property (readonly, nonatomic) NSArray<ENResource *> *resources;
 
 /**
  *  Add a resource obejct to this note.

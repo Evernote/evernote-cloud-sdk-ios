@@ -253,7 +253,7 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
  *
  *  @return The shared session object.
  */
-+ (ENSession *)sharedSession;
+@property (class, readonly, nonatomic) ENSession *sharedSession;
 
 /**
  *  Set to YES if the client would like to opt out from refreshing the notebooks cache on launch

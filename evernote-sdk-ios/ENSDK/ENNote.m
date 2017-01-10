@@ -117,7 +117,7 @@
 
 - (NSArray *)resources
 {
-    return _resources;
+    return [_resources copy];
 }
 
 - (void)addResource:(ENResource *)resource
