@@ -76,42 +76,42 @@
     } success:success failure:failure];
 }
 
-- (void)getBootstrapInfoWithLocale:(NSString *)locale
-                           success:(void(^)(EDAMBootstrapInfo *info))success
-                           failure:(void(^)(NSError *error))failure
+- (void)fetchBootstrapInfoWithLocale:(NSString *)locale
+                             success:(void(^)(EDAMBootstrapInfo *info))success
+                             failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getBootstrapInfo:locale];
     } success:success failure:failure];
 }
 
-- (void)getUserWithSuccess:(void(^)(EDAMUser *user))success
-                   failure:(void(^)(NSError *error))failure
+- (void)fetchUserWithSuccess:(void(^)(EDAMUser *user))success
+                     failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getUser:self.authenticationToken];
     } success:success failure:failure];
 }
 
-- (void)getPublicUserInfoWithUsername:(NSString *)username
-                              success:(void(^)(EDAMPublicUserInfo *info))success
-                              failure:(void(^)(NSError *error))failure
+- (void)fetchPublicUserInfoWithUsername:(NSString *)username
+                                success:(void(^)(EDAMPublicUserInfo *info))success
+                                failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getPublicUserInfo:username];
     } success:success failure:failure];
 }
 
-- (void)getPremiumInfoWithSuccess:(void(^)(EDAMPremiumInfo *info))success
-                          failure:(void(^)(NSError *error))failure
+- (void)fetchPremiumInfoWithSuccess:(void(^)(EDAMPremiumInfo *info))success
+                            failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getPremiumInfo:self.authenticationToken];
     } success:success failure:failure];
 }
 
-- (void)getNoteStoreUrlWithSuccess:(void(^)(NSString *noteStoreUrl))success
-                           failure:(void(^)(NSError *error))failure
+- (void)fetchNoteStoreURLWithSuccess:(void(^)(NSString *noteStoreUrl))success
+                             failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getNoteStoreUrl:self.authenticationToken];
@@ -133,4 +133,40 @@
         [self.client revokeLongSession:authenticationToken];
     } success:success failure:failure];
 }
+
+
+#pragma mark - Deprecated
+
+- (void)getBootstrapInfoWithLocale:(NSString *)locale
+                           success:(void(^)(EDAMBootstrapInfo *info))success
+                           failure:(void(^)(NSError *error))failure
+{
+    [self fetchBootstrapInfoWithLocale:locale success:success failure:failure];
+}
+
+- (void)getUserWithSuccess:(void(^)(EDAMUser *user))success
+                   failure:(void(^)(NSError *error))failure
+{
+    [self fetchUserWithSuccess:success failure:failure];
+}
+
+- (void)getPublicUserInfoWithUsername:(NSString *)username
+                              success:(void(^)(EDAMPublicUserInfo *info))success
+                              failure:(void(^)(NSError *error))failure
+{
+    [self fetchPublicUserInfoWithUsername:username success:success failure:failure];
+}
+
+- (void)getPremiumInfoWithSuccess:(void(^)(EDAMPremiumInfo *info))success
+                          failure:(void(^)(NSError *error))failure
+{
+    [self fetchPremiumInfoWithSuccess:success failure:failure];
+}
+
+- (void)getNoteStoreUrlWithSuccess:(void(^)(NSString *noteStoreUrl))success
+                           failure:(void(^)(NSError *error))failure
+{
+    [self fetchNoteStoreURLWithSuccess:success failure:failure];
+}
+
 @end

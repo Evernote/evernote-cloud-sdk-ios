@@ -64,9 +64,14 @@ NS_ASSUME_NONNULL_BEGIN
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchBootstrapInfoWithLocale:(NSString *)locale
+                             success:(void(^)(EDAMBootstrapInfo *info))success
+                             failure:(void(^)(NSError *error))failure;
+
 - (void)getBootstrapInfoWithLocale:(NSString *)locale
                            success:(void(^)(EDAMBootstrapInfo *info))success
-                           failure:(void(^)(NSError *error))failure;
+                           failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchBootstrapInfoWithLocale:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Returns the User corresponding to the provided authentication token, or throws an exception if this token is not valid.
  
@@ -75,8 +80,12 @@ NS_ASSUME_NONNULL_BEGIN
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchUserWithSuccess:(void(^)(EDAMUser *user))success
+                     failure:(void(^)(NSError *error))failure;
+
 - (void)getUserWithSuccess:(void(^)(EDAMUser *user))success
-                   failure:(void(^)(NSError *error))failure;
+                   failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchUserWithSuccess:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Asks the UserStore about the publicly available location information for a particular username.
  
@@ -84,17 +93,26 @@ NS_ASSUME_NONNULL_BEGIN
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchPublicUserInfoWithUsername:(NSString *)username
+                                success:(void(^)(EDAMPublicUserInfo *info))success
+                                failure:(void(^)(NSError *error))failure;
+
 - (void)getPublicUserInfoWithUsername:(NSString *)username
                               success:(void(^)(EDAMPublicUserInfo *info))success
-                              failure:(void(^)(NSError *error))failure;
+                              failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchPublicUserInfoWithUsername:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Returns information regarding a user's Premium account corresponding to the provided authentication token, or throws an exception if this token is not valid.
  
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchPremiumInfoWithSuccess:(void(^)(EDAMPremiumInfo *info))success
+                            failure:(void(^)(NSError *error))failure;
+
 - (void)getPremiumInfoWithSuccess:(void(^)(EDAMPremiumInfo *info))success
-                          failure:(void(^)(NSError *error))failure;
+                          failure:(void(^)(NSError *error))failure
+	DEPRECATED_MSG_ATTRIBUTE("Use -fetchPremiumInfoWithSuccess:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Returns the URL that should be used to talk to the NoteStore for the account represented by the provided authenticationToken.
  
@@ -103,8 +121,12 @@ NS_ASSUME_NONNULL_BEGIN
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchNoteStoreURLWithSuccess:(void(^)(NSString *noteStoreUrl))success
+                             failure:(void(^)(NSError *error))failure;
+
 - (void)getNoteStoreUrlWithSuccess:(void(^)(NSString *noteStoreUrl))success
-                           failure:(void(^)(NSError *error))failure;
+                           failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchNoteStoreURLWithSuccess:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** This is used to take an existing authentication token that grants access to an individual user account (returned from 'authenticate', 'authenticateLongSession' or an OAuth authorization) and obtain an additional authentication token that may be used to access business notebooks if the user is a member of an Evernote Business account.
  

@@ -366,7 +366,7 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
     // errors, or transient problems.
     BOOL failuresAreFatal = (self.authenticationCompletion != nil);
     
-    [[self userStore] getUserWithSuccess:^(EDAMUser * user) {
+    [[self userStore] fetchUserWithSuccess:^(EDAMUser * user) {
         self.user = user;
         [self.preferences encodeObject:user forKey:ENSessionPreferencesUser];
         [self completeAuthenticationWithError:nil];
@@ -704,8 +704,8 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
         ENNoteStoreClient * noteStore = [self noteStoreForLinkedNotebook:linkedNotebook];
         if (linkedNotebook.sharedNotebookGlobalId == nil) {
             // sharedNotebookGlobalId is nil means it's a public notebook
-            [self.userStore getPublicUserInfoWithUsername:linkedNotebook.username
-                                                  success:^(EDAMPublicUserInfo *info) {
+            [self.userStore fetchPublicUserInfoWithUsername:linkedNotebook.username
+                                                    success:^(EDAMPublicUserInfo *info) {
                                                       [noteStore getPublicNotebookWithUserID:[[info userId] intValue]
                                                                                    publicUri:linkedNotebook.uri
                                                                                      success:^(EDAMNotebook *sharedNotebook) {

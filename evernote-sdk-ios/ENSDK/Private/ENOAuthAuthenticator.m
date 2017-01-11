@@ -142,7 +142,7 @@ NSString * ENOAuthAuthenticatorAuthInfoAppNotebookIsLinked = @"ENOAuthAuthentica
     // Start bootstrapping
     NSString * locale = [[NSLocale currentLocale] localeIdentifier];
     ENUserStoreClient * userStore = [self.delegate userStoreClientForBootstrapping];
-    [userStore getBootstrapInfoWithLocale:locale success:^(EDAMBootstrapInfo *info) {
+    [userStore fetchBootstrapInfoWithLocale:locale success:^(EDAMBootstrapInfo *info) {
         // Using first profile as the preferred profile.
         EDAMBootstrapProfile * profile = [info.profiles objectAtIndex:0];
         self.profiles = info.profiles;
