@@ -83,6 +83,7 @@
 - (void)updateProgressHandlers
 {
     // Uses the _client ivar here since we're called from within the -client getter.
+#if EN_PROGRESS_HANDLERS_ENABLED
     if (_client) {
         if (self.uploadProgressHandler) {
             ENNoteStoreClientProgressHandler uploadHandler = self.uploadProgressHandler;
@@ -108,6 +109,7 @@
             [_client setDownloadProgressBlock:nil];
         }
     }
+#endif
 }
 
 - (EDAMNoteStoreClient *)client
@@ -250,7 +252,7 @@
     } success:success failure:failure];
 }
 
-- (void)listTagsByNotebookWithGuid:(EDAMGuid)guid
+- (void)listTagsInNotebookWithGuid:(EDAMGuid)guid
                            success:(void(^)(NSArray<EDAMTag *> *tags))success
                            failure:(void(^)(NSError *error))failure
 {
@@ -553,12 +555,12 @@
 }
 
 - (void)copyNoteWithGuid:(EDAMGuid)guid
-          toNoteBookGuid:(EDAMGuid)toNotebookGuid
+      toNotebookWithGuid:(EDAMGuid)notebookGuid
                  success:(void(^)(EDAMNote *note))success
                  failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
-        return [self.client copyNote:self.authenticationToken noteGuid:guid toNotebookGuid:toNotebookGuid];
+        return [self.client copyNote:self.authenticationToken noteGuid:guid toNotebookGuid:notebookGuid];
     } success:success failure:failure];
 }
 
@@ -727,11 +729,11 @@
     } success:success failure:failure];
 }
 
-- (void)sendMessageToSharedNotebookMembersWithGuid:(EDAMGuid)guid
-                                       messageText:(NSString *)messageText
-                                        recipients:(NSArray<NSString *> *)recipients
-                                           success:(void(^)(int32_t numMessagesSent))success
-                                           failure:(void(^)(NSError *error))failure
+- (void)sendMessageToMembersOfSharedNotebookWithGuid:(EDAMGuid)guid
+                                         messageText:(NSString *)messageText
+                                          recipients:(NSArray<NSString *> *)recipients
+                                             success:(void(^)(int32_t numMessagesSent))success
+                                             failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncInt32Block:^int32_t {
         return [self.client sendMessageToSharedNotebookMembers:self.authenticationToken notebookGuid:guid messageText:messageText recipients:recipients];
@@ -855,10 +857,10 @@
     } success:success failure:failure];
 }
 
-- (void) setSharedNotebookRecipientSettingsWithSharedNotebookId: (int64_t) sharedNotebookId
-                                              recipientSettings: (EDAMSharedNotebookRecipientSettings *) recipientSettings
-                                                        success:(void(^)(int32_t usn))success
-                                                        failure:(void(^)(NSError *error))failure {
+- (void)setRecipientSettings:(EDAMSharedNotebookRecipientSettings *) recipientSettings
+     forSharedNotebookWithID:(int64_t)sharedNotebookId
+                     success:(void(^)(int32_t usn))success
+                     failure:(void(^)(NSError *error))failure {
     [self invokeAsyncInt32Block:^int32_t{
         return [self.client setSharedNotebookRecipientSettings:self.authenticationToken sharedNotebookId:sharedNotebookId recipientSettings:recipientSettings];
     } success:success failure:failure];
@@ -1110,6 +1112,36 @@
     [self fetchSharedNotebookByAuthWithSuccess:success failure:failure];
 }
 
+- (void)listTagsByNotebookWithGuid:(EDAMGuid)guid
+                           success:(void(^)(NSArray<EDAMTag *> *tags))success
+                           failure:(void(^)(NSError *error))failure
+{
+  [self listTagsInNotebookWithGuid:guid success:success failure:failure];
+};
+
+- (void)copyNoteWithGuid:(EDAMGuid)guid
+          toNoteBookGuid:(EDAMGuid)toNotebookGuid
+                 success:(void(^)(EDAMNote *note))success
+                 failure:(void(^)(NSError *error))failure
+{
+  [self copyNoteWithGuid:guid toNotebookWithGuid:toNotebookGuid success:success failure:failure];
+}
+
+- (void)sendMessageToSharedNotebookMembersWithGuid:(EDAMGuid)guid
+                                       messageText:(NSString *)messageText
+                                        recipients:(NSArray<NSString *> *)recipients
+                                           success:(void(^)(int32_t numMessagesSent))success
+                                           failure:(void(^)(NSError *error))failure
+{
+  [self sendMessageToMembersOfSharedNotebookWithGuid:guid messageText:messageText recipients:recipients success:success failure:failure];
+}
+
+- (void) setSharedNotebookRecipientSettingsWithSharedNotebookId: (int64_t) sharedNotebookId
+                                              recipientSettings: (EDAMSharedNotebookRecipientSettings *) recipientSettings
+                                                        success:(void(^)(int32_t usn))success
+                                                        failure:(void(^)(NSError *error))failure {
+  [self setRecipientSettings:recipientSettings forSharedNotebookWithID:sharedNotebookId success:success failure:failure];
+}
 
 - (void)getNoteWithGuid:(EDAMGuid)guid
             withContent:(BOOL)withContent

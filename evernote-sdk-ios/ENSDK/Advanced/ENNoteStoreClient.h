@@ -67,8 +67,8 @@ typedef void (^ENNoteStoreClientProgressHandler)(CGFloat progress);
 // ! DO NOT INSTANTIATE THIS OBJECT DIRECTLY. GET ONE FROM AN AUTHENTICATED ENSESSION !
 
 @interface ENNoteStoreClient : ENStoreClient
-@property (nonatomic, strong, nullable) ENNoteStoreClientProgressHandler uploadProgressHandler;
-@property (nonatomic, strong, nullable) ENNoteStoreClientProgressHandler downloadProgressHandler;
+@property (nonatomic, strong, nullable) ENNoteStoreClientProgressHandler uploadProgressHandler DEPRECATED_MSG_ATTRIBUTE("Progress handlers are no longer supported") NS_SWIFT_UNAVAILABLE("Deprecated");
+@property (nonatomic, strong, nullable) ENNoteStoreClientProgressHandler downloadProgressHandler DEPRECATED_MSG_ATTRIBUTE("Progress handlers are no longer supported") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 ///---------------------------------------------------------------------------------------
 /// @name NoteStore sync methods
@@ -272,9 +272,14 @@ typedef void (^ENNoteStoreClientProgressHandler)(CGFloat progress);
  @param success Success completion block.
  @param failure Failure completion block.
  */
-- (void)listTagsByNotebookWithGuid:(EDAMGuid)guid
+- (void)listTagsInNotebookWithGuid:(EDAMGuid)guid
                            success:(void(^)(NSArray<EDAMTag *> *tags))success
                            failure:(void(^)(NSError *error))failure;
+
+- (void)listTagsByNotebookWithGuid:(EDAMGuid)guid
+                           success:(void(^)(NSArray<EDAMTag *> *tags))success
+                           failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -listTagsInNotebookWithGuid:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 
 /** Returns the current state of the Tag with the provided GUID.
@@ -728,9 +733,15 @@ DEPRECATED_MSG_ATTRIBUTE("Use -fetchNoteWithGuid:includingContent:resourceOption
  @param failure Failure completion block.
  */
 - (void)copyNoteWithGuid:(EDAMGuid)guid
-          toNoteBookGuid:(EDAMGuid)toNotebookGuid
+      toNotebookWithGuid:(EDAMGuid)notebookGuid
                  success:(void(^)(EDAMNote *note))success
                  failure:(void(^)(NSError *error))failure;
+
+- (void)copyNoteWithGuid:(EDAMGuid)guid
+          toNoteBookGuid:(EDAMGuid)toNotebookGuid
+                 success:(void(^)(EDAMNote *note))success
+                 failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -copyNoteWithGuid:toNotebookWithGuid:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Returns a list of the prior versions of a particular note that are saved within the service.
  
@@ -1004,11 +1015,18 @@ DEPRECATED_MSG_ATTRIBUTE("Use -fetchNoteWithGuid:includingContent:resourceOption
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)sendMessageToMembersOfSharedNotebookWithGuid:(EDAMGuid)guid
+                                         messageText:(NSString *)messageText
+                                          recipients:(NSArray<NSString *> *)recipients
+                                             success:(void(^)(int32_t numMessagesSent))success
+                                             failure:(void(^)(NSError *error))failure;
+
 - (void)sendMessageToSharedNotebookMembersWithGuid:(EDAMGuid)guid
                                        messageText:(NSString *)messageText
                                         recipients:(NSArray<NSString *> *)recipients
                                            success:(void(^)(int32_t numMessagesSent))success
-                                           failure:(void(^)(NSError *error))failure;
+                                           failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -senderMessageToMembersOfSharedNotebookWithGuid:messageText:recipients:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Lists the collection of shared notebooks for all notebooks in the users account.
  
@@ -1162,10 +1180,16 @@ DEPRECATED_MSG_ATTRIBUTE("Use -fetchNoteWithGuid:includingContent:resourceOption
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)setRecipientSettings:(EDAMSharedNotebookRecipientSettings *) recipientSettings
+     forSharedNotebookWithID:(int64_t)sharedNotebookId
+                     success:(void(^)(int32_t usn))success
+                     failure:(void(^)(NSError *error))failure;
+
 - (void) setSharedNotebookRecipientSettingsWithSharedNotebookId: (int64_t) sharedNotebookId
                                               recipientSettings: (EDAMSharedNotebookRecipientSettings *) recipientSettings
                                                         success:(void(^)(int32_t usn))success
-                                                        failure:(void(^)(NSError *error))failure;
+                                                        failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -setRecipientSettings:forSharedNotebookWithID:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /**
  *  Cancel the first operation on the note store queue

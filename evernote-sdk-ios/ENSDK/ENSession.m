@@ -935,11 +935,12 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
     context.note.updated = @([[NSDate date] edamTimestamp]);
     
     context.note.guid = context.refToReplace.guid;
-    
+#if EN_PROGRESS_HANDLERS_ENABLED
     if (context.progress) {
         context.noteStore.uploadProgressHandler = context.progress;
     }
-    
+#endif
+
     [context.noteStore updateNote:context.note success:^(EDAMNote * resultNote) {
         context.noteRef = context.refToReplace; // The result by definition has the same ref.
         [self uploadNote_completeWithContext:context error:nil];
@@ -1036,10 +1037,11 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
     if (!context.note.notebookGuid) {
         context.note.notebookGuid = context.notebook.guid;
     }
-    
+#if EN_PROGRESS_HANDLERS_ENABLED
     if (context.progress) {
         context.noteStore.uploadProgressHandler = context.progress;
     }
+#endif
     [context.noteStore createNote:context.note success:^(EDAMNote * resultNote) {
         context.noteRef.guid = resultNote.guid;
         [self uploadNote_completeWithContext:context error:nil];
@@ -1053,7 +1055,9 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
 - (void)uploadNote_completeWithContext:(ENSessionUploadNoteContext *)context
                                  error:(NSError *)error
 {
+#if EN_PROGRESS_HANDLERS_ENABLED
     context.noteStore.uploadProgressHandler = nil;
+#endif
     if (context.completion) {
         context.completion(error ? nil : context.noteRef, error);
     }
@@ -1488,21 +1492,25 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
 
     // Find the note store client that works with this note.
     ENNoteStoreClient * noteStore = [self noteStoreForNoteRef:noteRef];
-    
+#if EN_PROGRESS_HANDLERS_ENABLED
     if (progress) {
         noteStore.downloadProgressHandler = progress;
     }
+#endif
     
     // Fetch by guid. Always get the content and resources.
     [noteStore fetchNoteWithGuid:noteRef.guid includingContent:YES resourceOptions:ENResourceFetchOptionIncludeData success:^(EDAMNote * note) {
         
         // Create an ENNote from the EDAMNote.
         ENNote * resultNote = [[ENNote alloc] initWithServiceNote:note];
-        
+#if EN_PROGRESS_HANDLERS_ENABLED
         noteStore.downloadProgressHandler = nil;
+#endif
         completion(resultNote, nil);
     } failure:^(NSError * error) {
+#if EN_PROGRESS_HANDLERS_ENABLED
         noteStore.downloadProgressHandler = nil;
+#endif
         completion(nil, error);
     }];
 }
