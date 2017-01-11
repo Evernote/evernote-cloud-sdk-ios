@@ -134,39 +134,39 @@
 
 #pragma mark - NoteStore sync methods
 
-- (void)getSyncStateWithSuccess:(void(^)(EDAMSyncState *syncState))success
-                        failure:(void(^)(NSError *error))failure
+- (void)fetchSyncStateWithSuccess:(void(^)(EDAMSyncState *syncState))success
+                          failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getSyncState:self.authenticationToken];
     } success:success failure:failure];
 }
 
-- (void)getSyncChunkAfterUSN:(int32_t)afterUSN
-                  maxEntries:(int32_t)maxEntries
-                fullSyncOnly:(BOOL)fullSyncOnly
-                     success:(void(^)(EDAMSyncChunk *syncChunk))success
-                     failure:(void(^)(NSError *error))failure
+- (void)fetchSyncChunkAfterUSN:(int32_t)afterUSN
+                    maxEntries:(int32_t)maxEntries
+                  fullSyncOnly:(BOOL)fullSyncOnly
+                       success:(void(^)(EDAMSyncChunk *syncChunk))success
+                       failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getSyncChunk:self.authenticationToken afterUSN:afterUSN maxEntries:maxEntries fullSyncOnly:fullSyncOnly];
     } success:success failure:failure];
 }
 
-- (void)getFilteredSyncChunkAfterUSN:(int32_t)afterUSN
-                          maxEntries:(int32_t)maxEntries
-                              filter:(EDAMSyncChunkFilter *)filter
-                             success:(void(^)(EDAMSyncChunk *syncChunk))success
-                             failure:(void(^)(NSError *error))failure
+- (void)fetchFilteredSyncChunkAfterUSN:(int32_t)afterUSN
+                            maxEntries:(int32_t)maxEntries
+                                filter:(EDAMSyncChunkFilter *)filter
+                               success:(void(^)(EDAMSyncChunk *syncChunk))success
+                               failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getFilteredSyncChunk:self.authenticationToken afterUSN:afterUSN maxEntries:maxEntries filter:filter];
     } success:success failure:failure];
 }
 
-- (void)getLinkedNotebookSyncState:(EDAMLinkedNotebook *)linkedNotebook
-                           success:(void(^)(EDAMSyncState *syncState))success
-                           failure:(void(^)(NSError *error))failure
+- (void)fetchSyncStateForLinkedNotebook:(EDAMLinkedNotebook *)linkedNotebook
+                                success:(void(^)(EDAMSyncState *syncState))success
+                                failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getLinkedNotebookSyncState:self.authenticationToken linkedNotebook:linkedNotebook];
@@ -183,29 +183,29 @@
     } success:success failure:failure];
 }
 
-- (void)getNotebookWithGuid:(EDAMGuid)guid
-                    success:(void(^)(EDAMNotebook *notebook))success
-                    failure:(void(^)(NSError *error))failure
+- (void)fetchNotebookWithGuid:(EDAMGuid)guid
+                      success:(void(^)(EDAMNotebook *notebook))success
+                      failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getNotebook:self.authenticationToken guid:guid];
     } success:success failure:failure];
 }
 
-- (void)getLinkedNotebookSyncChunk:(EDAMLinkedNotebook *)linkedNotebook
-                          afterUSN:(int32_t)afterUSN
-                        maxEntries:(int32_t) maxEntries
-                      fullSyncOnly:(BOOL)fullSyncOnly
-                           success:(void(^)(EDAMSyncChunk *syncChunk))success
-                           failure:(void(^)(NSError *error))failure
+- (void)fetchSyncChunkForLinkedNotebook:(EDAMLinkedNotebook *)linkedNotebook
+                               afterUSN:(int32_t)afterUSN
+                             maxEntries:(int32_t) maxEntries
+                           fullSyncOnly:(BOOL)fullSyncOnly
+                                success:(void(^)(EDAMSyncChunk *syncChunk))success
+                                failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getLinkedNotebookSyncChunk:self.authenticationToken linkedNotebook:linkedNotebook afterUSN:afterUSN maxEntries:maxEntries fullSyncOnly:fullSyncOnly];
     } success:success failure:failure];
 }
 
-- (void)getDefaultNotebookWithSuccess:(void(^)(EDAMNotebook *notebook))success
-                              failure:(void(^)(NSError *error))failure
+- (void)fetchDefaultNotebookWithSuccess:(void(^)(EDAMNotebook *notebook))success
+                                failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getDefaultNotebook:self.authenticationToken];
@@ -259,9 +259,9 @@
     } success:success failure:failure];
 };
 
-- (void)getTagWithGuid:(EDAMGuid)guid
-               success:(void(^)(EDAMTag *tag))success
-               failure:(void(^)(NSError *error))failure
+- (void)fetchTagWithGuid:(EDAMGuid)guid
+                 success:(void(^)(EDAMTag *tag))success
+                 failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getTag:self.authenticationToken guid:guid];
@@ -314,9 +314,9 @@
     } success:success failure:failure];
 }
 
-- (void)getSearchWithGuid:(EDAMGuid)guid
-                  success:(void(^)(EDAMSavedSearch *search))success
-                  failure:(void(^)(NSError *error))failure
+- (void)fetchSearchWithGuid:(EDAMGuid)guid
+                    success:(void(^)(EDAMSavedSearch *search))success
+                    failure:(void(^)(NSError *error))failure
 
 {
     [self invokeAsyncIdBlock:^id {
@@ -418,19 +418,19 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
     } success:success failure:failure];
 }
 
-- (void)getNoteApplicationDataWithGuid:(EDAMGuid)guid
-                               success:(void(^)(EDAMLazyMap *map))success
-                               failure:(void(^)(NSError *error))failure
+- (void)fetchNoteApplicationDataWithGuid:(EDAMGuid)guid
+                                 success:(void(^)(EDAMLazyMap *map))success
+                                 failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getNoteApplicationData:self.authenticationToken guid:guid];
     } success:success failure:failure];
 }
 
-- (void)getNoteApplicationDataEntryWithGuid:(EDAMGuid)guid
-                                        key:(NSString *)key
-                                    success:(void(^)(NSString *entry))success
-                                    failure:(void(^)(NSError *error))failure
+- (void)fetchNoteApplicationDataEntryWithGuid:(EDAMGuid)guid
+                                          key:(NSString *)key
+                                      success:(void(^)(NSString *entry))success
+                                      failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getNoteApplicationDataEntry:self.authenticationToken guid:guid key:key];
@@ -458,38 +458,38 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
     } success:success failure:failure];
 }
 
-- (void)getNoteContentWithGuid:(EDAMGuid)guid
-                       success:(void(^)(NSString *content))success
-                       failure:(void(^)(NSError *error))failure
+- (void)fetchNoteContentWithGuid:(EDAMGuid)guid
+                         success:(void(^)(NSString *content))success
+                         failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getNoteContent:self.authenticationToken guid:guid];
     } success:success failure:failure];
 }
 
-- (void)getNoteSearchTextWithGuid:(EDAMGuid)guid
-                         noteOnly:(BOOL)noteOnly
-              tokenizeForIndexing:(BOOL)tokenizeForIndexing
-                          success:(void(^)(NSString *text))success
-                          failure:(void(^)(NSError *error))failure
+- (void)fetchSearchTextForNoteWithGuid:(EDAMGuid)guid
+                              noteOnly:(BOOL)noteOnly
+                   tokenizeForIndexing:(BOOL)tokenizeForIndexing
+                               success:(void(^)(NSString *text))success
+                               failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getNoteSearchText:self.authenticationToken guid:guid noteOnly:noteOnly tokenizeForIndexing:tokenizeForIndexing];
     } success:success failure:failure];
 }
 
-- (void)getResourceSearchTextWithGuid:(EDAMGuid)guid
-                              success:(void(^)(NSString *text))success
-                              failure:(void(^)(NSError *error))failure
+- (void)fetchSearchTextForResourceWithGuid:(EDAMGuid)guid
+                                   success:(void(^)(NSString *text))success
+                                   failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getResourceSearchText:self.authenticationToken guid:guid];
     } success:success failure:failure];
 }
 
-- (void)getNoteTagNamesWithGuid:(EDAMGuid)guid
-                        success:(void(^)(NSArray<NSString *> *names))success
-                        failure:(void(^)(NSError *error))failure
+- (void)fetchTagNamesForNoteWithGuid:(EDAMGuid)guid
+                             success:(void(^)(NSArray<NSString *> *names))success
+                             failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getNoteTagNames:self.authenticationToken guid:guid];
@@ -596,19 +596,19 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
     } success:success failure:failure];
 }
 
-- (void)getResourceApplicationDataWithGuid:(EDAMGuid)guid
-                                   success:(void(^)(EDAMLazyMap *map))success
-                                   failure:(void(^)(NSError *error))failure
+- (void)fetchResourceApplicationDataWithGuid:(EDAMGuid)guid
+                                     success:(void(^)(EDAMLazyMap *map))success
+                                     failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getResourceApplicationData:self.authenticationToken guid:guid];
     } success:success failure:failure];
 }
 
-- (void)getResourceApplicationDataEntryWithGuid:(EDAMGuid)guid
-                                            key:(NSString *)key
-                                        success:(void(^)(NSString *entry))success
-                                        failure:(void(^)(NSError *error))failure
+- (void)fetchResourceApplicationDataEntryWithGuid:(EDAMGuid)guid
+                                              key:(NSString *)key
+                                          success:(void(^)(NSString *entry))success
+                                          failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getResourceApplicationDataEntry:self.authenticationToken guid:guid key:key];
@@ -645,9 +645,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
     } success:success failure:failure];
 }
 
-- (void)getResourceDataWithGuid:(EDAMGuid)guid
-                        success:(void(^)(NSData *data))success
-                        failure:(void(^)(NSError *error))failure
+- (void)fetchResourceDataWithGuid:(EDAMGuid)guid
+                          success:(void(^)(NSData *data))success
+                          failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getResourceData:self.authenticationToken guid:guid];
@@ -667,27 +667,27 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
     } success:success failure:failure];
 }
 
-- (void)getResourceRecognitionWithGuid:(EDAMGuid)guid
-                               success:(void(^)(NSData *data))success
-                               failure:(void(^)(NSError *error))failure
+- (void)fetchRecognitionDataForResourceWithGuid:(EDAMGuid)guid
+                                        success:(void(^)(NSData *data))success
+                                        failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getResourceRecognition:self.authenticationToken guid:guid];
     } success:success failure:failure];
 }
 
-- (void)getResourceAlternateDataWithGuid:(EDAMGuid)guid
-                                 success:(void(^)(NSData *data))success
-                                 failure:(void(^)(NSError *error))failure
+- (void)fetchAlternateDataForResourceWithGuid:(EDAMGuid)guid
+                                      success:(void(^)(NSData *data))success
+                                      failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getResourceAlternateData:self.authenticationToken guid:guid];
     } success:success failure:failure];
 }
 
-- (void)getResourceAttributesWithGuid:(EDAMGuid)guid
-                              success:(void(^)(EDAMResourceAttributes *attributes))success
-                              failure:(void(^)(NSError *error))failure
+- (void)fetchAttributesForResourceWithGuid:(EDAMGuid)guid
+                                   success:(void(^)(EDAMResourceAttributes *attributes))success
+                                   failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
         return [self.client getResourceAttributes:self.authenticationToken guid:guid];
@@ -696,13 +696,13 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
 
 #pragma mark - NoteStore shared notebook methods
 
-- (void)getPublicNotebookWithUserID:(EDAMUserID)userId
-                          publicUri:(NSString *)publicUri
-                            success:(void(^)(EDAMNotebook *notebook))success
-                            failure:(void(^)(NSError *error))failure
+- (void)fetchPublicNotebookWithUserID:(EDAMUserID)userId
+                            publicURI:(NSString *)publicURI
+                              success:(void(^)(EDAMNotebook *notebook))success
+                              failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
-        return [self.client getPublicNotebook:userId publicUri:publicUri];
+        return [self.client getPublicNotebook:userId publicUri:publicURI];
     } success:success failure:failure];
 }
 
@@ -788,8 +788,8 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
     } success:success failure:failure];
 }
 
-- (void)getSharedNotebookByAuthWithSuccess:(void(^)(EDAMSharedNotebook *sharedNotebook))success
-                                   failure:(void(^)(NSError *error))failure
+- (void)fetchSharedNotebookByAuthWithSuccess:(void(^)(EDAMSharedNotebook *sharedNotebook))success
+                                     failure:(void(^)(NSError *error))failure
 
 {
     [self invokeAsyncIdBlock:^id {
@@ -922,5 +922,182 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                   failure(error);
                               }];
 }
+
+
+
+#pragma mark - Deprecated
+
+- (void)getSyncStateWithSuccess:(void(^)(EDAMSyncState *syncState))success
+                        failure:(void(^)(NSError *error))failure
+{
+  [self fetchSyncStateWithSuccess:success failure:failure];
+}
+
+- (void)getSyncChunkAfterUSN:(int32_t)afterUSN
+                  maxEntries:(int32_t)maxEntries
+                fullSyncOnly:(BOOL)fullSyncOnly
+                     success:(void(^)(EDAMSyncChunk *syncChunk))success
+                     failure:(void(^)(NSError *error))failure
+{
+  [self fetchSyncChunkAfterUSN:afterUSN maxEntries:maxEntries fullSyncOnly:fullSyncOnly success:success failure:failure];
+}
+
+- (void)getFilteredSyncChunkAfterUSN:(int32_t)afterUSN
+                          maxEntries:(int32_t)maxEntries
+                              filter:(EDAMSyncChunkFilter *)filter
+                             success:(void(^)(EDAMSyncChunk *syncChunk))success
+                             failure:(void(^)(NSError *error))failure
+{
+  [self fetchFilteredSyncChunkAfterUSN:afterUSN maxEntries:maxEntries filter:filter success:success failure:failure];
+}
+
+- (void)getLinkedNotebookSyncState:(EDAMLinkedNotebook *)linkedNotebook
+                           success:(void(^)(EDAMSyncState *syncState))success
+                           failure:(void(^)(NSError *error))failure
+{
+  [self fetchSyncStateForLinkedNotebook:linkedNotebook success:success failure:failure];
+}
+
+- (void)getLinkedNotebookSyncChunk:(EDAMLinkedNotebook *)linkedNotebook
+                          afterUSN:(int32_t)afterUSN
+                        maxEntries:(int32_t) maxEntries
+                      fullSyncOnly:(BOOL)fullSyncOnly
+                           success:(void(^)(EDAMSyncChunk *syncChunk))success
+                           failure:(void(^)(NSError *error))failure
+{
+  [self fetchSyncChunkForLinkedNotebook:linkedNotebook afterUSN:afterUSN maxEntries:maxEntries fullSyncOnly:fullSyncOnly success:success failure:failure];
+}
+
+- (void)getNotebookWithGuid:(EDAMGuid)guid
+                    success:(void(^)(EDAMNotebook *notebook))success
+                    failure:(void(^)(NSError *error))failure
+{
+  [self fetchNotebookWithGuid:guid success:success failure:failure];
+}
+
+- (void)getDefaultNotebookWithSuccess:(void(^)(EDAMNotebook *notebook))success
+                              failure:(void(^)(NSError *error))failure
+{
+  [self fetchDefaultNotebookWithSuccess:success failure:failure];
+}
+
+- (void)getTagWithGuid:(EDAMGuid)guid
+               success:(void(^)(EDAMTag *tag))success
+               failure:(void(^)(NSError *error))failure
+{
+  [self fetchTagWithGuid:guid success:success failure:failure];
+}
+
+- (void)getSearchWithGuid:(EDAMGuid)guid
+                  success:(void(^)(EDAMSavedSearch *search))success
+                  failure:(void(^)(NSError *error))failure
+
+{
+  [self fetchSearchWithGuid:guid success:success failure:failure];
+}
+
+- (void)getNoteApplicationDataWithGuid:(EDAMGuid)guid
+                               success:(void(^)(EDAMLazyMap *map))success
+                               failure:(void(^)(NSError *error))failure
+{
+  [self fetchNoteApplicationDataWithGuid:guid success:success failure:failure];
+}
+
+- (void)getNoteApplicationDataEntryWithGuid:(EDAMGuid)guid
+                                        key:(NSString *)key
+                                    success:(void(^)(NSString *entry))success
+                                    failure:(void(^)(NSError *error))failure
+{
+  [self fetchNoteApplicationDataEntryWithGuid:guid key:key success:success failure:failure];
+}
+
+- (void)getNoteContentWithGuid:(EDAMGuid)guid
+                       success:(void(^)(NSString *content))success
+                       failure:(void(^)(NSError *error))failure
+{
+  [self fetchNoteContentWithGuid:guid success:success failure:failure];
+}
+
+- (void)getNoteSearchTextWithGuid:(EDAMGuid)guid
+                         noteOnly:(BOOL)noteOnly
+              tokenizeForIndexing:(BOOL)tokenizeForIndexing
+                          success:(void(^)(NSString *text))success
+                          failure:(void(^)(NSError *error))failure
+{
+  [self fetchSearchTextForNoteWithGuid:guid noteOnly:noteOnly tokenizeForIndexing:tokenizeForIndexing success:success failure:failure];
+}
+
+- (void)getResourceSearchTextWithGuid:(EDAMGuid)guid
+                              success:(void(^)(NSString *text))success
+                              failure:(void(^)(NSError *error))failure
+{
+    [self fetchSearchTextForResourceWithGuid:guid success:success failure:failure];
+}
+
+- (void)getNoteTagNamesWithGuid:(EDAMGuid)guid
+                        success:(void(^)(NSArray<NSString *> *names))success
+                        failure:(void(^)(NSError *error))failure
+{
+    [self fetchTagNamesForNoteWithGuid:guid success:success failure:failure];
+}
+
+- (void)getResourceApplicationDataWithGuid:(EDAMGuid)guid
+                                   success:(void(^)(EDAMLazyMap *map))success
+                                   failure:(void(^)(NSError *error))failure
+{
+    [self fetchResourceApplicationDataWithGuid:guid success:success failure:failure];
+}
+
+- (void)getResourceApplicationDataEntryWithGuid:(EDAMGuid)guid
+                                            key:(NSString *)key
+                                        success:(void(^)(NSString *entry))success
+                                        failure:(void(^)(NSError *error))failure
+{
+    [self fetchResourceApplicationDataEntryWithGuid:guid key:key success:success failure:failure];
+}
+
+- (void)getResourceDataWithGuid:(EDAMGuid)guid
+                        success:(void(^)(NSData *data))success
+                        failure:(void(^)(NSError *error))failure
+{
+    [self fetchResourceDataWithGuid:guid success:success failure:failure];
+}
+
+- (void)getResourceRecognitionWithGuid:(EDAMGuid)guid
+                               success:(void(^)(NSData *data))success
+                               failure:(void(^)(NSError *error))failure
+{
+    [self fetchRecognitionDataForResourceWithGuid:guid success:success failure:failure];
+}
+
+- (void)getResourceAlternateDataWithGuid:(EDAMGuid)guid
+                                 success:(void(^)(NSData *data))success
+                                 failure:(void(^)(NSError *error))failure
+{
+    [self fetchAlternateDataForResourceWithGuid:guid success:success failure:failure];
+}
+
+- (void)getResourceAttributesWithGuid:(EDAMGuid)guid
+                              success:(void(^)(EDAMResourceAttributes *attributes))success
+                              failure:(void(^)(NSError *error))failure
+{
+    [self fetchAttributesForResourceWithGuid:guid success:success failure:failure];
+}
+
+- (void)getPublicNotebookWithUserID:(EDAMUserID)userId
+                          publicUri:(NSString *)publicURI
+                            success:(void(^)(EDAMNotebook *notebook))success
+                            failure:(void(^)(NSError *error))failure
+{
+    [self fetchPublicNotebookWithUserID:userId publicURI:publicURI success:success failure:failure];
+}
+
+- (void)getSharedNotebookByAuthWithSuccess:(void(^)(EDAMSharedNotebook *sharedNotebook))success
+                                   failure:(void(^)(NSError *error))failure
+
+{
+  [self fetchSharedNotebookByAuthWithSuccess:success failure:failure];
+}
+
 
 @end

@@ -389,14 +389,14 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
 }
 
 - (void)refreshUploadUsage {
-    [self.primaryNoteStore getSyncStateWithSuccess:^(EDAMSyncState *syncState) {
+    [self.primaryNoteStore fetchSyncStateWithSuccess:^(EDAMSyncState *syncState) {
         self.personalUploadUsage = syncState.uploaded.longLongValue;
         self.personalUploadLimit = self.user.accounting.uploadLimit.longLongValue;
     } failure:^(NSError *error) {
         ENSDKLogError(@"Failed to get personal sync state");
     }];
     if (self.isBusinessUser) {
-        [self.businessNoteStore getSyncStateWithSuccess:^(EDAMSyncState *syncState) {
+        [self.businessNoteStore fetchSyncStateWithSuccess:^(EDAMSyncState *syncState) {
             self.businessUploadUsage = syncState.uploaded.longLongValue;
             self.businessUploadLimit = self.businessUser.accounting.uploadLimit.longLongValue;
         } failure:^(NSError *error) {
@@ -706,15 +706,15 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
             // sharedNotebookGlobalId is nil means it's a public notebook
             [self.userStore fetchPublicUserInfoWithUsername:linkedNotebook.username
                                                     success:^(EDAMPublicUserInfo *info) {
-                                                      [noteStore getPublicNotebookWithUserID:[[info userId] intValue]
-                                                                                   publicUri:linkedNotebook.uri
-                                                                                     success:^(EDAMNotebook *sharedNotebook) {
-                                                                                         [sharedNotebooks setObject:sharedNotebook forKey:linkedNotebook.guid];
-                                                                                         [self listNotebooks_completePendingSharedNotebookWithContext:context];
-                                                                                     } failure:^(NSError *error) {
-                                                                                         context.error = error;
-                                                                                         [self listNotebooks_completePendingSharedNotebookWithContext:context];
-                                                                                     }];
+                                                      [noteStore fetchPublicNotebookWithUserID:[[info userId] intValue]
+                                                                                     publicURI:linkedNotebook.uri
+                                                                                       success:^(EDAMNotebook *sharedNotebook) {
+                                                                                           [sharedNotebooks setObject:sharedNotebook forKey:linkedNotebook.guid];
+                                                                                           [self listNotebooks_completePendingSharedNotebookWithContext:context];
+                                                                                       } failure:^(NSError *error) {
+                                                                                           context.error = error;
+                                                                                           [self listNotebooks_completePendingSharedNotebookWithContext:context];
+                                                                                       }];
                                                   } failure:^(NSError *error) {
                                                       context.error = error;
                                                       [self listNotebooks_completePendingSharedNotebookWithContext:context];

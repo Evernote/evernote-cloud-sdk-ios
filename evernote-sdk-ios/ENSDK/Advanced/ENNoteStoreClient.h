@@ -60,8 +60,12 @@ typedef void (^ENNoteStoreClientProgressHandler)(CGFloat progress);
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchSyncStateWithSuccess:(void(^)(EDAMSyncState *syncState))success
+                          failure:(void(^)(NSError *error))failure;
+
 - (void)getSyncStateWithSuccess:(void(^)(EDAMSyncState *syncState))success
-                        failure:(void(^)(NSError *error))failure;
+                        failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchSyncStateWithSuccess:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 /** Asks the NoteStore to provide the state of the account in order of last modification.
  
  This request retrieves one block of the server's state so that a client can make several small requests against a large account rather than getting the entire state in one big message.
@@ -75,11 +79,18 @@ typedef void (^ENNoteStoreClientProgressHandler)(CGFloat progress);
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchSyncChunkAfterUSN:(int32_t)afterUSN
+                    maxEntries:(int32_t)maxEntries
+                  fullSyncOnly:(BOOL)fullSyncOnly
+                       success:(void(^)(EDAMSyncChunk *syncChunk))success
+                       failure:(void(^)(NSError *error))failure;
+
 - (void)getSyncChunkAfterUSN:(int32_t)afterUSN
                   maxEntries:(int32_t)maxEntries
                 fullSyncOnly:(BOOL)fullSyncOnly
                      success:(void(^)(EDAMSyncChunk *syncChunk))success
-                     failure:(void(^)(NSError *error))failure;
+                     failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchSyncChunkAfterUSN:maxEntries:fullSyncOnly:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 /** Asks the NoteStore to provide the state of the account in order of last modification.
  
  This request retrieves one block of the server's state so that a client can make several small requests against a large account rather than getting the entire state in one big message. This call gives more fine-grained control of the data that will be received by a client by omitting data elements that a client doesn't need. This may reduce network traffic and sync times.
@@ -93,11 +104,18 @@ typedef void (^ENNoteStoreClientProgressHandler)(CGFloat progress);
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchFilteredSyncChunkAfterUSN:(int32_t)afterUSN
+                            maxEntries:(int32_t)maxEntries
+                                filter:(EDAMSyncChunkFilter *)filter
+                               success:(void(^)(EDAMSyncChunk *syncChunk))success
+                               failure:(void(^)(NSError *error))failure;
+
 - (void)getFilteredSyncChunkAfterUSN:(int32_t)afterUSN
                           maxEntries:(int32_t)maxEntries
                               filter:(EDAMSyncChunkFilter *)filter
                              success:(void(^)(EDAMSyncChunk *syncChunk))success
-                             failure:(void(^)(NSError *error))failure;
+                             failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchFilteredSyncChunkAfterUSN:maxEntries:filter:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 /** Asks the NoteStore to provide information about the status of a linked notebook that has been shared with the caller, or that is public to the world.
  
  This will return a result that is similar to getSyncState, but may omit SyncState.uploaded if the caller doesn't have permission to write to the linked notebook.
@@ -108,9 +126,14 @@ typedef void (^ENNoteStoreClientProgressHandler)(CGFloat progress);
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchSyncStateForLinkedNotebook:(EDAMLinkedNotebook *)linkedNotebook
+                             success:(void(^)(EDAMSyncState *syncState))success
+                             failure:(void(^)(NSError *error))failure;
+
 - (void)getLinkedNotebookSyncState:(EDAMLinkedNotebook *)linkedNotebook
                            success:(void(^)(EDAMSyncState *syncState))success
-                           failure:(void(^)(NSError *error))failure;
+                           failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchSyncStateForLinkedNotebook:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 /** Asks the NoteStore to provide information about the contents of a linked notebook that has been shared with the caller, or that is public to the world.
  
  This will return a result that is similar to getSyncChunk, but will only contain entries that are visible to the caller. I.e. only that particular Notebook will be visible, along with its Notes, and Tags on those Notes.
@@ -127,12 +150,20 @@ typedef void (^ENNoteStoreClientProgressHandler)(CGFloat progress);
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchSyncChunkForLinkedNotebook:(EDAMLinkedNotebook *)linkedNotebook
+                               afterUSN:(int32_t)afterUSN
+                             maxEntries:(int32_t)maxEntries
+                           fullSyncOnly:(BOOL)fullSyncOnly
+                                success:(void(^)(EDAMSyncChunk *syncChunk))success
+                                failure:(void(^)(NSError *error))failure;
+
 - (void)getLinkedNotebookSyncChunk:(EDAMLinkedNotebook *)linkedNotebook
                           afterUSN:(int32_t)afterUSN
                         maxEntries:(int32_t)maxEntries
                       fullSyncOnly:(BOOL)fullSyncOnly
                            success:(void(^)(EDAMSyncChunk *syncChunk))success
-                           failure:(void(^)(NSError *error))failure;
+                           failure:(void(^)(NSError *error))failure
+	DEPRECATED_MSG_ATTRIBUTE("Use -fetchSyncChunkForLinkedNotebook:afterUSN:maxEntries:fullSyncOnly:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 ///---------------------------------------------------------------------------------------
 /// @name NoteStore notebook methods
@@ -152,17 +183,26 @@ typedef void (^ENNoteStoreClientProgressHandler)(CGFloat progress);
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchNotebookWithGuid:(EDAMGuid)guid
+                      success:(void(^)(EDAMNotebook *notebook))success
+                      failure:(void(^)(NSError *error))failure;
+
 - (void)getNotebookWithGuid:(EDAMGuid)guid
                     success:(void(^)(EDAMNotebook *notebook))success
-                    failure:(void(^)(NSError *error))failure;
+                    failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchNotebookWithGuid:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Returns the notebook that should be used to store new notes in the user's account when no other notebooks are specified.
  
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchDefaultNotebookWithSuccess:(void(^)(EDAMNotebook *notebook))success
+                                failure:(void(^)(NSError *error))failure;
+
 - (void)getDefaultNotebookWithSuccess:(void(^)(EDAMNotebook *notebook))success
-                              failure:(void(^)(NSError *error))failure;
+                              failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchDefaultNotebookWithSuccess:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Asks the service to make a notebook with the provided name.
  
@@ -224,9 +264,14 @@ typedef void (^ENNoteStoreClientProgressHandler)(CGFloat progress);
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchTagWithGuid:(EDAMGuid)guid
+                 success:(void(^)(EDAMTag *tag))success
+                 failure:(void(^)(NSError *error))failure;
+
 - (void)getTagWithGuid:(EDAMGuid)guid
                success:(void(^)(EDAMTag *tag))success
-               failure:(void(^)(NSError *error))failure;
+               failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchTagWithGuid:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Asks the service to make a tag with a set of information.
  
@@ -289,9 +334,14 @@ typedef void (^ENNoteStoreClientProgressHandler)(CGFloat progress);
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchSearchWithGuid:(EDAMGuid)guid
+                    success:(void(^)(EDAMSavedSearch *search))success
+                    failure:(void(^)(NSError *error))failure;
+
 - (void)getSearchWithGuid:(EDAMGuid)guid
                   success:(void(^)(EDAMSavedSearch *search))success
-                  failure:(void(^)(NSError *error))failure;
+                  failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchSearchWithGuid:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Asks the service to make a saved search with a set of information.
  
@@ -435,6 +485,7 @@ withResourcesRecognition:(BOOL)withResourcesRecognition
 withResourcesAlternateData:(BOOL)withResourcesAlternateData
                 success:(void(^)(EDAMNote *note))success
                 failure:(void(^)(NSError *error))failure;
+#warning Fix this with a bit flag
 
 /** Get all of the application data for the note identified by GUID, with values returned within the LazyMap fullMap field.
  
@@ -444,9 +495,14 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchNoteApplicationDataWithGuid:(EDAMGuid)guid
+                                 success:(void(^)(EDAMLazyMap *map))success
+                                 failure:(void(^)(NSError *error))failure;
+
 - (void)getNoteApplicationDataWithGuid:(EDAMGuid)guid
                                success:(void(^)(EDAMLazyMap *map))success
-                               failure:(void(^)(NSError *error))failure;
+                               failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchNoteApplicationDataWithGuid:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Get the value of a single entry in the applicationData map for the note identified by GUID.
  
@@ -455,10 +511,16 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchNoteApplicationDataEntryWithGuid:(EDAMGuid)guid
+                                          key:(NSString *)key
+                                      success:(void(^)(NSString *entry))success
+                                      failure:(void(^)(NSError *error))failure;
+
 - (void)getNoteApplicationDataEntryWithGuid:(EDAMGuid)guid
                                         key:(NSString *)key
                                     success:(void(^)(NSString *entry))success
-                                    failure:(void(^)(NSError *error))failure;
+                                    failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchNoteApplicationDataEntryWithGuid:key:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Update, or create, an entry in the applicationData map for the note identified by guid.
  
@@ -492,9 +554,14 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchNoteContentWithGuid:(EDAMGuid)guid
+                         success:(void(^)(NSString *content))success
+                         failure:(void(^)(NSError *error))failure;
+
 - (void)getNoteContentWithGuid:(EDAMGuid)guid
                        success:(void(^)(NSString *content))success
-                       failure:(void(^)(NSError *error))failure;
+                       failure:(void(^)(NSError *error))failure
+	DEPRECATED_MSG_ATTRIBUTE("Use -fetchNoteContentWithGuid:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Returns a block of the extracted plain text contents of the note with the provided GUID.
  
@@ -508,11 +575,18 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchSearchTextForNoteWithGuid:(EDAMGuid)guid
+                              noteOnly:(BOOL)noteOnly
+                   tokenizeForIndexing:(BOOL)tokenizeForIndexing
+                               success:(void(^)(NSString *text))success
+                               failure:(void(^)(NSError *error))failure;
+
 - (void)getNoteSearchTextWithGuid:(EDAMGuid)guid
                          noteOnly:(BOOL)noteOnly
               tokenizeForIndexing:(BOOL)tokenizeForIndexing
                           success:(void(^)(NSString *text))success
-                          failure:(void(^)(NSError *error))failure;
+                          failure:(void(^)(NSError *error))failure
+	DEPRECATED_MSG_ATTRIBUTE("Use -fetchSearchTextNoteWithGuid:noteOnly:tokenizeForIndexing:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Returns a block of the extracted plain text contents of the resource with the provided GUID.
  
@@ -522,9 +596,14 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchSearchTextForResourceWithGuid:(EDAMGuid)guid
+                                   success:(void(^)(NSString *text))success
+                                   failure:(void(^)(NSError *error))failure;
+
 - (void)getResourceSearchTextWithGuid:(EDAMGuid)guid
                               success:(void(^)(NSString *text))success
-                              failure:(void(^)(NSError *error))failure;
+                              failure:(void(^)(NSError *error))failure
+	DEPRECATED_MSG_ATTRIBUTE("Use -fetchSearchTextForResourceWithGuid:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Returns a list of the names of the tags for the note with the provided guid.
  
@@ -534,9 +613,14 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchTagNamesForNoteWithGuid:(EDAMGuid)guid
+                             success:(void(^)(NSArray<NSString *> *names))success
+                             failure:(void(^)(NSError *error))failure;
+
 - (void)getNoteTagNamesWithGuid:(EDAMGuid)guid
                         success:(void(^)(NSArray<NSString *> *names))success
-                        failure:(void(^)(NSError *error))failure;
+                        failure:(void(^)(NSError *error))failure
+	DEPRECATED_MSG_ATTRIBUTE("Use -fetchTagNamesForNoteWithGuid:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Asks the service to make a note with the provided set of information.
  
@@ -662,6 +746,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
     withResourcesAlternateData:(BOOL)withResourcesAlternateData
                        success:(void(^)(EDAMNote *note))success
                        failure:(void(^)(NSError *error))failure;
+#warning update this with bit flag
 ///---------------------------------------------------------------------------------------
 /// @name NoteStore resource methods
 ///---------------------------------------------------------------------------------------
@@ -689,6 +774,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
           withAlternateDate:(BOOL)withAlternateData
                     success:(void(^)(EDAMResource *resource))success
                     failure:(void(^)(NSError *error))failure;
+#warning update this with bit flag
 
 /** Get all of the application data for the Resource identified by GUID, with values returned within the LazyMap fullMap field. If there are no applicationData entries, then a LazyMap with an empty fullMap will be returned. If your application only needs to fetch its own applicationData entry, use getResourceApplicationDataEntry instead.
  
@@ -696,9 +782,14 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchResourceApplicationDataWithGuid:(EDAMGuid)guid
+                                     success:(void(^)(EDAMLazyMap *map))success
+                                     failure:(void(^)(NSError *error))failure;
+
 - (void)getResourceApplicationDataWithGuid:(EDAMGuid)guid
                                    success:(void(^)(EDAMLazyMap *map))success
-                                   failure:(void(^)(NSError *error))failure;
+                                   failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchResourceApplicationDataWithGuid:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Get the value of a single entry in the applicationData map for the Resource identified by GUID.
  
@@ -707,10 +798,16 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchResourceApplicationDataEntryWithGuid:(EDAMGuid)guid
+                                              key:(NSString *)key
+                                          success:(void(^)(NSString *entry))success
+                                          failure:(void(^)(NSError *error))failure;
+
 - (void)getResourceApplicationDataEntryWithGuid:(EDAMGuid)guid
                                             key:(NSString *)key
                                         success:(void(^)(NSString *entry))success
-                                        failure:(void(^)(NSError *error))failure;
+                                        failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchResourceApplicationDataWithGuid:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Update, or create, an entry in the applicationData map for the Resource identified by guid.
  
@@ -758,9 +855,14 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchResourceDataWithGuid:(EDAMGuid)guid
+                          success:(void(^)(NSData *data))success
+                          failure:(void(^)(NSError *error))failure;
+
 - (void)getResourceDataWithGuid:(EDAMGuid)guid
                         success:(void(^)(NSData *data))success
-                        failure:(void(^)(NSError *error))failure;
+                        failure:(void(^)(NSError *error))failure
+	DEPRECATED_MSG_ATTRIBUTE("Use -fetchResourceDataWithGuid:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Returns the current state of a resource, referenced by containing note GUID and resource content hash.
  
@@ -784,6 +886,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                 withAlternateData:(BOOL)withAlternateData
                           success:(void(^)(EDAMResource *resource))success
                           failure:(void(^)(NSError *error))failure;
+#warning update this with bit flag
 
 /** Returns the binary contents of the recognition index for the resource with the provided GUID.
  
@@ -793,9 +896,14 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchRecognitionDataForResourceWithGuid:(EDAMGuid)guid
+                                        success:(void(^)(NSData *data))success
+                                        failure:(void(^)(NSError *error))failure;
+
 - (void)getResourceRecognitionWithGuid:(EDAMGuid)guid
                                success:(void(^)(NSData *data))success
-                               failure:(void(^)(NSError *error))failure;
+                               failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchRecognitionDataForResourceWithGuid:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** If the Resource with the provided GUID has an alternate data representation (indicated via the Resource.alternateData field), then this request can be used to retrieve the binary contents of that alternate data file. If the caller asks about a resource that has no alternate data form, this will throw EDAMNotFoundException.
  
@@ -803,9 +911,14 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchAlternateDataForResourceWithGuid:(EDAMGuid)guid
+                                      success:(void(^)(NSData *data))success
+                                      failure:(void(^)(NSError *error))failure;
+
 - (void)getResourceAlternateDataWithGuid:(EDAMGuid)guid
                                  success:(void(^)(NSData *data))success
-                                 failure:(void(^)(NSError *error))failure;
+                                 failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchAlternateDataForResourceWithGuid:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Returns the set of attributes for the Resource with the provided GUID. If the Resource is found in a public notebook, the authenticationToken will be ignored (so it could be an empty string).
  
@@ -813,9 +926,14 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchAttributesForResourceWithGuid:(EDAMGuid)guid
+                                   success:(void(^)(EDAMResourceAttributes *attributes))success
+                                   failure:(void(^)(NSError *error))failure;
+
 - (void)getResourceAttributesWithGuid:(EDAMGuid)guid
                               success:(void(^)(EDAMResourceAttributes *attributes))success
-                              failure:(void(^)(NSError *error))failure;
+                              failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchAttributesForResourceWithGuid:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 ///---------------------------------------------------------------------------------------
 /// @name NoteStore shared notebook methods
@@ -830,10 +948,16 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchPublicNotebookWithUserID:(EDAMUserID)userId
+                            publicURI:(NSString *)publicURI
+                              success:(void(^)(EDAMNotebook *notebook))success
+                              failure:(void(^)(NSError *error))failure;
+
 - (void)getPublicNotebookWithUserID:(EDAMUserID)userId
                           publicUri:(NSString *)publicUri
                             success:(void(^)(EDAMNotebook *notebook))success
-                            failure:(void(^)(NSError *error))failure;
+                            failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchPublicNotebookWithUserID:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Used to construct a shared notebook object. The constructed notebook will contain a "share key" which serve as a unique identifer and access token for a user to access the notebook of the shared notebook owner.
  
@@ -942,6 +1066,9 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchSharedNotebookByAuthWithSuccess:(void(^)(EDAMSharedNotebook *sharedNotebook))success
+                                     failure:(void(^)(NSError *error))failure;
+
 - (void)getSharedNotebookByAuthWithSuccess:(void(^)(EDAMSharedNotebook *sharedNotebook))success
                                    failure:(void(^)(NSError *error))failure;
 
