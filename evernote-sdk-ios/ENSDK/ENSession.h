@@ -296,7 +296,7 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
  *
  *  @return Whether this method successfully handled this URL. (Non-Evernote URLs will return NO.)
  */
-- (BOOL)handleOpenURL:(NSURL *)url;
+- (BOOL)handleOpenURL:(NSURL *)url NS_SWIFT_NAME(handleOpenURL(_:));
 
 #pragma mark - Evernote functions
 
@@ -332,7 +332,7 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
  */
 - (void)uploadNote:(ENNote *)note
           notebook:(nullable ENNotebook *)notebook
-        completion:(ENSessionUploadNoteCompletionHandler)completion;
+        completion:(ENSessionUploadNoteCompletionHandler)completion NS_SWIFT_NAME(upload(_:notebook:completion:));
 
 /**
  *  Create a new note, or replace an existing note, in Evernote by uploading a note object.
@@ -352,7 +352,7 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
         toNotebook:(nullable ENNotebook *)notebook
      orReplaceNote:(nullable ENNoteRef *)noteToReplace
           progress:(nullable ENSessionProgressHandler)progress
-        completion:(ENSessionUploadNoteCompletionHandler)completion;
+        completion:(ENSessionUploadNoteCompletionHandler)completion NS_SWIFT_NAME(upload(_:policy:to:orReplace:progress:completion:));
 
 /**
  *  Share an existing note, and creates a URL that allows access to it directly.
@@ -403,7 +403,7 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
  */
 - (void)downloadNote:(ENNoteRef *)noteRef
             progress:(nullable ENSessionProgressHandler)progress
-          completion:(ENSessionDownloadNoteCompletionHandler)completion;
+          completion:(ENSessionDownloadNoteCompletionHandler)completion NS_SWIFT_NAME(download(_:progress:completion:));
 
 /**
  *  Download the service-generated thumbnail image for a note.
@@ -426,7 +426,7 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
  *  @return No means the Evernote app is not installed or not available. Yes does not guarantee that this note is successfuly opened,
  *          as the user could have logged into another account in the Evernote app.
  */
-- (BOOL)viewNoteInEvernote:(ENNoteRef *)noteRef;
+- (BOOL)viewNoteInEvernote:(ENNoteRef *)noteRef NS_SWIFT_NAME(viewNoteInEvernote(_:));
 
 /**
  *  View this note in the Evernote app and call callbackURL when done
@@ -437,7 +437,7 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
  *  @return No means the Evernote app is not installed or not available. Yes does not guarantee that this note is successfuly opened,
  *          as the user could have logged into another account in the Evernote app.
  */
-- (BOOL)viewNoteInEvernote:(ENNoteRef *)noteRef callbackURL:(NSString *)callbackURL;
+- (BOOL)viewNoteInEvernote:(ENNoteRef *)noteRef callbackURL:(NSString *)callbackURL NS_SWIFT_NAME(viewNoteInEvernote(_:callbackURL:));
 
 #pragma mark - Custom Evernote login in your app
 
