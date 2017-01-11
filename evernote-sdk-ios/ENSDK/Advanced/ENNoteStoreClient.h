@@ -232,7 +232,7 @@ typedef void (^ENNoteStoreClientProgressHandler)(CGFloat progress);
  */
 - (void)createNotebook:(EDAMNotebook *)notebook
                success:(void(^)(EDAMNotebook *notebook))success
-               failure:(void(^)(NSError *error))failure;
+               failure:(void(^)(NSError *error))failure NS_SWIFT_NAME(create(_:success:failure:));
 
 /** Submits notebook changes to the service. The provided data must include the notebook's guid field for identification.
  
@@ -300,7 +300,7 @@ typedef void (^ENNoteStoreClientProgressHandler)(CGFloat progress);
  */
 - (void)createTag:(EDAMTag *)tag
           success:(void(^)(EDAMTag *tag))success
-          failure:(void(^)(NSError *error))failure;
+          failure:(void(^)(NSError *error))failure NS_SWIFT_NAME(create(_:success:failure:));
 
 /** Submits tag changes to the service. The provided data must include the tag's guid field for identification. The service will apply updates to the following tag fields: name, parentGuid
  
@@ -370,7 +370,7 @@ typedef void (^ENNoteStoreClientProgressHandler)(CGFloat progress);
  */
 - (void)createSearch:(EDAMSavedSearch *)search
              success:(void(^)(EDAMSavedSearch *search))success
-             failure:(void(^)(NSError *error))failure;
+             failure:(void(^)(NSError *error))failure NS_SWIFT_NAME(create(_:success:failure:));
 
 /** Submits search changes to the service. The provided data must include the search's guid field for identification. The service will apply updates to the following search fields: name, query, and format.
  
@@ -653,7 +653,7 @@ DEPRECATED_MSG_ATTRIBUTE("Use -fetchNoteWithGuid:includingContent:resourceOption
  */
 - (void)createNote:(EDAMNote *)note
            success:(void(^)(EDAMNote *note))success
-           failure:(void(^)(NSError *error))failure;
+           failure:(void(^)(NSError *error))failure NS_SWIFT_NAME(create(_:success:failure:));
 
 /** Submit a set of changes to a note to the service.
  
@@ -795,7 +795,8 @@ DEPRECATED_MSG_ATTRIBUTE("Use -fetchNoteWithGuid:includingContent:resourceOption
              withAttributes:(BOOL)withAttributes
           withAlternateDate:(BOOL)withAlternateData
                     success:(void(^)(EDAMResource *resource))success
-                    failure:(void(^)(NSError *error))failure;
+                    failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchResourceWithGuid:options:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Get all of the application data for the Resource identified by GUID, with values returned within the LazyMap fullMap field. If there are no applicationData entries, then a LazyMap with an empty fullMap will be returned. If your application only needs to fetch its own applicationData entry, use getResourceApplicationDataEntry instead.
  
@@ -822,7 +823,7 @@ DEPRECATED_MSG_ATTRIBUTE("Use -fetchNoteWithGuid:includingContent:resourceOption
 - (void)fetchResourceApplicationDataEntryWithGuid:(EDAMGuid)guid
                                               key:(NSString *)key
                                           success:(void(^)(NSString *entry))success
-                                          failure:(void(^)(NSError *error))failure;
+                                          failure:(void(^)(NSError *error))failure NS_SWIFT_NAME(fetchResourceApplicationDataEntryWith(guid:key:success:failure:));
 
 - (void)getResourceApplicationDataEntryWithGuid:(EDAMGuid)guid
                                             key:(NSString *)key
@@ -854,7 +855,7 @@ DEPRECATED_MSG_ATTRIBUTE("Use -fetchNoteWithGuid:includingContent:resourceOption
 - (void)unsetResourceApplicationDataEntryWithGuid:(EDAMGuid)guid
                                               key:(NSString *)key
                                           success:(void(^)(int32_t usn))success
-                                          failure:(void(^)(NSError *error))failure;
+                                          failure:(void(^)(NSError *error))failure NS_SWIFT_NAME(unsetResourceApplicationDataEntryWith(guid:key:success:failure:));
 
 /** Submit a set of changes to a resource to the service.
  
@@ -900,7 +901,7 @@ DEPRECATED_MSG_ATTRIBUTE("Use -fetchNoteWithGuid:includingContent:resourceOption
                         contentHash:(NSData *)contentHash
                             options:(ENResourceFetchOption)options
                             success:(void(^)(EDAMResource *resource))success
-                            failure:(void(^)(NSError *error))failure;
+                            failure:(void(^)(NSError *error))failure NS_SWIFT_NAME(fetchResourceByHashWith(guid:contentHash:options:success:failure:));
 
 - (void)getResourceByHashWithGuid:(EDAMGuid)guid
                       contentHash:(NSData *)contentHash
@@ -975,7 +976,7 @@ DEPRECATED_MSG_ATTRIBUTE("Use -fetchNoteWithGuid:includingContent:resourceOption
 - (void)fetchPublicNotebookWithUserID:(EDAMUserID)userId
                             publicURI:(NSString *)publicURI
                               success:(void(^)(EDAMNotebook *notebook))success
-                              failure:(void(^)(NSError *error))failure;
+                              failure:(void(^)(NSError *error))failure NS_SWIFT_NAME(fetchPublicNotebookWith(userID:publicURI:success:failure:));
 
 - (void)getPublicNotebookWithUserID:(EDAMUserID)userId
                           publicUri:(NSString *)publicUri
@@ -991,7 +992,7 @@ DEPRECATED_MSG_ATTRIBUTE("Use -fetchNoteWithGuid:includingContent:resourceOption
  */
 - (void)createSharedNotebook:(EDAMSharedNotebook *)sharedNotebook
                      success:(void(^)(EDAMSharedNotebook *sharedNotebook))success
-                     failure:(void(^)(NSError *error))failure;
+                     failure:(void(^)(NSError *error))failure NS_SWIFT_NAME(create(_:success:failure:));
 
 /** Send a reminder message to some or all of the email addresses that a notebook has been shared with.
  
@@ -1039,7 +1040,7 @@ DEPRECATED_MSG_ATTRIBUTE("Use -fetchNoteWithGuid:includingContent:resourceOption
  */
 - (void)createLinkedNotebook:(EDAMLinkedNotebook *)linkedNotebook
                      success:(void(^)(EDAMLinkedNotebook *linkedNotebook))success
-                     failure:(void(^)(NSError *error))failure;
+                     failure:(void(^)(NSError *error))failure NS_SWIFT_NAME(create(_:success:failure:));
 
 /** Asks the service to update a linked notebook.
  
