@@ -405,16 +405,19 @@
     } success:success failure:failure];
 }
 
-- (void)getNoteWithGuid:(EDAMGuid)guid
-            withContent:(BOOL)withContent
-      withResourcesData:(BOOL)withResourcesData
-withResourcesRecognition:(BOOL)withResourcesRecognition
-withResourcesAlternateData:(BOOL)withResourcesAlternateData
-                success:(void(^)(EDAMNote *note))success
-                failure:(void(^)(NSError *error))failure
+- (void)fetchNoteWithGuid:(EDAMGuid)guid
+         includingContent:(BOOL)includingContent
+          resourceOptions:(ENResourceFetchOption)resourceOptions
+                  success:(void(^)(EDAMNote *note))success
+                  failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
-        return [self.client getNote:self.authenticationToken guid:guid withContent:withContent withResourcesData:withResourcesData withResourcesRecognition:withResourcesRecognition withResourcesAlternateData:withResourcesAlternateData];
+        return [self.client getNote:self.authenticationToken
+                               guid:guid
+                        withContent:includingContent
+                  withResourcesData:EN_FLAG_ISSET(resourceOptions, ENResourceFetchOptionIncludeData)
+           withResourcesRecognition:EN_FLAG_ISSET(resourceOptions, ENResourceFetchOptionIncludeRecognitionData)
+         withResourcesAlternateData:EN_FLAG_ISSET(resourceOptions, ENResourceFetchOptionIncludeAlternateData)];
     } success:success failure:failure];
 }
 
@@ -568,31 +571,36 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
     } success:success failure:failure];
 }
 
-- (void)getNoteVersionWithGuid:(EDAMGuid)guid
-             updateSequenceNum:(int32_t)updateSequenceNum
-             withResourcesData:(BOOL)withResourcesData
-      withResourcesRecognition:(BOOL)withResourcesRecognition
-    withResourcesAlternateData:(BOOL)withResourcesAlternateData
-                       success:(void(^)(EDAMNote *note))success
-                       failure:(void(^)(NSError *error))failure
+- (void)fetchNoteVersionWithGuid:(EDAMGuid)guid
+               updateSequenceNum:(int32_t)updateSequenceNum
+                 resourceOptions:(ENResourceFetchOption)resourceOptions
+                         success:(void(^)(EDAMNote *note))success
+                         failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
-        return [self.client getNoteVersion:self.authenticationToken noteGuid:guid updateSequenceNum:updateSequenceNum withResourcesData:withResourcesData withResourcesRecognition:withResourcesRecognition withResourcesAlternateData:withResourcesAlternateData];
+        return [self.client getNoteVersion:self.authenticationToken
+                                  noteGuid:guid
+                         updateSequenceNum:updateSequenceNum
+                         withResourcesData:EN_FLAG_ISSET(resourceOptions, ENResourceFetchOptionIncludeData)
+                  withResourcesRecognition:EN_FLAG_ISSET(resourceOptions, ENResourceFetchOptionIncludeRecognitionData)
+                withResourcesAlternateData:EN_FLAG_ISSET(resourceOptions, ENResourceFetchOptionIncludeAlternateData)];
     } success:success failure:failure];
 }
 
 #pragma mark - NoteStore resource methods
 
-- (void)getResourceWithGuid:(EDAMGuid)guid
-                   withData:(BOOL)withData
-            withRecognition:(BOOL)withRecognition
-             withAttributes:(BOOL)withAttributes
-          withAlternateDate:(BOOL)withAlternateData
-                    success:(void(^)(EDAMResource *resource))success
-                    failure:(void(^)(NSError *error))failure
+- (void)fetchResourceWithGuid:(EDAMGuid)guid
+                      options:(ENResourceFetchOption)options
+                      success:(void(^)(EDAMResource *resource))success
+                      failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
-        return [self.client getResource:self.authenticationToken guid:guid withData:withData withRecognition:withRecognition withAttributes:withAttributes withAlternateData:withAlternateData];
+        return [self.client getResource:self.authenticationToken
+                                   guid:guid
+                               withData:EN_FLAG_ISSET(options, ENResourceFetchOptionIncludeData)
+                        withRecognition:EN_FLAG_ISSET(options, ENResourceFetchOptionIncludeRecognitionData)
+                         withAttributes:EN_FLAG_ISSET(options, ENResourceFetchOptionIncludeAttributes)
+                      withAlternateData:EN_FLAG_ISSET(options, ENResourceFetchOptionIncludeAlternateData)];
     } success:success failure:failure];
 }
 
@@ -654,16 +662,19 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
     } success:success failure:failure];
 }
 
-- (void)getResourceByHashWithGuid:(EDAMGuid)guid
-                      contentHash:(NSData *)contentHash
-                         withData:(BOOL)withData
-                  withRecognition:(BOOL)withRecognition
-                withAlternateData:(BOOL)withAlternateData
-                          success:(void(^)(EDAMResource *resource))success
-                          failure:(void(^)(NSError *error))failure
+- (void)fetchResourceByHashWithGuid:(EDAMGuid)guid
+                        contentHash:(NSData *)contentHash
+                            options:(ENResourceFetchOption)options
+                            success:(void(^)(EDAMResource *resource))success
+                            failure:(void(^)(NSError *error))failure
 {
     [self invokeAsyncIdBlock:^id {
-        return [self.client getResourceByHash:self.authenticationToken noteGuid:guid contentHash:contentHash withData:withData withRecognition:withRecognition withAlternateData:withAlternateData];
+        return [self.client getResourceByHash:self.authenticationToken
+                                     noteGuid:guid
+                                  contentHash:contentHash
+                                     withData:EN_FLAG_ISSET(options, ENResourceFetchOptionIncludeData)
+                              withRecognition:EN_FLAG_ISSET(options, ENResourceFetchOptionIncludeRecognitionData)
+                            withAlternateData:EN_FLAG_ISSET(options, ENResourceFetchOptionIncludeAlternateData)];
     } success:success failure:failure];
 }
 
@@ -1096,8 +1107,95 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                    failure:(void(^)(NSError *error))failure
 
 {
-  [self fetchSharedNotebookByAuthWithSuccess:success failure:failure];
+    [self fetchSharedNotebookByAuthWithSuccess:success failure:failure];
 }
 
+
+- (void)getNoteWithGuid:(EDAMGuid)guid
+            withContent:(BOOL)withContent
+      withResourcesData:(BOOL)withResourcesData
+withResourcesRecognition:(BOOL)withResourcesRecognition
+withResourcesAlternateData:(BOOL)withResourcesAlternateData
+                success:(void(^)(EDAMNote *note))success
+                failure:(void(^)(NSError *error))failure
+{
+    ENResourceFetchOption options = 0;
+    if (withResourcesData) {
+        EN_FLAG_SET(options, ENResourceFetchOptionIncludeData);
+    }
+    if (withResourcesRecognition) {
+        EN_FLAG_SET(options, ENResourceFetchOptionIncludeRecognitionData);
+    }
+    if (withResourcesAlternateData) {
+        EN_FLAG_SET(options, ENResourceFetchOptionIncludeAlternateData);
+    }
+    [self fetchNoteWithGuid:guid includingContent:withContent resourceOptions:options success:success failure:failure];
+}
+
+- (void)getNoteVersionWithGuid:(EDAMGuid)guid
+             updateSequenceNum:(int32_t)updateSequenceNum
+             withResourcesData:(BOOL)withResourcesData
+      withResourcesRecognition:(BOOL)withResourcesRecognition
+    withResourcesAlternateData:(BOOL)withResourcesAlternateData
+                       success:(void(^)(EDAMNote *note))success
+                       failure:(void(^)(NSError *error))failure
+{
+    ENResourceFetchOption options = 0;
+    if (withResourcesData) {
+        EN_FLAG_SET(options, ENResourceFetchOptionIncludeData);
+    }
+    if (withResourcesRecognition) {
+        EN_FLAG_SET(options, ENResourceFetchOptionIncludeRecognitionData);
+    }
+    if (withResourcesAlternateData) {
+        EN_FLAG_SET(options, ENResourceFetchOptionIncludeAlternateData);
+    }
+    [self fetchNoteVersionWithGuid:guid updateSequenceNum:updateSequenceNum resourceOptions:options success:success failure:failure];
+}
+
+- (void)getResourceWithGuid:(EDAMGuid)guid
+                   withData:(BOOL)withData
+            withRecognition:(BOOL)withRecognition
+             withAttributes:(BOOL)withAttributes
+          withAlternateDate:(BOOL)withAlternateData
+                    success:(void(^)(EDAMResource *resource))success
+                    failure:(void(^)(NSError *error))failure
+{
+    ENResourceFetchOption options = 0;
+    if (withData) {
+        EN_FLAG_SET(options, ENResourceFetchOptionIncludeData);
+    }
+    if (withRecognition) {
+        EN_FLAG_SET(options, ENResourceFetchOptionIncludeRecognitionData);
+    }
+    if (withAlternateData) {
+        EN_FLAG_SET(options, ENResourceFetchOptionIncludeAlternateData);
+    }
+    if (withAttributes) {
+        EN_FLAG_SET(options, ENResourceFetchOptionIncludeAttributes);
+    }
+    [self fetchResourceWithGuid:guid options:options success:success failure:failure];
+}
+
+- (void)getResourceByHashWithGuid:(EDAMGuid)guid
+                      contentHash:(NSData *)contentHash
+                         withData:(BOOL)withData
+                  withRecognition:(BOOL)withRecognition
+                withAlternateData:(BOOL)withAlternateData
+                          success:(void(^)(EDAMResource *resource))success
+                          failure:(void(^)(NSError *error))failure
+{
+    ENResourceFetchOption options = 0;
+    if (withData) {
+        EN_FLAG_SET(options, ENResourceFetchOptionIncludeData);
+    }
+    if (withRecognition) {
+        EN_FLAG_SET(options, ENResourceFetchOptionIncludeRecognitionData);
+    }
+    if (withAlternateData) {
+        EN_FLAG_SET(options, ENResourceFetchOptionIncludeAlternateData);
+    }
+    [self fetchResourceByHashWithGuid:guid contentHash:contentHash options:options success:success failure:failure];
+}
 
 @end

@@ -1494,7 +1494,7 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
     }
     
     // Fetch by guid. Always get the content and resources.
-    [noteStore getNoteWithGuid:noteRef.guid withContent:YES withResourcesData:YES withResourcesRecognition:NO withResourcesAlternateData:NO success:^(EDAMNote * note) {
+    [noteStore fetchNoteWithGuid:noteRef.guid includingContent:YES resourceOptions:ENResourceFetchOptionIncludeData success:^(EDAMNote * note) {
         
         // Create an ENNote from the EDAMNote.
         ENNote * resultNote = [[ENNote alloc] initWithServiceNote:note];

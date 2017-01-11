@@ -43,6 +43,25 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_OPTIONS(NSUInteger, ENResourceFetchOption) {
+    /**
+            Fetches the data for the resource, populating its data property
+        */
+    ENResourceFetchOptionIncludeData = 1 << 0,
+    /**
+            Fetches any recognition data for the resource, populating its recognition property
+        */
+    ENResourceFetchOptionIncludeRecognitionData = 1 << 1,
+    /**
+            Fetches any alternate form for the resource's data, populating its alternateData property
+        */
+    ENResourceFetchOptionIncludeAlternateData = 1 << 2,
+    /**
+            Fetches the attributes for the resource, populating its attributes property
+        */
+    ENResourceFetchOptionIncludeAttributes = 1 << 3,
+};
+
 typedef void (^ENNoteStoreClientProgressHandler)(CGFloat progress);
 
 // ! DO NOT INSTANTIATE THIS OBJECT DIRECTLY. GET ONE FROM AN AUTHENTICATED ENSESSION !
@@ -470,22 +489,24 @@ typedef void (^ENNoteStoreClientProgressHandler)(CGFloat progress);
  
  @param  withContent If true, the note will include the ENML contents of its 'content' field.
  
- @param  withResourcesData If true, any Resource elements in this Note will include the binary contents of their 'data' field's body.
- 
- @param  withResourcesRecognition If true, any Resource elements will include the binary contents of the 'recognition' field's body if recognition data is present.
- 
- @param  withResourcesAlternateData If true, any Resource elements in this Note will include the binary contents of their 'alternateData' fields' body, if an alternate form is present.
+ @param  resourceOptions The options for fetching resource data
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchNoteWithGuid:(EDAMGuid)guid
+         includingContent:(BOOL)includingContent
+          resourceOptions:(ENResourceFetchOption)resourceOptions
+                  success:(void(^)(EDAMNote *note))success
+                  failure:(void(^)(NSError *error))failure;
+
 - (void)getNoteWithGuid:(EDAMGuid)guid
             withContent:(BOOL)withContent
       withResourcesData:(BOOL)withResourcesData
 withResourcesRecognition:(BOOL)withResourcesRecognition
 withResourcesAlternateData:(BOOL)withResourcesAlternateData
                 success:(void(^)(EDAMNote *note))success
-                failure:(void(^)(NSError *error))failure;
-#warning Fix this with a bit flag
+                failure:(void(^)(NSError *error))failure
+DEPRECATED_MSG_ATTRIBUTE("Use -fetchNoteWithGuid:includingContent:resourceOptions:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Get all of the application data for the note identified by GUID, with values returned within the LazyMap fullMap field.
  
@@ -731,22 +752,24 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  
  @param  updateSequenceNum The USN of the version of the note that is being retrieved
  
- @param  withResourcesData If true, any Resource elements in this Note will include the binary contents of their 'data' field's body.
- 
- @param  withResourcesRecognition If true, any Resource elements will include the binary contents of the 'recognition' field's body if recognition data is present.
- 
- @param  withResourcesAlternateData If true, any Resource elements in this Note will include the binary contents of their 'alternateData' fields' body, if an alternate form is present.
+ @param  resourceOptions The options for fetching resource data
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchNoteVersionWithGuid:(EDAMGuid)guid
+               updateSequenceNum:(int32_t)updateSequenceNum
+                 resourceOptions:(ENResourceFetchOption)resourceOptions
+                         success:(void(^)(EDAMNote *note))success
+                         failure:(void(^)(NSError *error))failure;
+
 - (void)getNoteVersionWithGuid:(EDAMGuid)guid
              updateSequenceNum:(int32_t)updateSequenceNum
              withResourcesData:(BOOL)withResourcesData
       withResourcesRecognition:(BOOL)withResourcesRecognition
     withResourcesAlternateData:(BOOL)withResourcesAlternateData
                        success:(void(^)(EDAMNote *note))success
-                       failure:(void(^)(NSError *error))failure;
-#warning update this with bit flag
+                       failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchNoteVersionWithGuid:updateSequenceNum:resourceOptions:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 ///---------------------------------------------------------------------------------------
 /// @name NoteStore resource methods
 ///---------------------------------------------------------------------------------------
@@ -756,17 +779,16 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  If the Resource is found in a public notebook, the authenticationToken will be ignored (so it could be an empty string). Only the keys for the applicationData will be returned.
  
  @param  guid The GUID of the resource to be retrieved.
- 
- @param  withData If true, the Resource will include the binary contents of the 'data' field's body.
- 
- @param  withRecognition If true, the Resource will include the binary contents of the 'recognition' field's body if recognition data is present.
- 
- @param  withAttributes If true, the Resource will include the attributes
- 
- @param  withAlternateData If true, the Resource will include the binary contents of the 'alternateData' field's body, if an alternate form is present.
+
+ @param  resourceOptions The options for fetching resource data
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchResourceWithGuid:(EDAMGuid)guid
+                      options:(ENResourceFetchOption)options
+                      success:(void(^)(EDAMResource *resource))success
+                      failure:(void(^)(NSError *error))failure;
+
 - (void)getResourceWithGuid:(EDAMGuid)guid
                    withData:(BOOL)withData
             withRecognition:(BOOL)withRecognition
@@ -774,7 +796,6 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
           withAlternateDate:(BOOL)withAlternateData
                     success:(void(^)(EDAMResource *resource))success
                     failure:(void(^)(NSError *error))failure;
-#warning update this with bit flag
 
 /** Get all of the application data for the Resource identified by GUID, with values returned within the LazyMap fullMap field. If there are no applicationData entries, then a LazyMap with an empty fullMap will be returned. If your application only needs to fetch its own applicationData entry, use getResourceApplicationDataEntry instead.
  
@@ -870,23 +891,26 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
  
  @param  contentHash The MD5 checksum of the resource within that note. Note that this is the binary checksum, for example from Resource.data.bodyHash, and not the hex-encoded checksum that is used within an en-media tag in a note body.
  
- @param  withData If true, the Resource will include the binary contents of the 'data' field's body.
- 
- @param  withRecognition If true, the Resource will include the binary contents of the 'recognition' field's body.
- 
- @param  withAlternateData If true, the Resource will include the binary contents of the 'alternateData' field's body, if an alternate form is present.
+ @param  resourceOptions The options for fetching resource data
  
  @param success Success completion block.
  @param failure Failure completion block.
  */
+- (void)fetchResourceByHashWithGuid:(EDAMGuid)guid
+                        contentHash:(NSData *)contentHash
+                            options:(ENResourceFetchOption)options
+                            success:(void(^)(EDAMResource *resource))success
+                            failure:(void(^)(NSError *error))failure;
+
 - (void)getResourceByHashWithGuid:(EDAMGuid)guid
                       contentHash:(NSData *)contentHash
                          withData:(BOOL)withData
                   withRecognition:(BOOL)withRecognition
                 withAlternateData:(BOOL)withAlternateData
                           success:(void(^)(EDAMResource *resource))success
-                          failure:(void(^)(NSError *error))failure;
-#warning update this with bit flag
+                          failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchResourcebyHashWithGuid:contentHash:options:success:failure: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
+
 
 /** Returns the binary contents of the recognition index for the resource with the provided GUID.
  
