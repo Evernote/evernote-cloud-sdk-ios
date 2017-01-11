@@ -1,5 +1,7 @@
 # Evernote Cloud SDK 3.0 for iOS
 
+This is the official Evernote SDK for iOS. 
+
 ## Installation
 ### Cocoapods
 ```ruby
