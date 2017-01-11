@@ -81,7 +81,7 @@ typedef void (^ENNoteGenerateWebArchiveDataCompletionHandler)(NSData *_Nullable 
  *
  *  @param resource A fully-specified ENResource.
  */
-- (void)addResource:(ENResource *)resource;
+- (void)addResource:(ENResource *)resource NS_SWIFT_NAME(add(_:));
 
 /**
  *  Removes all resources currently attached.
