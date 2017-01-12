@@ -10,6 +10,176 @@
 		0BB3D1B11524ED96001C4534 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB3D1B01524ED96001C4534 /* Foundation.framework */; };
 		6D9D5FFC1E23AC27001740D8 /* EDAMAuthenticationTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D9D5FFA1E23AC27001740D8 /* EDAMAuthenticationTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D9D5FFD1E23AC27001740D8 /* EDAMAuthenticationTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D9D5FFB1E23AC27001740D8 /* EDAMAuthenticationTypes.m */; };
+		6D9D60BB1E27940A001740D8 /* EvernoteSDKiOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D9D60B91E27940A001740D8 /* EvernoteSDKiOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D60BF1E279424001740D8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB3D1B01524ED96001C4534 /* Foundation.framework */; };
+		6D9D60C01E279487001740D8 /* ENCommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CD513719D9DAD600DCC747 /* ENCommonUtils.m */; };
+		6D9D60C11E279487001740D8 /* ENSession.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23F718EBA5D500BD7E6E /* ENSession.m */; };
+		6D9D60C21E279487001740D8 /* ENNote.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23ED18EBA5D500BD7E6E /* ENNote.m */; };
+		6D9D60C31E279487001740D8 /* ENNoteContent.m in Sources */ = {isa = PBXBuildFile; fileRef = BECDD2F318F77BC3003736EE /* ENNoteContent.m */; };
+		6D9D60C41E279487001740D8 /* ENNotebook.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23EF18EBA5D500BD7E6E /* ENNotebook.m */; };
+		6D9D60C51E279487001740D8 /* ENResource.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23F318EBA5D500BD7E6E /* ENResource.m */; };
+		6D9D60C61E279487001740D8 /* ENNoteRef.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23F118EBA5D500BD7E6E /* ENNoteRef.m */; };
+		6D9D60C71E279487001740D8 /* ENError.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23EB18EBA5D500BD7E6E /* ENError.m */; };
+		6D9D60C81E279487001740D8 /* ENNoteSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4BF75E1925736300564DA3 /* ENNoteSearch.m */; };
+		6D9D60C91E279487001740D8 /* ENNoteStoreClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23CD18EBA5D400BD7E6E /* ENNoteStoreClient.m */; };
+		6D9D60CA1E279487001740D8 /* ENUserStoreClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23D018EBA5D400BD7E6E /* ENUserStoreClient.m */; };
+		6D9D60CB1E279487001740D8 /* ENPreferencesStore.m in Sources */ = {isa = PBXBuildFile; fileRef = BECDD2EF18F5C8F3003736EE /* ENPreferencesStore.m */; };
+		6D9D60CC1E279487001740D8 /* EDAMAuthenticationTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D9D5FFB1E23AC27001740D8 /* EDAMAuthenticationTypes.m */; };
+		6D9D60CD1E279487001740D8 /* EDAMErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23C118EBA5D400BD7E6E /* EDAMErrors.m */; };
+		6D9D60CE1E279487001740D8 /* EDAMLimits.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23C318EBA5D400BD7E6E /* EDAMLimits.m */; };
+		6D9D60CF1E279487001740D8 /* EDAMNoteStore.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23C518EBA5D400BD7E6E /* EDAMNoteStore.m */; };
+		6D9D60D01E279487001740D8 /* EDAMTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23C718EBA5D400BD7E6E /* EDAMTypes.m */; };
+		6D9D60D11E279487001740D8 /* EDAMUserStore.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23C918EBA5D400BD7E6E /* EDAMUserStore.m */; };
+		6D9D60D21E279487001740D8 /* ENMLConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E25D818F4D6C200BD7E6E /* ENMLConstants.m */; };
+		6D9D60D31E279487001740D8 /* ENMLUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23D318EBA5D400BD7E6E /* ENMLUtility.m */; };
+		6D9D60D41E279487001740D8 /* ENEncryptedContentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23D618EBA5D400BD7E6E /* ENEncryptedContentInfo.m */; };
+		6D9D60D51E279487001740D8 /* ENMIMEUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23D818EBA5D400BD7E6E /* ENMIMEUtils.m */; };
+		6D9D60D61E279487001740D8 /* ENMLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23DA18EBA5D400BD7E6E /* ENMLWriter.m */; };
+		6D9D60D71E279487001740D8 /* ENXMLDTD.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23DC18EBA5D400BD7E6E /* ENXMLDTD.m */; };
+		6D9D60D81E279487001740D8 /* ENXMLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23DF18EBA5D400BD7E6E /* ENXMLWriter.m */; };
+		6D9D60D91E279487001740D8 /* NSRegularExpression+ENAGRegex.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23E118EBA5D400BD7E6E /* NSRegularExpression+ENAGRegex.m */; };
+		6D9D60DA1E279487001740D8 /* NSString+EDAMNilAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23E218EBA5D400BD7E6E /* NSString+EDAMNilAdditions.m */; };
+		6D9D60DB1E279487001740D8 /* NSData+EvernoteSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23E518EBA5D500BD7E6E /* NSData+EvernoteSDK.m */; };
+		6D9D60DC1E279487001740D8 /* NSDate+EDAMAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23E918EBA5D500BD7E6E /* NSDate+EDAMAdditions.m */; };
+		6D9D60DD1E279487001740D8 /* FATField.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F2F1921808B00A4DA30 /* FATField.m */; };
+		6D9D60DE1E279487001740D8 /* FATObject.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F311921808B00A4DA30 /* FATObject.m */; };
+		6D9D60DF1E279487001740D8 /* ENTBinaryProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F341921808B00A4DA30 /* ENTBinaryProtocol.m */; };
+		6D9D60E01E279487001740D8 /* ENTException.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F361921808B00A4DA30 /* ENTException.m */; };
+		6D9D60E11E279487001740D8 /* ENTHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F381921808B00A4DA30 /* ENTHTTPClient.m */; };
+		6D9D60E21E279487001740D8 /* ENTProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F3A1921808B00A4DA30 /* ENTProtocol.m */; };
+		6D9D60E31E279487001740D8 /* ENTTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7E5F3C1921808B00A4DA30 /* ENTTransport.m */; };
+		6D9D60E41E279487001740D8 /* RMSTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 86D49E3A191DA4A8001C3581 /* RMSTextField.m */; };
+		6D9D60E51E279487001740D8 /* RMSTokenConstraintManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 86D49E3C191DA4A8001C3581 /* RMSTokenConstraintManager.m */; };
+		6D9D60E61E279487001740D8 /* RMSTokenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86D49E3E191DA4A8001C3581 /* RMSTokenView.m */; };
+		6D9D60E71E279487001740D8 /* ENAFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23FC18EBA5D500BD7E6E /* ENAFURLConnectionOperation.m */; };
+		6D9D60E81E279487001740D8 /* ENGCOAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E23FF18EBA5D500BD7E6E /* ENGCOAuth.m */; };
+		6D9D60E91E279487001740D8 /* KSForwardingWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E240518EBA5D500BD7E6E /* KSForwardingWriter.m */; };
+		6D9D60EA1E279487001740D8 /* KSHTMLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E240718EBA5D500BD7E6E /* KSHTMLWriter.m */; };
+		6D9D60EB1E279487001740D8 /* KSWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E240918EBA5D500BD7E6E /* KSWriter.m */; };
+		6D9D60EC1E279487001740D8 /* KSXMLAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E240B18EBA5D500BD7E6E /* KSXMLAttributes.m */; };
+		6D9D60ED1E279487001740D8 /* KSXMLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E240D18EBA5D500BD7E6E /* KSXMLWriter.m */; };
+		6D9D60EE1E279487001740D8 /* NSString+XMLAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E241018EBA5D500BD7E6E /* NSString+XMLAdditions.m */; };
+		6D9D60EF1E279487001740D8 /* ENSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 862CE9F11A757B5100D0DB23 /* ENSSKeychain.m */; };
+		6D9D60F01E279487001740D8 /* ENSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 862CE9F31A757B5100D0DB23 /* ENSSKeychainQuery.m */; };
+		6D9D60F11E279487001740D8 /* ENSDKPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E25DC18F4DCE600BD7E6E /* ENSDKPrivate.m */; };
+		6D9D60F21E279487001740D8 /* EDAMNoteStoreClient+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E243B18EBA5D500BD7E6E /* EDAMNoteStoreClient+Utilities.m */; };
+		6D9D60F31E279487001740D8 /* ENAuthCache.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E243D18EBA5D500BD7E6E /* ENAuthCache.m */; };
+		6D9D60F41E279487001740D8 /* ENCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E243F18EBA5D500BD7E6E /* ENCredentials.m */; };
+		6D9D60F51E279487001740D8 /* ENCredentialStore.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E244118EBA5D500BD7E6E /* ENCredentialStore.m */; };
+		6D9D60F61E279487001740D8 /* ENHTMLtoENMLConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E244318EBA5D500BD7E6E /* ENHTMLtoENMLConverter.m */; };
+		6D9D60F71E279487001740D8 /* ENLinkedNotebookRef.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E244518EBA5D500BD7E6E /* ENLinkedNotebookRef.m */; };
+		6D9D60F81E279487001740D8 /* ENLinkedNoteStoreClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E244718EBA5D500BD7E6E /* ENLinkedNoteStoreClient.m */; };
+		6D9D60F91E279487001740D8 /* ENBusinessNoteStoreClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E25D218F3745700BD7E6E /* ENBusinessNoteStoreClient.m */; };
+		6D9D60FA1E279487001740D8 /* ENNotebookTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C54DDC191D8F0900670865 /* ENNotebookTypeView.m */; };
+		6D9D60FB1E279487001740D8 /* ENNotebookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 866F1C711905F01F0072F4C8 /* ENNotebookCell.m */; };
+		6D9D60FC1E279487001740D8 /* ENNotebookChooserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E244918EBA5D500BD7E6E /* ENNotebookChooserViewController.m */; };
+		6D9D60FD1E279487001740D8 /* ENOAuthAuthenticator.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E244C18EBA5D500BD7E6E /* ENOAuthAuthenticator.m */; };
+		6D9D60FE1E279487001740D8 /* ENOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E244E18EBA5D500BD7E6E /* ENOAuthViewController.m */; };
+		6D9D60FF1E279487001740D8 /* ENStoreClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E245118EBA5D500BD7E6E /* ENStoreClient.m */; };
+		6D9D61001E279487001740D8 /* ENXMLSaxParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E245318EBA5D500BD7E6E /* ENXMLSaxParser.m */; };
+		6D9D61011E279487001740D8 /* NSString+ENScrubbing.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E245618EBA5D500BD7E6E /* NSString+ENScrubbing.m */; };
+		6D9D61021E279487001740D8 /* ENPlainNoteContent.m in Sources */ = {isa = PBXBuildFile; fileRef = BECDD2F718F77C0E003736EE /* ENPlainNoteContent.m */; };
+		6D9D61031E279487001740D8 /* ENHTMLNoteContent.m in Sources */ = {isa = PBXBuildFile; fileRef = BECDD2FB18F78072003736EE /* ENHTMLNoteContent.m */; };
+		6D9D61041E279487001740D8 /* ENTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CB761A18FF4554002F267E /* ENTheme.m */; };
+		6D9D61051E279487001740D8 /* ENSDKResourceLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = BECDD3C7190A2DE7003736EE /* ENSDKResourceLoader.m */; };
+		6D9D61061E279487001740D8 /* ENWebContentTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = BE48C6F619102CC600025618 /* ENWebContentTransformer.m */; };
+		6D9D61071E279487001740D8 /* ENWebClipNoteBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = BE48C6FC19102DD900025618 /* ENWebClipNoteBuilder.m */; };
+		6D9D61081E279487001740D8 /* ENWebResource.m in Sources */ = {isa = PBXBuildFile; fileRef = BE48C70219116D3400025618 /* ENWebResource.m */; };
+		6D9D61091E279487001740D8 /* ENWebArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = BE48C7081911713300025618 /* ENWebArchive.m */; };
+		6D9D610A1E279487001740D8 /* ENLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE48C70E1912FC1300025618 /* ENLoadingViewController.m */; };
+		6D9D610B1E279487001740D8 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4BF764192C4B5200564DA3 /* NSString+URLEncoding.m */; };
+		6D9D610C1E279487001740D8 /* ENShareURLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4C731A195B859A001E5EF6 /* ENShareURLHelper.m */; };
+		6D9D610D1E279487001740D8 /* ENSaveToEvernoteActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2E245B18EBA5D500BD7E6E /* ENSaveToEvernoteActivity.m */; };
+		6D9D610E1E279487001740D8 /* ENSaveToEvernoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 86CB761318FF33D4002F267E /* ENSaveToEvernoteViewController.m */; };
+		6D9D610F1E279487001740D8 /* ENNotebookPickerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 86B198561901DB0A008F606A /* ENNotebookPickerButton.m */; };
+		6D9D61101E279487001740D8 /* ENNotebookPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 862E76C6192AB962003D0A32 /* ENNotebookPickerView.m */; };
+		6D9D61121E279517001740D8 /* ENCommonUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 86CD513619D9DAD600DCC747 /* ENCommonUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D61131E279517001740D8 /* ENSession.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23F618EBA5D500BD7E6E /* ENSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D61141E279517001740D8 /* ENNote.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23EC18EBA5D500BD7E6E /* ENNote.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D61151E279517001740D8 /* ENNoteContent.h in Headers */ = {isa = PBXBuildFile; fileRef = BECDD2F218F77BC3003736EE /* ENNoteContent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D61161E279517001740D8 /* ENNotebook.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23EE18EBA5D500BD7E6E /* ENNotebook.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D61171E279517001740D8 /* ENResource.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23F218EBA5D500BD7E6E /* ENResource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D61181E279517001740D8 /* ENNoteRef.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23F018EBA5D500BD7E6E /* ENNoteRef.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D61191E279517001740D8 /* ENError.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23EA18EBA5D500BD7E6E /* ENError.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D611A1E279517001740D8 /* ENSDKLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23F518EBA5D500BD7E6E /* ENSDKLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D611B1E279517001740D8 /* ENNoteSearch.h in Headers */ = {isa = PBXBuildFile; fileRef = BE4BF75D1925736300564DA3 /* ENNoteSearch.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D611C1E279517001740D8 /* ENSDKAdvanced.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23CE18EBA5D400BD7E6E /* ENSDKAdvanced.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D611D1E279517001740D8 /* ENNoteStoreClient.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23CC18EBA5D400BD7E6E /* ENNoteStoreClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D611E1E279517001740D8 /* ENUserStoreClient.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23CF18EBA5D400BD7E6E /* ENUserStoreClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D611F1E279517001740D8 /* ENPreferencesStore.h in Headers */ = {isa = PBXBuildFile; fileRef = BECDD2EE18F5C8F3003736EE /* ENPreferencesStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D61201E279517001740D8 /* EDAM.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23BF18EBA5D400BD7E6E /* EDAM.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D61211E279517001740D8 /* EDAMAuthenticationTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D9D5FFA1E23AC27001740D8 /* EDAMAuthenticationTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D61221E279517001740D8 /* EDAMErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23C018EBA5D400BD7E6E /* EDAMErrors.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D61231E279517001740D8 /* EDAMLimits.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23C218EBA5D400BD7E6E /* EDAMLimits.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D61241E279517001740D8 /* EDAMNoteStore.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23C418EBA5D400BD7E6E /* EDAMNoteStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D61251E279517001740D8 /* EDAMTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23C618EBA5D400BD7E6E /* EDAMTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D61261E279517001740D8 /* EDAMUserStore.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23C818EBA5D400BD7E6E /* EDAMUserStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D61271E279517001740D8 /* ENMLConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E25D718F4D6C200BD7E6E /* ENMLConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D61281E279517001740D8 /* ENMLUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23D218EBA5D400BD7E6E /* ENMLUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D61291E279517001740D8 /* ENEncryptedContentInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23D518EBA5D400BD7E6E /* ENEncryptedContentInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D612A1E279517001740D8 /* ENMIMEUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23D718EBA5D400BD7E6E /* ENMIMEUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D612B1E279517001740D8 /* ENMLWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23D918EBA5D400BD7E6E /* ENMLWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D612C1E279517001740D8 /* ENXMLDTD.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23DB18EBA5D400BD7E6E /* ENXMLDTD.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D612D1E279517001740D8 /* ENXMLUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23DD18EBA5D400BD7E6E /* ENXMLUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D612E1E279517001740D8 /* ENXMLWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23DE18EBA5D400BD7E6E /* ENXMLWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D612F1E279517001740D8 /* NSRegularExpression+ENAGRegex.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23E018EBA5D400BD7E6E /* NSRegularExpression+ENAGRegex.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D61301E279517001740D8 /* NSString+EDAMNilAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23E318EBA5D400BD7E6E /* NSString+EDAMNilAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D61311E279517001740D8 /* NSData+EvernoteSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23E418EBA5D400BD7E6E /* NSData+EvernoteSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D61321E279517001740D8 /* NSDate+EDAMAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23E818EBA5D500BD7E6E /* NSDate+EDAMAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D9D61331E279536001740D8 /* FATField.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F2E1921808B00A4DA30 /* FATField.h */; };
+		6D9D61341E279536001740D8 /* FATObject.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F301921808B00A4DA30 /* FATObject.h */; };
+		6D9D61351E279536001740D8 /* ENTBinaryProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F331921808B00A4DA30 /* ENTBinaryProtocol.h */; };
+		6D9D61361E279536001740D8 /* ENTException.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F351921808B00A4DA30 /* ENTException.h */; };
+		6D9D61371E279536001740D8 /* ENTHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F371921808B00A4DA30 /* ENTHTTPClient.h */; };
+		6D9D61381E279536001740D8 /* ENTProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F391921808B00A4DA30 /* ENTProtocol.h */; };
+		6D9D61391E279536001740D8 /* ENTTransport.h in Headers */ = {isa = PBXBuildFile; fileRef = BE7E5F3B1921808B00A4DA30 /* ENTTransport.h */; };
+		6D9D613A1E279536001740D8 /* RMSTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 86D49E39191DA4A8001C3581 /* RMSTextField.h */; };
+		6D9D613B1E279536001740D8 /* RMSTokenConstraintManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 86D49E3B191DA4A8001C3581 /* RMSTokenConstraintManager.h */; };
+		6D9D613C1E279536001740D8 /* RMSTokenView.h in Headers */ = {isa = PBXBuildFile; fileRef = 86D49E3D191DA4A8001C3581 /* RMSTokenView.h */; };
+		6D9D613D1E279536001740D8 /* ENAFURLConnectionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23FB18EBA5D500BD7E6E /* ENAFURLConnectionOperation.h */; };
+		6D9D613E1E279536001740D8 /* ENGCOAuth.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23FE18EBA5D500BD7E6E /* ENGCOAuth.h */; };
+		6D9D613F1E279536001740D8 /* KSForwardingWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E240418EBA5D500BD7E6E /* KSForwardingWriter.h */; };
+		6D9D61401E279536001740D8 /* KSHTMLWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E240618EBA5D500BD7E6E /* KSHTMLWriter.h */; };
+		6D9D61411E279536001740D8 /* KSWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E240818EBA5D500BD7E6E /* KSWriter.h */; };
+		6D9D61421E279536001740D8 /* KSXMLAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E240A18EBA5D500BD7E6E /* KSXMLAttributes.h */; };
+		6D9D61431E279536001740D8 /* KSXMLWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E240C18EBA5D500BD7E6E /* KSXMLWriter.h */; };
+		6D9D61441E279536001740D8 /* NSString+XMLAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E240F18EBA5D500BD7E6E /* NSString+XMLAdditions.h */; };
+		6D9D61451E279536001740D8 /* ENSSKeychain.h in Headers */ = {isa = PBXBuildFile; fileRef = 862CE9F01A757B5100D0DB23 /* ENSSKeychain.h */; };
+		6D9D61461E279536001740D8 /* ENSSKeychainQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = 862CE9F21A757B5100D0DB23 /* ENSSKeychainQuery.h */; };
+		6D9D61471E279536001740D8 /* ENSDKPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E244F18EBA5D500BD7E6E /* ENSDKPrivate.h */; };
+		6D9D61481E279536001740D8 /* EDAMNoteStoreClient+Utilities.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E243A18EBA5D500BD7E6E /* EDAMNoteStoreClient+Utilities.h */; };
+		6D9D61491E279536001740D8 /* ENAuthCache.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E243C18EBA5D500BD7E6E /* ENAuthCache.h */; };
+		6D9D614A1E279536001740D8 /* ENCredentials.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E243E18EBA5D500BD7E6E /* ENCredentials.h */; };
+		6D9D614B1E279536001740D8 /* ENCredentialStore.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E244018EBA5D500BD7E6E /* ENCredentialStore.h */; };
+		6D9D614C1E279536001740D8 /* ENHTMLtoENMLConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E244218EBA5D500BD7E6E /* ENHTMLtoENMLConverter.h */; };
+		6D9D614D1E279536001740D8 /* ENLinkedNotebookRef.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E244418EBA5D500BD7E6E /* ENLinkedNotebookRef.h */; };
+		6D9D614E1E279536001740D8 /* ENLinkedNoteStoreClient.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E244618EBA5D500BD7E6E /* ENLinkedNoteStoreClient.h */; };
+		6D9D614F1E279536001740D8 /* ENBusinessNoteStoreClient.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E25D118F3745700BD7E6E /* ENBusinessNoteStoreClient.h */; };
+		6D9D61501E279536001740D8 /* ENNotebookTypeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 86C54DDB191D8F0900670865 /* ENNotebookTypeView.h */; };
+		6D9D61511E279536001740D8 /* ENNotebookCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 866F1C701905F01F0072F4C8 /* ENNotebookCell.h */; };
+		6D9D61521E279536001740D8 /* ENNotebookChooserViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E244818EBA5D500BD7E6E /* ENNotebookChooserViewController.h */; };
+		6D9D61531E279536001740D8 /* ENNoteRefInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E244A18EBA5D500BD7E6E /* ENNoteRefInternal.h */; };
+		6D9D61541E279536001740D8 /* ENOAuthAuthenticator.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E244B18EBA5D500BD7E6E /* ENOAuthAuthenticator.h */; };
+		6D9D61551E279536001740D8 /* ENOAuthViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E244D18EBA5D500BD7E6E /* ENOAuthViewController.h */; };
+		6D9D61561E279536001740D8 /* ENStoreClient.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E245018EBA5D500BD7E6E /* ENStoreClient.h */; };
+		6D9D61571E279536001740D8 /* ENXMLSaxParser.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E245218EBA5D500BD7E6E /* ENXMLSaxParser.h */; };
+		6D9D61581E279536001740D8 /* NSString+ENScrubbing.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E245518EBA5D500BD7E6E /* NSString+ENScrubbing.h */; };
+		6D9D61591E279536001740D8 /* ENPlainNoteContent.h in Headers */ = {isa = PBXBuildFile; fileRef = BECDD2F618F77C0E003736EE /* ENPlainNoteContent.h */; };
+		6D9D615A1E279536001740D8 /* ENHTMLNoteContent.h in Headers */ = {isa = PBXBuildFile; fileRef = BECDD2FA18F78072003736EE /* ENHTMLNoteContent.h */; };
+		6D9D615B1E279536001740D8 /* ENTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 86CB761918FF4554002F267E /* ENTheme.h */; };
+		6D9D615C1E279536001740D8 /* ENSDKResourceLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = BECDD3C6190A2DE7003736EE /* ENSDKResourceLoader.h */; };
+		6D9D615D1E279536001740D8 /* ENWebContentTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = BE48C6F519102CC600025618 /* ENWebContentTransformer.h */; };
+		6D9D615E1E279536001740D8 /* ENWebClipNoteBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = BE48C6FB19102DD900025618 /* ENWebClipNoteBuilder.h */; };
+		6D9D615F1E279536001740D8 /* ENWebResource.h in Headers */ = {isa = PBXBuildFile; fileRef = BE48C70119116D3400025618 /* ENWebResource.h */; };
+		6D9D61601E279536001740D8 /* ENWebArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = BE48C7071911713200025618 /* ENWebArchive.h */; };
+		6D9D61611E279536001740D8 /* ENLoadingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BE48C70D1912FC1300025618 /* ENLoadingViewController.h */; };
+		6D9D61621E279536001740D8 /* NSString+URLEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = BE4BF763192C4B5200564DA3 /* NSString+URLEncoding.h */; };
+		6D9D61631E279536001740D8 /* ENShareURLHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = BE4C7319195B859A001E5EF6 /* ENShareURLHelper.h */; };
+		6D9D61641E279536001740D8 /* ENSaveToEvernoteActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E245A18EBA5D500BD7E6E /* ENSaveToEvernoteActivity.h */; };
+		6D9D61651E279536001740D8 /* ENSaveToEvernoteViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 86CB761218FF33D4002F267E /* ENSaveToEvernoteViewController.h */; };
+		6D9D61661E279536001740D8 /* ENNotebookPickerButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 86B198551901DB0A008F606A /* ENNotebookPickerButton.h */; };
+		6D9D61671E279536001740D8 /* ENNotebookPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 862E76C5192AB962003D0A32 /* ENNotebookPickerView.h */; };
+		6D9D61691E2796FC001740D8 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D9D61681E2796FC001740D8 /* libxml2.2.tbd */; };
 		8600EC171A15D97400F8F838 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8600EC161A15D97400F8F838 /* Launch Screen.xib */; };
 		8603EFF61A731A680002AE28 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8603EFF51A731A680002AE28 /* Images.xcassets */; };
 		860DF40A18FCCE51002B4793 /* ENSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = BE2E23F418EBA5D500BD7E6E /* ENSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -357,6 +527,10 @@
 		0BB3D24D1524EEF3001C4534 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6D9D5FFA1E23AC27001740D8 /* EDAMAuthenticationTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDAMAuthenticationTypes.h; sourceTree = "<group>"; };
 		6D9D5FFB1E23AC27001740D8 /* EDAMAuthenticationTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EDAMAuthenticationTypes.m; sourceTree = "<group>"; };
+		6D9D60B71E27940A001740D8 /* EvernoteSDKiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EvernoteSDKiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D9D60B91E27940A001740D8 /* EvernoteSDKiOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EvernoteSDKiOS.h; sourceTree = "<group>"; };
+		6D9D60BA1E27940A001740D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6D9D61681E2796FC001740D8 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
 		8600EC161A15D97400F8F838 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		8603EFF51A731A680002AE28 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		86254FCC1A1AA0D5005A3425 /* NotebooksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotebooksViewController.h; sourceTree = "<group>"; };
@@ -587,6 +761,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6D9D60B31E27940A001740D8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D9D61691E2796FC001740D8 /* libxml2.2.tbd in Frameworks */,
+				6D9D60BF1E279424001740D8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		865C382E18F8BA2400ECB2BA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -616,6 +799,7 @@
 				0BB3D1B21524ED96001C4534 /* evernote-sdk-ios */,
 				865C383818F8BA2400ECB2BA /* ENSDK */,
 				BECDD3741908FFC1003736EE /* EvernoteSDKSample */,
+				6D9D60B81E27940A001740D8 /* EvernoteSDKiOS */,
 				0BB3D1AF1524ED96001C4534 /* Frameworks */,
 				0BB3D1AE1524ED96001C4534 /* Products */,
 			);
@@ -630,6 +814,7 @@
 				0BB3D1AD1524ED96001C4534 /* libevernote-sdk-ios.a */,
 				865C383118F8BA2400ECB2BA /* ENSDK.framework */,
 				BECDD3701908FFC1003736EE /* EvernoteSDKSample.app */,
+				6D9D60B71E27940A001740D8 /* EvernoteSDKiOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -637,6 +822,7 @@
 		0BB3D1AF1524ED96001C4534 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D9D61681E2796FC001740D8 /* libxml2.2.tbd */,
 				BE2E25B018EDE1C100BD7E6E /* MobileCoreServices.framework */,
 				A9BE476B1781FAFA00471BF7 /* libxml2.dylib */,
 				0BB3D1B01524ED96001C4534 /* Foundation.framework */,
@@ -662,6 +848,15 @@
 				0BB3D1B41524ED96001C4534 /* evernote-sdk-ios-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6D9D60B81E27940A001740D8 /* EvernoteSDKiOS */ = {
+			isa = PBXGroup;
+			children = (
+				6D9D60B91E27940A001740D8 /* EvernoteSDKiOS.h */,
+				6D9D60BA1E27940A001740D8 /* Info.plist */,
+			);
+			path = EvernoteSDKiOS;
 			sourceTree = "<group>";
 		};
 		862CE9FC1A757C4B00D0DB23 /* en.lproj */ = {
@@ -1145,6 +1340,100 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6D9D60B41E27940A001740D8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D9D60BB1E27940A001740D8 /* EvernoteSDKiOS.h in Headers */,
+				6D9D61121E279517001740D8 /* ENCommonUtils.h in Headers */,
+				6D9D61131E279517001740D8 /* ENSession.h in Headers */,
+				6D9D61141E279517001740D8 /* ENNote.h in Headers */,
+				6D9D61151E279517001740D8 /* ENNoteContent.h in Headers */,
+				6D9D61161E279517001740D8 /* ENNotebook.h in Headers */,
+				6D9D61171E279517001740D8 /* ENResource.h in Headers */,
+				6D9D61181E279517001740D8 /* ENNoteRef.h in Headers */,
+				6D9D61191E279517001740D8 /* ENError.h in Headers */,
+				6D9D611A1E279517001740D8 /* ENSDKLogging.h in Headers */,
+				6D9D611B1E279517001740D8 /* ENNoteSearch.h in Headers */,
+				6D9D611C1E279517001740D8 /* ENSDKAdvanced.h in Headers */,
+				6D9D611D1E279517001740D8 /* ENNoteStoreClient.h in Headers */,
+				6D9D611E1E279517001740D8 /* ENUserStoreClient.h in Headers */,
+				6D9D611F1E279517001740D8 /* ENPreferencesStore.h in Headers */,
+				6D9D61201E279517001740D8 /* EDAM.h in Headers */,
+				6D9D61211E279517001740D8 /* EDAMAuthenticationTypes.h in Headers */,
+				6D9D61221E279517001740D8 /* EDAMErrors.h in Headers */,
+				6D9D61231E279517001740D8 /* EDAMLimits.h in Headers */,
+				6D9D61241E279517001740D8 /* EDAMNoteStore.h in Headers */,
+				6D9D61251E279517001740D8 /* EDAMTypes.h in Headers */,
+				6D9D61261E279517001740D8 /* EDAMUserStore.h in Headers */,
+				6D9D61271E279517001740D8 /* ENMLConstants.h in Headers */,
+				6D9D61281E279517001740D8 /* ENMLUtility.h in Headers */,
+				6D9D61291E279517001740D8 /* ENEncryptedContentInfo.h in Headers */,
+				6D9D612A1E279517001740D8 /* ENMIMEUtils.h in Headers */,
+				6D9D612B1E279517001740D8 /* ENMLWriter.h in Headers */,
+				6D9D612C1E279517001740D8 /* ENXMLDTD.h in Headers */,
+				6D9D612D1E279517001740D8 /* ENXMLUtils.h in Headers */,
+				6D9D612E1E279517001740D8 /* ENXMLWriter.h in Headers */,
+				6D9D612F1E279517001740D8 /* NSRegularExpression+ENAGRegex.h in Headers */,
+				6D9D61301E279517001740D8 /* NSString+EDAMNilAdditions.h in Headers */,
+				6D9D61311E279517001740D8 /* NSData+EvernoteSDK.h in Headers */,
+				6D9D61321E279517001740D8 /* NSDate+EDAMAdditions.h in Headers */,
+				6D9D61331E279536001740D8 /* FATField.h in Headers */,
+				6D9D61341E279536001740D8 /* FATObject.h in Headers */,
+				6D9D61351E279536001740D8 /* ENTBinaryProtocol.h in Headers */,
+				6D9D61361E279536001740D8 /* ENTException.h in Headers */,
+				6D9D61371E279536001740D8 /* ENTHTTPClient.h in Headers */,
+				6D9D61381E279536001740D8 /* ENTProtocol.h in Headers */,
+				6D9D61391E279536001740D8 /* ENTTransport.h in Headers */,
+				6D9D613A1E279536001740D8 /* RMSTextField.h in Headers */,
+				6D9D613B1E279536001740D8 /* RMSTokenConstraintManager.h in Headers */,
+				6D9D613C1E279536001740D8 /* RMSTokenView.h in Headers */,
+				6D9D613D1E279536001740D8 /* ENAFURLConnectionOperation.h in Headers */,
+				6D9D613E1E279536001740D8 /* ENGCOAuth.h in Headers */,
+				6D9D613F1E279536001740D8 /* KSForwardingWriter.h in Headers */,
+				6D9D61401E279536001740D8 /* KSHTMLWriter.h in Headers */,
+				6D9D61411E279536001740D8 /* KSWriter.h in Headers */,
+				6D9D61421E279536001740D8 /* KSXMLAttributes.h in Headers */,
+				6D9D61431E279536001740D8 /* KSXMLWriter.h in Headers */,
+				6D9D61441E279536001740D8 /* NSString+XMLAdditions.h in Headers */,
+				6D9D61451E279536001740D8 /* ENSSKeychain.h in Headers */,
+				6D9D61461E279536001740D8 /* ENSSKeychainQuery.h in Headers */,
+				6D9D61471E279536001740D8 /* ENSDKPrivate.h in Headers */,
+				6D9D61481E279536001740D8 /* EDAMNoteStoreClient+Utilities.h in Headers */,
+				6D9D61491E279536001740D8 /* ENAuthCache.h in Headers */,
+				6D9D614A1E279536001740D8 /* ENCredentials.h in Headers */,
+				6D9D614B1E279536001740D8 /* ENCredentialStore.h in Headers */,
+				6D9D614C1E279536001740D8 /* ENHTMLtoENMLConverter.h in Headers */,
+				6D9D614D1E279536001740D8 /* ENLinkedNotebookRef.h in Headers */,
+				6D9D614E1E279536001740D8 /* ENLinkedNoteStoreClient.h in Headers */,
+				6D9D614F1E279536001740D8 /* ENBusinessNoteStoreClient.h in Headers */,
+				6D9D61501E279536001740D8 /* ENNotebookTypeView.h in Headers */,
+				6D9D61511E279536001740D8 /* ENNotebookCell.h in Headers */,
+				6D9D61521E279536001740D8 /* ENNotebookChooserViewController.h in Headers */,
+				6D9D61531E279536001740D8 /* ENNoteRefInternal.h in Headers */,
+				6D9D61541E279536001740D8 /* ENOAuthAuthenticator.h in Headers */,
+				6D9D61551E279536001740D8 /* ENOAuthViewController.h in Headers */,
+				6D9D61561E279536001740D8 /* ENStoreClient.h in Headers */,
+				6D9D61571E279536001740D8 /* ENXMLSaxParser.h in Headers */,
+				6D9D61581E279536001740D8 /* NSString+ENScrubbing.h in Headers */,
+				6D9D61591E279536001740D8 /* ENPlainNoteContent.h in Headers */,
+				6D9D615A1E279536001740D8 /* ENHTMLNoteContent.h in Headers */,
+				6D9D615B1E279536001740D8 /* ENTheme.h in Headers */,
+				6D9D615C1E279536001740D8 /* ENSDKResourceLoader.h in Headers */,
+				6D9D615D1E279536001740D8 /* ENWebContentTransformer.h in Headers */,
+				6D9D615E1E279536001740D8 /* ENWebClipNoteBuilder.h in Headers */,
+				6D9D615F1E279536001740D8 /* ENWebResource.h in Headers */,
+				6D9D61601E279536001740D8 /* ENWebArchive.h in Headers */,
+				6D9D61611E279536001740D8 /* ENLoadingViewController.h in Headers */,
+				6D9D61621E279536001740D8 /* NSString+URLEncoding.h in Headers */,
+				6D9D61631E279536001740D8 /* ENShareURLHelper.h in Headers */,
+				6D9D61641E279536001740D8 /* ENSaveToEvernoteActivity.h in Headers */,
+				6D9D61651E279536001740D8 /* ENSaveToEvernoteViewController.h in Headers */,
+				6D9D61661E279536001740D8 /* ENNotebookPickerButton.h in Headers */,
+				6D9D61671E279536001740D8 /* ENNotebookPickerView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		860DF40918FCCE28002B4793 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1227,6 +1516,24 @@
 			productReference = 0BB3D1AD1524ED96001C4534 /* libevernote-sdk-ios.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		6D9D60B61E27940A001740D8 /* EvernoteSDKiOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6D9D60BE1E27940A001740D8 /* Build configuration list for PBXNativeTarget "EvernoteSDKiOS" */;
+			buildPhases = (
+				6D9D60B21E27940A001740D8 /* Sources */,
+				6D9D60B31E27940A001740D8 /* Frameworks */,
+				6D9D60B41E27940A001740D8 /* Headers */,
+				6D9D60B51E27940A001740D8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EvernoteSDKiOS;
+			productName = EvernoteSDKiOS;
+			productReference = 6D9D60B71E27940A001740D8 /* EvernoteSDKiOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		865C383018F8BA2400ECB2BA /* ENSDK */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 865C384118F8BA2400ECB2BA /* Build configuration list for PBXNativeTarget "ENSDK" */;
@@ -1270,6 +1577,13 @@
 			attributes = {
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Evernote Corporation";
+				TargetAttributes = {
+					6D9D60B61E27940A001740D8 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = Q79WDW8YH9;
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
 			buildConfigurationList = 0BB3D1A71524ED96001C4534 /* Build configuration list for PBXProject "evernote-sdk-ios" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1291,11 +1605,19 @@
 				0BB3D1AC1524ED96001C4534 /* evernote-sdk-ios */,
 				865C383018F8BA2400ECB2BA /* ENSDK */,
 				BECDD36F1908FFC1003736EE /* EvernoteSDKSample */,
+				6D9D60B61E27940A001740D8 /* EvernoteSDKiOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6D9D60B51E27940A001740D8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		865C382F18F8BA2400ECB2BA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1424,6 +1746,94 @@
 				86D49E42191DA4A8001C3581 /* RMSTextField.m in Sources */,
 				BE2E248F18EBA5D500BD7E6E /* ENNoteRef.m in Sources */,
 				BE2E246918EBA5D500BD7E6E /* EDAMUserStore.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6D9D60B21E27940A001740D8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D9D60C01E279487001740D8 /* ENCommonUtils.m in Sources */,
+				6D9D60C11E279487001740D8 /* ENSession.m in Sources */,
+				6D9D60C21E279487001740D8 /* ENNote.m in Sources */,
+				6D9D60C31E279487001740D8 /* ENNoteContent.m in Sources */,
+				6D9D60C41E279487001740D8 /* ENNotebook.m in Sources */,
+				6D9D60C51E279487001740D8 /* ENResource.m in Sources */,
+				6D9D60C61E279487001740D8 /* ENNoteRef.m in Sources */,
+				6D9D60C71E279487001740D8 /* ENError.m in Sources */,
+				6D9D60C81E279487001740D8 /* ENNoteSearch.m in Sources */,
+				6D9D60C91E279487001740D8 /* ENNoteStoreClient.m in Sources */,
+				6D9D60CA1E279487001740D8 /* ENUserStoreClient.m in Sources */,
+				6D9D60CB1E279487001740D8 /* ENPreferencesStore.m in Sources */,
+				6D9D60CC1E279487001740D8 /* EDAMAuthenticationTypes.m in Sources */,
+				6D9D60CD1E279487001740D8 /* EDAMErrors.m in Sources */,
+				6D9D60CE1E279487001740D8 /* EDAMLimits.m in Sources */,
+				6D9D60CF1E279487001740D8 /* EDAMNoteStore.m in Sources */,
+				6D9D60D01E279487001740D8 /* EDAMTypes.m in Sources */,
+				6D9D60D11E279487001740D8 /* EDAMUserStore.m in Sources */,
+				6D9D60D21E279487001740D8 /* ENMLConstants.m in Sources */,
+				6D9D60D31E279487001740D8 /* ENMLUtility.m in Sources */,
+				6D9D60D41E279487001740D8 /* ENEncryptedContentInfo.m in Sources */,
+				6D9D60D51E279487001740D8 /* ENMIMEUtils.m in Sources */,
+				6D9D60D61E279487001740D8 /* ENMLWriter.m in Sources */,
+				6D9D60D71E279487001740D8 /* ENXMLDTD.m in Sources */,
+				6D9D60D81E279487001740D8 /* ENXMLWriter.m in Sources */,
+				6D9D60D91E279487001740D8 /* NSRegularExpression+ENAGRegex.m in Sources */,
+				6D9D60DA1E279487001740D8 /* NSString+EDAMNilAdditions.m in Sources */,
+				6D9D60DB1E279487001740D8 /* NSData+EvernoteSDK.m in Sources */,
+				6D9D60DC1E279487001740D8 /* NSDate+EDAMAdditions.m in Sources */,
+				6D9D60DD1E279487001740D8 /* FATField.m in Sources */,
+				6D9D60DE1E279487001740D8 /* FATObject.m in Sources */,
+				6D9D60DF1E279487001740D8 /* ENTBinaryProtocol.m in Sources */,
+				6D9D60E01E279487001740D8 /* ENTException.m in Sources */,
+				6D9D60E11E279487001740D8 /* ENTHTTPClient.m in Sources */,
+				6D9D60E21E279487001740D8 /* ENTProtocol.m in Sources */,
+				6D9D60E31E279487001740D8 /* ENTTransport.m in Sources */,
+				6D9D60E41E279487001740D8 /* RMSTextField.m in Sources */,
+				6D9D60E51E279487001740D8 /* RMSTokenConstraintManager.m in Sources */,
+				6D9D60E61E279487001740D8 /* RMSTokenView.m in Sources */,
+				6D9D60E71E279487001740D8 /* ENAFURLConnectionOperation.m in Sources */,
+				6D9D60E81E279487001740D8 /* ENGCOAuth.m in Sources */,
+				6D9D60E91E279487001740D8 /* KSForwardingWriter.m in Sources */,
+				6D9D60EA1E279487001740D8 /* KSHTMLWriter.m in Sources */,
+				6D9D60EB1E279487001740D8 /* KSWriter.m in Sources */,
+				6D9D60EC1E279487001740D8 /* KSXMLAttributes.m in Sources */,
+				6D9D60ED1E279487001740D8 /* KSXMLWriter.m in Sources */,
+				6D9D60EE1E279487001740D8 /* NSString+XMLAdditions.m in Sources */,
+				6D9D60EF1E279487001740D8 /* ENSSKeychain.m in Sources */,
+				6D9D60F01E279487001740D8 /* ENSSKeychainQuery.m in Sources */,
+				6D9D60F11E279487001740D8 /* ENSDKPrivate.m in Sources */,
+				6D9D60F21E279487001740D8 /* EDAMNoteStoreClient+Utilities.m in Sources */,
+				6D9D60F31E279487001740D8 /* ENAuthCache.m in Sources */,
+				6D9D60F41E279487001740D8 /* ENCredentials.m in Sources */,
+				6D9D60F51E279487001740D8 /* ENCredentialStore.m in Sources */,
+				6D9D60F61E279487001740D8 /* ENHTMLtoENMLConverter.m in Sources */,
+				6D9D60F71E279487001740D8 /* ENLinkedNotebookRef.m in Sources */,
+				6D9D60F81E279487001740D8 /* ENLinkedNoteStoreClient.m in Sources */,
+				6D9D60F91E279487001740D8 /* ENBusinessNoteStoreClient.m in Sources */,
+				6D9D60FA1E279487001740D8 /* ENNotebookTypeView.m in Sources */,
+				6D9D60FB1E279487001740D8 /* ENNotebookCell.m in Sources */,
+				6D9D60FC1E279487001740D8 /* ENNotebookChooserViewController.m in Sources */,
+				6D9D60FD1E279487001740D8 /* ENOAuthAuthenticator.m in Sources */,
+				6D9D60FE1E279487001740D8 /* ENOAuthViewController.m in Sources */,
+				6D9D60FF1E279487001740D8 /* ENStoreClient.m in Sources */,
+				6D9D61001E279487001740D8 /* ENXMLSaxParser.m in Sources */,
+				6D9D61011E279487001740D8 /* NSString+ENScrubbing.m in Sources */,
+				6D9D61021E279487001740D8 /* ENPlainNoteContent.m in Sources */,
+				6D9D61031E279487001740D8 /* ENHTMLNoteContent.m in Sources */,
+				6D9D61041E279487001740D8 /* ENTheme.m in Sources */,
+				6D9D61051E279487001740D8 /* ENSDKResourceLoader.m in Sources */,
+				6D9D61061E279487001740D8 /* ENWebContentTransformer.m in Sources */,
+				6D9D61071E279487001740D8 /* ENWebClipNoteBuilder.m in Sources */,
+				6D9D61081E279487001740D8 /* ENWebResource.m in Sources */,
+				6D9D61091E279487001740D8 /* ENWebArchive.m in Sources */,
+				6D9D610A1E279487001740D8 /* ENLoadingViewController.m in Sources */,
+				6D9D610B1E279487001740D8 /* NSString+URLEncoding.m in Sources */,
+				6D9D610C1E279487001740D8 /* ENShareURLHelper.m in Sources */,
+				6D9D610D1E279487001740D8 /* ENSaveToEvernoteActivity.m in Sources */,
+				6D9D610E1E279487001740D8 /* ENSaveToEvernoteViewController.m in Sources */,
+				6D9D610F1E279487001740D8 /* ENNotebookPickerButton.m in Sources */,
+				6D9D61101E279487001740D8 /* ENNotebookPickerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1671,6 +2081,7 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/evernote_sdk_ios.dst;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "evernote-sdk-ios/evernote-sdk-ios-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -1688,6 +2099,7 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/evernote_sdk_ios.dst;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "evernote-sdk-ios/evernote-sdk-ios-Prefix.pch";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -1697,6 +2109,85 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		6D9D60BC1E27940A001740D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = Q79WDW8YH9;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				HEADER_SEARCH_PATHS = "${SDKROOT}/usr/include/libxml2";
+				INFOPLIST_FILE = EvernoteSDKiOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.evernote.EvernoteSDKiOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		6D9D60BD1E27940A001740D8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = Q79WDW8YH9;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				HEADER_SEARCH_PATHS = "${SDKROOT}/usr/include/libxml2";
+				INFOPLIST_FILE = EvernoteSDKiOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.evernote.EvernoteSDKiOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -1875,6 +2366,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		6D9D60BE1E27940A001740D8 /* Build configuration list for PBXNativeTarget "EvernoteSDKiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D9D60BC1E27940A001740D8 /* Debug */,
+				6D9D60BD1E27940A001740D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		865C384118F8BA2400ECB2BA /* Build configuration list for PBXNativeTarget "ENSDK" */ = {
 			isa = XCConfigurationList;

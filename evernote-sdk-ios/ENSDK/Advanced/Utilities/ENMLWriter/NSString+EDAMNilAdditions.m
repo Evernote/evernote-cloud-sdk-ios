@@ -33,8 +33,11 @@
 // see .h
 - (BOOL)enIsEqualToStringOrNil:(nullable NSString *)str
 {
-  if (str == nil && [self length] == 0) {
-    return YES;
+  if (str == nil) {
+    if ([self length] == 0) {
+      return YES;
+    }
+    return NO;
   }
   return [self isEqualToString: str];
 }
