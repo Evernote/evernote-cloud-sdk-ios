@@ -23,9 +23,9 @@
 #warning Remove these warnings once done with it.
 
   // Set shared session key information.
-  [ENSession setSharedSessionConsumerKey:@"your key"
-                          consumerSecret:@"your secret"
-                            optionalHost:nil];
+  [ENSession setSharedSessionConsumerKey:@"your_consumer_key"
+                          consumerSecret:@"your_consumer_secret"
+                            optionalHost:ENSessionHostSandbox];
 
   // Override point for customization after application launch.
   self.window = [[UIWindow alloc] initWithFrame:
