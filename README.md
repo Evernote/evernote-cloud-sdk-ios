@@ -1,6 +1,9 @@
+![Evernote Logo](https://evernote.com/media/img/logos/evernote_logo_4c-lrg.png)
 # Evernote Cloud SDK 3.0 for iOS
 
-This is the official Evernote SDK for iOS. 
+This is the official Evernote SDK for iOS. To get started, follow the instructions bellow. Additional information can be found in the [Getting Started Guide](Getting_Started.md).
+
+More information about our developer program can be found here: [Evernote Developers](https://dev.evernote.com/)
 
 ## Installation
 ### Cocoapods
