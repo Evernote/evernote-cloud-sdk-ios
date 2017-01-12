@@ -28,6 +28,7 @@
 
 #import "ENSDKResourceLoader.h"
 #import "ENSDKPrivate.h"
+#import "ENSDKLogging.h"
 
 @implementation ENSDKResourceLoader
 + (NSString *)pathToResourceNamed:(nullable NSString *)name extension:(nullable NSString *)extension

@@ -29,6 +29,7 @@
 #import "ENHTMLtoENMLConverter.h"
 #import "ENMLConstants.h"
 #import "ENSDKPrivate.h"
+#import "ENSDKLogging.h"
 
 @implementation ENHTMLtoENMLConverter
 

@@ -35,6 +35,28 @@
 #import "ENError.h"
 #import "ENSession.h"
 #import "ENCommonUtils.h"
+#import "ENSDKLogging.h"
 
 #import "ENSaveToEvernoteActivity.h"
 
+//Advanced
+#import "ENSDKAdvanced.h"
+#import "EDAM.h"
+#import "ENThrift.h"
+
+#import "ENNoteStoreClient.h"
+#import "ENUserStoreClient.h"
+#import "ENBusinessNoteStoreClient.h"
+#import "ENPreferencesStore.h"
+#import "ENMLConstants.h"
+#import "ENMLUtility.h"
+#import "NSData+EvernoteSDK.h"
+#import "NSDate+EDAMAdditions.h"
+#import "ENEncryptedContentInfo.h"
+#import "ENMIMEUtils.h"
+#import "ENMLWriter.h"
+#import "ENXMLDTD.h"
+#import "ENXMLUtils.h"
+#import "ENXMLWriter.h"
+#import "NSRegularExpression+ENAGRegex.h"
+#import "NSString+EDAMNilAdditions.h"

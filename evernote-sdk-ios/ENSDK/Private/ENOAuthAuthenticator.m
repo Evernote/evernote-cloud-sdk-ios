@@ -35,6 +35,7 @@
 #import "ENSDKPrivate.h"
 #import "ENGCOAuth.h"
 #import "NSString+URLEncoding.h"
+#import "ENSDKLogging.h"
 
 #import "NSRegularExpression+ENAGRegex.h"
 

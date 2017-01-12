@@ -29,7 +29,7 @@
 #import "ENSaveToEvernoteViewController.h"
 #import "ENNotebookChooserViewController.h"
 #import "ENNotebookPickerButton.h"
-#import "ENSDK.h"
+#import "EvernoteSDKiOS.h"
 #import "ENTheme.h"
 #import "RMSTokenView.h"
 #import "ENNotebookPickerView.h"

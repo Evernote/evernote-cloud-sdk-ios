@@ -34,6 +34,7 @@
 #import "ENMIMEUtils.h"
 #import "NSData+EvernoteSDK.h"
 #import "NSString+URLEncoding.h"
+#import "ENSDKLogging.h"
 
 #pragma mark - ENNote
 

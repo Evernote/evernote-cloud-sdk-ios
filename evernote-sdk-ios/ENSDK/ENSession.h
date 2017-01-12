@@ -28,12 +28,12 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "ENSDK.h"
-#import "ENSDKLogging.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class ENSessionFindNotesResult;
+@class ENNotebook, ENNote, ENNoteRef, ENNoteSearch;
+@protocol ENSDKLogging;
 
 extern NSString * const ENSessionHostSandbox;
 

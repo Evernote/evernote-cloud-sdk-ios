@@ -30,6 +30,7 @@
 #import "ENError.h"
 #import "EDAMErrors.h"
 #import "ENSDKPrivate.h"
+#import "ENSDKLogging.h"
 
 NSString * ENStoreClientDidFailWithAuthenticationErrorNotification = @"ENStoreClientDidFailWithAuthenticationErrorNotification";
 

@@ -27,6 +27,7 @@
  */
 
 #import "ENSDKPrivate.h"
+#import "ENSDKLogging.h"
 #import "ENSDKAdvanced.h"
 #import "ENAuthCache.h"
 #import "ENNoteStoreClient.h"

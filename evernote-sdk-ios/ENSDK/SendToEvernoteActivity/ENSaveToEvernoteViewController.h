@@ -27,7 +27,7 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "ENSDK.h"
+#import "EvernoteSDKiOS.h"
 @class ENSaveToEvernoteViewController;
 
 @protocol ENSendToEvernoteViewControllerDelegate <NSObject>

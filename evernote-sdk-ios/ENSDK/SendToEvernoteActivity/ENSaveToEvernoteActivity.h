@@ -27,8 +27,8 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "ENSDK.h"
 @class ENSaveToEvernoteActivity;
+@class ENNote;
 
 @protocol ENSaveToEvernoteActivityDelegate <NSObject>
 /**

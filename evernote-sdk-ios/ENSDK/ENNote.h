@@ -30,6 +30,7 @@
 @class ENNote;
 @class ENResource;
 @class ENNotebook;
+@class ENNoteContent;
 @class UIWebView;
 
 NS_ASSUME_NONNULL_BEGIN

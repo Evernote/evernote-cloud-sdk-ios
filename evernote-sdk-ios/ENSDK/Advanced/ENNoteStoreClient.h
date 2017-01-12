@@ -27,10 +27,9 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "ENSDK.h"
+#import <CoreGraphics/CoreGraphics.h>
 #import "EDAM.h"
 #import "ENStoreClient.h"
-#import "ENLinkedNotebookRef.h"
 
 @class EDAMSyncState, EDAMSyncChunk, EDAMSyncChunkFilter;
 @class EDAMNotebook, EDAMLinkedNotebook, EDAMSharedNotebook, EDAMSharedNotebookRecipientSettings;

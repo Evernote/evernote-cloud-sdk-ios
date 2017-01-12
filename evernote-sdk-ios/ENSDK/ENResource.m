@@ -29,6 +29,7 @@
 #import "ENSDKPrivate.h"
 #import "NSData+EvernoteSDK.h"
 #import "ENMLUtility.h"
+#import "ENSDKLogging.h"
 
 @interface ENResource ()
 @property (nonatomic, copy) NSString * sourceUrl;
