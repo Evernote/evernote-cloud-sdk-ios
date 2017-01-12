@@ -45,6 +45,10 @@
     return [[ENNoteSearch alloc] initWithSearchString:search];
 }
 
+- (id)init {
+    return [self initWithSearchString:@""];
+}
+
 - (id)initWithSearchString:(NSString *)searchString
 {
     if (!searchString) {

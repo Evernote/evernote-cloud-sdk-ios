@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(class, readonly, nonatomic) ENXMLDTD *symbolDTD;
 @property(class, readonly, nonatomic) ENXMLDTD *specialDTD;
 
-
+- (id)init NS_UNAVAILABLE;
 - (nullable id) initWithContentsOfFile:(NSString *)file NS_DESIGNATED_INITIALIZER;
 
 - (BOOL) isElementLegal:(NSString *)name;

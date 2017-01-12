@@ -35,6 +35,7 @@
 #import "ENNotebookPickerView.h"
 #import "ENSDKPrivate.h"
 #import "ENSaveToEvernoteActivity.h"
+#import "ENWebResource.h"
 
 #define kTitleViewHeight        50.0
 #define kTagsViewHeight         44.0
@@ -157,8 +158,8 @@ CGFloat kTextLeftPadding = 20;
         }
         [self.noteView loadData:data
                        MIMEType:ENWebArchiveDataMIMEType
-               textEncodingName:nil
-                        baseURL:nil];
+               textEncodingName:ENWebResourceTextEncodingNameUTF8
+                        baseURL:[NSURL new]];
     }];
 }
 

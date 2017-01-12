@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  The data body of the resource.
  */
-@property (nonatomic, strong) NSData * data;
+@property (nonatomic, strong, nullable) NSData * data;
 
 /**
  *  The MIME type of the resource.
@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return A resouce object instance.
  */
-- (id)initWithData:(NSData *)data mimeType:(NSString *)mimeType filename:(nullable NSString *)filename;
+- (nullable id)initWithData:(NSData *)data mimeType:(NSString *)mimeType filename:(nullable NSString *)filename;
 
 /**
  *  Initializer for data and MIME type.
