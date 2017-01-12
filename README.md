@@ -9,14 +9,12 @@ pod 'evernote-cloud-sdk-ios', '~> 3.0'
 ```
 
 ### Manually
-```bash
-cd scripts
-./build_framework.sh
-```
-Now drag & drop `ENSDK.framework` and `ENSDKResources.bundle` into your project. Make sure you check `Copy items if needed` inside Xcode.
 
-And as the last step, open your target's `Build Phases` and add these two libraries to your `Link Binary With Libraries` section:
+Drag & Drop `evernote-sdk-ios.xcodeproj` into your project.
 
+Now open your target's `Build Phases` and add the following items to your `Link Binary With Libraries` section:
+
+- EvernoteSDKiOS.framework
 - MobileCoreServices.framework
 - libxml2.dylib
 
