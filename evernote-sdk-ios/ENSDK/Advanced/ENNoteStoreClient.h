@@ -492,7 +492,7 @@ typedef void (^ENNoteStoreClientProgressHandler)(CGFloat progress);
  
  @param  guid The GUID of the note to be retrieved.
  
- @param  withContent If true, the note will include the ENML contents of its 'content' field.
+ @param  includingContent If true, the note will include the ENML contents of its 'content' field.
  
  @param  resourceOptions The options for fetching resource data
  @param success Success completion block.
@@ -597,7 +597,7 @@ DEPRECATED_MSG_ATTRIBUTE("Use -fetchNoteWithGuid:includingContent:resourceOption
  
  @param  noteOnly If true, this will only return the text extracted from the ENML contents of the note itself. If false, this will also include the extracted text from any text-bearing resources (PDF, recognized images)
  
- @param  tokenizeForIndexing If true, this will break the text into cleanly separated and sanitized tokens. If false, this will return the more raw text extraction, with its original punctuation, capitalization, spacing, etc. @param success Success completion block.
+ @param  tokenizeForIndexing If true, this will break the text into cleanly separated and sanitized tokens. If false, this will return the more raw text extraction, with its original punctuation, capitalization, spacing, etc.
  @param success Success completion block.
  @param failure Failure completion block.
  */
@@ -728,7 +728,7 @@ DEPRECATED_MSG_ATTRIBUTE("Use -fetchNoteWithGuid:includingContent:resourceOption
  
  @param  guid The GUID of the Note to copy.
  
- @param  toNotebookGuid The GUID of the Notebook that should receive the new Note.
+ @param  notebookGuid The GUID of the Notebook that should receive the new Note.
  @param success Success completion block.
  @param failure Failure completion block.
  */
@@ -791,7 +791,7 @@ DEPRECATED_MSG_ATTRIBUTE("Use -fetchNoteWithGuid:includingContent:resourceOption
  
  @param  guid The GUID of the resource to be retrieved.
 
- @param  resourceOptions The options for fetching resource data
+ @param  options The options for fetching resource data
  @param success Success completion block.
  @param failure Failure completion block.
  */
@@ -903,7 +903,7 @@ DEPRECATED_MSG_ATTRIBUTE("Use -fetchNoteWithGuid:includingContent:resourceOption
  
  @param  contentHash The MD5 checksum of the resource within that note. Note that this is the binary checksum, for example from Resource.data.bodyHash, and not the hex-encoded checksum that is used within an en-media tag in a note body.
  
- @param  resourceOptions The options for fetching resource data
+ @param  options The options for fetching resource data
  
  @param success Success completion block.
  @param failure Failure completion block.
@@ -980,7 +980,7 @@ DEPRECATED_MSG_ATTRIBUTE("Use -fetchNoteWithGuid:includingContent:resourceOption
  If the account is not found, or no public notebook exists with this URI, this will throw an EDAMNotFoundException, otherwise this will return the information for that Notebook. If a notebook is visible on the web with a full URL like http://www.evernote.com/pub/sethdemo/api Then 'sethdemo' is the username that can be used to look up the userId, and 'api' is the publicUri.
  
  @param  userId The numeric identifier for the user who owns the public notebook. To find this value based on a username string, you can invoke UserStore.getPublicUserInfo
- @param  publicUri The uri string for the public notebook, from Notebook.publishing.uri.
+ @param  publicURI The uri string for the public notebook, from Notebook.publishing.uri.
  @param success Success completion block.
  @param failure Failure completion block.
  */

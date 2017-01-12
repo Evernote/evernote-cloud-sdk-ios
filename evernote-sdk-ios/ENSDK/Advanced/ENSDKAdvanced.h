@@ -135,7 +135,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Set to the security application group identifier, if the app should share authenticate with an application group.
  *
- *  @param the security application group identifier.
+ *  @param securityApplicationGroupIdentifier security application group identifier.
  *  @see https://developer.apple.com/library/prerelease/ios/documentation/General/Conceptual/ExtensibilityPG/ExtensionScenarios.html#//apple_ref/doc/uid/TP40014214-CH21-SW6
  */
 + (void) setSecurityApplicationGroupIdentifier:(nullable NSString*)securityApplicationGroupIdentifier;
