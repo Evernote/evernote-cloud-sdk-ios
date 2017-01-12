@@ -7,7 +7,7 @@
 //
 
 #import "NotebooksViewController.h"
-#import <EvernoteSDKiOS/EvernoteSDKiOS.h>
+#import <EvernoteSDK/EvernoteSDK.h>
 #import "CommonUtils.h"
 #import "NoteListResultViewController.h"
 #import "SVProgressHUD.h"

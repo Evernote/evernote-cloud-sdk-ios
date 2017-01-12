@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import <EvernoteSDKiOS/EvernoteSDKiOS.h>
+#import <EvernoteSDK/EvernoteSDK.h>
 #import "MainViewController.h"
 
 @interface AppDelegate ()

@@ -7,7 +7,7 @@
 //
 
 #import "MainViewController.h"
-#import <EvernoteSDKiOS/EvernoteSDKiOS.h>
+#import <EvernoteSDK/EvernoteSDK.h>
 #import "UserInfoViewController.h"
 #import "TagsInfoViewController.h"
 #import "SaveActivityViewController.h"

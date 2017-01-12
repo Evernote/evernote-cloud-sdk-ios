@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <EvernoteSDKiOS/EvernoteSDKiOS.h>
+#import <EvernoteSDK/EvernoteSDK.h>
 
 @interface ResourcesListTableViewController : UITableViewController
 

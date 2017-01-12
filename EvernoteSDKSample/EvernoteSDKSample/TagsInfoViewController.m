@@ -7,7 +7,7 @@
 //
 
 #import "TagsInfoViewController.h"
-#import <EvernoteSDKiOS/EvernoteSDKiOS.h>
+#import <EvernoteSDK/EvernoteSDK.h>
 
 @interface TagsInfoViewController ()
 

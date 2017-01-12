@@ -26,7 +26,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "EvernoteSDKiOS.h"
+#import "EvernoteSDK.h"
 #import "EDAM.h"
 #import "ENUserStoreClient.h"
 #import "ENPreferencesStore.h"

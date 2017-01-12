@@ -27,7 +27,7 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "EvernoteSDKiOS.h"
+#import "EvernoteSDK.h"
 @class ENNotebookChooserViewController;
 
 @protocol ENNotebookChooserViewControllerDelegate <NSObject>
