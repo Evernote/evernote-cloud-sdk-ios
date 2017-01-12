@@ -40,17 +40,14 @@ You can also just test-drive the SDK against your personal production Evernote a
 Simply import the SDK inside your project:
 
 ```swift
-import evernote_cloud_sdk_ios
+import EvernoteSDK
 ```
 
 ```objc
-#import <evernote_cloud_sdk_ios/ENSDK.h> // cocoapods
-#import <ENSDK/ENSDK.h> // manually added
+#import <EvernoteSDK/EvernoteSDK.h>
 ```
 
-If you've manually added the framework and are using Swift, be sure to add the import statement in your project's [bridging header](https://developer.apple.com/library/content/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html).
-
-### Key Setup
+### API Key Setup
 
 ```swift
 ENSession.setSharedSessionConsumerKey(<Consumer Key>, consumerSecret:<Consumer Secret>, optionalHost: ENSessionHostSandbox)
@@ -66,7 +63,7 @@ ENSession.setSharedSessionConsumerKey(<Consumer Key>, consumerSecret:<Consumer S
 ### Authentication
 
 ```swift
-ENSession.shared().authenticate(with: self, preferRegistration: false, completion: { (_error: Error?) in
+ENSession.shared.authenticate(with: self, preferRegistration: false, completion: { (_error: Error?) in
 
 })
 ```
