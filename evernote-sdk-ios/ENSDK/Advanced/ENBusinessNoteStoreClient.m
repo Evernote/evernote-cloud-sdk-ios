@@ -48,24 +48,30 @@
 }
 
 - (void)createBusinessNotebook:(EDAMNotebook *)notebook
-                       success:(void(^)(EDAMLinkedNotebook *notebook))success
-                       failure:(void(^)(NSError *error))failure
+                    completion:(void(^)(EDAMLinkedNotebook *notebook, NSError *error))completion
 {
-    [self createNotebook:notebook success:^(EDAMNotebook *businessNotebook) {
+    [self createNotebook:notebook completion:^(EDAMNotebook *businessNotebook, NSError *error) {
+        if (error != nil) {
+            completion(nil, error);
+            return;
+        }
         EDAMSharedNotebook *sharedNotebook = businessNotebook.sharedNotebooks[0];
         EDAMLinkedNotebook *linkedNotebook = [[EDAMLinkedNotebook alloc] init];
         [linkedNotebook setSharedNotebookGlobalId:sharedNotebook.globalId];
         [linkedNotebook setShareName:[businessNotebook name]];
         [linkedNotebook setUsername:[ENSession sharedSession].businessUser.username];
         [linkedNotebook setShardId:[ENSession sharedSession].businessUser.shardId];
-        [[ENSession sharedSession].primaryNoteStore createLinkedNotebook:linkedNotebook success:^(EDAMLinkedNotebook *businessLinkedNotebook) {
-            success(businessLinkedNotebook);
-        } failure:^(NSError *error) {
-            failure(error);
-        }];
-    } failure:^(NSError *error) {
-        failure(error);
+        [[ENSession sharedSession].primaryNoteStore createLinkedNotebook:linkedNotebook completion:completion];
     }];
 }
 
+
+- (void)createBusinessNotebook:(EDAMNotebook *)notebook
+                       success:(void(^)(EDAMLinkedNotebook *notebook))success
+                       failure:(void(^)(NSError *error))failure
+{
+    [self createBusinessNotebook:notebook completion:^(EDAMLinkedNotebook *createdNotebook, NSError *error) {
+        (error != nil) ? success(createdNotebook) : failure(error);
+    }];
+}
 @end

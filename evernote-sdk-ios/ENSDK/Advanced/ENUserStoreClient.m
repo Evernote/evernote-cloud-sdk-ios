@@ -67,106 +67,136 @@
 - (void)checkVersionWithClientName:(NSString *)clientName
                   edamVersionMajor:(int16_t)edamVersionMajor
                   edamVersionMinor:(int16_t)edamVersionMinor
-                           success:(void(^)(BOOL versionOK))success
-                           failure:(void(^)(NSError *error))failure
+                                completion:(void(^)(BOOL versionOK, NSError *error))completion
 
 {
     [self invokeAsyncBoolBlock:^BOOL{
         return [self.client checkVersion:clientName edamVersionMajor:edamVersionMajor edamVersionMinor:edamVersionMinor];
-    } success:success failure:failure];
+    } completion:completion];
 }
 
 - (void)fetchBootstrapInfoWithLocale:(NSString *)locale
-                             success:(void(^)(EDAMBootstrapInfo *info))success
-                             failure:(void(^)(NSError *error))failure
+                          completion:(void(^)(EDAMBootstrapInfo *info, NSError *error))completion
 {
-    [self invokeAsyncIdBlock:^id {
+    [self invokeAsyncObjectBlock:^id {
         return [self.client getBootstrapInfo:locale];
-    } success:success failure:failure];
+    } completion:completion];
 }
 
-- (void)fetchUserWithSuccess:(void(^)(EDAMUser *user))success
-                     failure:(void(^)(NSError *error))failure
+- (void)fetchUserWithCompletion:(void(^)(EDAMUser *user, NSError *error))completion
 {
-    [self invokeAsyncIdBlock:^id {
+    [self invokeAsyncObjectBlock:^id {
         return [self.client getUser:self.authenticationToken];
-    } success:success failure:failure];
+    } completion:completion];
 }
 
 - (void)fetchPublicUserInfoWithUsername:(NSString *)username
-                                success:(void(^)(EDAMPublicUserInfo *info))success
-                                failure:(void(^)(NSError *error))failure
+                             completion:(void(^)(EDAMPublicUserInfo *info, NSError *error))completion
 {
-    [self invokeAsyncIdBlock:^id {
+    [self invokeAsyncObjectBlock:^id {
         return [self.client getPublicUserInfo:username];
-    } success:success failure:failure];
+    } completion:completion];
 }
 
-- (void)fetchPremiumInfoWithSuccess:(void(^)(EDAMPremiumInfo *info))success
-                            failure:(void(^)(NSError *error))failure
+- (void)fetchPremiumInfoWithCompletion:(void(^)(EDAMPremiumInfo *info, NSError *error))completion
 {
-    [self invokeAsyncIdBlock:^id {
+    [self invokeAsyncObjectBlock:^id {
         return [self.client getPremiumInfo:self.authenticationToken];
-    } success:success failure:failure];
+    } completion:completion];
 }
 
-- (void)fetchNoteStoreURLWithSuccess:(void(^)(NSString *noteStoreUrl))success
-                             failure:(void(^)(NSError *error))failure
+- (void)fetchNoteStoreURLWithCompletion:(void(^)(NSString *noteStoreUrl, NSError *error))completion
 {
-    [self invokeAsyncIdBlock:^id {
+    [self invokeAsyncObjectBlock:^id {
         return [self.client getNoteStoreUrl:self.authenticationToken];
-    } success:success failure:failure];
+    } completion:completion];
 }
 
-- (void)authenticateToBusinessWithSuccess:(void(^)(EDAMAuthenticationResult *authenticationResult))success
-                                  failure:(void(^)(NSError *error))failure
+- (void)authenticateToBusinessWithCompletion:(void(^)(EDAMAuthenticationResult *authenticationResult, NSError *error))completion
 {
-    [self invokeAsyncIdBlock:^id {
+    [self invokeAsyncObjectBlock:^id {
         return [self.client authenticateToBusiness:self.authenticationToken];
-    } success:success failure:failure];
+    } completion:completion];
 }
 
 - (void)revokeLongSessionWithAuthenticationToken:(NSString*)authenticationToken
-                                         success:(void(^)())success
-                                         failure:(void(^)(NSError *error))failure {
-    [self invokeAsyncVoidBlock:^void {
+                                      completion:(void(^)(NSError *error))completion {
+    [self invokeAsyncBlock:^void {
         [self.client revokeLongSession:authenticationToken];
-    } success:success failure:failure];
+    } completion:completion];
 }
 
 
 #pragma mark - Deprecated
 
+- (void)checkVersionWithClientName:(NSString *)clientName
+                  edamVersionMajor:(int16_t)edamVersionMajor
+                  edamVersionMinor:(int16_t)edamVersionMinor
+                           success:(void(^)(BOOL versionOK))success
+                           failure:(void(^)(NSError *error))failure
+
+{
+    [self checkVersionWithClientName:clientName edamVersionMajor:edamVersionMajor edamVersionMinor:edamVersionMinor completion:^(BOOL versionOK, NSError *error) {
+        (error != nil) ? success(versionOK) : failure(error);
+    }];
+}
+
 - (void)getBootstrapInfoWithLocale:(NSString *)locale
                            success:(void(^)(EDAMBootstrapInfo *info))success
                            failure:(void(^)(NSError *error))failure
 {
-    [self fetchBootstrapInfoWithLocale:locale success:success failure:failure];
+    [self fetchBootstrapInfoWithLocale:locale completion:^(EDAMBootstrapInfo *info, NSError *error) {
+        (error != nil) ? success(info) : failure(error);
+    }];
 }
 
 - (void)getUserWithSuccess:(void(^)(EDAMUser *user))success
                    failure:(void(^)(NSError *error))failure
 {
-    [self fetchUserWithSuccess:success failure:failure];
+    [self fetchUserWithCompletion:^(EDAMUser * user, NSError * error) {
+        (error != nil) ? success(user) : failure(error);
+    }];
 }
 
 - (void)getPublicUserInfoWithUsername:(NSString *)username
                               success:(void(^)(EDAMPublicUserInfo *info))success
                               failure:(void(^)(NSError *error))failure
 {
-    [self fetchPublicUserInfoWithUsername:username success:success failure:failure];
+    [self fetchPublicUserInfoWithUsername:username completion:^(EDAMPublicUserInfo *info, NSError *error) {
+        (error != nil) ? success(info) : failure(error);
+    }];
 }
 
 - (void)getPremiumInfoWithSuccess:(void(^)(EDAMPremiumInfo *info))success
                           failure:(void(^)(NSError *error))failure
 {
-    [self fetchPremiumInfoWithSuccess:success failure:failure];
+    [self fetchPremiumInfoWithCompletion:^(EDAMPremiumInfo *info, NSError *error) {
+        (error != nil) ? success(info) : failure(error);
+    }];
 }
 
 - (void)getNoteStoreUrlWithSuccess:(void(^)(NSString *noteStoreUrl))success
                            failure:(void(^)(NSError *error))failure
 {
-    [self fetchNoteStoreURLWithSuccess:success failure:failure];
+    [self fetchNoteStoreURLWithCompletion:^(NSString *noteStoreUrl, NSError *error) {
+        (error != nil) ? success(noteStoreUrl) : failure(error);
+    }];
+}
+
+- (void)authenticateToBusinessWithSuccess:(void(^)(EDAMAuthenticationResult *authenticationResult))success
+                                  failure:(void(^)(NSError *error))failure
+{
+    [self authenticateToBusinessWithCompletion:^(EDAMAuthenticationResult *authenticationResult, NSError *error) {
+        (error != nil) ? success(authenticationResult) : failure(error);
+    }];
+}
+
+- (void)revokeLongSessionWithAuthenticationToken:(NSString*)authenticationToken
+                                         success:(void(^)())success
+                                         failure:(void(^)(NSError *error))failure {
+    [self revokeLongSessionWithAuthenticationToken:authenticationToken completion:^(NSError *error) {
+        (error != nil) ? success() : failure(error);
+    }];
 }
 
 @end

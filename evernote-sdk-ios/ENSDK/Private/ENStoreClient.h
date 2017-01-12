@@ -29,19 +29,18 @@
 #import <Foundation/Foundation.h>
 @class ENStoreClient;
 
+NS_ASSUME_NONNULL_BEGIN
+
 extern NSString * ENStoreClientDidFailWithAuthenticationErrorNotification;
 
 @interface ENStoreClient : NSObject
-- (void)invokeAsyncBoolBlock:(BOOL(^)())block
-                     success:(void(^)(BOOL val))success
-                     failure:(void(^)(NSError * error))failure;
-- (void)invokeAsyncIdBlock:(id(^)())block
-                   success:(void(^)(id))success
-                   failure:(void(^)(NSError * error))failure;
-- (void)invokeAsyncInt32Block:(int32_t(^)())block
-                      success:(void(^)(int32_t val))success
-                      failure:(void(^)(NSError * error))failure;
-- (void)invokeAsyncVoidBlock:(void(^)())block
-                     success:(void(^)())success
-                     failure:(void(^)(NSError * error))failure;
+
+- (void)invokeAsyncBoolBlock:(BOOL(^)())block completion:(void (^)(BOOL value, NSError *_Nullable error))completion;
+- (void)invokeAsyncObjectBlock:(nullable id(^)())block completion:(void (^)(id _Nullable value, NSError *_Nullable error))completion;
+- (void)invokeAsyncInt32Block:(int32_t(^)())block completion:(void (^)(int32_t value, NSError *_Nullable error))completion;
+- (void)invokeAsyncBlock:(void(^)())block completion:(void (^)(NSError *_Nullable error))completion;
+
 @end
+
+NS_ASSUME_NONNULL_END
+

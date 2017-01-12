@@ -367,7 +367,12 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
     // errors, or transient problems.
     BOOL failuresAreFatal = (self.authenticationCompletion != nil);
     
-    [[self userStore] fetchUserWithSuccess:^(EDAMUser * user) {
+    [[self userStore] fetchUserWithCompletion:^(EDAMUser *user, NSError *error) {
+        if (error) {
+            ENSDKLogError(@"Failed to get user info for user: %@", error);
+            [self completeAuthenticationWithError:(failuresAreFatal ? error : nil)];
+            return;
+        }
         self.user = user;
         [self.preferences encodeObject:user forKey:ENSessionPreferencesUser];
         [self completeAuthenticationWithError:nil];
@@ -383,25 +388,26 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
         }
         
         [self refreshUploadUsage];
-    } failure:^(NSError * getUserError) {
-        ENSDKLogError(@"Failed to get user info for user: %@", getUserError);
-        [self completeAuthenticationWithError:(failuresAreFatal ? getUserError : nil)];
     }];
 }
 
 - (void)refreshUploadUsage {
-    [self.primaryNoteStore fetchSyncStateWithSuccess:^(EDAMSyncState *syncState) {
+    [self.primaryNoteStore fetchSyncStateWithCompletion:^(EDAMSyncState *syncState, NSError *error) {
+        if (error) {
+            ENSDKLogError(@"Failed to get personal sync state");
+            return;
+        }
         self.personalUploadUsage = syncState.uploaded.longLongValue;
         self.personalUploadLimit = self.user.accounting.uploadLimit.longLongValue;
-    } failure:^(NSError *error) {
-        ENSDKLogError(@"Failed to get personal sync state");
     }];
     if (self.isBusinessUser) {
-        [self.businessNoteStore fetchSyncStateWithSuccess:^(EDAMSyncState *syncState) {
+        [self.businessNoteStore fetchSyncStateWithCompletion:^(EDAMSyncState *syncState, NSError *error) {
+            if (error) {
+                ENSDKLogError(@"Failed to get business sync state");
+                return;
+            }
             self.businessUploadUsage = syncState.uploaded.longLongValue;
             self.businessUploadLimit = self.businessUser.accounting.uploadLimit.longLongValue;
-        } failure:^(NSError *error) {
-            ENSDKLogError(@"Failed to get business sync state");
         }];
     }
 }
@@ -705,33 +711,38 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
         ENNoteStoreClient * noteStore = [self noteStoreForLinkedNotebook:linkedNotebook];
         if (linkedNotebook.sharedNotebookGlobalId == nil) {
             // sharedNotebookGlobalId is nil means it's a public notebook
-            [self.userStore fetchPublicUserInfoWithUsername:linkedNotebook.username
-                                                    success:^(EDAMPublicUserInfo *info) {
-                                                      [noteStore fetchPublicNotebookWithUserID:[[info userId] intValue]
-                                                                                     publicURI:linkedNotebook.uri
-                                                                                       success:^(EDAMNotebook *sharedNotebook) {
-                                                                                           [sharedNotebooks setObject:sharedNotebook forKey:linkedNotebook.guid];
-                                                                                           [self listNotebooks_completePendingSharedNotebookWithContext:context];
-                                                                                       } failure:^(NSError *error) {
-                                                                                           context.error = error;
-                                                                                           [self listNotebooks_completePendingSharedNotebookWithContext:context];
-                                                                                       }];
-                                                  } failure:^(NSError *error) {
-                                                      context.error = error;
-                                                      [self listNotebooks_completePendingSharedNotebookWithContext:context];
-                                                  }];
+            [self.userStore fetchPublicUserInfoWithUsername:linkedNotebook.username completion:^(EDAMPublicUserInfo *info, NSError *error) {
+                if (error) {
+                    context.error = error;
+                    [self listNotebooks_completePendingSharedNotebookWithContext:context];
+                    return;
+                }
+                [noteStore fetchPublicNotebookWithUserID:[[info userId] intValue]
+                                               publicURI:linkedNotebook.uri
+                                               completion:^(EDAMNotebook *sharedNotebook, NSError *fetchError) {
+                                                   if (fetchError) {
+                                                       context.error = fetchError;
+                                                       [self listNotebooks_completePendingSharedNotebookWithContext:context];
+                                                       return;
+                                                   }
+                                                   [sharedNotebooks setObject:sharedNotebook forKey:linkedNotebook.guid];
+                                                   [self listNotebooks_completePendingSharedNotebookWithContext:context];
+                                               }];
+            }];
         } else {
-            [noteStore getSharedNotebookByAuthWithSuccess:^(EDAMSharedNotebook * sharedNotebook) {
+            [noteStore fetchSharedNotebookByAuthWithCompletion:^(EDAMSharedNotebook * sharedNotebook, NSError *error) {
+                if (error) {
+                    // failed to get the sharedNotebook from the service
+                    // the shared notebook could be deleted from the owner
+                    // we remove the linked notebook record from the context so it won't be listed in the result
+                    ENSDKLogError(@"Failed to get shared notebook for linked notebook record %@", linkedNotebook);
+                    [context.linkedPersonalNotebooks removeObject:linkedNotebook];
+                    context.error = error;
+                    [self listNotebooks_completePendingSharedNotebookWithContext:context];
+                    return;
+                }
                 // Add the shared notebook to the map.
                 [sharedNotebooks setObject:sharedNotebook forKey:linkedNotebook.guid];
-                [self listNotebooks_completePendingSharedNotebookWithContext:context];
-            } failure:^(NSError * error) {
-                // failed to get the sharedNotebook from the service
-                // the shared notebook could be deleted from the owner
-                // we remove the linked notebook record from the context so it won't be listed in the result
-                ENSDKLogError(@"Failed to get shared notebook for linked notebook record %@", linkedNotebook);
-                [context.linkedPersonalNotebooks removeObject:linkedNotebook];
-                context.error = error;
                 [self listNotebooks_completePendingSharedNotebookWithContext:context];
             }];
         }
@@ -1500,19 +1511,20 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
 #endif
     
     // Fetch by guid. Always get the content and resources.
-    [noteStore fetchNoteWithGuid:noteRef.guid includingContent:YES resourceOptions:ENResourceFetchOptionIncludeData success:^(EDAMNote * note) {
-        
+    [noteStore fetchNoteWithGuid:noteRef.guid includingContent:YES resourceOptions:ENResourceFetchOptionIncludeData completion:^(EDAMNote * note, NSError *error) {
+        if (error) {
+#if EN_PROGRESS_HANDLERS_ENABLED
+            noteStore.downloadProgressHandler = nil;
+#endif
+            completion(nil, error);
+            return;
+        }
         // Create an ENNote from the EDAMNote.
         ENNote * resultNote = [[ENNote alloc] initWithServiceNote:note];
 #if EN_PROGRESS_HANDLERS_ENABLED
         noteStore.downloadProgressHandler = nil;
 #endif
         completion(resultNote, nil);
-    } failure:^(NSError * error) {
-#if EN_PROGRESS_HANDLERS_ENABLED
-        noteStore.downloadProgressHandler = nil;
-#endif
-        completion(nil, error);
     }];
 }
 

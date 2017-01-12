@@ -43,11 +43,19 @@
  
  @param  notebook The desired fields for the notebook must be provided on this object. The name of the notebook must be set. If a notebook exists in the business account with the same name (via case-insensitive compare), this will throw an EDAMUserException.
  
- @param success Success completion block with the newly created Notebook. The server-side GUID will be saved in this object's 'guid' field.
- @param failure Failure completion block.
+ @param completion Completion block (if the error parameter is set, then the value of the first parameter is undefined)
  */
 - (void)createBusinessNotebook:(EDAMNotebook *)notebook
-               success:(void(^)(EDAMLinkedNotebook *notebook))success
-               failure:(void(^)(NSError *error))failure;
+                    completion:(void(^)(EDAMLinkedNotebook *notebook, NSError *error))completion;
+
+@end
+
+//Deprecated
+@interface ENBusinessNoteStoreClient ()
+
+- (void)createBusinessNotebook:(EDAMNotebook *)notebook
+                       success:(void(^)(EDAMLinkedNotebook *notebook))success
+                       failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -createBusinessNotebook:completion: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 @end
