@@ -48,7 +48,7 @@
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     [[ENSession sharedSession] findNotesWithSearch:self.noteSearch
                                         inNotebook:self.notebookToSearch
-                                           orScope:ENSessionSearchScopeAll
+                                           orScope:ENSessionSearchScopePersonal
                                          sortOrder:ENSessionSortOrderRecentlyCreated
                                         maxResults:0
                                         completion:^(NSArray *findNotesResults, NSError *findNotesError) {
