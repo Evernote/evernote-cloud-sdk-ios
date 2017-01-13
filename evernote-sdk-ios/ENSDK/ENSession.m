@@ -492,9 +492,7 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
     // normal session state.
     if (self.isAuthenticated && shouldRevokeAccessToken) {
         self.userStorePendingRevocation = self.userStore;
-        [self.userStorePendingRevocation revokeLongSessionWithAuthenticationToken:self.primaryAuthenticationToken success:^{
-            self.userStorePendingRevocation = nil;
-        } failure:^(NSError *error) {
+        [self.userStorePendingRevocation revokeLongSessionWithAuthenticationToken:self.primaryAuthenticationToken completion:^(NSError * _Nullable error) {
             self.userStorePendingRevocation = nil;
         }];
     }
@@ -583,7 +581,18 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
 
 - (void)listNotebooks_listNotebooksWithContext:(ENSessionListNotebooksContext *)context
 {
-    [self.primaryNoteStore listNotebooksWithSuccess:^(NSArray * notebooks) {
+    [self.primaryNoteStore listNotebooksWithCompletion:^(NSArray * notebooks, NSError *error) {
+        if (error) {
+            if ([self isErrorDueToRestrictedAuth:error]) {
+                // App has a single notebook auth token, so try getting linked notebooks.
+                [self listNotebooks_listLinkedNotebooksWithContext:context];
+                return;
+            }
+            ENSDKLogError(@"Error from listNotebooks in user's store: %@", error);
+            [self listNotebooks_completeWithContext:context error:error];
+            return;
+        }
+
         // Populate the result list with personal notebooks.
         for (EDAMNotebook * notebook in notebooks) {
             ENNotebook * result = [[ENNotebook alloc] initWithNotebook:notebook];
@@ -591,30 +600,36 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
         }
         // Now get any shared notebooks records for the personal account.
         [self listNotebooks_listSharedNotebooksWithContext:context];
-    } failure:^(NSError * error) {
-        if ([self isErrorDueToRestrictedAuth:error]) {
-            // App has a single notebook auth token, so try getting linked notebooks.
-            [self listNotebooks_listLinkedNotebooksWithContext:context];
-            return;
-        }
-        ENSDKLogError(@"Error from listNotebooks in user's store: %@", error);
-        [self listNotebooks_completeWithContext:context error:error];
     }];
 }
 
 - (void)listNotebooks_listSharedNotebooksWithContext:(ENSessionListNotebooksContext *)context
 {
-    [self.primaryNoteStore listSharedNotebooksWithSuccess:^(NSArray * sharedNotebooks) {
+    [self.primaryNoteStore listSharedNotebooksWithCompletion:^(NSArray * sharedNotebooks, NSError *error) {
+        if (error) {
+            ENSDKLogError(@"Error from listSharedNotebooks in user's store: %@", error);
+            [self listNotebooks_completeWithContext:context error:error];
+            return;
+        }
         [self listNotebooks_listLinkedNotebooksWithContext:context];
-    } failure:^(NSError *error) {
-        ENSDKLogError(@"Error from listSharedNotebooks in user's store: %@", error);
-        [self listNotebooks_completeWithContext:context error:error];
     }];
 }
 
 - (void)listNotebooks_listLinkedNotebooksWithContext:(ENSessionListNotebooksContext *)context
 {
-    [self.primaryNoteStore listLinkedNotebooksWithSuccess:^(NSArray *linkedNotebooks) {
+    [self.primaryNoteStore listLinkedNotebooksWithCompletion:^(NSArray *linkedNotebooks, NSError *error) {
+        if (error) {
+            if ([self isErrorDueToRestrictedAuth:error]) {
+                // App has a single notebook auth token, so skip to the end.
+                [self listNotebooks_prepareResultsWithContext:context];
+                return;
+            }
+            ENSDKLogError(@"Error from listLinkedNotebooks in user's store: %@", error);
+            [self listNotebooks_completeWithContext:context error:error];
+            return;
+        }
+
+
         if (linkedNotebooks.count == 0) {
             [self listNotebooks_prepareResultsWithContext:context];
         } else {
@@ -625,20 +640,18 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
                 [self listNotebooks_fetchSharedNotebooksWithContext:context];
             }
         }
-    } failure:^(NSError *error) {
-        if ([self isErrorDueToRestrictedAuth:error]) {
-            // App has a single notebook auth token, so skip to the end.
-            [self listNotebooks_prepareResultsWithContext:context];
-            return;
-        }
-        ENSDKLogError(@"Error from listLinkedNotebooks in user's store: %@", error);
-        [self listNotebooks_completeWithContext:context error:error];
     }];
 }
 
 - (void)listNotebooks_fetchSharedBusinessNotebooksWithContext:(ENSessionListNotebooksContext *)context
 {
-    [self.businessNoteStore listSharedNotebooksWithSuccess:^(NSArray *sharedNotebooks) {
+    [self.businessNoteStore listSharedNotebooksWithCompletion:^(NSArray *sharedNotebooks, NSError *error) {
+        if (error) {
+            ENSDKLogError(@"Error from listSharedNotebooks in business store: %@", error);
+            [self listNotebooks_completeWithContext:context error:error];
+            return;
+        }
+
         // Run through the results, and set each notebook keyed by its shareKey, which
         // is how we'll find corresponding linked notebooks.
         context.sharedBusinessNotebooks = [[NSMutableDictionary alloc] init];
@@ -650,15 +663,17 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
         
         // Now continue on to grab all of the linked notebooks for the business.
         [self listNotebooks_fetchBusinessNotebooksWithContext:context];
-    } failure:^(NSError *error) {
-        ENSDKLogError(@"Error from listSharedNotebooks in business store: %@", error);
-        [self listNotebooks_completeWithContext:context error:error];
     }];
 }
 
 - (void)listNotebooks_fetchBusinessNotebooksWithContext:(ENSessionListNotebooksContext *)context
 {
-    [self.businessNoteStore listNotebooksWithSuccess:^(NSArray *notebooks) {
+    [self.businessNoteStore listNotebooksWithCompletion:^(NSArray *notebooks, NSError *error) {
+        if (error) {
+            ENSDKLogError(@"Error from listNotebooks in business store: %@", error);
+            [self listNotebooks_completeWithContext:context error:error];
+            return;
+        }
         // Run through the results, and set each notebook keyed by its guid, which
         // is how we'll find it from the shared notebook.
         context.businessNotebooks = [[NSMutableDictionary alloc] init];
@@ -666,9 +681,6 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
             [context.businessNotebooks setObject:notebook forKey:notebook.guid];
         }
         [self listNotebooks_processBusinessNotebooksWithContext:context];
-    } failure:^(NSError *error) {
-        ENSDKLogError(@"Error from listNotebooks in business store: %@", error);
-        [self listNotebooks_completeWithContext:context error:error];
     }];
 }
 
@@ -953,38 +965,49 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
     }
 #endif
 
-    [context.noteStore updateNote:context.note success:^(EDAMNote * resultNote) {
+    [context.noteStore updateNote:context.note completion:^(EDAMNote * resultNote, NSError *error) {
+        if (error) {
+            if ([error.userInfo[@"parameter"] isEqualToString:@"Note.guid"]) {
+                // We tried to replace a note that isn't there anymore. Now we look at the replacement policy.
+                if (context.policy == ENSessionUploadPolicyReplaceOrCreate) {
+                    // Can't update it, just create it anew.
+                    context.note.guid = nil;
+                    context.policy = ENSessionUploadPolicyCreate;
+                    context.refToReplace = nil;
+
+                    // Go back to determining the destination before creating. We'll take into account a supplied
+                    // notebook at this point, which may actually be in a different place than the note we were
+                    // trying to replace. We don't have enough information otherwise to reliably place a new note
+                    // in the same notebook as the original one, so defaulting to a default notebook in a given
+                    // note store is less predictable than defaulting to the default overall. In practice, this
+                    // works out the same most of the time. (For app notebook apps, it'll end up in the app notebook
+                    // anyway of course.)
+                    [self uploadNote_determineDestinationWithContext:context];
+                    return;
+                }
+            }
+            ENSDKLogError(@"Failed to updateNote for uploadNote: %@", error);
+            [self uploadNote_completeWithContext:context error:error];
+            return;
+        }
+
         context.noteRef = context.refToReplace; // The result by definition has the same ref.
         [self uploadNote_completeWithContext:context error:nil];
-    } failure:^(NSError *error) {
-        if ([error.userInfo[@"parameter"] isEqualToString:@"Note.guid"]) {
-            // We tried to replace a note that isn't there anymore. Now we look at the replacement policy.
-            if (context.policy == ENSessionUploadPolicyReplaceOrCreate) {
-                // Can't update it, just create it anew.
-                context.note.guid = nil;
-                context.policy = ENSessionUploadPolicyCreate;
-                context.refToReplace = nil;
-                
-                // Go back to determining the destination before creating. We'll take into account a supplied
-                // notebook at this point, which may actually be in a different place than the note we were
-                // trying to replace. We don't have enough information otherwise to reliably place a new note
-                // in the same notebook as the original one, so defaulting to a default notebook in a given
-                // note store is less predictable than defaulting to the default overall. In practice, this
-                // works out the same most of the time. (For app notebook apps, it'll end up in the app notebook
-                // anyway of course.)
-                [self uploadNote_determineDestinationWithContext:context];
-                return;
-            }
-        }
-        ENSDKLogError(@"Failed to updateNote for uploadNote: %@", error);
-        [self uploadNote_completeWithContext:context error:error];
     }];
 }
 
 - (void)uploadNote_findLinkedAppNotebookWithContext:(ENSessionUploadNoteContext *)context
 {
     // We know the app notebook is linked. List linked notebooks; we expect to find a single result.
-    [self.primaryNoteStore listLinkedNotebooksWithSuccess:^(NSArray * linkedNotebooks) {
+    [self.primaryNoteStore listLinkedNotebooksWithCompletion:^(NSArray * linkedNotebooks, NSError *listError) {
+        if (listError) {
+            ENSDKLogInfo(@"Failed to listLinkedNotebooks for uploadNote; turning into NotFound: %@", listError);
+            // Uh-oh; there's no destination to use. We have to fail the request.
+            NSError *error = [NSError errorWithDomain:ENErrorDomain code:ENErrorCodeNotFound userInfo:nil];
+            [self uploadNote_completeWithContext:context error:error];
+            return;
+        }
+
         if (linkedNotebooks.count < 1) {
             ENSDKLogInfo(@"Cannot find linked app notebook. Perhaps user deleted it?");
             // Uh-oh; there's no destination to use. We have to fail the request.
@@ -1007,11 +1030,6 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
         
         // Go find the shared notebook that corresponds to this.
         [self uploadNote_findSharedAppNotebookWithContext:context];
-    } failure:^(NSError * error) {
-        ENSDKLogInfo(@"Failed to listLinkedNotebooks for uploadNote; turning into NotFound: %@", error);
-        // Uh-oh; there's no destination to use. We have to fail the request.
-        error = [NSError errorWithDomain:ENErrorDomain code:ENErrorCodeNotFound userInfo:nil];
-        [self uploadNote_completeWithContext:context error:error];
     }];
 }
 
@@ -1019,7 +1037,15 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
 {
     EDAMLinkedNotebook * linkedNotebook = [self.preferences decodedObjectForKey:ENSessionPreferencesLinkedAppNotebook];
     ENNoteStoreClient * linkedNoteStore = [self noteStoreForLinkedNotebook:linkedNotebook];
-    [linkedNoteStore getSharedNotebookByAuthWithSuccess:^(EDAMSharedNotebook *sharedNotebook) {
+    [linkedNoteStore fetchSharedNotebookByAuthWithCompletion:^(EDAMSharedNotebook *sharedNotebook, NSError *fetchError) {
+        if (fetchError) {
+            ENSDKLogInfo(@"Failed to getSharedNotebookByAuth for uploadNote; turning into NotFound: %@", fetchError);
+            // Uh-oh; there's no destination to use. We have to fail the request.
+            NSError *error = [NSError errorWithDomain:ENErrorDomain code:ENErrorCodeNotFound userInfo:nil];
+            [self uploadNote_completeWithContext:context error:error];
+            return;
+        }
+
         if (sharedNotebook) {
             // Persist the shared notebook record.
             [self.preferences encodeObject:sharedNotebook forKey:ENSessionPreferencesSharedAppNotebook];
@@ -1032,11 +1058,6 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
             NSError * error = [NSError errorWithDomain:ENErrorDomain code:ENErrorCodeNotFound userInfo:nil];
             [self uploadNote_completeWithContext:context error:error];
         }
-    } failure:^(NSError *error) {
-        ENSDKLogInfo(@"Failed to getSharedNotebookByAuth for uploadNote; turning into NotFound: %@", error);
-        // Uh-oh; there's no destination to use. We have to fail the request.
-        error = [NSError errorWithDomain:ENErrorDomain code:ENErrorCodeNotFound userInfo:nil];
-        [self uploadNote_completeWithContext:context error:error];
     }];
 }
 
@@ -1054,13 +1075,15 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
         context.noteStore.uploadProgressHandler = context.progress;
     }
 #endif
-    [context.noteStore createNote:context.note success:^(EDAMNote * resultNote) {
+    [context.noteStore createNote:context.note completion:^(EDAMNote * resultNote, NSError * error) {
+        if (error) {
+            context.noteRef = nil;
+            ENSDKLogError(@"Failed to createNote for uploadNote: %@", error);
+            [self uploadNote_completeWithContext:context error:error];
+            return;
+        }
         context.noteRef.guid = resultNote.guid;
         [self uploadNote_completeWithContext:context error:nil];
-    } failure:^(NSError * error) {
-        context.noteRef = nil;
-        ENSDKLogError(@"Failed to createNote for uploadNote: %@", error);
-        [self uploadNote_completeWithContext:context error:error];
     }];
 }
 
@@ -1088,7 +1111,14 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
     }
 
     ENNoteStoreClient * noteStore = [self noteStoreForNoteRef:noteRef];
-    [noteStore shareNoteWithGuid:noteRef.guid success:^(NSString * noteKey) {
+    [noteStore shareNoteWithGuid:noteRef.guid completion:^(NSString * noteKey, NSError *error) {
+        if (error) {
+            ENSDKLogError(@"Failed to shareNote: %@", error);
+            if (completion) {
+                completion(nil, error);
+            }
+            return;
+        }
         NSString * shardId = [self shardIdForNoteRef:noteRef];
         NSString * shareUrl = [ENShareURLHelper shareURLStringForNoteGUID:noteRef.guid
                                                                   shardId:shardId
@@ -1097,11 +1127,6 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
                                                   encodedAdditionalString:nil];        
         if (completion) {
             completion(shareUrl, nil);
-        }
-    } failure:^(NSError * error) {
-        ENSDKLogError(@"Failed to shareNote: %@", error);
-        if (completion) {
-            completion(nil, error);
         }
     }];
 }
@@ -1119,14 +1144,16 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
     }
 
     ENNoteStoreClient * noteStore = [self noteStoreForNoteRef:noteRef];
-    [noteStore deleteNoteWithGuid:noteRef.guid success:^(int32_t usn) {
+    [noteStore deleteNoteWithGuid:noteRef.guid completion:^(int32_t usn, NSError *error) {
+        if (error) {
+            ENSDKLogError(@"Failed to deleteNote: %@", error);
+            if (completion) {
+                completion(error);;
+            }
+            return;
+        }
         if (completion) {
             completion(nil);
-        }
-    } failure:^(NSError * error) {
-        ENSDKLogError(@"Failed to deleteNote: %@", error);
-        if (completion) {
-            completion(error);;
         }
     }];
 }
