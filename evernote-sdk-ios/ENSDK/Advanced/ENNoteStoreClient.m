@@ -879,7 +879,7 @@
                         failure:(void(^)(NSError *error))failure
 {
     [self fetchSyncStateWithCompletion:^(EDAMSyncState * _Nullable syncState, NSError * _Nullable error) {
-        (error != nil) ? success(syncState) : failure(error);
+        (error == nil) ? success(syncState) : failure(error);
     }];
 }
 
@@ -890,7 +890,7 @@
                      failure:(void(^)(NSError *error))failure
 {
     [self fetchSyncChunkAfterUSN:afterUSN maxEntries:maxEntries fullSyncOnly:fullSyncOnly completion:^(EDAMSyncChunk * _Nullable syncChunk, NSError * _Nullable error) {
-        (error != nil) ? success(syncChunk) : failure(error);
+        (error == nil) ? success(syncChunk) : failure(error);
     }];
 }
 
@@ -901,7 +901,7 @@
                              failure:(void(^)(NSError *error))failure
 {
     [self fetchFilteredSyncChunkAfterUSN:afterUSN maxEntries:maxEntries filter:filter completion:^(EDAMSyncChunk * _Nullable syncChunk, NSError * _Nullable error) {
-        (error != nil) ? success(syncChunk) : failure(error);
+        (error == nil) ? success(syncChunk) : failure(error);
     }];
 }
 
@@ -910,7 +910,7 @@
                            failure:(void(^)(NSError *error))failure
 {
     [self fetchSyncStateForLinkedNotebook:linkedNotebook completion:^(EDAMSyncState * _Nullable syncState, NSError * _Nullable error) {
-        (error != nil) ? success(syncState) : failure(error);
+        (error == nil) ? success(syncState) : failure(error);
     }];
 }
 
@@ -922,7 +922,7 @@
                            failure:(void(^)(NSError *error))failure
 {
     [self fetchSyncChunkForLinkedNotebook:linkedNotebook afterUSN:afterUSN maxEntries:maxEntries fullSyncOnly:fullSyncOnly completion:^(EDAMSyncChunk * _Nullable syncChunk, NSError * _Nullable error) {
-        (error != nil) ? success(syncChunk) : failure(error);
+        (error == nil) ? success(syncChunk) : failure(error);
     }];
 }
 
@@ -930,7 +930,7 @@
                          failure:(void(^)(NSError *error))failure
 {
     [self listNotebooksWithCompletion:^(NSArray<EDAMNotebook *> * _Nullable notebooks, NSError * _Nullable error) {
-        (error != nil) ? success(notebooks) : failure(error);
+        (error == nil) ? success(notebooks) : failure(error);
     }];
 }
 
@@ -939,7 +939,7 @@
                     failure:(void(^)(NSError *error))failure
 {
     [self fetchNotebookWithGuid:guid completion:^(EDAMNotebook * _Nullable notebook, NSError * _Nullable error) {
-        (error != nil) ? success(notebook) : failure(error);
+        (error == nil) ? success(notebook) : failure(error);
     }];
 }
 
@@ -947,7 +947,7 @@
                               failure:(void(^)(NSError *error))failure
 {
     [self fetchDefaultNotebookWithCompletion:^(EDAMNotebook * _Nullable notebook, NSError * _Nullable error) {
-        (error != nil) ? success(notebook) : failure(error);
+        (error == nil) ? success(notebook) : failure(error);
     }];
 }
 
@@ -956,7 +956,7 @@
                failure:(void(^)(NSError *error))failure
 {
     [self createNotebook:notebook completion:^(EDAMNotebook * _Nullable createdNotebook, NSError * _Nullable error) {
-        (error != nil) ? success(createdNotebook) : failure(error);
+        (error == nil) ? success(createdNotebook) : failure(error);
     }];
 }
 
@@ -965,7 +965,7 @@
                failure:(void(^)(NSError *error))failure
 {
     [self updateNotebook:notebook completion:^(int32_t usn, NSError * _Nullable error) {
-        (error != nil) ? success(usn) : failure(error);
+        (error == nil) ? success(usn) : failure(error);
     }];
 }
 
@@ -974,7 +974,7 @@
                         failure:(void(^)(NSError *error))failure
 {
     [self expungeNotebookWithGuid:guid completion:^(int32_t usn, NSError * _Nullable error) {
-        (error != nil) ? success(usn) : failure(error);
+        (error == nil) ? success(usn) : failure(error);
     }];
 }
 
@@ -982,7 +982,7 @@
                     failure:(void(^)(NSError *error))failure
 {
     [self listTagsWithCompletion:^(NSArray<EDAMTag *> * _Nullable tags, NSError * _Nullable error) {
-        (error != nil) ? success(tags) : failure(error);
+        (error == nil) ? success(tags) : failure(error);
     }];
 }
 
@@ -991,7 +991,7 @@
                            failure:(void(^)(NSError *error))failure
 {
     [self listTagsInNotebookWithGuid:guid completion:^(NSArray<EDAMTag *> *_Nullable tags, NSError * _Nullable error) {
-        (error != nil) ? success(tags) : failure(error);
+        (error == nil) ? success(tags) : failure(error);
     }];
 }
 
@@ -1000,7 +1000,7 @@
                failure:(void(^)(NSError *error))failure
 {
     [self fetchTagWithGuid:guid completion:^(EDAMTag * _Nullable tag, NSError * _Nullable error) {
-        (error != nil) ? success(tag) : failure(error);
+        (error == nil) ? success(tag) : failure(error);
     }];
 }
 
@@ -1009,7 +1009,7 @@
           failure:(void(^)(NSError *error))failure
 {
     [self createTag:tag completion:^(EDAMTag * _Nullable createdTag, NSError * _Nullable error) {
-        (error != nil) ? success(createdTag) : failure(error);
+        (error == nil) ? success(createdTag) : failure(error);
     }];
 }
 
@@ -1018,7 +1018,7 @@
           failure:(void(^)(NSError *error))failure
 {
     [self updateTag:tag completion:^(int32_t usn, NSError * _Nullable error) {
-        (error != nil) ? success(usn) : failure(error);
+        (error == nil) ? success(usn) : failure(error);
     }];
 }
 
@@ -1027,7 +1027,7 @@
                  failure:(void(^)(NSError *error))failure
 {
     [self untagAllWithGuid:guid completion:^(NSError * _Nonnull error) {
-        (error != nil) ? success() : failure(error);
+        (error == nil) ? success() : failure(error);
     }];
 }
 
@@ -1036,7 +1036,7 @@
                    failure:(void(^)(NSError *error))failure
 {
     [self expungeTagWithGuid:guid completion:^(int32_t usn, NSError * _Nullable error) {
-        (error != nil) ? success(usn) : failure(error);
+        (error == nil) ? success(usn) : failure(error);
     }];
 }
 
@@ -1044,7 +1044,7 @@
                         failure:(void(^)(NSError *error))failure
 {
     [self listSearchesWithCompletion:^(NSArray<EDAMSavedSearch *> * _Nullable searches, NSError * _Nullable error) {
-        (error != nil) ? success(searches) : failure(error);
+        (error == nil) ? success(searches) : failure(error);
     }];
 }
 
@@ -1053,7 +1053,7 @@
                   failure:(void(^)(NSError *error))failure
 {
     [self fetchSearchWithGuid:guid completion:^(EDAMSavedSearch * _Nullable search, NSError * _Nullable error) {
-        (error != nil) ? success(search) : failure(error);
+        (error == nil) ? success(search) : failure(error);
     }];
 }
 
@@ -1062,7 +1062,7 @@
              failure:(void(^)(NSError *error))failure
 {
     [self createSearch:search completion:^(EDAMSavedSearch * _Nullable createdSearch, NSError * _Nullable error) {
-        (error != nil) ? success(createdSearch) : failure(error);
+        (error == nil) ? success(createdSearch) : failure(error);
     }];
 }
 
@@ -1071,7 +1071,7 @@
              failure:(void(^)(NSError *error))failure
 {
     [self updateSearch:search completion:^(int32_t usn, NSError * _Nullable error) {
-        (error != nil) ? success(usn) : failure(error);
+        (error == nil) ? success(usn) : failure(error);
     }];
 }
 
@@ -1080,7 +1080,7 @@
                       failure:(void(^)(NSError *error))failure
 {
     [self expungeSearchWithGuid:guid completion:^(int32_t usn, NSError * _Nullable error) {
-        (error != nil) ? success(usn) : failure(error);
+        (error == nil) ? success(usn) : failure(error);
     }];
 }
 
@@ -1090,7 +1090,7 @@
                      failure:(void(^)(NSError *error))failure
 {
     [self findRelatedWithQuery:query resultSpec:resultSpec completion:^(EDAMRelatedResult * _Nullable result, NSError * _Nullable error) {
-        (error != nil) ? success(result) : failure(error);
+        (error == nil) ? success(result) : failure(error);
     }];
 }
 
@@ -1101,7 +1101,7 @@
                     failure:(void(^)(NSError *error))failure
 {
     [self findNotesWithFilter:filter offset:offset maxNotes:maxNotes completion:^(EDAMNoteList * _Nullable list, NSError * _Nullable error) {
-        (error != nil) ? success(list) : failure(error);
+        (error == nil) ? success(list) : failure(error);
     }];
 }
 
@@ -1111,7 +1111,7 @@
                          failure:(void(^)(NSError *error))failure
 {
     [self findNoteOffsetWithFilter:filter guid:guid completion:^(int32_t offset, NSError * _Nullable error) {
-        (error != nil) ? success(offset) : failure(error);
+        (error == nil) ? success(offset) : failure(error);
     }];
 }
 
@@ -1123,7 +1123,7 @@
                             failure:(void(^)(NSError *error))failure
 {
     [self findNotesMetadataWithFilter:filter offset:offset maxNotes:maxNotes resultSpec:resultSpec completion:^(EDAMNotesMetadataList * _Nullable metadata, NSError * _Nullable error) {
-        (error != nil) ? success(metadata) : failure(error);
+        (error == nil) ? success(metadata) : failure(error);
     }];
 }
 
@@ -1134,7 +1134,7 @@
                          failure:(void(^)(NSError *error))failure
 {
     [self findNoteCountsWithFilter:filter includingTrash:withTrash completion:^(EDAMNoteCollectionCounts * _Nullable counts, NSError * _Nullable error) {
-        (error != nil) ? success(counts) : failure(error);
+        (error == nil) ? success(counts) : failure(error);
     }];
 }
 
@@ -1157,7 +1157,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
         EN_FLAG_SET(options, ENResourceFetchOptionIncludeAlternateData);
     }
     [self fetchNoteWithGuid:guid includingContent:withContent resourceOptions:options completion:^(EDAMNote * _Nullable note, NSError * _Nullable error) {
-        (error != nil) ? success(note) : failure(error);
+        (error == nil) ? success(note) : failure(error);
     }];
 }
 
@@ -1166,7 +1166,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                failure:(void(^)(NSError *error))failure
 {
     [self fetchNoteApplicationDataWithGuid:guid completion:^(EDAMLazyMap * _Nullable map, NSError * _Nullable error) {
-        (error != nil) ? success(map) : failure(error);
+        (error == nil) ? success(map) : failure(error);
     }];
 }
 
@@ -1176,7 +1176,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                     failure:(void(^)(NSError *error))failure
 {
     [self fetchNoteApplicationDataEntryWithGuid:guid key:key completion:^(NSString * _Nullable entry, NSError * _Nullable error) {
-        (error != nil) ? success(entry) : failure(error);
+        (error == nil) ? success(entry) : failure(error);
     }];
 }
 
@@ -1187,7 +1187,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                     failure:(void(^)(NSError *error))failure
 {
     [self setNoteApplicationDataEntryWithGuid:guid key:key value:value completion:^(int32_t usn, NSError * _Nullable error) {
-        (error != nil) ? success(usn) : failure(error);
+        (error == nil) ? success(usn) : failure(error);
     }];
 }
 
@@ -1197,7 +1197,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                       failure:(void(^)(NSError *error))failure
 {
     [self unsetNoteApplicationDataEntryWithGuid:guid key:key completion:^(int32_t usn, NSError * _Nullable error) {
-        (error != nil) ? success(usn) : failure(error);
+        (error == nil) ? success(usn) : failure(error);
     }];
 }
 
@@ -1206,7 +1206,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                        failure:(void(^)(NSError *error))failure
 {
     [self fetchNoteContentWithGuid:guid completion:^(NSString * _Nullable content, NSError * _Nullable error) {
-        (error != nil) ? success(content) : failure(error);
+        (error == nil) ? success(content) : failure(error);
     }];
 }
 
@@ -1217,7 +1217,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                           failure:(void(^)(NSError *error))failure
 {
     [self fetchSearchTextForNoteWithGuid:guid noteOnly:noteOnly tokenizeForIndexing:tokenizeForIndexing completion:^(NSString * _Nullable text, NSError * _Nullable error) {
-        (error != nil) ? success(text) : failure(error);
+        (error == nil) ? success(text) : failure(error);
     }];
 }
 
@@ -1226,7 +1226,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                               failure:(void(^)(NSError *error))failure
 {
     [self fetchSearchTextForResourceWithGuid:guid completion:^(NSString * _Nullable text, NSError * _Nullable error) {
-        (error != nil) ? success(text) : failure(error);
+        (error == nil) ? success(text) : failure(error);
     }];
 }
 
@@ -1235,7 +1235,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                         failure:(void(^)(NSError *error))failure
 {
     [self fetchTagNamesForNoteWithGuid:guid completion:^(NSArray<NSString *> * _Nullable names, NSError * _Nullable error) {
-        (error != nil) ? success(names) : failure(error);
+        (error == nil) ? success(names) : failure(error);
     }];
 }
 
@@ -1244,7 +1244,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
            failure:(void(^)(NSError *error))failure
 {
     [self createNote:note completion:^(EDAMNote * _Nullable createdNote, NSError * _Nullable error) {
-        (error != nil) ? success(createdNote) : failure(error);
+        (error == nil) ? success(createdNote) : failure(error);
     }];
 }
 
@@ -1253,7 +1253,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
            failure:(void(^)(NSError *error))failure
 {
     [self updateNote:note completion:^(EDAMNote * _Nullable updatedNote, NSError * _Nullable error) {
-        (error != nil) ? success(updatedNote) : failure(error);
+        (error == nil) ? success(updatedNote) : failure(error);
     }];
 }
 
@@ -1262,7 +1262,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                    failure:(void(^)(NSError *error))failure
 {
     [self deleteNoteWithGuid:guid completion:^(int32_t usn, NSError * _Nullable error) {
-        (error != nil) ? success(usn) : failure(error);
+        (error == nil) ? success(usn) : failure(error);
     }];
 }
 
@@ -1271,7 +1271,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                     failure:(void(^)(NSError *error))failure
 {
     [self expungeNoteWithGuid:guid completion:^(int32_t usn, NSError * _Nullable error) {
-        (error != nil) ? success(usn) : failure(error);
+        (error == nil) ? success(usn) : failure(error);
     }];
 }
 
@@ -1280,7 +1280,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                       failure:(void(^)(NSError *error))failure
 {
     [self expungeNotesWithGuids:guids completion:^(int32_t usn, NSError * _Nullable error) {
-        (error != nil) ? success(usn) : failure(error);
+        (error == nil) ? success(usn) : failure(error);
     }];
 }
 
@@ -1288,7 +1288,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                failure:(void(^)(NSError *error))failure
 {
     [self expungeInactiveNoteWithCompletion:^(int32_t usn, NSError * _Nullable error) {
-        (error != nil) ? success(usn) : failure(error);
+        (error == nil) ? success(usn) : failure(error);
     }];
 }
 
@@ -1298,7 +1298,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                  failure:(void(^)(NSError *error))failure
 {
     [self copyNoteWithGuid:guid toNotebookWithGuid:toNotebookGuid completion:^(EDAMNote * _Nullable note, NSError * _Nullable error) {
-        (error != nil) ? success(note) : failure(error);
+        (error == nil) ? success(note) : failure(error);
     }];
 }
 
@@ -1307,7 +1307,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                          failure:(void(^)(NSError *error))failure
 {
     [self listNoteVersionsWithGuid:guid completion:^(NSArray<EDAMNoteVersionId *> * _Nullable versions, NSError * _Nullable error) {
-        (error != nil) ? success(versions) : failure(error);
+        (error == nil) ? success(versions) : failure(error);
     }];
 }
 
@@ -1330,7 +1330,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
         EN_FLAG_SET(options, ENResourceFetchOptionIncludeAlternateData);
     }
     [self fetchNoteVersionWithGuid:guid updateSequenceNum:updateSequenceNum resourceOptions:options completion:^(EDAMNote * _Nullable note, NSError * _Nullable error) {
-        (error != nil) ? success(note) : failure(error);
+        (error == nil) ? success(note) : failure(error);
     }];
 }
 
@@ -1357,7 +1357,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
         EN_FLAG_SET(options, ENResourceFetchOptionIncludeAttributes);
     }
     [self fetchResourceWithGuid:guid options:options completion:^(EDAMResource * _Nullable resource, NSError * _Nullable error) {
-        (error != nil) ? success(resource) : failure(error);
+        (error == nil) ? success(resource) : failure(error);
     }];
 }
 
@@ -1366,7 +1366,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                    failure:(void(^)(NSError *error))failure
 {
     [self fetchResourceApplicationDataWithGuid:guid completion:^(EDAMLazyMap * _Nullable map, NSError * _Nullable error) {
-        (error != nil) ? success(map) : failure(error);
+        (error == nil) ? success(map) : failure(error);
     }];
 }
 
@@ -1376,7 +1376,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                         failure:(void(^)(NSError *error))failure
 {
     [self fetchResourceApplicationDataEntryWithGuid:guid key:key completion:^(NSString * _Nullable entry, NSError * _Nullable error) {
-        (error != nil) ? success(entry) : failure(error);
+        (error == nil) ? success(entry) : failure(error);
     }];
 }
 
@@ -1387,7 +1387,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                         failure:(void(^)(NSError *error))failure
 {
     [self setResourceApplicationDataEntryWithGuid:guid key:key value:value completion:^(int32_t usn, NSError * _Nullable error) {
-        (error != nil) ? success(usn) : failure(error);
+        (error == nil) ? success(usn) : failure(error);
     }];
 }
 
@@ -1397,7 +1397,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                           failure:(void(^)(NSError *error))failure
 {
     [self unsetResourceApplicationDataEntryWithGuid:guid key:key completion:^(int32_t usn, NSError * _Nullable error) {
-        (error != nil) ? success(usn) : failure(error);
+        (error == nil) ? success(usn) : failure(error);
     }];
 }
 
@@ -1406,7 +1406,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                failure:(void(^)(NSError *error))failure
 {
     [self updateResource:resource completion:^(int32_t usn, NSError * _Nullable error) {
-        (error != nil) ? success(usn) : failure(error);
+        (error == nil) ? success(usn) : failure(error);
     }];
 }
 
@@ -1415,7 +1415,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                         failure:(void(^)(NSError *error))failure
 {
     [self fetchResourceDataWithGuid:guid completion:^(NSData * _Nullable data, NSError * _Nullable error) {
-        (error != nil) ? success(data) : failure(error);
+        (error == nil) ? success(data) : failure(error);
     }];
 }
 
@@ -1438,7 +1438,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
         EN_FLAG_SET(options, ENResourceFetchOptionIncludeAlternateData);
     }
     [self fetchResourceByHashWithGuid:guid contentHash:contentHash options:options completion:^(EDAMResource * _Nullable resource, NSError * _Nullable error) {
-        (error != nil) ? success(resource) : failure(error);
+        (error == nil) ? success(resource) : failure(error);
     }];
 }
 
@@ -1447,7 +1447,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                failure:(void(^)(NSError *error))failure
 {
     [self fetchRecognitionDataForResourceWithGuid:guid completion:^(NSData * _Nullable data, NSError * _Nullable error) {
-        (error != nil) ? success(data) : failure(error);
+        (error == nil) ? success(data) : failure(error);
     }];
 }
 
@@ -1456,7 +1456,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                  failure:(void(^)(NSError *error))failure
 {
     [self fetchAlternateDataForResourceWithGuid:guid completion:^(NSData * _Nullable data, NSError * _Nullable error) {
-        (error != nil) ? success(data) : failure(error);
+        (error == nil) ? success(data) : failure(error);
     }];
 }
 
@@ -1465,7 +1465,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                               failure:(void(^)(NSError *error))failure
 {
     [self fetchAttributesForResourceWithGuid:guid completion:^(EDAMResourceAttributes * _Nullable attributes, NSError * _Nullable error) {
-        (error != nil) ? success(attributes) : failure(error);
+        (error == nil) ? success(attributes) : failure(error);
     }];
 }
 
@@ -1475,7 +1475,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                             failure:(void(^)(NSError *error))failure
 {
     [self fetchPublicNotebookWithUserID:userId publicURI:publicUri completion:^(EDAMNotebook * _Nullable notebook, NSError * _Nullable error) {
-        (error != nil) ? success(notebook) : failure(error);
+        (error == nil) ? success(notebook) : failure(error);
     }];
 }
 
@@ -1484,7 +1484,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                      failure:(void(^)(NSError *error))failure
 {
     [self createSharedNotebook:sharedNotebook completion:^(EDAMSharedNotebook * _Nullable createdSharedNotebook, NSError * _Nullable error) {
-        (error != nil) ? success(createdSharedNotebook) : failure(error);
+        (error == nil) ? success(createdSharedNotebook) : failure(error);
     }];
 }
 
@@ -1495,7 +1495,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                            failure:(void(^)(NSError *error))failure
 {
     [self sendMessageToMembersOfSharedNotebookWithGuid:guid messageText:messageText recipients:recipients completion:^(int32_t numMessagesSent, NSError * _Nullable error) {
-        (error != nil) ? success(numMessagesSent) : failure(error);
+        (error == nil) ? success(numMessagesSent) : failure(error);
     }];
 }
 
@@ -1503,7 +1503,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                failure:(void(^)(NSError *error))failure
 {
     [self listSharedNotebooksWithCompletion:^(NSArray<EDAMSharedNotebook *> * _Nullable sharedNotebooks, NSError * _Nullable error) {
-        (error != nil) ? success(sharedNotebooks) : failure(error);
+        (error == nil) ? success(sharedNotebooks) : failure(error);
     }];
 }
 
@@ -1512,7 +1512,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                               failure:(void(^)(NSError *error))failure
 {
     [self expungeSharedNotebooksWithIds:sharedNotebookIds completion:^(int32_t usn, NSError * _Nullable error) {
-        (error != nil) ? success(usn) : failure(error);
+        (error == nil) ? success(usn) : failure(error);
     }];
 }
 
@@ -1521,7 +1521,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                      failure:(void(^)(NSError *error))failure
 {
     [self createLinkedNotebook:linkedNotebook completion:^(EDAMLinkedNotebook * _Nullable createdLinkedNotebook, NSError * _Nullable error) {
-        (error != nil) ? success(createdLinkedNotebook) : failure(error);
+        (error == nil) ? success(createdLinkedNotebook) : failure(error);
     }];
 }
 
@@ -1530,7 +1530,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                      failure:(void(^)(NSError *error))failure
 {
     [self updateLinkedNotebook:linkedNotebook completion:^(int32_t usn, NSError * _Nullable error) {
-        (error != nil) ? success(usn) : failure(error);
+        (error == nil) ? success(usn) : failure(error);
     }];
 }
 
@@ -1538,7 +1538,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                failure:(void(^)(NSError *error))failure
 {
     [self listLinkedNotebooksWithCompletion:^(NSArray<EDAMLinkedNotebook *> * _Nullable linkedNotebooks, NSError * _Nullable error) {
-        (error != nil) ? success(linkedNotebooks) : failure(error);
+        (error == nil) ? success(linkedNotebooks) : failure(error);
     }];
 }
 
@@ -1547,7 +1547,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                               failure:(void(^)(NSError *error))failure
 {
     [self expungeLinkedNotebookWithGuid:guid completion:^(int32_t usn, NSError * _Nullable error) {
-        (error != nil) ? success(usn) : failure(error);
+        (error == nil) ? success(usn) : failure(error);
     }];
 }
 
@@ -1556,7 +1556,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                              failure:(void(^)(NSError *error))failure
 {
     [self authenticateToSharedNotebook:shareKeyOrGlobalId completion:^(EDAMAuthenticationResult * _Nullable result, NSError * _Nullable error) {
-        (error != nil) ? success(result) : failure(error);
+        (error == nil) ? success(result) : failure(error);
     }];
 }
 
@@ -1564,7 +1564,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                    failure:(void(^)(NSError *error))failure
 {
     [self fetchSharedNotebookByAuthWithCompletion:^(EDAMSharedNotebook * _Nullable sharedNotebook, NSError * _Nullable error) {
-        (error != nil) ? success(sharedNotebook) : failure(error);
+        (error == nil) ? success(sharedNotebook) : failure(error);
     }];
 }
 
@@ -1573,7 +1573,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                         failure:(void(^)(NSError *error))failure
 {
     [self emailNoteWithParameters:parameters completion:^(NSError * _Nonnull error) {
-        (error != nil) ? success() : failure(error);
+        (error == nil) ? success() : failure(error);
     }];
 }
 
@@ -1582,7 +1582,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                   failure:(void(^)(NSError *error))failure
 {
     [self shareNoteWithGuid:guid completion:^(NSString * _Nullable noteKey, NSError * _Nullable error) {
-        (error != nil) ? success(noteKey) : failure(error);
+        (error == nil) ? success(noteKey) : failure(error);
     }];
 }
 
@@ -1591,7 +1591,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                         failure:(void(^)(NSError *error))failure
 {
     [self stopSharingNoteWithGuid:guid completion:^(NSError * _Nonnull error) {
-        (error != nil) ? success() : failure(error);
+        (error == nil) ? success() : failure(error);
     }];
 }
 
@@ -1602,7 +1602,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                  failure:(void(^)(NSError *error))failure
 {
     [self authenticateToSharedNoteWithGuid:guid noteKey:noteKey authenticationToken:authenticationToken completion:^(EDAMAuthenticationResult * _Nullable result, NSError * _Nullable error) {
-        (error != nil) ? success(result) : failure(error);
+        (error == nil) ? success(result) : failure(error);
     }];
 }
 
@@ -1611,7 +1611,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                      failure:(void(^)(NSError *error))failure
 {
     [self updateSharedNotebook:sharedNotebook completion:^(int32_t usn, NSError * _Nullable error) {
-        (error != nil) ? success(usn) : failure(error);
+        (error == nil) ? success(usn) : failure(error);
     }];
 }
 
@@ -1621,7 +1621,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
                                                         failure:(void(^)(NSError *error))failure
 {
     [self setRecipientSettings:recipientSettings forSharedNotebookWithID:sharedNotebookId completion:^(int32_t usn, NSError * _Nullable error) {
-        (error != nil) ? success(usn) : failure(error);
+        (error == nil) ? success(usn) : failure(error);
     }];
 }
 

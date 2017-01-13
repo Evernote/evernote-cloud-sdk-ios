@@ -71,7 +71,7 @@
                        failure:(void(^)(NSError *error))failure
 {
     [self createBusinessNotebook:notebook completion:^(EDAMLinkedNotebook *createdNotebook, NSError *error) {
-        (error != nil) ? success(createdNotebook) : failure(error);
+        (error == nil) ? success(createdNotebook) : failure(error);
     }];
 }
 @end

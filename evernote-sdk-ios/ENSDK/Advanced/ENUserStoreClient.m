@@ -137,7 +137,7 @@
 
 {
     [self checkVersionWithClientName:clientName edamVersionMajor:edamVersionMajor edamVersionMinor:edamVersionMinor completion:^(BOOL versionOK, NSError *error) {
-        (error != nil) ? success(versionOK) : failure(error);
+        (error == nil) ? success(versionOK) : failure(error);
     }];
 }
 
@@ -146,7 +146,7 @@
                            failure:(void(^)(NSError *error))failure
 {
     [self fetchBootstrapInfoWithLocale:locale completion:^(EDAMBootstrapInfo *info, NSError *error) {
-        (error != nil) ? success(info) : failure(error);
+        (error == nil) ? success(info) : failure(error);
     }];
 }
 
@@ -154,7 +154,7 @@
                    failure:(void(^)(NSError *error))failure
 {
     [self fetchUserWithCompletion:^(EDAMUser * user, NSError * error) {
-        (error != nil) ? success(user) : failure(error);
+        (error == nil) ? success(user) : failure(error);
     }];
 }
 
@@ -163,7 +163,7 @@
                               failure:(void(^)(NSError *error))failure
 {
     [self fetchPublicUserInfoWithUsername:username completion:^(EDAMPublicUserInfo *info, NSError *error) {
-        (error != nil) ? success(info) : failure(error);
+        (error == nil) ? success(info) : failure(error);
     }];
 }
 
@@ -171,7 +171,7 @@
                           failure:(void(^)(NSError *error))failure
 {
     [self fetchPremiumInfoWithCompletion:^(EDAMPremiumInfo *info, NSError *error) {
-        (error != nil) ? success(info) : failure(error);
+        (error == nil) ? success(info) : failure(error);
     }];
 }
 
@@ -179,7 +179,7 @@
                            failure:(void(^)(NSError *error))failure
 {
     [self fetchNoteStoreURLWithCompletion:^(NSString *noteStoreUrl, NSError *error) {
-        (error != nil) ? success(noteStoreUrl) : failure(error);
+        (error == nil) ? success(noteStoreUrl) : failure(error);
     }];
 }
 
@@ -187,7 +187,7 @@
                                   failure:(void(^)(NSError *error))failure
 {
     [self authenticateToBusinessWithCompletion:^(EDAMAuthenticationResult *authenticationResult, NSError *error) {
-        (error != nil) ? success(authenticationResult) : failure(error);
+        (error == nil) ? success(authenticationResult) : failure(error);
     }];
 }
 
@@ -195,7 +195,7 @@
                                          success:(void(^)())success
                                          failure:(void(^)(NSError *error))failure {
     [self revokeLongSessionWithAuthenticationToken:authenticationToken completion:^(NSError *error) {
-        (error != nil) ? success() : failure(error);
+        (error == nil) ? success() : failure(error);
     }];
 }
 
