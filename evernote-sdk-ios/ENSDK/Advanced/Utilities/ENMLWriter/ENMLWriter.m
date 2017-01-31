@@ -71,7 +71,7 @@
   }
   
   scheme = [components objectAtIndex: 2];
-  if (![scheme enIsEqualToStringWithEmptyEqualToNull: [url scheme]]) {
+  if (![scheme enIsEqualToStringOrNil: [url scheme]]) {
     NSLog(@"Scheme '%@' does not match scheme '%@'", scheme, [url scheme]);
     result = NO;
   }
@@ -95,22 +95,22 @@
     [hrefAuthority appendFormat: @"%@", [url port]];
   }
   
-  if (![authority enIsEqualToStringWithEmptyEqualToNull: hrefAuthority]) {
+  if (![authority enIsEqualToStringOrNil: hrefAuthority]) {
     NSLog(@"Authority '%@' does not match authority '%@'", authority, hrefAuthority);
     result = NO;
   }
   NSString * path = [components objectAtIndex: 5];
   path = [path stringByReplacingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
   NSString * urlPath = [url path];
-  if (![path enIsEqualToStringWithEmptyEqualToNull: urlPath]) {
+  if (![path enIsEqualToStringOrNil: urlPath]) {
     if ([scheme caseInsensitiveCompare: @"mailto"] == 0) {
-      if (! [path enIsEqualToStringWithEmptyEqualToNull: [url resourceSpecifier]]) {
+      if (! [path enIsEqualToStringOrNil: [url resourceSpecifier]]) {
         NSLog(@"Path '%@' does not match resource specifier '%@'", path, [url resourceSpecifier]);
         result = NO;
       }
     } else if ([path hasSuffix: @"/"]) {
       path = [path substringToIndex: [path length] - 1];
-      if (![path enIsEqualToStringWithEmptyEqualToNull: urlPath]) {
+      if (![path enIsEqualToStringOrNil: urlPath]) {
         NSLog(@"Path '%@' does not match path '%@'", path, urlPath);
         result = NO;
       }
@@ -120,12 +120,12 @@
     }
   }
   NSString * query = [components objectAtIndex: 7];
-  if (![query enIsEqualToStringWithEmptyEqualToNull: [url query]]) {
+  if (![query enIsEqualToStringOrNil: [url query]]) {
     NSLog(@"Query '%@' does not match query '%@'", query, [url query]);
     result = NO;
   }
   NSString * fragment = [components objectAtIndex: 9];
-  if (![fragment enIsEqualToStringWithEmptyEqualToNull: [url fragment]]) {
+  if (![fragment enIsEqualToStringOrNil: [url fragment]]) {
     NSLog(@"Fragment '%@' does not match fragment '%@'", fragment, [url fragment]);
     result = NO;
   }
@@ -151,7 +151,7 @@
 - (void) startDocumentWithAttributes:(NSDictionary *)attributes {
   [super startDocument];
   [self startElement:ENMLTagNote 
-      withAttributes:attributes];
+          attributes:attributes];
 }
 
 - (void) startDocument {
@@ -185,33 +185,32 @@
   return newAttributes;
 }
 
-- (BOOL) startElement:(NSString*)elementName 
-       withAttributes:(NSDictionary*)attrDict 
+- (BOOL)startElement:(NSString *)element attributes:(NSDictionary<NSString *,NSString *> *)attributes
 {
-  if ([elementName isEqualToString:@"a"]) {
-    NSMutableDictionary *newAttributes = [NSMutableDictionary dictionaryWithDictionary:attrDict];
-    NSArray *attributeKeys = [attrDict allKeys];
+  if ([element isEqualToString:@"a"]) {
+    NSMutableDictionary *newAttributes = [NSMutableDictionary dictionaryWithDictionary:attributes];
+    NSArray *attributeKeys = [attributes allKeys];
     for (NSString *aKey in attributeKeys) {
       if ([aKey hasPrefix:@"x-apple-"] == YES) {
         [newAttributes removeObjectForKey:aKey];
       }
     }
 
-    attrDict = [self validateURLAttribute:@"href"
+    attributes = [self validateURLAttribute:@"href"
                              inAttributes:newAttributes];
   }
-  else if ([elementName isEqualToString:@"img"]) {
-    attrDict = [self validateURLAttribute:@"src"
-                             inAttributes:attrDict];
+  else if ([element isEqualToString:@"img"]) {
+    attributes = [self validateURLAttribute:@"src"
+                             inAttributes:attributes];
   }
-  return [super startElement:elementName withAttributes:attrDict];
+  return [super startElement:element attributes:attributes];
 }
 
 #pragma mark -
 #pragma mark
 - (void) writeResourceWithDataHash:(NSData *)dataHash
                               mime:(NSString *)mime
-                        attributes:(NSDictionary *)attributes
+                        attributes:(NSDictionary<NSString *, NSString *> *)attributes
 {
   NSMutableDictionary *mediaAttributes = [NSMutableDictionary dictionaryWithDictionary:attributes];
   
@@ -222,7 +221,7 @@
   [mediaAttributes setObject:[dataHash enlowercaseHexDigits] forKey:@"hash"];
 
   [self writeElement:ENMLTagMedia 
-      withAttributes:mediaAttributes 
+          attributes:mediaAttributes
              content:nil];
 }
 
@@ -246,7 +245,7 @@
   }
   
   [self writeElement:ENMLTagCrypt
-      withAttributes:cryptAttributes 
+          attributes:cryptAttributes
              content:encryptedInfo.cipherText];
 }
 
@@ -257,7 +256,7 @@
   }
   
   [self writeElement:ENMLTagTodo
-      withAttributes:attributes 
+          attributes:attributes
              content:nil];
 }
 

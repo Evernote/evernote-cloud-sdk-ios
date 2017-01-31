@@ -33,7 +33,9 @@
 /**
  * Compare receiver to another string, but consider null equal to the empty string
  */
-- (BOOL) enIsEqualToStringWithEmptyEqualToNull: (NSString *) s;
+- (BOOL)enIsEqualToStringOrNil:(nullable NSString *)str;
 
+- (BOOL) enIsEqualToStringWithEmptyEqualToNull: (nullable NSString *) s
+    DEPRECATED_MSG_ATTRIBUTE("Use -enIsEqualToStringOrNil: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 @end

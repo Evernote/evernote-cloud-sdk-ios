@@ -28,6 +28,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  An opaque reference to an existing note in the service. It encapsulates enough
  *  information to point to a note in any notebook a user has access to. It can be used to
@@ -42,7 +44,7 @@
  *
  *  @return A valid note ref instance.
  */
-+ (instancetype)noteRefFromData:(NSData *)data;
++ (nullable instancetype)noteRefFromData:(nullable NSData *)data;
 
 /**
  *  Create a serialized data representation of the receiver.
@@ -53,3 +55,4 @@
 
 @end
 
+NS_ASSUME_NONNULL_END

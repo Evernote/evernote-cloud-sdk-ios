@@ -27,6 +27,7 @@
  */
 
 #import "ENNoteStoreClient.h"
+#import "ENLinkedNotebookRef.h"
 
 @protocol ENLinkedNoteStoreClientDelegate <NSObject>
 - (NSString *)authenticationTokenForLinkedNotebookRef:(ENLinkedNotebookRef *)linkedNotebookRef;

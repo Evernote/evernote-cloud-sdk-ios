@@ -29,6 +29,7 @@
 #import "ENHTMLtoENMLConverter.h"
 #import "ENMLConstants.h"
 #import "ENSDKPrivate.h"
+#import "ENSDKLogging.h"
 
 @implementation ENHTMLtoENMLConverter
 
@@ -116,7 +117,7 @@
   }
   else {
     BOOL success = [_enmlWriter startElement:tag
-                              withAttributes:attrDict];
+                                  attributes:attrDict];
     if (success == NO) {
       ENSDKLogInfo(@"startElement:%@ returned NO, skipping element and children", tag);
       _skipCount++;

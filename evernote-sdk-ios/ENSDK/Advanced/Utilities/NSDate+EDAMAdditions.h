@@ -28,6 +28,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /** Extra methods on `NSDate` to deal with Evernote API time stamps.
  */
 @interface NSDate (NSDateEDAMAdditions)
@@ -43,6 +45,8 @@
 /**
  * Convert an NSDate to an edam timestamp
  */
-- (int64_t) edamTimestamp;
+@property (readonly, nonatomic) int64_t edamTimestamp;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -26,7 +26,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ENSDK.h"
+#import "EvernoteSDK.h"
 #import "EDAM.h"
 #import "ENUserStoreClient.h"
 #import "ENPreferencesStore.h"
@@ -34,7 +34,9 @@
 #import "ENMLWriter.h"
 #import "ENNoteStoreClient.h"
 #import "ENBusinessNoteStoreClient.h"
-#import "ENSDKPrivate.h"
+
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface ENSession (Advanced)
 /**
@@ -57,12 +59,12 @@
 /**
  *  EDAMUser object of the user's personal account
  */
-@property (nonatomic, strong) EDAMUser * user;
+@property (nonatomic, strong, nullable) EDAMUser * user;
 
 /**
  *  EDAMUser object of the user's business account
  */
-@property (nonatomic, strong) EDAMUser * businessUser;
+@property (nonatomic, strong, nullable) EDAMUser * businessUser;
 
 /**
  * This give access to the preferences store that the session keeps independently from NSUserDefaults, and is
@@ -76,12 +78,12 @@
  *  Primary authentication token for the user, can be used to fetch personal notes and authenticate 
  *  to get shared notes and business notes
  */
-@property (nonatomic, strong) NSString * primaryAuthenticationToken;
+@property (nonatomic, strong, nullable) NSString * primaryAuthenticationToken;
 
 /**
  *  The user store client that manages the Evernote user account.
  */
-@property (nonatomic, readonly) ENUserStoreClient * userStore;
+@property (nonatomic, readonly, nullable) ENUserStoreClient * userStore;
 
 // The following accessors all allow retrieval of an appropriate note store client to perform API operations with.
 
@@ -91,7 +93,7 @@
  *
  *  @return A client for the user's primary note store.
  */
-- (ENNoteStoreClient *)primaryNoteStore;
+- (nullable ENNoteStoreClient *)primaryNoteStore;
 
 /**
  *  The business note store client will only be non-nil if the authenticated user is a member of a business. With
@@ -99,7 +101,7 @@
  *
  *  @return A client for the user's business note store, or nil if the user is not a member of a business.
  */
-- (ENBusinessNoteStoreClient *)businessNoteStore;
+- (nullable ENBusinessNoteStoreClient *)businessNoteStore;
 
 /**
  *  Every linked notebook requires its own note store client instance to access.
@@ -118,7 +120,7 @@
  *
  *  @return A client for the note store that contains the note ref's note.
  */
-- (ENNoteStoreClient *)noteStoreForNoteRef:(ENNoteRef *)noteRef;
+- (nullable ENNoteStoreClient *)noteStoreForNoteRef:(ENNoteRef *)noteRef;
 
 /**
  *  Retrieves a note store client appropriate for accessing a given notebook.
@@ -128,22 +130,22 @@
  *
  *  @return A client for the note store that contains the notebook.
  */
-- (ENNoteStoreClient *)noteStoreForNotebook:(ENNotebook *)notebook;
+- (nullable ENNoteStoreClient *)noteStoreForNotebook:(ENNotebook *)notebook;
 
 /**
  *  Set to the security application group identifier, if the app should share authenticate with an application group.
  *
- *  @param the security application group identifier.
+ *  @param securityApplicationGroupIdentifier security application group identifier.
  *  @see https://developer.apple.com/library/prerelease/ios/documentation/General/Conceptual/ExtensibilityPG/ExtensionScenarios.html#//apple_ref/doc/uid/TP40014214-CH21-SW6
  */
-+ (void) setSecurityApplicationGroupIdentifier:(NSString*)securityApplicationGroupIdentifier;
++ (void) setSecurityApplicationGroupIdentifier:(nullable NSString*)securityApplicationGroupIdentifier;
 
 /**
  *  The keychain groups used for keychain sharing. If not set, keychain sharing is disabled.
  *
  *  This should be the shared keychain group of your app in XCode "Capabilities" > "Keychain Sharing".
  */
-+ (void) setKeychainGroup:(NSString*)keychainGroup;
++ (void) setKeychainGroup:(nullable NSString*)keychainGroup;
 
 @end
 
@@ -159,7 +161,7 @@
  *  A property indicating the "source" URL for this note. Optional, and useful mainly in contexts where the 
  *  note is captured from web content.
  */
-@property (nonatomic, copy) NSString * sourceUrl;
+@property (nonatomic, copy, nullable) NSString * sourceUrl;
 
 /**
  *  An optional dictionary of attributes which are used at upload time only to apply to an EDAMNote's attributes during
@@ -169,7 +171,7 @@
  *  Note that downloaded notes do not populate this dictionary; if you need to inspect properties of an EDAMNote that aren't
  *  represented by ENNote, you should use ENNoteStoreClient's -getNoteWithGuid... method to download the EDAMNote directly.
  */
-@property (nonatomic, strong) NSDictionary * edamAttributes;
+@property (nonatomic, strong, nullable) NSDictionary<NSString *, id> * edamAttributes;
 @end
 
 @interface ENNoteContent (Advanced)
@@ -198,7 +200,7 @@
  *
  *  @return A note content object.
  */
-- (NSString *)enml;
+@property (readonly, nonatomic) NSString *enml;
 @end
 
 @interface ENResource (Advanced)
@@ -206,7 +208,7 @@
  *  A property indicating the "source" URL for this resource. Optional, and useful mainly in contexts where the
  *  resource is captured from web content.
  */
-@property (nonatomic, copy) NSString * sourceUrl;
+@property (nonatomic, copy, nullable) NSString * sourceUrl;
 
 /**
  *  Accessor for the MD5 hash of the data of a resource. This is useful when writing ENML.
@@ -223,13 +225,13 @@
  *  Note that downloaded resources do not populate this dictionary; if you need to inspect properties of an EDAMResource that aren't
  *  represented by ENResource, you should use ENNoteStoreClient's -getResourceWithGuid... method to download the EDAMResource directly.
  */
-@property (nonatomic, strong) NSDictionary * edamAttributes;
+@property (nonatomic, strong, nullable) NSDictionary<NSString *, id> * edamAttributes;
 
 /**
  *  The Evernote service guid for the resource. Valid only with a note store client
  *  that also corresponds to this resource; see ENSession to retrieve an appropriate note store client.
  */
-@property (nonatomic, readonly) NSString * guid;
+@property (nonatomic, readonly, nullable) NSString * guid;
 @end
 
 @interface ENNoteRef (Advanced)
@@ -237,7 +239,7 @@
  *  The Evernote service guid for the note that this note ref points to. Valid only with a note store client
  *  that also corresponds to this note ref; see ENSession to retrieve an appropriate note store client.
  */
-@property (nonatomic, readonly) NSString * guid;
+@property (nonatomic, readonly, nullable) NSString * guid;
 @end
 
 @interface  ENNotebook (Advanced)
@@ -245,7 +247,7 @@
  *  The Evernote service guid for the note that this notebook corresponds to. Valid only with a note store client
  *  that also corresponds to this notebook; see ENSession to retrieve an appropriate note store client.
  */
-@property (nonatomic, readonly) NSString * guid;
+@property (nonatomic, readonly, nullable) NSString * guid;
 @end
 
 @interface ENPreferencesStore (Advanced)
@@ -255,3 +257,5 @@
 +(instancetype) preferenceStoreWithSecurityApplicationGroupIdentifier:(NSString*)groupId;
 
 @end
+
+NS_ASSUME_NONNULL_END

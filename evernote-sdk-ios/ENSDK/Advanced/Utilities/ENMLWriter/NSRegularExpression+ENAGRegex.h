@@ -28,12 +28,16 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSRegularExpression (ENAGRegex)
 
-+ (NSRegularExpression *) enRegexWithPattern:(NSString *)pattern;
++ (nullable NSRegularExpression *) enRegexWithPattern:(NSString *)pattern;
 - (BOOL) enFindInString:(NSString *)string;
 - (BOOL) enMatchesString:(NSString *)string;
-- (NSArray *) enCapturedSubstringsOfString:(NSString *)string;
+- (NSArray<NSString *> *) enCapturedSubstringsOfString:(NSString *)string;
 - (NSString *)enReplaceWithString:(NSString *)rep inString:(NSString *)str;
 
 @end
+
+NS_ASSUME_NONNULL_END

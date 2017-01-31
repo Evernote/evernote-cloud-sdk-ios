@@ -28,22 +28,26 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface ENXMLDTD : NSObject
 
-@property ( strong, nonatomic) NSString *docTypeDeclaration;
+@property (strong, nonatomic, nullable) NSString *docTypeDeclaration;
 
-+ (ENXMLDTD *) enexDTD;
-+ (ENXMLDTD *) enml2dtd;
-+ (ENXMLDTD *) lat1DTD;
-+ (ENXMLDTD *) symbolDTD;
-+ (ENXMLDTD *) specialDTD;
+@property(class, readonly, nonatomic) ENXMLDTD *enexDTD;
+@property(class, readonly, nonatomic) ENXMLDTD *enml2dtd;
+@property(class, readonly, nonatomic) ENXMLDTD *lat1DTD;
+@property(class, readonly, nonatomic) ENXMLDTD *symbolDTD;
+@property(class, readonly, nonatomic) ENXMLDTD *specialDTD;
 
-
-- (id) initWithContentsOfFile:(NSString *)file;
+- (id)init NS_UNAVAILABLE;
+- (nullable id) initWithContentsOfFile:(NSString *)file NS_DESIGNATED_INITIALIZER;
 
 - (BOOL) isElementLegal:(NSString *)name;
-- (NSDictionary*) sanitizedAttributes:(NSDictionary*)attribDict
-                           forElement:(NSString *)elementName;
+- (nullable NSDictionary<NSString *, id> *) sanitizedAttributes:(NSDictionary<NSString *, id> *)attribDict
+                                                     forElement:(NSString *)elementName;
 - (BOOL) isAttributeLegal:(NSString *)attribute 
                 inElement:(NSString *)element;
 @end
+
+NS_ASSUME_NONNULL_END

@@ -30,6 +30,7 @@
 #import "ENSDKPrivate.h"
 #import "ENXMLDTD.h"
 #import "ENXMLUtils.h"
+#import "ENSDKLogging.h"
 
 #import <libxml/tree.h>
 #include <libxml/HTMLtree.h>

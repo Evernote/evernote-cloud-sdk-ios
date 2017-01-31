@@ -134,9 +134,8 @@
       fieldValue = [inProtocol readBinary];
       break;
     case TType_STRUCT:
-      fieldValue = [[field.valueClass alloc] init];
-      [self readFromProtocol:inProtocol
-                  ontoObject:fieldValue];
+      fieldValue = [[field.structClass alloc] init];
+      [fieldValue read:inProtocol];
       break;
     case TType_MAP: {
       int mapSize = 0;
@@ -144,18 +143,13 @@
       int mapValueType = 0;
       [inProtocol readMapBeginReturningKeyType: &mapKeyType valueType: &mapValueType size: &mapSize];
       
-      FATField *keyField = [[FATField alloc] init];
-      keyField.type = mapKeyType;
-      keyField.valueClass = field.keyClass;
-      
-      FATField *valueField = [[FATField alloc] init];
-      valueField.type = mapValueType;
-      valueField.valueClass = field.valueClass;
+      FATField *keyField = field.keyField;
+      FATField *valueField = field.valueField;
       
       NSMutableDictionary *mapValue = [[NSMutableDictionary alloc] initWithCapacity:mapSize];
       for (int i=0; i<mapSize; i++) {
         id entryKey = [self _readValueForField:keyField
-                                fromProtocol:inProtocol];
+                                  fromProtocol:inProtocol];
         id entryValue = [self _readValueForField:valueField
                                     fromProtocol:inProtocol];
         
@@ -170,10 +164,8 @@
       int setElementType = 0;
       [inProtocol readSetBeginReturningElementType: &setElementType size: &setSize];
       
-      FATField *setField = [[FATField alloc] init];
-      setField.type = setElementType;
-      setField.valueClass = field.valueClass;
-
+      FATField *setField = field.valueField;
+      
       NSMutableSet *setValue = [[NSMutableSet alloc] initWithCapacity: setSize];
       for (int i = 0; i < setSize; i++) {
         id setElement = [self _readValueForField:setField
@@ -192,9 +184,7 @@
       int listElementType = 0;
       [inProtocol readListBeginReturningElementType: &listElementType size: &listSize];
       
-      FATField *listField = [[FATField alloc] init];
-      listField.type = listElementType;
-      listField.valueClass = field.valueClass;
+      FATField *listField = field.valueField;
       
       NSMutableArray *listValue = [[NSMutableArray alloc] initWithCapacity: listSize];
       for (int i = 0; i < listSize; i++) {
@@ -232,17 +222,17 @@
     
     FATField *field = nil;
     for (FATField *aField in structFields) {
-      if (aField.index == (uint32_t)fieldID) {
+      if (aField.index == fieldID) {
         field = aField;
         break;
       }
     }
-
-    if (field == nil || (field.type != (uint32_t)fieldType && field.type != TType_BINARY && fieldType != TType_STRING)) {
+    
+    if (field == nil || (field.type != fieldType && field.type != TType_BINARY && fieldType != TType_STRING)) {
       if (field != nil) {
         NSLog(@"Skipping field:%@ due to type mismatch (received:%i)", field, fieldType);
       }
-
+      
       [self skipType: fieldType onProtocol: inProtocol];
       continue;
     }
@@ -290,15 +280,13 @@
       [outProtocol writeString: fieldValue];
       break;
     case TType_STRUCT:
-      [self writeObject:fieldValue ontoProtocol:outProtocol];
+      [fieldValue write:outProtocol];
       break;
     case TType_MAP: {
-      FATField *keyField = [[FATField alloc] init];
-      keyField.type = field.keyType;
-      FATField *valueField = [[FATField alloc] init];
-      valueField.type = field.valueType;
+      FATField *keyField = field.keyField;
+      FATField *valueField = field.valueField;
       
-      [outProtocol writeMapBeginWithKeyType: field.keyType valueType: field.valueType size:(int)[fieldValue count]];
+      [outProtocol writeMapBeginWithKeyType: keyField.type valueType: valueField.type size:(int)[fieldValue count]];
       
       for (id aMapKey in fieldValue) {
         [self _writeValue:aMapKey
@@ -312,10 +300,9 @@
       break;
     }
     case TType_SET: {
-      FATField *elementField = [[FATField alloc] init];
-      elementField.type = field.valueType;
+      FATField *elementField = field.valueField;
       
-      [outProtocol writeSetBeginWithElementType: field.valueType size:(int)[fieldValue count]];
+      [outProtocol writeSetBeginWithElementType: elementField.type size:(int)[fieldValue count]];
       [outProtocol writeSetEnd];
       for (id aListValue in fieldValue) {
         [self _writeValue:aListValue
@@ -325,10 +312,9 @@
       break;
     }
     case TType_LIST: {
-      FATField *elementField = [[FATField alloc] init];
-      elementField.type = field.valueType;
+      FATField *elementField = field.valueField;
       
-      [outProtocol writeListBeginWithElementType: field.valueType size:(int)[fieldValue count]];
+      [outProtocol writeListBeginWithElementType: elementField.type size:(int)[fieldValue count]];
       for (id aListValue in fieldValue) {
         [self _writeValue:aListValue
                  forField:elementField
@@ -367,7 +353,7 @@
     
     BOOL matched = NO;
     for (FATField *aResponseType in responseTypes) {
-      if (aResponseType.index == (uint32_t)fieldID) {
+      if (aResponseType.index == fieldID) {
         if (aResponseType.type != (uint32_t)fieldType && aResponseType.type != TType_BINARY && fieldType != TType_STRING) {
           NSLog(@"Skipping field:%@ due to type mismatch (received:%i)", aResponseType, fieldType);
         }
@@ -389,7 +375,7 @@
   
   [inProtocol readStructEnd];
   [inProtocol readMessageEnd];
-
+  
   for (id anObject in responseObjects) {
     if ([anObject isKindOfClass:[NSException class]] == NO) {
       return anObject;
@@ -401,20 +387,20 @@
       @throw anObject;
     }
   }
-    
+  
   BOOL nonExceptionTypesPresent = NO;
   for (FATField *aResponseType in responseTypes) {
-    if ([aResponseType.valueClass isSubclassOfClass:[FATException class]] == NO) {
+    if ([aResponseType.structClass isSubclassOfClass:[FATException class]] == NO) {
       nonExceptionTypesPresent = YES;
       break;
     }
   }
-    
+  
   if (nonExceptionTypesPresent) {
     @throw [ENTApplicationException exceptionWithType: ENTApplicationException_MISSING_RESULT
                                              reason: [message stringByAppendingString:@" failed: unknown result"]];
   }
-    
+  
   return nil;
 }
 
@@ -450,18 +436,14 @@
 
 + (void) sendMessage:(NSString *)messageName
           toProtocol:(id<ENTProtocol>)outProtocol
-        withArgPairs:(NSArray *)argPairs
+       withArguments:(NSArray *)arguments
 {
   [outProtocol writeMessageBeginWithName: messageName type: TMessageType_CALL sequenceID: 0];
   [outProtocol writeStructBeginWithName: [messageName stringByAppendingString:@"_args"]];
-
-  for (NSArray *anArgumentPair in argPairs) {
-    if ([anArgumentPair count] != 2) {
-      continue;
-    }
-    
-    FATField *field = [anArgumentPair objectAtIndex:0];
-    id fieldValue = [anArgumentPair objectAtIndex:1];
+  
+  for (FATArgument *anArgument in arguments) {
+    FATField *field = anArgument.field;
+    id fieldValue = anArgument.value;
     
     [outProtocol writeFieldBeginWithName:field.name type:field.type fieldID:field.index];
     [self _writeValue:fieldValue

@@ -28,12 +28,16 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface ENMIMEUtils : NSObject {
 
 }
 
-+ (NSString *) fileExtensionForMIMEType: (NSString *) mime;
-+ (NSString *) determineMIMETypeForFile: (NSString *) filename;
-+ (NSString *) mimeTypeForUTI:(NSString *)uti;
++ (nullable NSString *) fileExtensionForMIMEType: (NSString *) mime;
++ (nullable NSString *) determineMIMETypeForFile: (NSString *) filename;
++ (nullable NSString *) mimeTypeForUTI:(NSString *)uti;
 
 @end
+
+NS_ASSUME_NONNULL_END

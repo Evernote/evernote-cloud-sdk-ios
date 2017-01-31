@@ -28,9 +28,10 @@
 
 #import "ENSDKResourceLoader.h"
 #import "ENSDKPrivate.h"
+#import "ENSDKLogging.h"
 
 @implementation ENSDKResourceLoader
-+ (NSString *)pathToResourceNamed:(NSString *)name extension:(NSString *)extension
++ (NSString *)pathToResourceNamed:(nullable NSString *)name extension:(nullable NSString *)extension
 {
     NSString * path = [ENSDKResourceBundle pathForResource:name ofType:extension];
     if (!path) {

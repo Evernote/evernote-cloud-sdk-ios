@@ -9,7 +9,6 @@ Pod::Spec.new do |spec|
   spec.ios.deployment_target = "8.0"
   spec.xcconfig = {'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2 ${PODS_ROOT}/Headers/Public/evernote-cloud-sdk-ios/SendToEvernoteActivity'}
 
-  spec.header_mappings_dir = "evernote-sdk-ios/"
   spec.source_files = "evernote-sdk-ios/**/*.{h,m}",
   spec.exclude_files = "evernote-sdk-ios/evernote-sdk-ios-Prefix.pch",
   spec.resource = "ENSDKResources.bundle"
@@ -17,4 +16,6 @@ Pod::Spec.new do |spec|
 
   spec.framework = "MobileCoreServices", "CoreGraphics", "Foundation", "UIKit"
   spec.library = "xml2"
+  
+  spec.deprecated_in_favor_of = "EvernoteSDK"
 end

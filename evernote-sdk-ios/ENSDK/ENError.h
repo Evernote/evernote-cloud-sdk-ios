@@ -28,6 +28,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 extern NSString * ENErrorDomain;
 
 typedef NS_ENUM(NSInteger, ENErrorCode) {
@@ -49,7 +51,9 @@ typedef NS_ENUM(NSInteger, ENErrorCode) {
 
 + (NSError *)connectionFailedError;
 + (NSError *)noteSizeLimitReachedError;
-+ (NSError *)errorFromException:(NSException *)exception;
++ (nullable NSError *)errorFromException:(nullable NSException *)exception;
 + (ENErrorCode)sanitizedErrorCodeFromEDAMErrorCode:(int)code;
 
 @end
+
+NS_ASSUME_NONNULL_END

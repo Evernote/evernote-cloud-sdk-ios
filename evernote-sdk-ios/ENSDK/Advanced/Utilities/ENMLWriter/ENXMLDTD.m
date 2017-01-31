@@ -195,7 +195,7 @@ static xmlParserInputPtr	enxmlExternalEntityLoader	(const char * URL,
   return ([self xmlElementNamed:name] != NULL);
 }
 
-- (NSDictionary*) sanitizedAttributes:(NSDictionary*)attribDict
+- (NSDictionary*) sanitizedAttributes:(NSDictionary<NSString *, id>*)attribDict
                            forElement:(NSString *)elementName
 {
   xmlElementPtr elementResult = [self xmlElementNamed:elementName];

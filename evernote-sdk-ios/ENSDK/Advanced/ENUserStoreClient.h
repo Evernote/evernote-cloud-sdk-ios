@@ -29,6 +29,8 @@
 #import "ENStoreClient.h"
 #import "EDAM.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface ENUserStoreClient : ENStoreClient
 
 // ! DO NOT INSTANTIATE THIS OBJECT DIRECTLY. GET ONE FROM AN AUTHENTICATED ENSESSION !
@@ -45,82 +47,112 @@
  
  @param  edamVersionMajor This should be the major protocol version that was compiled by the client. This should be the current value of the EDAM_VERSION_MAJOR constant for the client.
  @param  edamVersionMinor This should be the major protocol version that was compiled by the client. This should be the current value of the EDAM_VERSION_MINOR constant for the client.
- @param success Success completion block.
- @param failure Failure completion block.
+ @param completion Completion block (if the error parameter is set, then the value of the first parameter is undefined)
  */
 - (void)checkVersionWithClientName:(NSString *)clientName
                   edamVersionMajor:(int16_t)edamVersionMajor
                   edamVersionMinor:(int16_t)edamVersionMinor
-                           success:(void(^)(BOOL versionOK))success
-                           failure:(void(^)(NSError *error))failure;
+                        completion:(void(^)(BOOL versionOK, NSError *_Nullable error))completion;
 
 /** This provides bootstrap information to the client.
  
  Various bootstrap profiles and settings may be used by the client to configure itself.
  
  @param  locale The client's current locale, expressed in language[_country] format. E.g., "en_US". See ISO-639 and ISO-3166 for valid language and country codes.
- @param success Success completion block.
- @param failure Failure completion block.
+ @param completion Completion block (if the error parameter is set, then the value of the first parameter is undefined)
  */
-- (void)getBootstrapInfoWithLocale:(NSString *)locale
-                           success:(void(^)(EDAMBootstrapInfo *info))success
-                           failure:(void(^)(NSError *error))failure;
+- (void)fetchBootstrapInfoWithLocale:(NSString *)locale
+                          completion:(void(^)(EDAMBootstrapInfo *_Nullable info, NSError *_Nullable error))completion;
 
 /** Returns the User corresponding to the provided authentication token, or throws an exception if this token is not valid.
  
  The level of detail provided in the returned User structure depends on the access level granted by the token, so a web service client may receive fewer fields than an integrated desktop client.
  
- @param success Success completion block.
- @param failure Failure completion block.
+ @param completion Completion block (if the error parameter is set, then the value of the first parameter is undefined)
  */
-- (void)getUserWithSuccess:(void(^)(EDAMUser *user))success
-                   failure:(void(^)(NSError *error))failure;
+- (void)fetchUserWithCompletion:(void(^)(EDAMUser *_Nullable user, NSError *_Nullable error))completion;
 
 /** Asks the UserStore about the publicly available location information for a particular username.
  
  @param username The username for the location information
- @param success Success completion block.
- @param failure Failure completion block.
+ @param completion Completion block (if the error parameter is set, then the value of the first parameter is undefined)
  */
-- (void)getPublicUserInfoWithUsername:(NSString *)username
-                              success:(void(^)(EDAMPublicUserInfo *info))success
-                              failure:(void(^)(NSError *error))failure;
+- (void)fetchPublicUserInfoWithUsername:(NSString *)username
+                             completion:(void(^)(EDAMPublicUserInfo *_Nullable info, NSError *_Nullable error))completion;
 
 /** Returns information regarding a user's Premium account corresponding to the provided authentication token, or throws an exception if this token is not valid.
  
- @param success Success completion block.
- @param failure Failure completion block.
+ @param completion Completion block (if the error parameter is set, then the value of the first parameter is undefined)
  */
-- (void)getPremiumInfoWithSuccess:(void(^)(EDAMPremiumInfo *info))success
-                          failure:(void(^)(NSError *error))failure;
+- (void)fetchPremiumInfoWithCompletion:(void(^)(EDAMPremiumInfo *_Nullable info, NSError *_Nullable error))completion;
 
 /** Returns the URL that should be used to talk to the NoteStore for the account represented by the provided authenticationToken.
  
  This method isn't needed by most clients, who can retrieve the correct NoteStore URL from the AuthenticationResult returned from the authenticate or refreshAuthentication calls. This method is typically only needed to look up the correct URL for a long-lived session token (e.g. for an OAuth web service).
  
- @param success Success completion block.
- @param failure Failure completion block.
+ @param completion Completion block (if the error parameter is set, then the value of the first parameter is undefined)
  */
-- (void)getNoteStoreUrlWithSuccess:(void(^)(NSString *noteStoreUrl))success
-                           failure:(void(^)(NSError *error))failure;
+- (void)fetchNoteStoreURLWithCompletion:(void(^)(NSString *_Nullable noteStoreUrl, NSError *_Nullable error))completion;
 
 /** This is used to take an existing authentication token that grants access to an individual user account (returned from 'authenticate', 'authenticateLongSession' or an OAuth authorization) and obtain an additional authentication token that may be used to access business notebooks if the user is a member of an Evernote Business account.
  
  The resulting authentication token may be used to make NoteStore API calls against the business using the NoteStore URL returned in the result.
  
- @param success Success completion block.
- @param failure Failure completion block.
+ @param completion Completion block (if the error parameter is set, then the value of the first parameter is undefined)
  */
-- (void)authenticateToBusinessWithSuccess:(void(^)(EDAMAuthenticationResult *authenticationResult))success
-                                  failure:(void(^)(NSError *error))failure;
+- (void)authenticateToBusinessWithCompletion:(void(^)(EDAMAuthenticationResult *_Nullable authenticationResult, NSError *_Nullable error))completion;
 
 /** Revoke an existing long lived authentication token. This can be used to revoke OAuth tokens or tokens created by calling authenticateLongSession, and allows a user to effectively log out of Evernote from the perspective of the application that holds the token. The authentication token that is passed is immediately revoked and may not be used to call any authenticated EDAM function.
  
  @param authenticationToken the authentication token to revoke.
- @param success Success completion block.
- @param failure Failure completion block.
+ @param completion Completion block
  */
 - (void)revokeLongSessionWithAuthenticationToken:(NSString*)authenticationToken
-                                         success:(void(^)())success
-                                         failure:(void(^)(NSError *error))failure;
+                                      completion:(void(^)(NSError *_Nullable error))completion;
 @end
+
+
+
+//Deprecated
+@interface ENUserStoreClient ()
+
+- (void)checkVersionWithClientName:(NSString *)clientName
+                  edamVersionMajor:(int16_t)edamVersionMajor
+                  edamVersionMinor:(int16_t)edamVersionMinor
+                           success:(void(^)(BOOL versionOK))success
+                           failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -checkVersionWithClientName:edamVersionMajor:edamVersionMinor:completion: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
+
+- (void)getBootstrapInfoWithLocale:(NSString *)locale
+                           success:(void(^)(EDAMBootstrapInfo *info))success
+                           failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchBootstrapInfoWithLocale:completion: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
+
+- (void)getUserWithSuccess:(void(^)(EDAMUser *user))success
+                   failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchUserWithCompletion: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
+
+- (void)getPublicUserInfoWithUsername:(NSString *)username
+                              success:(void(^)(EDAMPublicUserInfo *info))success
+                              failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchPublicUserInfoWithUsername:completion: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
+
+- (void)getPremiumInfoWithSuccess:(void(^)(EDAMPremiumInfo *info))success
+                          failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchPremiumInfoWithCompletion: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
+
+- (void)getNoteStoreUrlWithSuccess:(void(^)(NSString *noteStoreUrl))success
+                           failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -fetchNoteStoreURLWithCompletion: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
+
+- (void)authenticateToBusinessWithSuccess:(void(^)(EDAMAuthenticationResult *authenticationResult))success
+                                  failure:(void(^)(NSError *error))failure
+    DEPRECATED_MSG_ATTRIBUTE("Use -authenticateToBusinessWithCompletion: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
+
+- (void)revokeLongSessionWithAuthenticationToken:(NSString*)authenticationToken
+                                         success:(void(^)())success
+                                         failure:(void(^)(NSError *error))failure
+	DEPRECATED_MSG_ATTRIBUTE("Use -revokeLongSessionWithAuthenticationToken:completion: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
+@end
+
+NS_ASSUME_NONNULL_END

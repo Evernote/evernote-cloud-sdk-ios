@@ -28,6 +28,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  A note search represents a search query for the Evernote service used in finding notes.
  */
@@ -64,5 +66,7 @@
  *
  *  @return An initialized note search object.
  */
-- (id)initWithSearchString:(NSString *)searchString;
+- (id)initWithSearchString:(NSString *)searchString NS_DESIGNATED_INITIALIZER;
 @end
+
+NS_ASSUME_NONNULL_END

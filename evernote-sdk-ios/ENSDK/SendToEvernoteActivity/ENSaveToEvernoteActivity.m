@@ -28,7 +28,7 @@
 
 #import "ENSaveToEvernoteActivity.h"
 #import "ENSaveToEvernoteViewController.h"
-#import "ENSDK.h"
+#import "EvernoteSDK.h"
 #import "ENTheme.h"
 #import "ENSDKPrivate.h"
 

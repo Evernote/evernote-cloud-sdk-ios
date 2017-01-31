@@ -30,6 +30,7 @@
 #import "ENNotebookCell.h"
 #import "ENTheme.h"
 #import "ENSDKAdvanced.h"
+#import "ENSDKPrivate.h"
 
 #define kENRecentNotebooksKey       @"ENRecentNotebooksKey"
 #define kENRecentNotebooksCount     3

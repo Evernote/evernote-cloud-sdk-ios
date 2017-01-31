@@ -28,6 +28,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  *  This class represents the content of a note.
  */
@@ -59,10 +61,12 @@
  *  NB If you have an HTML source that's not already sanitized, you can load it into a UIWebView and
  *  use +[ENNote populateNoteFromWebView:completion:] to capture it.
  *
- *  @param Sanitized HTML string.
+ *  @param html HTML string.
  *
  *  @return A valid note content instance.
  */
 + (instancetype)noteContentWithSanitizedHTML:(NSString *)html;
 
 @end
+
+NS_ASSUME_NONNULL_END

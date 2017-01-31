@@ -28,6 +28,12 @@
 
 #import <Foundation/Foundation.h>
 
+@class EDAMResource;
+
+NS_ASSUME_NONNULL_BEGIN
+
+typedef void (^ENMLToHTMLCompletionBlock)(NSString *_Nullable html, NSError *_Nullable error);
+
 /** Utility methods to work with ENML.
  */
 @interface ENMLUtility : NSObject <NSXMLParserDelegate>
@@ -38,31 +44,43 @@
  @param  mime The mime type of the data
  */
 + (NSString*) mediaTagWithDataHash:(NSData *)dataHash
-                              mime:(NSString *)mime;
+                              mime:(nullable NSString *)mime NS_SWIFT_NAME(mediaTagWith(dataHash:mime:));
 
 
 /** Utility function to convert ENML to HTML.
  
- @param  enmlContent The enml content of the note
- @param  block The completion block that will be called on completion
+ @param  enml The enml content of the note
+ @param  completion The completion block that will be called on completion
  */
-- (void) convertENMLToHTML:(NSString*)enmlContent completionBlock:(void(^)(NSString* html, NSError *error))block;
+- (void)generateHTMLFromENML:(NSString *)enml completion:(ENMLToHTMLCompletionBlock)completion NS_SWIFT_NAME(generateHTMLFrom(enml:completion:));
 
-
-/** Utility function to convert ENML to HTML.
- 
- @param  enmlContent The enml content of the note
- @param  resources Array of EDAM resources, which will be inlined into the resulting HTML.
- @param  block The completion block that will be called on completion
- */
-- (void) convertENMLToHTML:(NSString*)enmlContent withInlinedResources:(NSArray*)resources completionBlock:(void(^)(NSString* html, NSError *error))block;
+- (void) convertENMLToHTML:(NSString*)enmlContent completionBlock:(ENMLToHTMLCompletionBlock)block
+    DEPRECATED_MSG_ATTRIBUTE("Use -generateHTMLFromENML:completion: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 /** Utility function to convert ENML to HTML.
  
- @param  enmlContent The enml content of the note
- @param  resources Array of EDAM resources, which will be referenced in the resulting HTML using the sourceURL property.
- @param  block The completion block that will be called on completion
+ @param  enml The enml content of the note
+ @param  inlinedResources Array of EDAM resources, which will be inlined into the resulting HTML.
+ @param  completion The completion block that will be called on completion
  */
-- (void) convertENMLToHTML:(NSString*)enmlContent withReferencedResources:(NSArray*)resources completionBlock:(void(^)(NSString* html, NSError *error))block;
+- (void)generateHTMLFromENML:(NSString *)enml
+            inlinedResources:(nullable NSArray<EDAMResource *> *)inlinedResources
+                  completion:(ENMLToHTMLCompletionBlock)completion NS_SWIFT_NAME(generateHTMLFrom(enml:inlinedResources:completion:));
+- (void) convertENMLToHTML:(NSString*)enmlContent withInlinedResources:(nullable NSArray<EDAMResource *> *)resources completionBlock:(ENMLToHTMLCompletionBlock)block
+    DEPRECATED_MSG_ATTRIBUTE("Use -generateHTMLFromENML:inlinedResources:completion: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
+
+/** Utility function to convert ENML to HTML.
+ 
+ @param  enml The enml content of the note
+ @param  referencedResources Array of EDAM resources, which will be referenced in the resulting HTML using the sourceURL property.
+ @param  completion The completion block that will be called on completion
+ */
+- (void)generateHTMLFromENML:(NSString *)enml
+         referencedResources:(nullable NSArray<EDAMResource *> *)referencedResources
+                  completion:(ENMLToHTMLCompletionBlock)completion NS_SWIFT_NAME(generateHTMLFrom(enml:referencedResources:completion:));
+- (void) convertENMLToHTML:(NSString*)enmlContent withReferencedResources:(nullable NSArray<EDAMResource *> *)resources completionBlock:(ENMLToHTMLCompletionBlock)block
+    DEPRECATED_MSG_ATTRIBUTE("Use -generateHTMLFromENML:referencedResources:completion: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 @end
+
+NS_ASSUME_NONNULL_END

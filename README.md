@@ -1,55 +1,83 @@
-Evernote Cloud SDK 2.0 for iOS
-==============================
+![Evernote Logo](https://evernote.com/media/img/logos/evernote_logo_4c-lrg.png)
+# Evernote Cloud SDK 3.0 for iOS
 
-What Is This?
--------------
+This is the official Evernote SDK for iOS. To get started, follow the instructions bellow. Additional information can be found in the [Getting Started Guide](Getting_Started.md).
 
-A newly-redesigned, simple, workflow-oriented library built on the Evernote Cloud API. It's designed to drop into your app easily and make most common Evernote integrations very simple to accomplish. (And even the more complex integrations easier than they used to be.)
+More information about our developer program can be found here: [Evernote Developers](https://dev.evernote.com/)
 
-How Do I Get Started?
----------------------
-
-Setup instructions and sample snippets are all in the [Getting Started](Getting_Started.md) guide. [Have a look there next](Getting_Started.md) and you'll be working with Evernote in just a few minutes.
-
-Note for users of the 1.x SDK for iOS
--------------------------------------
-
-This library is the spiritual, although not syntactic, successor to to the [Evernote SDK for iOS 1.x](https://github.com/evernote/evernote-sdk-ios). Currently, both libraries are available and supported. This one is not a "drop-in" update-- it omits the "app bridge" functionality, and the objects that you use for authentication and to get to the traditional (EDAM) API are a little different. [We have provided a migration guide for users of the 1.x SDK](Migration_from_SDK_1_x.md).
-
-FAQ
----
-
-### What iOS versions are supported?
-
-This version of the SDK is designed for iOS 8.0 and above. If you want to support iOS 7, please checkout the [ios7](https://github.com/evernote/evernote-cloud-sdk-ios/tree/ios7) branch.
-
-### Does the Evernote SDK support ARC?
-
-Yes. (To use the SDK in a non-ARC project, please use the -fobjc-arc compiler flag on all the files in the Evernote SDK.)
-
-### Can I use this library with CocoaPods?
-
-Yes! Just add
+## Installation
+### Cocoapods
+```ruby
+pod 'evernote-cloud-sdk-ios', '~> 3.0'
 ```
-pod 'evernote-cloud-sdk-ios'
+
+### Manually
+
+Drag & Drop `evernote-sdk-ios.xcodeproj` into your project.
+
+Now open your target's `Build Phases` and add the following items to your `Link Binary With Libraries` section:
+
+- EvernoteSDKiOS.framework
+- MobileCoreServices.framework
+- libxml2.dylib
+
+## Configuration
+Users will have the fastest OAuth experience in your app if they already have the Evernote app installed. When this is the case, the authentication process will bounce to the Evernote app and authenticate without the user needing to enter their credentials at all. To enable this add following two properties to your Info.plist:
+
+<img src="info_plist_setting.png" width="488">
+
+**Note** When your app is in development and uses the "sandbox" environment, authentication will always use web-based OAuth, even if you have the Evernote app installed. After upgrading to a production consumer key, be sure to test authentication again with the Evernote app.
+
+## Usage
+### API Token
+#### Register for an Evernote API key (and secret)...
+
+You can do this on the [Evernote Developers portal page](http://dev.evernote.com/documentation/cloud/). Most applications will want to do this-- it's easy and instant. During development, you will point your app at Evernote's "sandbox" development environment. When you are ready to test on production, we will upgrade your key. (You can create test accounts on sandbox by just going to [sandbox.evernote.com](http://sandbox.evernote.com)).
+
+#### ...or get a Developer Token
+
+You can also just test-drive the SDK against your personal production Evernote account, if you're afraid of commitment or are building a one-off tool for yourself. [Get a developer token here](https://www.evernote.com/api/DeveloperToken.action). Make sure to then use the alternate setup instructions given in the "Key Setup" section below.
+
+
+### Import
+Simply import the SDK inside your project:
+
+```swift
+import EvernoteSDK
 ```
-to your Podfile
 
-### Where can I find out more about the Evernote for Developers?
-
-Please check out the [Evernote Developers portal page](http://dev.evernote.com).
-
-### Can I show the registration page instead of the login page when authorizing?
-
-Yes. Please specify preferRegistration parameter as YES when calling
-```objective-c
-- (void)authenticateWithViewController:(UIViewController *)viewController
-                    preferRegistration:(BOOL)preferRegistration
-                            completion:(ENSessionAuthenticateCompletionHandler)completion;
+```objc
+#import <EvernoteSDK/EvernoteSDK.h>
 ```
-on [ENSession sharedSession]
 
-### Where can I find the release notes?
+### API Key Setup
 
- You can find it [here](CHANGES.md).
- 
+```swift
+ENSession.setSharedSessionConsumerKey(<Consumer Key>, consumerSecret:<Consumer Secret>, optionalHost: ENSessionHostSandbox)
+
+// using a developer token:
+// ENSession.setSharedSessionDeveloperToken(<Dev Token>, noteStoreUrl: <Note Store URL>)
+```
+
+```objc
+[ENSession setSharedSessionConsumerKey:<Consumer Key> consumerSecret:<Consumer Secret> optionalHost:ENSessionHostSandbox];
+```
+
+### Authentication
+
+```swift
+ENSession.shared.authenticate(with: self, preferRegistration: false, completion: { (_error: Error?) in
+
+})
+```
+
+```objc
+[[ENSession sharedSession] authenticateWithViewController:self preferRegistration:NO completion:^(NSError *authenticateError) {
+
+}];
+```
+
+## Documentation
+
+- [Additional Documentation](Getting_Started.md)
+- [API Reference](https://dev.evernote.com/doc/reference/)

@@ -28,6 +28,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 /** Extra methods on `NSData` to deal with Evernote API data.
  */
 @interface NSData (EvernoteSDK)
@@ -36,14 +38,14 @@
  
  @returns The MD5 hash
  */
-- (NSData *) enmd5;
+@property (readonly, nonatomic) NSData *enmd5;
 
-/** hex representation of data (used in ENML media)
- 
- @returns The hex representation in lower case
+/** hex representation of data (used in ENML media) in lower case
  */
-- (NSString *) enlowercaseHexDigits;
+@property (readonly, nonatomic) NSString *enlowercaseHexDigits;
 
-+ (NSData *) endataWithHexDigits: (NSString *) hexDigits;
++ (nullable NSData *) endataWithHexDigits: (NSString *) hexDigits;
 
 @end
+
+NS_ASSUME_NONNULL_END

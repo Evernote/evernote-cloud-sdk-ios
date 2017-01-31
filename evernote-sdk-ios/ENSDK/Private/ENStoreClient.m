@@ -30,6 +30,7 @@
 #import "ENError.h"
 #import "EDAMErrors.h"
 #import "ENSDKPrivate.h"
+#import "ENSDKLogging.h"
 
 NSString * ENStoreClientDidFailWithAuthenticationErrorNotification = @"ENStoreClientDidFailWithAuthenticationErrorNotification";
 
@@ -49,109 +50,83 @@ NSString * ENStoreClientDidFailWithAuthenticationErrorNotification = @"ENStoreCl
     return self;
 }
 
-- (void)invokeAsyncBoolBlock:(BOOL(^)())block
-                     success:(void(^)(BOOL val))success
-                     failure:(void(^)(NSError *error))failure
+- (void)invokeAsyncBoolBlock:(BOOL(^)())block completion:(void (^)(BOOL val, NSError *error))completion
 {
     dispatch_async(self.queue, ^(void) {
         __block BOOL retVal = NO;
         @try {
-            if (block) {
-                retVal = block();
-                dispatch_async(dispatch_get_main_queue(),
-                               ^{
-                                   if (success) {
-                                       success(retVal);
-                                   }
-                               });
-            }
+            retVal = block();
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(retVal, nil);
+            });
         }
         @catch (NSException *exception) {
-            [self handleException:exception withFailureBlock:failure];
+            NSError * error = [ENError errorFromException:exception];
+            completion(NO, error);
+            [self handleError:error];
         }
     });
 }
 
-- (void)invokeAsyncInt32Block:(int32_t(^)())block
-                      success:(void(^)(int32_t val))success
-                      failure:(void(^)(NSError *error))failure
+- (void)invokeAsyncInt32Block:(int32_t(^)())block completion:(void (^)(int32_t val, NSError *_Nullable error))completion
 {
     dispatch_async(self.queue, ^(void) {
         __block int32_t retVal = -1;
         @try {
-            if (block) {
-                retVal = block();
-                dispatch_async(dispatch_get_main_queue(),
-                               ^{
-                                   if (success) {
-                                       success(retVal);
-                                   }
-                               });
-            }
+            retVal = block();
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(retVal, nil);
+            });
         }
         @catch (NSException *exception) {
-            [self handleException:exception withFailureBlock:failure];
+            NSError * error = [ENError errorFromException:exception];
+            completion(-1, error);
+            [self handleError:error];
         }
     });
 }
 
 // use id instead of NSObject* so block type-checking is happy
-- (void)invokeAsyncIdBlock:(id(^)())block
-                   success:(void(^)(id))success
-                   failure:(void(^)(NSError *error))failure
+- (void)invokeAsyncObjectBlock:(nullable id(^)())block completion:(void (^)(id _Nullable val, NSError *_Nullable error))completion
+
 {
     dispatch_async(self.queue, ^(void) {
         id retVal = nil;
         @try {
-            if (block) {
-                retVal = block();
-                dispatch_async(dispatch_get_main_queue(),
-                               ^{
-                                   if (success) {
-                                       success(retVal);
-                                   }
-                               });
-            }
+            retVal = block();
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(retVal, nil);
+            });
         }
         @catch (NSException *exception) {
-            [self handleException:exception withFailureBlock:failure];
+            NSError * error = [ENError errorFromException:exception];
+            completion(nil, error);
+            [self handleError:error];
         }
     });
 }
 
-- (void)invokeAsyncVoidBlock:(void(^)())block
-                     success:(void(^)())success
-                     failure:(void(^)(NSError *error))failure
+- (void)invokeAsyncBlock:(void(^)())block completion:(void (^)(NSError *_Nullable error))completion
 {
     dispatch_async(self.queue, ^(void) {
         @try {
-            if (block) {
-                block();
-                dispatch_async(dispatch_get_main_queue(),
-                               ^{
-                                   if (success) {
-                                       success();
-                                   }
-                               });
-            }
+            block();
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completion(nil);
+            });
         }
         @catch (NSException *exception) {
-            [self handleException:exception withFailureBlock:failure];
+            NSError * error = [ENError errorFromException:exception];
+            completion(error);
+            [self handleError:error];
         }
     });
 }
 
 #pragma mark - Private routines
 
-- (void)handleException:(NSException *)exception withFailureBlock:(void(^)(NSError *error))failure
+- (void)handleError:(NSError *)error
 {
-    NSError * error = [ENError errorFromException:exception];
-    if (failure) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            failure(error);
-        });
-    }
-    
     // If this is a hard auth error, then send a notification about it. This is intended to trigger for
     // tokens that have either expired or that have been revoked. This does NOT include permissions
     // denials (ie, the auth token is valid, but not for the operation you're trying to do with it). Those

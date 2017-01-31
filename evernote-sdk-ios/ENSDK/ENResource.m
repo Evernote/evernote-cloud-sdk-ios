@@ -29,6 +29,7 @@
 #import "ENSDKPrivate.h"
 #import "NSData+EvernoteSDK.h"
 #import "ENMLUtility.h"
+#import "ENSDKLogging.h"
 
 @interface ENResource ()
 @property (nonatomic, copy) NSString * sourceUrl;
@@ -62,6 +63,7 @@
         self.filename = filename;
 
         if (!self.data) {
+            ENSDKLogError(@"[WARNING]: data is a required argument, this may become an assertion at a later date");
             return nil;
         }
     }

@@ -28,11 +28,15 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface ENPreferencesStore : NSObject
-- (id)objectForKey:(NSString *)key;
-- (void)setObject:(id)object forKey:(NSString *)key;
-- (id)decodedObjectForKey:(NSString *)key;               // used for objects that conform to NSCoding
+- (nullable id)objectForKey:(NSString *)key;
+- (void)setObject:(nullable id)object forKey:(NSString *)key;
+- (nullable id)decodedObjectForKey:(NSString *)key;               // used for objects that conform to NSCoding
 - (void)encodeObject:(id)object forKey:(NSString *)key;  // used for objects that conform to NSCoding
 - (void)save;
 - (void)removeAllItems;
 @end
+
+NS_ASSUME_NONNULL_END

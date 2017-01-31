@@ -68,7 +68,7 @@
             for (NSString * line in [stringObj componentsSeparatedByString:@"\n"]) {
                 [writer startElement:@"div"];
                 if (line.length == 0) {
-                    [writer writeElement:@"br" withAttributes:nil content:nil];
+                    [writer writeElement:@"br" attributes:nil content:nil];
                 } else {
                     [writer writeString:line];
                 }

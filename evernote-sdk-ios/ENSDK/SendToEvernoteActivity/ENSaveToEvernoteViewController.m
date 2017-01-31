@@ -29,12 +29,13 @@
 #import "ENSaveToEvernoteViewController.h"
 #import "ENNotebookChooserViewController.h"
 #import "ENNotebookPickerButton.h"
-#import "ENSDK.h"
+#import "EvernoteSDK.h"
 #import "ENTheme.h"
 #import "RMSTokenView.h"
 #import "ENNotebookPickerView.h"
 #import "ENSDKPrivate.h"
 #import "ENSaveToEvernoteActivity.h"
+#import "ENWebResource.h"
 
 #define kTitleViewHeight        50.0
 #define kTagsViewHeight         44.0
@@ -152,10 +153,13 @@ CGFloat kTextLeftPadding = 20;
         [self.tagsView addTokenWithText:tagName];
     }
     [note generateWebArchiveData:^(NSData *data) {
+        if (!data) {
+            return;
+        }
         [self.noteView loadData:data
-                      MIMEType:ENWebArchiveDataMIMEType
-              textEncodingName:nil
-                       baseURL:nil];
+                       MIMEType:ENWebArchiveDataMIMEType
+               textEncodingName:ENWebResourceTextEncodingNameUTF8
+                        baseURL:[NSURL new]];
     }];
 }
 

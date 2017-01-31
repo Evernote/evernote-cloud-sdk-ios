@@ -22,11 +22,11 @@
 
 @interface ENTBinaryProtocol : NSObject <ENTProtocol>
 
-- (id) initWithTransport: (id <ENTTransport>) transport;
+- (instancetype) initWithTransport: (id <ENTTransport>) transport;
 
-- (id) initWithTransport: (id <ENTTransport>) transport
-              strictRead: (BOOL) strictRead
-             strictWrite: (BOOL) strictWrite;
+- (instancetype) initWithTransport: (id <ENTTransport>) transport
+                        strictRead: (BOOL) strictRead
+                       strictWrite: (BOOL) strictWrite;
 
 - (int32_t) messageSizeLimit;
 - (void) setMessageSizeLimit: (int32_t) sizeLimit;

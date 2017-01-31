@@ -62,16 +62,20 @@ typedef void (^ENMLHTMLCompletionBlock)(NSString* html, NSError *error);
     return mediaTag;
 }
 
-- (void) convertENMLToHTML:(NSString*)enmlContent completionBlock:(void(^)(NSString* html, NSError *error))block {
-    [self convertENMLToHTML:enmlContent withInlinedResources:nil completionBlock:block];
+- (void)generateHTMLFromENML:(NSString *)enml completion:(ENMLToHTMLCompletionBlock)completion {
+    [self generateHTMLFromENML:enml inlinedResources:nil completion:completion];
 }
 
-- (void) convertENMLToHTML:(NSString*)enmlContent withInlinedResources:(NSArray*)resources completionBlock:(void(^)(NSString* html, NSError *error))block {
-    [self convertENMLToHTML:enmlContent withResources:resources inlineResources:YES completionBlock:block];
+- (void)generateHTMLFromENML:(NSString *)enml
+            inlinedResources:(nullable NSArray<EDAMResource *> *)inlinedResources
+                  completion:(ENMLToHTMLCompletionBlock)completion {
+    [self convertENMLToHTML:enml withResources:inlinedResources inlineResources:YES completionBlock:completion];
 }
 
-- (void) convertENMLToHTML:(NSString*)enmlContent withReferencedResources:(NSArray*)resources completionBlock:(void(^)(NSString* html, NSError *error))block {
-    [self convertENMLToHTML:enmlContent withResources:resources inlineResources:NO completionBlock:block];
+- (void)generateHTMLFromENML:(NSString *)enml
+         referencedResources:(nullable NSArray<EDAMResource *> *)referencedResources
+                  completion:(ENMLToHTMLCompletionBlock)completion {
+    [self convertENMLToHTML:enml withResources:referencedResources inlineResources:NO completionBlock:completion];
 }
 
 - (void) convertENMLToHTML:(NSString*)enmlContent withResources:(NSArray*)resources inlineResources:(BOOL)shouldInline completionBlock:(void(^)(NSString* html, NSError *error))block {
@@ -236,6 +240,22 @@ typedef void (^ENMLHTMLCompletionBlock)(NSString* html, NSError *error);
     [self.htmlWriter startElement:@"input"
             attributes:checkboxAttributes];
     [self.htmlWriter endElement];
+}
+
+
+
+#pragma mark - Deprecated
+
+- (void) convertENMLToHTML:(NSString*)enmlContent completionBlock:(void(^)(NSString* html, NSError *error))block {
+    [self generateHTMLFromENML:enmlContent completion:block];
+}
+
+- (void) convertENMLToHTML:(NSString*)enmlContent withInlinedResources:(NSArray<EDAMResource *> *)resources completionBlock:(void(^)(NSString* html, NSError *error))block {
+    [self generateHTMLFromENML:enmlContent inlinedResources:resources completion:block];
+}
+
+- (void) convertENMLToHTML:(NSString*)enmlContent withReferencedResources:(NSArray<EDAMResource *> *)resources completionBlock:(void(^)(NSString* html, NSError *error))block {
+    [self generateHTMLFromENML:enmlContent referencedResources:resources completion:block];
 }
 
 

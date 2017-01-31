@@ -96,8 +96,12 @@ static int ENXMLWriter_delegateCloseCallback(void * context) {
 
 #pragma mark -
 #pragma mark NSObject Methods
+- (id)init {
+    return [self initWithDelegate:nil];
+}
+
 - (id) initWithDelegate:(id)delegate {
-  self = [self init];
+  self = [super init];
   if (self != nil) {
     self.delegate = delegate;
   }
@@ -172,14 +176,14 @@ static int ENXMLWriter_delegateCloseCallback(void * context) {
   return YES;
 }
 
-- (BOOL) startElement:(NSString*)elementName 
-       withAttributes:(NSDictionary*)attrDict 
+- (BOOL)startElement:(NSString *)elementName
+          attributes:(nullable NSDictionary<NSString *, NSString *> *)attributes
 {
   BOOL success = [self startElement:elementName];
   if (success == NO) return NO;
   
-  for (NSString *key in [attrDict allKeys]) {
-    id value = attrDict[key];
+  for (NSString *key in [attributes allKeys]) {
+    id value = attributes[key];
     if ([value isKindOfClass:[NSString class]]) {
       [self writeAttributeName:key value:value];
     }
@@ -195,12 +199,12 @@ static int ENXMLWriter_delegateCloseCallback(void * context) {
   _openElementCount--;
 }
 
-- (BOOL) writeElement:(NSString *)element
-       withAttributes:(NSDictionary *)attributes
-              content:(NSString *)content
+- (BOOL)writeElement:(NSString *)element
+          attributes:(nullable NSDictionary<NSString *, NSString *> *)attributes
+             content:(nullable NSString *)content
 {
   BOOL success = [self startElement:element
-                     withAttributes:attributes];
+                         attributes:attributes];
   if (success == NO) return NO;
   
   [self writeString:content];
@@ -281,6 +285,23 @@ static int ENXMLWriter_delegateCloseCallback(void * context) {
 - (void) endCDATA {
   int result = xmlTextWriterEndCDATA(_xmlWriter);
   CheckXMLResult(result, @"xmlTextWriterEndCDATA");
+}
+
+
+
+#pragma mark - Deprecated
+
+- (BOOL) startElement:(NSString*)elementName
+       withAttributes:(NSDictionary<NSString *, NSString *> *)attrDict
+{
+    return [self startElement:elementName attributes:attrDict];
+}
+
+- (BOOL) writeElement:(NSString *)element
+       withAttributes:(NSDictionary<NSString *, NSString *> *)attributes
+              content:(NSString *)content
+{
+    return [self writeElement:element attributes:attributes content:content];
 }
 
 @end

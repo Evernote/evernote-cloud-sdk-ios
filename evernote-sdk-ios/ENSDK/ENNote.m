@@ -34,6 +34,7 @@
 #import "ENMIMEUtils.h"
 #import "NSData+EvernoteSDK.h"
 #import "NSString+URLEncoding.h"
+#import "ENSDKLogging.h"
 
 #pragma mark - ENNote
 
@@ -117,7 +118,7 @@
 
 - (NSArray *)resources
 {
-    return _resources;
+    return [_resources copy];
 }
 
 - (void)addResource:(ENResource *)resource
@@ -174,7 +175,7 @@
     
     ENMLUtility * utility = [[ENMLUtility alloc] init];
     NSURL * sourceURL = self.sourceUrl ? [NSURL URLWithString:self.sourceUrl] : nil;
-    [utility convertENMLToHTML:enml withReferencedResources:edamResources completionBlock:^(NSString * html, NSError * error) {
+    [utility generateHTMLFromENML:enml referencedResources:edamResources completion:^(NSString * html, NSError * error) {
         if (!html) {
             ENSDKLogInfo(@"+webArchiveData failed to convert ENML to HTML: %@", error);
             completion(nil);
