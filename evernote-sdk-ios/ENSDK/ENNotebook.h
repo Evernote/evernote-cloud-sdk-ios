@@ -30,10 +30,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class EDAMNotebook;
+
 /**
  *  This class represents a notebook in the Evernote service.
  */
 @interface ENNotebook : NSObject <NSCoding>
+
+@property (nonatomic, strong) EDAMNotebook * notebook;
 
 /**
  *  The name of the notebook.
@@ -104,6 +108,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  set using full Evernote clients.)
  */
 @property (nonatomic, readonly) BOOL isDefaultNotebook;
+
+- (id)initWithNotebook:(EDAMNotebook *)notebook;
+
 @end
 
 NS_ASSUME_NONNULL_END
