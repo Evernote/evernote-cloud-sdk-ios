@@ -1217,7 +1217,8 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
     resultSpec.includeCreated = @YES;
     resultSpec.includeUpdated = @YES;
     resultSpec.includeUpdateSequenceNum = @YES;
-    
+    resultSpec.includeLargestResourceSize = @YES;
+
     EDAMNoteFilter * noteFilter = [[EDAMNoteFilter alloc] init];
     noteFilter.words = noteSearch.searchString;
     
@@ -1484,7 +1485,8 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
         result.created = [NSDate dateWithEDAMTimestamp:[metadata.created longLongValue]];
         result.updated = [NSDate dateWithEDAMTimestamp:[metadata.updated longLongValue]];
         result.updateSequenceNum = [metadata.updateSequenceNum intValue];
-        
+        result.hasResources = (metadata.largestResourceSize > 0)?YES:NO;
+
         [findNotesResults addObject:result];
         
         // If the caller specified a max result count, and we've reached it, then stop fixing up
