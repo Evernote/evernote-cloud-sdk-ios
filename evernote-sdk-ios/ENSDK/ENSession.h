@@ -148,6 +148,7 @@ typedef NS_OPTIONS(NSUInteger, ENSessionSortOrder) {
 @property (nonatomic, strong, nullable) NSString * title;
 @property (nonatomic, strong, nullable) NSDate * created;
 @property (nonatomic, strong, nullable) NSDate * updated;
+@property (nonatomic) BOOL hasResources;
 @end
 
 /**
