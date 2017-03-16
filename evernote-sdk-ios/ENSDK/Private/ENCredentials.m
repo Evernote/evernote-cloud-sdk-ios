@@ -128,7 +128,7 @@ authenticationResult:(EDAMAuthenticationResult *)authenticationResult
 
 -(ENSSKeychainQuery*) keychainQuery
 {
-    [ENSSKeychain setAccessibilityType:kSecAttrAccessibleAlways];
+    [ENSSKeychain setAccessibilityType:kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly];
     ENSSKeychainQuery *query = [[ENSSKeychainQuery alloc] init];
     query.service = self.host;
     query.account = self.edamUserId;
