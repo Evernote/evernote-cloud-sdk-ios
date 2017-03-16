@@ -8,7 +8,7 @@ More information about our developer program can be found here: [Evernote Develo
 ## Installation
 ### Cocoapods
 ```ruby
-pod 'evernote-cloud-sdk-ios', '~> 3.0'
+pod 'EvernoteSDK', '~> 3.0'
 ```
 
 ### Manually
