@@ -29,7 +29,7 @@
 #import "ENSDKPrivate.h"
 
 @interface ENNotebook ()
-@property (nonatomic, strong) EDAMNotebook * notebook;
+
 @property (nonatomic, strong) EDAMLinkedNotebook * linkedNotebook;
 @property (nonatomic, strong) EDAMSharedNotebook * sharedNotebook;
 @property (nonatomic, assign) BOOL isShared;
