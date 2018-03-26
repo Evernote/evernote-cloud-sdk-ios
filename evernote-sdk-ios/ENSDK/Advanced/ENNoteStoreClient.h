@@ -962,7 +962,7 @@ DEPRECATED_MSG_ATTRIBUTE("Use -createTag:completion: instead") NS_SWIFT_UNAVAILA
 DEPRECATED_MSG_ATTRIBUTE("Use -updateTag:completion: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 - (void)untagAllWithGuid:(EDAMGuid)guid
-                 success:(void(^)())success
+                 success:(void(^)(void))success
                  failure:(void(^)(NSError *error))failure
 DEPRECATED_MSG_ATTRIBUTE("Use -untagAllWithGuid:completion: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
@@ -1256,7 +1256,7 @@ DEPRECATED_MSG_ATTRIBUTE("Use -authenticateToSharedNotebook:completion: instead"
 DEPRECATED_MSG_ATTRIBUTE("Use -getSharedNotebookByAuthWithCompletion: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 - (void)emailNoteWithParameters:(EDAMNoteEmailParameters *)parameters
-                        success:(void(^)())success
+                        success:(void(^)(void))success
                         failure:(void(^)(NSError *error))failure
 DEPRECATED_MSG_ATTRIBUTE("Use -emailNoteWithParameters:completion: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
@@ -1266,7 +1266,7 @@ DEPRECATED_MSG_ATTRIBUTE("Use -emailNoteWithParameters:completion: instead") NS_
 DEPRECATED_MSG_ATTRIBUTE("Use -shareNoteWithGuid:completion: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 - (void)stopSharingNoteWithGuid:(EDAMGuid)guid
-                        success:(void(^)())success
+                        success:(void(^)(void))success
                         failure:(void(^)(NSError *error))failure
 DEPRECATED_MSG_ATTRIBUTE("Use -stopSharingNoteWithGuid:completion: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
