@@ -150,7 +150,7 @@ NS_ASSUME_NONNULL_BEGIN
     DEPRECATED_MSG_ATTRIBUTE("Use -authenticateToBusinessWithCompletion: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 
 - (void)revokeLongSessionWithAuthenticationToken:(NSString*)authenticationToken
-                                         success:(void(^)())success
+                                         success:(void(^)(void))success
                                          failure:(void(^)(NSError *error))failure
 	DEPRECATED_MSG_ATTRIBUTE("Use -revokeLongSessionWithAuthenticationToken:completion: instead") NS_SWIFT_UNAVAILABLE("Deprecated");
 @end
