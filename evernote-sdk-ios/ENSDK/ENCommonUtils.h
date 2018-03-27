@@ -10,7 +10,7 @@
 
 @interface ENCommonUtils : NSObject
 
-BOOL IsIOS8();
-BOOL IsEvernoteInstalled();
+BOOL IsIOS8(void);
+BOOL IsEvernoteInstalled(void);
 
 @end
