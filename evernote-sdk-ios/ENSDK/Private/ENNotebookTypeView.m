@@ -52,7 +52,7 @@ static CGFloat const kCircleRadius = 13;
 
 - (void)setIsBusiness:(BOOL)isBusiness {
     _isBusiness = isBusiness;
-    UIImage* notebookTypeIcon = isBusiness? [UIImage imageNamed:@"ENSDKResources.bundle/ENBusinessIcon"] : [UIImage imageNamed:@"ENSDKResources.bundle/ENMultiplePeopleIcon"];
+    UIImage* notebookTypeIcon = isBusiness? [UIImage imageNamed:@"ENSDKResources.bundle/ENBusinessIcon" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil] : [UIImage imageNamed:@"ENSDKResources.bundle/ENMultiplePeopleIcon" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
     _imageView.image = [notebookTypeIcon imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [_imageView sizeToFit];
     [self updateNotebookTypeIconColor];

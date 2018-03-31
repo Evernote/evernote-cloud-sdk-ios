@@ -54,7 +54,7 @@
 
 - (UIImage *)activityImage
 {
-    return [UIImage imageNamed:@"ENSDKResources.bundle/ENActivityIcon"];
+    return [UIImage imageNamed:@"ENSDKResources.bundle/ENActivityIcon" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
 }
 
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems
