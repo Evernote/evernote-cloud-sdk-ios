@@ -27,6 +27,7 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
 @class ENOAuthViewController;
 

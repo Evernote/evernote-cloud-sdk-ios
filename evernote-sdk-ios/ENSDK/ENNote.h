@@ -27,11 +27,12 @@
  */
 
 #import <Foundation/Foundation.h>
+#import <WebKit/WebKit.h>
 @class ENNote;
 @class ENResource;
 @class ENNotebook;
 @class ENNoteContent;
-@class UIWebView;
+@class WKWebView;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -91,7 +92,7 @@ typedef void (^ENNoteGenerateWebArchiveDataCompletionHandler)(NSData *_Nullable 
 
 /**
  *  A note can be rendered for the user within a web view. This method generates a web archive from the
- *  receiver's content. This archive is a single data object that can be given to a UIWebView's -loadData:...
+ *  receiver's content. This archive is a single data object that can be given to a WKWebView's -loadData:...
  *  method, using the MIME type defined as ENWebArchiveDataMIMEType. This method is asynchronous, but does
  *  not operate using any remote resources; it can generally be safely used without e.g. a background 
  *  thread/progress indicator.
@@ -101,7 +102,7 @@ typedef void (^ENNoteGenerateWebArchiveDataCompletionHandler)(NSData *_Nullable 
 - (void)generateWebArchiveData:(ENNoteGenerateWebArchiveDataCompletionHandler)completion;
 
 /**
- *  Class method to create and populate a note object from a loaded UIWebView of your content. The styled contents 
+ *  Class method to create and populate a note object from a loaded WKWebView of your content. The styled contents 
  *  of the DOM as currently loaded are captured into the content of the note. Remote images (i.e. in <img> tags) 
  *  are captured as resources. (CSS-based images are not pulled in as resources, but will remain remote links in 
  *  the resulting note.) 
@@ -111,10 +112,10 @@ typedef void (^ENNoteGenerateWebArchiveDataCompletionHandler)(NSData *_Nullable 
  *  completely support general-purpose web page capture and reproduction; it will not work well in a 
  *  generic "web clipping to Evernote" feature.
  *
- *  @param webView    A UIWebView (on or offscreen) that contains loaded web content for capture.
+ *  @param webView    A WKWebView (on or offscreen) that contains loaded web content for capture.
  *  @param completion A prepopulated note object appropriate for upload.
  */
-+ (void)populateNoteFromWebView:(UIWebView *)webView completion:(ENNotePopulateFromWebViewCompletionHandler)completion;
++ (void)populateNoteFromWebView:(WKWebView *)webView completion:(ENNotePopulateFromWebViewCompletionHandler)completion;
 @end
 
 NS_ASSUME_NONNULL_END
