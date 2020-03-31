@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0BB3D1B11524ED96001C4534 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB3D1B01524ED96001C4534 /* Foundation.framework */; };
+		27F202FB243395FD00A535EA /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F202FA243395FD00A535EA /* CoreServices.framework */; };
 		6D9D5FFC1E23AC27001740D8 /* EDAMAuthenticationTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D9D5FFA1E23AC27001740D8 /* EDAMAuthenticationTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6D9D5FFD1E23AC27001740D8 /* EDAMAuthenticationTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D9D5FFB1E23AC27001740D8 /* EDAMAuthenticationTypes.m */; };
 		6D9D60BF1E279424001740D8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BB3D1B01524ED96001C4534 /* Foundation.framework */; };
@@ -505,6 +506,7 @@
 		0BB3D1B01524ED96001C4534 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0BB3D1B41524ED96001C4534 /* evernote-sdk-ios-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "evernote-sdk-ios-Prefix.pch"; sourceTree = "<group>"; };
 		0BB3D24D1524EEF3001C4534 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		27F202FA243395FD00A535EA /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		6D9D5FFA1E23AC27001740D8 /* EDAMAuthenticationTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDAMAuthenticationTypes.h; sourceTree = "<group>"; };
 		6D9D5FFB1E23AC27001740D8 /* EDAMAuthenticationTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EDAMAuthenticationTypes.m; sourceTree = "<group>"; };
 		6D9D60B71E27940A001740D8 /* EvernoteSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EvernoteSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -648,7 +650,6 @@
 		BE2E245A18EBA5D500BD7E6E /* ENSaveToEvernoteActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENSaveToEvernoteActivity.h; sourceTree = "<group>"; };
 		BE2E245B18EBA5D500BD7E6E /* ENSaveToEvernoteActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENSaveToEvernoteActivity.m; sourceTree = "<group>"; };
 		BE2E24E818EDD4A300BD7E6E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		BE2E25B018EDE1C100BD7E6E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		BE2E25D718F4D6C200BD7E6E /* ENMLConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ENMLConstants.h; sourceTree = "<group>"; };
 		BE2E25D818F4D6C200BD7E6E /* ENMLConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENMLConstants.m; sourceTree = "<group>"; };
 		BE2E25DC18F4DCE600BD7E6E /* ENSDKPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ENSDKPrivate.m; sourceTree = "<group>"; };
@@ -709,6 +710,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D9D61691E2796FC001740D8 /* libxml2.2.tbd in Frameworks */,
+				27F202FB243395FD00A535EA /* CoreServices.framework in Frameworks */,
 				6D9D60BF1E279424001740D8 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -758,8 +760,8 @@
 		0BB3D1AF1524ED96001C4534 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				27F202FA243395FD00A535EA /* CoreServices.framework */,
 				6D9D61681E2796FC001740D8 /* libxml2.2.tbd */,
-				BE2E25B018EDE1C100BD7E6E /* MobileCoreServices.framework */,
 				A9BE476B1781FAFA00471BF7 /* libxml2.dylib */,
 				0BB3D1B01524ED96001C4534 /* Foundation.framework */,
 				0BB3D24D1524EEF3001C4534 /* UIKit.framework */,
@@ -1442,6 +1444,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				"zh-cn",
 				Base,
