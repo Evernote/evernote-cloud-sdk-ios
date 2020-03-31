@@ -11,7 +11,6 @@
 		030DA2F81E27BCF700FD4BDB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 030DA2F71E27BCF700FD4BDB /* AppDelegate.m */; };
 		030DA3001E27BCF700FD4BDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 030DA2FF1E27BCF700FD4BDB /* Assets.xcassets */; };
 		030DA3031E27BCF700FD4BDB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 030DA3011E27BCF700FD4BDB /* LaunchScreen.storyboard */; };
-		030DA3211E27BD4700FD4BDB /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 030DA3201E27BD4700FD4BDB /* MobileCoreServices.framework */; };
 		030DA3231E27BD5100FD4BDB /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 030DA3221E27BD5100FD4BDB /* libxml2.tbd */; };
 		030DA3361E27BDB700FD4BDB /* CommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 030DA3251E27BDB700FD4BDB /* CommonUtils.m */; };
 		030DA3371E27BDB700FD4BDB /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 030DA3271E27BDB700FD4BDB /* MainViewController.m */; };
@@ -26,6 +25,7 @@
 		030DA3461E27BEEE00FD4BDB /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 030DA3421E27BEEE00FD4BDB /* LICENSE.txt */; };
 		030DA3471E27BEEE00FD4BDB /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 030DA3441E27BEEE00FD4BDB /* SVProgressHUD.m */; };
 		038EE1E11E27C1A800595956 /* EvernoteSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038EE1E01E27C18800595956 /* EvernoteSDK.framework */; };
+		27F202F82433958F00A535EA /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F202F72433958F00A535EA /* CoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +60,6 @@
 		030DA2FF1E27BCF700FD4BDB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		030DA3021E27BCF700FD4BDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		030DA3041E27BCF700FD4BDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		030DA3201E27BD4700FD4BDB /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		030DA3221E27BD5100FD4BDB /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		030DA3241E27BDB700FD4BDB /* CommonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtils.h; sourceTree = "<group>"; };
 		030DA3251E27BDB700FD4BDB /* CommonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtils.m; sourceTree = "<group>"; };
@@ -85,6 +84,7 @@
 		030DA3431E27BEEE00FD4BDB /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		030DA3441E27BEEE00FD4BDB /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		038EE1D51E27C18800595956 /* evernote-sdk-ios.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "evernote-sdk-ios.xcodeproj"; path = "../../evernote-sdk-ios.xcodeproj"; sourceTree = "<group>"; };
+		27F202F72433958F00A535EA /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +93,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				038EE1E11E27C1A800595956 /* EvernoteSDK.framework in Frameworks */,
-				030DA3211E27BD4700FD4BDB /* MobileCoreServices.framework in Frameworks */,
+				27F202F82433958F00A535EA /* CoreServices.framework in Frameworks */,
 				030DA3231E27BD5100FD4BDB /* libxml2.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -162,8 +162,8 @@
 		030DA31F1E27BD4700FD4BDB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				27F202F72433958F00A535EA /* CoreServices.framework */,
 				030DA3221E27BD5100FD4BDB /* libxml2.tbd */,
-				030DA3201E27BD4700FD4BDB /* MobileCoreServices.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -238,6 +238,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
