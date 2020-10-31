@@ -50,7 +50,7 @@ NSString * ENStoreClientDidFailWithAuthenticationErrorNotification = @"ENStoreCl
     return self;
 }
 
-- (void)invokeAsyncBoolBlock:(BOOL(^)())block completion:(void (^)(BOOL val, NSError *error))completion
+- (void)invokeAsyncBoolBlock:(BOOL(^)(void))block completion:(void (^)(BOOL val, NSError *error))completion
 {
     dispatch_async(self.queue, ^(void) {
         __block BOOL retVal = NO;
@@ -68,7 +68,7 @@ NSString * ENStoreClientDidFailWithAuthenticationErrorNotification = @"ENStoreCl
     });
 }
 
-- (void)invokeAsyncInt32Block:(int32_t(^)())block completion:(void (^)(int32_t val, NSError *_Nullable error))completion
+- (void)invokeAsyncInt32Block:(int32_t(^)(void))block completion:(void (^)(int32_t val, NSError *_Nullable error))completion
 {
     dispatch_async(self.queue, ^(void) {
         __block int32_t retVal = -1;
@@ -87,7 +87,7 @@ NSString * ENStoreClientDidFailWithAuthenticationErrorNotification = @"ENStoreCl
 }
 
 // use id instead of NSObject* so block type-checking is happy
-- (void)invokeAsyncObjectBlock:(nullable id(^)())block completion:(void (^)(id _Nullable val, NSError *_Nullable error))completion
+- (void)invokeAsyncObjectBlock:(nullable id(^)(void))block completion:(void (^)(id _Nullable val, NSError *_Nullable error))completion
 
 {
     dispatch_async(self.queue, ^(void) {
@@ -106,7 +106,7 @@ NSString * ENStoreClientDidFailWithAuthenticationErrorNotification = @"ENStoreCl
     });
 }
 
-- (void)invokeAsyncBlock:(void(^)())block completion:(void (^)(NSError *_Nullable error))completion
+- (void)invokeAsyncBlock:(void(^)(void))block completion:(void (^)(NSError *_Nullable error))completion
 {
     dispatch_async(self.queue, ^(void) {
         @try {

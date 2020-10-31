@@ -36,7 +36,7 @@
 +(UIColor*)defaultBusinessColor;
 +(UIColor*)defaultShareColor;
 +(UIColor*)defaultSeparatorColor;
-BOOL IsIPad();
-CGFloat OnePxHeight();
+BOOL IsIPad(void);
+CGFloat OnePxHeight(void);
 
 @end

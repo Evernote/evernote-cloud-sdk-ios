@@ -35,10 +35,10 @@ extern NSString * ENStoreClientDidFailWithAuthenticationErrorNotification;
 
 @interface ENStoreClient : NSObject
 
-- (void)invokeAsyncBoolBlock:(BOOL(^)())block completion:(void (^)(BOOL value, NSError *_Nullable error))completion;
-- (void)invokeAsyncObjectBlock:(nullable id(^)())block completion:(void (^)(id _Nullable value, NSError *_Nullable error))completion;
-- (void)invokeAsyncInt32Block:(int32_t(^)())block completion:(void (^)(int32_t value, NSError *_Nullable error))completion;
-- (void)invokeAsyncBlock:(void(^)())block completion:(void (^)(NSError *_Nullable error))completion;
+- (void)invokeAsyncBoolBlock:(BOOL(^)(void))block completion:(void (^)(BOOL value, NSError *_Nullable error))completion;
+- (void)invokeAsyncObjectBlock:(nullable id(^)(void))block completion:(void (^)(id _Nullable value, NSError *_Nullable error))completion;
+- (void)invokeAsyncInt32Block:(int32_t(^)(void))block completion:(void (^)(int32_t value, NSError *_Nullable error))completion;
+- (void)invokeAsyncBlock:(void(^)(void))block completion:(void (^)(NSError *_Nullable error))completion;
 
 @end
 
