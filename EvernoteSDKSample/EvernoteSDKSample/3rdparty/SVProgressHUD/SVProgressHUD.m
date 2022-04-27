@@ -53,7 +53,6 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
 @property (nonatomic, readonly) CGFloat visibleKeyboardHeight;
 @property (nonatomic, assign) UIOffset offsetFromCenter;
 
-
 - (void)showProgress:(float)progress
               status:(NSString*)string
             maskType:(SVProgressHUDMaskType)hudMaskType;
@@ -331,7 +330,7 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
 - (void)setFadeOutTimer:(NSTimer *)newTimer {
     
     if(_fadeOutTimer)
-        [_fadeOutTimer invalidate], _fadeOutTimer = nil;
+        (void)([_fadeOutTimer invalidate]), _fadeOutTimer = nil;
     
     if(newTimer)
         _fadeOutTimer = newTimer;
@@ -611,14 +610,14 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
                              
                              [[NSNotificationCenter defaultCenter] removeObserver:self];
                              [self cancelRingLayerAnimation];
-                             [_hudView removeFromSuperview];
-                             _hudView = nil;
+                             [self->_hudView removeFromSuperview];
+                             self->_hudView = nil;
                              
-                             [_overlayView removeFromSuperview];
-                             _overlayView = nil;
+                             [self->_overlayView removeFromSuperview];
+                             self->_overlayView = nil;
                              
-                             [_indefiniteAnimatedLayer removeFromSuperlayer];
-                             _indefiniteAnimatedLayer = nil;
+                             [self->_indefiniteAnimatedLayer removeFromSuperlayer];
+                             self->_indefiniteAnimatedLayer = nil;
 
                              UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 
@@ -767,6 +766,7 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
 #pragma mark - Utilities
 
 + (BOOL)isVisible {
+    //DispatchQueue.main.async {
     return ([self sharedView].alpha == 1);
 }
 

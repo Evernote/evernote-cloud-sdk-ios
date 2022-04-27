@@ -52,7 +52,10 @@
 #pragma ENSaveToEvernoteActivityDelegate
 - (void)activity:(ENSaveToEvernoteActivity *)activity didFinishWithSuccess:(BOOL)success error:(NSError *)error {
     if (success) {
-        [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Saved to Evernote!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"Saved to Evernote" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [[[UIApplication sharedApplication] keyWindow].rootViewController presentViewController:alert animated:YES completion:nil];
     } else {
         NSLog(@"Activity Error: %@", error);
     }

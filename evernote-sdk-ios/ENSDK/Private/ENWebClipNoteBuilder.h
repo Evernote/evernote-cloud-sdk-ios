@@ -27,11 +27,12 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
 @class ENNote;
 
 @interface ENWebClipNoteBuilder : NSObject
 - (id)initWithUrl:(NSURL *)url;
-- (id)initWithWebView:(UIWebView *)webView;
+- (id)initWithWebView:(WKWebView *)webView;
 - (void)buildNote:(void(^)(ENNote *))completion;
 @end

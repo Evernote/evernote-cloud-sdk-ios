@@ -27,6 +27,7 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 #import "EvernoteSDK.h"
 @class ENSaveToEvernoteViewController;
 
