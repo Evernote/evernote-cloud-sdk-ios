@@ -53,7 +53,6 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
 @property (nonatomic, readonly) CGFloat visibleKeyboardHeight;
 @property (nonatomic, assign) UIOffset offsetFromCenter;
 
-
 - (void)showProgress:(float)progress
               status:(NSString*)string
             maskType:(SVProgressHUDMaskType)hudMaskType;

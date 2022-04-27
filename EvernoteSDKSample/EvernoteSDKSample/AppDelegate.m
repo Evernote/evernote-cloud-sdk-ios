@@ -22,6 +22,7 @@
 #warning Add Consumer Key and Consumer Secret, but also modify your app's Info.plist according to documentation!
 #warning Remove these warnings once done with it.
 
+    
   // Set shared session key information.
   [ENSession setSharedSessionConsumerKey:@"your_consumer_key"
                           consumerSecret:@"your_consumer_secret"
@@ -38,7 +39,7 @@
   return YES;
 }
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options
 {
   return [[ENSession sharedSession] handleOpenURL:url];
 }

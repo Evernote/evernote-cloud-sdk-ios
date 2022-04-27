@@ -108,20 +108,22 @@
         notebookToCreate.name = notebookName;
 
         if (weakSelf.creatingBusinessNotebook) {
-            [[ENSession sharedSession].businessNoteStore createBusinessNotebook:notebookToCreate success:^(EDAMLinkedNotebook *notebook) {
+            [[ENSession sharedSession].businessNoteStore createBusinessNotebook:notebookToCreate completion:^(EDAMLinkedNotebook *notebook,NSError *error) {
+                if(notebook){
                 NSLog(@"Successfully created business notebook %@", notebook);
                 [weakSelf reloadNotebooks];
-            } failure:^(NSError *error) {
+            } else {
                 NSLog(@"Failed to create the notebook with error %@", error);
-            }];
+            }}];
             weakSelf.creatingBusinessNotebook = NO;
         } else {
-            [[ENSession sharedSession].primaryNoteStore createNotebook:notebookToCreate success:^(EDAMNotebook *notebook) {
+[[ENSession sharedSession].primaryNoteStore createNotebook:notebookToCreate completion:^(EDAMNotebook *notebook,NSError *error) {
+                if(notebook){
                 NSLog(@"Successfully created personal notebook %@", notebook);
                 [weakSelf reloadNotebooks];
-            } failure:^(NSError *error) {
+            } else{
                 NSLog(@"Failed to create the notebook with error %@", error);
-            }];
+            }}];
         }
     }];
     UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];

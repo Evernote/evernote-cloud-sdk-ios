@@ -14,7 +14,7 @@ Pod::Spec.new do |spec|
   spec.resource = "ENSDKResources.bundle"
   spec.requires_arc = true
 
-  spec.framework = "MobileCoreServices", "CoreGraphics", "Foundation", "UIKit"
+  spec.framework = "CoreServices", "CoreGraphics", "Foundation", "UIKit"
   spec.library = "xml2"
   
   spec.deprecated_in_favor_of = "EvernoteSDK"
