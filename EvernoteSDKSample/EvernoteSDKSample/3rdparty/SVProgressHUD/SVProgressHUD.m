@@ -330,7 +330,7 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
 - (void)setFadeOutTimer:(NSTimer *)newTimer {
     
     if(_fadeOutTimer)
-        (void)([_fadeOutTimer invalidate]), _fadeOutTimer = nil;
+        ([_fadeOutTimer invalidate]), _fadeOutTimer = nil;
     
     if(newTimer)
         _fadeOutTimer = newTimer;
@@ -610,15 +610,15 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
                              
                              [[NSNotificationCenter defaultCenter] removeObserver:self];
                              [self cancelRingLayerAnimation];
-                             [self->_hudView removeFromSuperview];
-                             self->_hudView = nil;
+                             [_hudView removeFromSuperview];
+                            _hudView = nil;
                              
-                             [self->_overlayView removeFromSuperview];
-                             self->_overlayView = nil;
+                             [_overlayView removeFromSuperview];
+                             _overlayView = nil;
                              
-                             [self->_indefiniteAnimatedLayer removeFromSuperlayer];
-                             self->_indefiniteAnimatedLayer = nil;
-
+                             [_indefiniteAnimatedLayer removeFromSuperlayer];
+                            _indefiniteAnimatedLayer = nil;
+                             
                              UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 
                              [[NSNotificationCenter defaultCenter] postNotificationName:SVProgressHUDDidDisappearNotification
@@ -766,7 +766,6 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
 #pragma mark - Utilities
 
 + (BOOL)isVisible {
-    //DispatchQueue.main.async {
     return ([self sharedView].alpha == 1);
 }
 
