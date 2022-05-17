@@ -1,3 +1,6 @@
+= 3.0.1
+* Replacing UIWebView with WKWebView for better compatibility
+
 = 2.0.5
 * Fix Cocoapods integration
 
