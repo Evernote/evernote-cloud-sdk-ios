@@ -238,7 +238,6 @@ NS_ENUM(NSInteger, SampleFunctions) {
     [clipController addAction:clipAction];
     [clipController addAction:dismissAction];
     [[[UIApplication sharedApplication] keyWindow].rootViewController presentViewController:clipController animated:YES completion:nil];
-    //[self presentViewController:clipController animated:YES completion:nil];
 }
 
 - (void)loadWebViewWithURLString:(NSString *)urlString {
