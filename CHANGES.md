@@ -1,4 +1,4 @@
-= 3.0.1
+= 4.0.0
 * Replacing UIWebView with WKWebView for better compatibility
 
 = 2.0.5
