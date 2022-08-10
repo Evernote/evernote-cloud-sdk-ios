@@ -1,9 +1,14 @@
 ![Evernote Logo](https://evernote.com/media/img/logos/evernote_logo_4c-lrg.png)
-# Evernote Cloud SDK 4.0.0 for iOS
+
+# [Deprecated] Evernote Cloud SDK 4.0.0 for iOS
 
 This is the official Evernote SDK for iOS. To get started, follow the instructions bellow. Additional information can be found in the [Getting Started Guide](Getting_Started.md).
 
 More information about our developer program can be found here: [Evernote Developers](https://dev.evernote.com/)
+
+## Deprecation Notice
+
+This SDK is considered to be deprecated in favor of [evernote-sdk-mac](https://github.com/evernote/evernote-sdk-mac).
 
 ## Installation
 ### Cocoapods
