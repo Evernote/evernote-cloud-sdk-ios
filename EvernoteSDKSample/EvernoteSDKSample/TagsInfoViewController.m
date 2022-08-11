@@ -28,29 +28,31 @@
     NSMutableString * str = [NSMutableString string];
     
     [self.textView setText:str];
-    
-    [[ENSession sharedSession].primaryNoteStore listTagsWithSuccess:^(NSArray *tags) {
+
+    [[ENSession sharedSession].primaryNoteStore listTagsWithCompletion:^(NSArray *tags,NSError *error) {
+        if(tags){
         [str appendString:@"Personal Tags:\n"];
         for (EDAMTag *tag in tags) {
             [str appendFormat:@"%@\n", tag.name];
         }
         [str appendString:@"\n"];
         [self.textView setText:str];
-    } failure:^(NSError *error) {
+    } else {
         NSLog(@"Error in fetching personal tags %@", error);
-    }];
+    }}];
     
     if ([[ENSession sharedSession] isBusinessUser]) {
-        [[ENSession sharedSession].businessNoteStore listTagsWithSuccess:^(NSArray *tags) {
+        [[ENSession sharedSession].businessNoteStore listTagsWithCompletion:^(NSArray *tags,NSError *error) {
+            if(tags){
             [str appendString:@"Business Tags:\n"];
             for (EDAMTag *tag in tags) {
                 [str appendFormat:@"%@\n", tag.name];
             }
             [str appendString:@"\n"];
             [self.textView setText:str];
-        } failure:^(NSError *error) {
+        } else {
             NSLog(@"Error in fetching business tags %@", error);
-        }];
+        }}];
     }
 }
 

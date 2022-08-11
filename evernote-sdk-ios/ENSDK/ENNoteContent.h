@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  "Sanitized" HTML means that any desired CSS styles are inlined into the DOM (versus being
  *  remote resources or a single <style> block.)
  *
- *  NB If you have an HTML source that's not already sanitized, you can load it into a UIWebView and
+ *  NB If you have an HTML source that's not already sanitized, you can load it into a WKWebView and
  *  use +[ENNote populateNoteFromWebView:completion:] to capture it.
  *
  *  @param html HTML string.

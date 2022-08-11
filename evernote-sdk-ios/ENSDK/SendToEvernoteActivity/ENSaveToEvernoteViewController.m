@@ -54,7 +54,7 @@ CGFloat kTextLeftPadding = 20;
 @property (nonatomic, strong) ENNotebookPickerView *notebookPickerView;
 @property (nonatomic, strong) ENNotebookPickerButton * notebookPickerButton;
 @property (nonatomic, strong) RMSTokenView * tagsView;
-@property (nonatomic, strong) UIWebView * noteView;
+@property (nonatomic, strong) WKWebView * noteView;
 
 @property (nonatomic, strong) NSArray * notebookList;
 @property (nonatomic, strong) ENNotebook * currentNotebook;
@@ -102,7 +102,7 @@ CGFloat kTextLeftPadding = 20;
     [divider3 setBackgroundColor:[ENTheme defaultSeparatorColor]];
     [self.view addSubview:divider3];
     
-    UIWebView *noteView = [[UIWebView alloc] initWithFrame:CGRectZero];
+    WKWebView *noteView = [[WKWebView alloc] initWithFrame:CGRectZero];
     noteView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:noteView];
     self.noteView = noteView;
@@ -158,7 +158,7 @@ CGFloat kTextLeftPadding = 20;
         }
         [self.noteView loadData:data
                        MIMEType:ENWebArchiveDataMIMEType
-               textEncodingName:ENWebResourceTextEncodingNameUTF8
+          characterEncodingName:ENWebResourceTextEncodingNameUTF8
                         baseURL:[NSURL new]];
     }];
 }

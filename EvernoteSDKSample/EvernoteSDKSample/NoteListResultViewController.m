@@ -52,7 +52,10 @@
                                          sortOrder:ENSessionSortOrderRecentlyCreated
                                         maxResults:0
                                         completion:^(NSArray *findNotesResults, NSError *findNotesError) {
-                                            [SVProgressHUD dismiss];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+        });
+        dispatch_async(dispatch_get_main_queue(), ^{
                                             if (!findNotesResults) {
                                                 if ([findNotesError.domain isEqualToString:ENErrorDomain] &&
                                                     findNotesError.code == ENErrorCodePermissionDenied) {
@@ -67,7 +70,8 @@
                                                 self.findNotesResults = findNotesResults;
                                                 [self.tableView reloadData];
                                             }
-                                        }];
+        });
+}];
 }
 
 #pragma mark - UITableView

@@ -53,7 +53,6 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
 @property (nonatomic, readonly) CGFloat visibleKeyboardHeight;
 @property (nonatomic, assign) UIOffset offsetFromCenter;
 
-
 - (void)showProgress:(float)progress
               status:(NSString*)string
             maskType:(SVProgressHUDMaskType)hudMaskType;
@@ -331,7 +330,7 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
 - (void)setFadeOutTimer:(NSTimer *)newTimer {
     
     if(_fadeOutTimer)
-        [_fadeOutTimer invalidate], _fadeOutTimer = nil;
+        ([_fadeOutTimer invalidate]), _fadeOutTimer = nil;
     
     if(newTimer)
         _fadeOutTimer = newTimer;
@@ -612,14 +611,14 @@ static const CGFloat SVProgressHUDParallaxDepthPoints = 10;
                              [[NSNotificationCenter defaultCenter] removeObserver:self];
                              [self cancelRingLayerAnimation];
                              [_hudView removeFromSuperview];
-                             _hudView = nil;
+                            _hudView = nil;
                              
                              [_overlayView removeFromSuperview];
                              _overlayView = nil;
                              
                              [_indefiniteAnimatedLayer removeFromSuperlayer];
-                             _indefiniteAnimatedLayer = nil;
-
+                            _indefiniteAnimatedLayer = nil;
+                             
                              UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, nil);
 
                              [[NSNotificationCenter defaultCenter] postNotificationName:SVProgressHUDDidDisappearNotification

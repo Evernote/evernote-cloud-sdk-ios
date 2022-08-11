@@ -1023,7 +1023,7 @@
 }
 
 - (void)untagAllWithGuid:(EDAMGuid)guid
-                 success:(void(^)())success
+                 success:(void(^)(void))success
                  failure:(void(^)(NSError *error))failure
 {
     [self untagAllWithGuid:guid completion:^(NSError * _Nonnull error) {
@@ -1569,7 +1569,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
 }
 
 - (void)emailNoteWithParameters:(EDAMNoteEmailParameters *)parameters
-                        success:(void(^)())success
+                        success:(void(^)(void))success
                         failure:(void(^)(NSError *error))failure
 {
     [self emailNoteWithParameters:parameters completion:^(NSError * _Nonnull error) {
@@ -1587,7 +1587,7 @@ withResourcesAlternateData:(BOOL)withResourcesAlternateData
 }
 
 - (void)stopSharingNoteWithGuid:(EDAMGuid)guid
-                        success:(void(^)())success
+                        success:(void(^)(void))success
                         failure:(void(^)(NSError *error))failure
 {
     [self stopSharingNoteWithGuid:guid completion:^(NSError * _Nonnull error) {

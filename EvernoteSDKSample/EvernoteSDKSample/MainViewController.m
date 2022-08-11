@@ -31,9 +31,10 @@ NS_ENUM(NSInteger, SampleFunctions) {
     kSampleFunctionsMaxValue
 };
 
-@interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIWebViewDelegate>
+@interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,WKNavigationDelegate>
+
 @property (nonatomic, strong) UITableView * tableView;
-@property (nonatomic, strong) UIWebView * webView;
+@property (nonatomic, strong) WKWebView * webView;
 @property (nonatomic, strong) UIBarButtonItem * loginItem;
 @end
 
@@ -236,7 +237,7 @@ NS_ENUM(NSInteger, SampleFunctions) {
     UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
     [clipController addAction:clipAction];
     [clipController addAction:dismissAction];
-    [self presentViewController:clipController animated:YES completion:nil];
+    [[[UIApplication sharedApplication] keyWindow].rootViewController presentViewController:clipController animated:YES completion:nil];
 }
 
 - (void)loadWebViewWithURLString:(NSString *)urlString {
@@ -246,15 +247,15 @@ NS_ENUM(NSInteger, SampleFunctions) {
         return;
     }
     
-    self.webView = [[UIWebView alloc] initWithFrame:self.view.window.bounds];
-    self.webView.delegate = self;
+    self.webView = [[WKWebView alloc] initWithFrame:self.view.window.bounds];
+    self.webView.navigationDelegate = self;
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     [self.webView loadRequest:[NSURLRequest requestWithURL:urlToClip]];
 }
 
 - (void)clipWebPage {
-    UIWebView * webView = self.webView;
-    self.webView.delegate = nil;
+    WKWebView * webView = self.webView;
+    self.webView.navigationDelegate = nil;
     [self.webView stopLoading];
     self.webView = nil;
     
@@ -342,7 +343,7 @@ NS_ENUM(NSInteger, SampleFunctions) {
 
 #pragma mark - UIWebViewDelegate
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
 {
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(clipWebPage) object:nil];
     NSLog(@"Web view fail: %@", error);
@@ -351,7 +352,7 @@ NS_ENUM(NSInteger, SampleFunctions) {
     [CommonUtils showSimpleAlertWithMessage:@"Failed to load web page to clip."];
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation;
 {
     // At the end of every load complete, cancel a pending perform and start a new one. We wait for 3
     // seconds for the page to "settle down"

@@ -11,8 +11,8 @@
 #import "SVProgressHUD.h"
 #import "CommonUtils.h"
 
-@interface NoteDetailViewController () <UIWebViewDelegate>
-@property (nonatomic, strong) UIWebView * webView;
+@interface NoteDetailViewController () <WKNavigationDelegate>
+@property (nonatomic, strong) WKWebView * webView;
 @property (nonatomic, assign) BOOL doneLoading;
 @property (nonatomic, strong) ENNote *note;
 @end
@@ -22,8 +22,8 @@
 - (void)loadView
 {
     [super loadView];
-    self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
-    self.webView.delegate = self;
+    self.webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
+    self.webView.navigationDelegate = self;
     [self.view addSubview:self.webView];
 }
 
@@ -66,7 +66,8 @@
         [SVProgressHUD dismiss];
         [self.webView loadData:data
                       MIMEType:ENWebArchiveDataMIMEType
-              textEncodingName:nil
+              //textEncodingName:nil
+         characterEncodingName:nil
                        baseURL:nil];
     }];
 }
@@ -89,16 +90,18 @@
         [CommonUtils showSimpleAlertWithMessage:@"Evernote App not installed"];
     }
 }
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
+- (void)webView:(WKWebView *)webView
+didFinishNavigation:(WKNavigation *)navigation
 {
     self.doneLoading = YES;
 }
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
-{
-    // Don't allow user to navigate from here.
-    return !self.doneLoading;
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    if(!self.doneLoading){
+        decisionHandler(WKNavigationActionPolicyAllow);
+    }else{
+    decisionHandler(WKNavigationActionPolicyCancel);
+}
 }
 
 @end

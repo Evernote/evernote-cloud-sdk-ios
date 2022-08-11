@@ -12,12 +12,9 @@
 
 + (void)showSimpleAlertWithMessage:(NSString *)message
 {
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil
-                                                     message:message
-                                                    delegate:nil
-                                           cancelButtonTitle:nil
-                                           otherButtonTitles:@"OK", nil];
-    [alert show];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [[[UIApplication sharedApplication] keyWindow].rootViewController presentViewController:alert animated:YES completion:nil];
 }
 
 @end

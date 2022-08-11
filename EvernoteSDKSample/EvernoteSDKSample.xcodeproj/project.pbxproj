@@ -11,7 +11,6 @@
 		030DA2F81E27BCF700FD4BDB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 030DA2F71E27BCF700FD4BDB /* AppDelegate.m */; };
 		030DA3001E27BCF700FD4BDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 030DA2FF1E27BCF700FD4BDB /* Assets.xcassets */; };
 		030DA3031E27BCF700FD4BDB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 030DA3011E27BCF700FD4BDB /* LaunchScreen.storyboard */; };
-		030DA3211E27BD4700FD4BDB /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 030DA3201E27BD4700FD4BDB /* MobileCoreServices.framework */; };
 		030DA3231E27BD5100FD4BDB /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 030DA3221E27BD5100FD4BDB /* libxml2.tbd */; };
 		030DA3361E27BDB700FD4BDB /* CommonUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 030DA3251E27BDB700FD4BDB /* CommonUtils.m */; };
 		030DA3371E27BDB700FD4BDB /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 030DA3271E27BDB700FD4BDB /* MainViewController.m */; };
@@ -26,6 +25,8 @@
 		030DA3461E27BEEE00FD4BDB /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 030DA3421E27BEEE00FD4BDB /* LICENSE.txt */; };
 		030DA3471E27BEEE00FD4BDB /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 030DA3441E27BEEE00FD4BDB /* SVProgressHUD.m */; };
 		038EE1E11E27C1A800595956 /* EvernoteSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 038EE1E01E27C18800595956 /* EvernoteSDK.framework */; };
+		27F202F82433958F00A535EA /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27F202F72433958F00A535EA /* CoreServices.framework */; };
+		4E6D597A28056D6700634EC4 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E6D597628056D6700634EC4 /* WebKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +61,6 @@
 		030DA2FF1E27BCF700FD4BDB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		030DA3021E27BCF700FD4BDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		030DA3041E27BCF700FD4BDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		030DA3201E27BD4700FD4BDB /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		030DA3221E27BD5100FD4BDB /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		030DA3241E27BDB700FD4BDB /* CommonUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtils.h; sourceTree = "<group>"; };
 		030DA3251E27BDB700FD4BDB /* CommonUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtils.m; sourceTree = "<group>"; };
@@ -85,6 +85,9 @@
 		030DA3431E27BEEE00FD4BDB /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		030DA3441E27BEEE00FD4BDB /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		038EE1D51E27C18800595956 /* evernote-sdk-ios.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "evernote-sdk-ios.xcodeproj"; path = "../../evernote-sdk-ios.xcodeproj"; sourceTree = "<group>"; };
+		27F202F72433958F00A535EA /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		4E6D597628056D6700634EC4 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		4EE007B0281192F3007E4A1B /* EvernoteSDKSample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EvernoteSDKSample.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,8 +95,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E6D597A28056D6700634EC4 /* WebKit.framework in Frameworks */,
 				038EE1E11E27C1A800595956 /* EvernoteSDK.framework in Frameworks */,
-				030DA3211E27BD4700FD4BDB /* MobileCoreServices.framework in Frameworks */,
+				27F202F82433958F00A535EA /* CoreServices.framework in Frameworks */,
 				030DA3231E27BD5100FD4BDB /* libxml2.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -121,6 +125,7 @@
 		030DA2F21E27BCF700FD4BDB /* EvernoteSDKSample */ = {
 			isa = PBXGroup;
 			children = (
+				4EE007B0281192F3007E4A1B /* EvernoteSDKSample.entitlements */,
 				038EE1D51E27C18800595956 /* evernote-sdk-ios.xcodeproj */,
 				030DA33F1E27BEEE00FD4BDB /* 3rdparty */,
 				030DA2F61E27BCF700FD4BDB /* AppDelegate.h */,
@@ -162,8 +167,9 @@
 		030DA31F1E27BD4700FD4BDB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4E6D597628056D6700634EC4 /* WebKit.framework */,
+				27F202F72433958F00A535EA /* CoreServices.framework */,
 				030DA3221E27BD5100FD4BDB /* libxml2.tbd */,
-				030DA3201E27BD4700FD4BDB /* MobileCoreServices.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -223,19 +229,19 @@
 		030DA2E81E27BCF700FD4BDB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 1330;
 				ORGANIZATIONNAME = Evernote;
 				TargetAttributes = {
 					030DA2EF1E27BCF700FD4BDB = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = Q79WDW8YH9;
+						DevelopmentTeam = 35CHVC8T8P;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
 			buildConfigurationList = 030DA2EB1E27BCF700FD4BDB /* Build configuration list for PBXProject "EvernoteSDKSample" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -333,20 +339,30 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -369,7 +385,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -380,20 +396,30 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -410,7 +436,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -426,6 +452,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.evernote.EvernoteSDKSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -438,6 +466,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.evernote.EvernoteSDKSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
