@@ -299,7 +299,7 @@ static BOOL disableRefreshingNotebooksCacheOnLaunch;
     } else {
         // Choose the initial host based on locale. Simplified Chinese locales get the yinxiang service.
         NSString * locale = [[[NSLocale currentLocale] localeIdentifier] lowercaseString];
-        if ([locale hasPrefix:@"zh-hans"] || [locale isEqualToString:@"zh-cn"] || [locale isEqualToString:@"zh"]) {
+        if ([locale hasPrefix:@"zh-hans"] || [locale isEqualToString:@"zh-cn"] || [locale isEqualToString:@"zh"]|| [locale isEqualToString:@"zh_cn"]) {
             self.sessionHost = ENSessionBootstrapServerBaseURLStringCN;
         } else {
             self.sessionHost = ENSessionBootstrapServerBaseURLStringUS;
